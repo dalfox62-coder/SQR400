@@ -265,7 +265,7 @@ const HSBCForm = ({ onSubmit, initialData = {} }) => {
         <p className="text-xs text-gray-500 italic mb-4">SWIFT Fields: F20, F21, F23B, F32A, F33B, F70, F71A, F77B</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="text-sm font-semibold text-gray-700 block mb-1.5">Sender's Reference (F20)</label>
+            <label className="text-sm font-semibold text-gray-700 block mb-1.5">{"Sender's Reference (F20)"}</label>
             <input
               type="text"
               className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:ring-2 focus:ring-red-200 transition-all duration-200 bg-white text-sm text-black"

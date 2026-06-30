@@ -143,7 +143,7 @@ const BNIForm = ({ onSubmit, initialData = {} }) => {
         <p className="text-xs text-gray-500 italic mb-4">F70: Remittance Information / Purpose</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="text-sm font-semibold text-gray-700 block mb-1.5">Sender's Reference (F20)</label>
+            <label className="text-sm font-semibold text-gray-700 block mb-1.5">{"Sender's Reference (F20)"}</label>
             <input
               type="text"
               className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 bg-white text-sm"

@@ -3,7 +3,7 @@ export const bankConfigs = {
     id: "hsbc",
     name: "HSBC UK",
     code: "HBUKGB4B",
-    logo: "/logos/hsbc.png",
+    logo: "/logos/hsbc.jpg",
     bankFullName: "HSBC UK BANK PLC",
     address: "AYLESBURY, MARKET SQUARE, 8 MARKET SQUARE, AYLESBURY, HP 20 1TW, UK",
     receiverBank: "BANK NEGARA INDONESIA - PT (PERSERO)",
