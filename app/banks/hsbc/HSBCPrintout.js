@@ -1,0 +1,303 @@
+"use client";
+
+import { useRef } from "react";
+
+// Dynamic Barcode Generator for authentic SWIFT printouts
+const Barcode = ({ value }) => {
+  if (!value) return null;
+  
+  // Generate a realistic Code-39 / Code-128 styled barcode pattern
+  let pattern = "101100101011"; // start code
+  for (let i = 0; i < value.length; i++) {
+    const charCode = value.charCodeAt(i);
+    // Dynamic bit-shifting pattern to generate unique width combinations
+    const charPattern = ((charCode * 12345) % 4096).toString(2).padStart(12, "0");
+    pattern += charPattern.replace(/1/g, "11").replace(/0/g, "0");
+  }
+  pattern += "11010011011"; // stop code
+  
+  const elements = [];
+  let x = 0;
+  let i = 0;
+  
+  while (i < pattern.length) {
+    let width = 0;
+    const currentVal = pattern[i];
+    while (i < pattern.length && pattern[i] === currentVal) {
+      width += 1.2; // slight scaling
+      i++;
+    }
+    
+    if (currentVal === "1") {
+      elements.push(<rect key={x} x={x} y={0} width={width} height={38} fill="black" />);
+    }
+    x += width;
+  }
+  
+  return (
+    <div className="flex flex-col items-center select-none bg-white p-1">
+      <svg width={Math.ceil(x)} height="38" className="block">
+        {elements}
+      </svg>
+      <span className="text-[10px] tracking-[4px] font-mono mt-0.5 text-black font-bold uppercase mr-[-4px]">{value}</span>
+    </div>
+  );
+};
+
+const HSBCPrintout = ({ data, onBack }) => {
+  const formatNumber = (num) => {
+    if (!num) return "0.00";
+    return new Intl.NumberFormat("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(parseFloat(num));
+  };
+
+  const getFormattedDates = (valueDateStr, transactionTimeStr) => {
+    let dateObj = new Date();
+    if (valueDateStr) {
+      const parts = valueDateStr.split("-");
+      if (parts.length === 3) {
+        // Date parsing (YYYY-MM-DD)
+        dateObj = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+      }
+    }
+    
+    const dayNames = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
+    const monthNames = [
+      "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+      "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
+    ];
+    
+    const dayName = dayNames[dateObj.getDay()];
+    const day = String(dateObj.getDate()).padStart(2, "0");
+    const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+    const year = dateObj.getFullYear();
+    const monthName = monthNames[dateObj.getMonth()];
+    
+    const timeStr = transactionTimeStr || "15:30:30";
+    
+    return {
+      dateTimeStr: `${day}/${month}/${year}-${timeStr}`,
+      dateLongStr: `${dayName} ${parseInt(day)} ${monthName}, ${year}`,
+      yearMonthStr: `${year}-${month}`,
+      monthShort: monthNames[dateObj.getMonth()].substring(0, 3).toUpperCase(),
+      dayNum: day,
+      yearNum: year,
+      monthNum: month
+    };
+  };
+
+  const getCurrencyName = (ccy) => {
+    const ccyUpper = ccy.toUpperCase();
+    if (ccyUpper === "EUR" || ccyUpper === "EURO") return "EURO";
+    if (ccyUpper === "USD" || ccyUpper === "US DOLLAR") return "EURO"; // default to standard template fallback or keep euro
+    if (ccyUpper === "GBP" || ccyUpper === "BRITISH POUND") return "BRITISH POUND";
+    if (ccyUpper === "IDR" || ccyUpper === "RUPIAH") return "INDONESIAN RUPIAH";
+    return ccyUpper;
+  };
+
+  const getCurrencySymbol = (ccy) => {
+    const ccyUpper = ccy.toUpperCase();
+    if (ccyUpper === "EUR" || ccyUpper === "EURO") return "€";
+    if (ccyUpper === "USD" || ccyUpper === "US DOLLAR") return "$";
+    if (ccyUpper === "GBP" || ccyUpper === "BRITISH POUND") return "£";
+    if (ccyUpper === "IDR" || ccyUpper === "RUPIAH") return "Rp";
+    return ccy;
+  };
+
+  // Extract variables
+  const institution = data.institution || {};
+  const transaction = data.transaction || {};
+  const receiverBank = data.receiverBank || {};
+  const beneficiary = data.beneficiary || {};
+  const technical = data.technical || {};
+
+  const formattedDates = getFormattedDates(transaction.valueDate, transaction.transactionTime);
+  const amtFormatted = formatNumber(transaction.amount);
+  const currencyUpper = (transaction.currency || "EUR").toUpperCase();
+  const ccySymbol = getCurrencySymbol(currencyUpper);
+  const currencyName = getCurrencyName(currencyUpper);
+
+  const senderCode8 = (institution.swiftCode || "HBUKGB4B").substring(0, 8).toUpperCase();
+  const receiverCode8 = (receiverBank.swiftCode || "BNINIDJA").substring(0, 8).toUpperCase();
+
+  const charges = (transaction.charges || "OUR").toUpperCase();
+  const chargesFormatted = charges === "OUR" ? "OURS" : charges === "BEN" ? "BENEFICIARY" : charges === "SHA" ? "SHARED" : charges;
+
+  // Dynamic Page 2 values
+  const senderCode4 = senderCode8.substring(0, 4);
+  const suffix6 = (transaction.senderReference || "HSBC587069248914").slice(-6);
+  
+  const trackCode = (technical.trackCode || `${senderCode4}${suffix6}`).toUpperCase();
+  const cipher = (technical.cipher || `PTZH_DETH-${senderCode4}-${formattedDates.monthShort}${formattedDates.dayNum}-${charges}103`).toUpperCase();
+  const transmissionCode = (technical.transmissionCode || `PRT_TPZH${formattedDates.yearNum}${formattedDates.monthNum}${formattedDates.dayNum}`).toUpperCase();
+
+  // Create Page 1 RAW SWIFT Text
+  const page1Text = `${formattedDates.dateTimeStr.padEnd(71)}SWIFT ACKS-8547-${formattedDates.yearMonthStr}
+                         ++++++++ ${institution.bankName || "HSBC UK BANK PLC"} ++++++++
+${formattedDates.dateLongStr.padEnd(80)}++++++103++
+SINGLE CUSTOMER CASH TRANSFER
+----------------------------------------------------------------------------------------------
+NOTIFICATION (TRANSMISSION) OF ORIGINAL SENT TO SWIFT WIRE SYSTEM
+NETWORK DELIVERY STATUS   : NETWORK ACK
+
+PRIORITY/DELIVERY         : NORMAL/DELIVERY NOTIFICATION
+SRC RTE                   : ${technical.srcRte || "HBUKGB4BXXX"}
+DEST RTE                  : ${technical.destRte || "BNINIDJAXXX"}
+SESSION HEADER            : ${technical.sessionHeader || "HBUKGB4BXXX"}
+MESSAGE INPUT REFERENCE   : ${technical.msgInputRef || "HBUKGB4BXXX75412835942185"}
+MESSAGE OUTPUT REFERENCE  : ${technical.msgOutputRef || "BNINIDJAXXX76102436987104"}
+-------------------------------------------MESSAGE HEADER-------------------------------------
+SENDER    : ${institution.bankName || "HSBC UK BANK PLC"}
+            ${institution.address || "AYLESBURY, MARKET SQUARE, 8 MARKET SQUARE, AYLESBURY, HP 20 1TW, UK"}
+            ${senderCode8}
+RECEIVER  : ${receiverBank.bankName || "BANK NEGARA INDONESIA - PT (PERSERO)"}
+            ${receiverBank.address || "BNI BUILDING, FLOOR 7, JALAN JENDERAL SUDIRMAN 1, JAKARTA, INDONESIA"}
+            ${receiverCode8}
+---------------------------------------------MESSAGE TEXT-------------------------------------
+F20: SENDER’S REFERENCE
+     ${transaction.senderReference || "HSBC587069248914"}
+F21: TRANSACTION CODE
+     ${transaction.transactionCode || "HBUKGB4B248914"}
+F23B: BANK OPERATION CODE
+      ${transaction.bankOperationCode || "CRED"}
+F32A: VALUE DATE/ CUR / INTERBANK SETTLED AMOUNT
+      SAME DAY / ${currencyName}
+      ${ccySymbol}${amtFormatted}
+F33B: CURRENCY / INSTRUCTED AMOUNT
+      ${ccySymbol}${amtFormatted}
+F50A: /${institution.accountNumber || "GB32HBUK40086810148040"}
+      ${institution.accountName || "XA FINANCIAL LTD"}
+      ${institution.address || "AYLESBURY, MARKET SQUARE, 8 MARKET SQUARE, AYLESBURY, HP 20 1TW, UK"}
+F52A: /${senderCode8}
+      ${institution.bankName || "HSBC UK BANK PLC"}
+      ${institution.address || "AYLESBURY, MARKET SQUARE, 8 MARKET SQUARE, AYLESBURY, HP 20 1TW, UK"}
+F57A: /${receiverBank.swiftCode || "BNINIDJAXXX"}
+      ${receiverBank.bankName || "BANK NEGARA INDONESIA - PT (PERSERO)"}
+      ${receiverBank.address || "BNI BUILDING, FLOOR 7, JALAN JENDERAL SUDIRMAN 1, JAKARTA, INDONESIA"}
+F59:
+     /${beneficiary.accountNumber || "8980888829"}
+     /${beneficiary.swiftCode || "BNINIDJAXXX"}
+     ${beneficiary.accountName || "PT ALDO PUTRA MANDIRI BANDUNG"}
+     ${beneficiary.address || "BNI BUILDING, JALAN ASIA AFRIKA, BANDUNG, INDONESIA"}
+
+
+
+F70: /REMITTANCE INFORMATION
+     ${transaction.remittanceInfo || "INVESTMENT"}
+F71A: DETAILS OF CHARGES
+      ${chargesFormatted}
+
+F72: /SENDER TO RECEIVER INFORMATION
+     PLEASE ADVICE THE BENEFICIARY OF THIS SWIFT.
+     THIS TRANSFER IS VALID UPON IDENTIFICATION, THE DAY OF RECEIPT.
+     THIS IRREVOCABLE CASH SWIFT/103 TRANSFER CAN BE RELIED UPON FOR FULL
+     CASH.FUNDS ARE CLEAN AND CLEAR, OF NON-CRIMINAL ORIGIN.
+F77B: /REGULATORY REPORTING
+      #${amtFormatted}#
+-------------------------------------------MESSAGE TRAILER------------------------------------
+{CHK: ${technical.chk || "HBUKGB4B2119809863"}}
+PKI SIGNATURE: ${technical.pkiSignature || "MAC-EQUIVALENT"}`;
+
+  // Create Page 2 RAW SWIFT Text
+  const page2Text = `-------------------------INTERVENTIONS--------------------------------------------------------
+CONFIRMED AND RECEIVED
+----------------------------------------------------------------------------------------------
+ANSWER BACK AND ACKNOWLEDGMENT MESSAGE AUTOMATED FILE TRANSFER (AFT)
+GATEWAY RESPONSE VALIDATION SERVICE PROVIDER LOG/APPLICATION GENERATED REPORT ACKNOWLEDGMENT
+& AUTHENTICATION ACK NAG DELIVERY
+
+FTA/FTI CONFIRMATION STATEMENT PASS/FAIL STATUS
+
+0050 CNT, -------------------------------- Valid
+0060 RFF-DTM, ---------------------------- Valid
+0070 RFF, -------------------------------- Valid
+0080 DTM, -------------------------------- Valid
+0090 NAD-CTA-COM-------------------------- Valid
+0100 NAD, -------------------------------- Valid
+0110 CTA, -------------------------------- Valid
+0120 COM, -------------------------------- Valid
+0130 ERC-FTX-5G4, ------------------------ Valid
+0140 ERC, -------------------------------- Valid
+0150 FTX, -------------------------------- Valid
+0160 RFF-FTX, ---------------------------- Valid
+0170 REF, -------------------------------- Valid
+0180 FTX, -------------------------------- Valid
+0190 UNT, -------------------------------- Valid
+
+--------------{XMT DELIVERY REPORT} ----------------------------------------------------------
+TRACK CODE: ${trackCode}
+CATEGORY: NETWORK REPORT
+CREATION DATE/TIME: ${formattedDates.dateTimeStr}
+APPLICATION: SWIFT / 103
+OPERATION: SYSTEM
+TEXT {1:F01 ${formattedDates.yearNum}${senderCode8} ${institution.accountNumber || "GB32HBUK40086810148040"}} {2:P103${receiverBank.swiftCode || "BNINIDJAXXX"} ${beneficiary.accountNumber || "8980888829"}}
+{2:{254:124}{141:}
+-----------------------------------------------------------------------------------------------
+(+) END OF MESSAGE
+***************************************************************************************
+MESSAGE HAS BEEN TRANSMITTED SUCCESSFULLY (02) ************************
+CIPHER: ${cipher}
+END OF TRANSMISSION
+PRT_TPZH${formattedDates.yearNum}${formattedDates.monthNum}${formattedDates.dayNum}`;
+
+  return (
+    <div className="bg-gray-200 rounded-2xl p-4 md:p-6 print:bg-white print:p-0">
+      {/* Back and Print buttons (Hidden on Print) */}
+      <div className="flex flex-wrap justify-between gap-3 mb-6 no-print">
+        <button onClick={onBack} className="px-5 py-2.5 bg-gray-300 hover:bg-gray-400 rounded-lg font-semibold transition text-sm text-gray-800">
+          ← Back to Form
+        </button>
+        <button onClick={() => window.print()} className="px-5 py-2.5 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black text-white rounded-lg font-semibold transition text-sm shadow-md">
+          🖨️ Print / Download PDF
+        </button>
+      </div>
+
+      {/* Pages Container (Stacked for Preview, Page Breaks for Print) */}
+      <div className="flex flex-col items-center gap-8 my-4 print:my-0 print:gap-0 bg-gray-600 py-8 px-4 rounded-xl print:bg-white print:p-0">
+        
+        {/* PAGE 1 */}
+        <div className="swift-page print-page relative flex flex-col" id="hsbc-printout-page1">
+          {/* Logo & Barcode Row */}
+          <div className="flex justify-between items-start mb-6">
+            <img src="/logos/hsbc.jpg" alt="HSBC" className="h-10 w-auto object-contain mt-2" />
+            <Barcode value={transaction.senderReference || "HSBC587069248914"} />
+          </div>
+          
+          {/* Page 1 SWIFT Text */}
+          <pre className="font-mono text-[11px] leading-[15px] whitespace-pre text-black flex-1 select-text">
+            {page1Text}
+          </pre>
+          
+          {/* Watermark/Footer */}
+          <div className="absolute bottom-6 right-8 text-xs font-mono text-gray-300 select-none pointer-events-none uppercase">
+            HSBC UK WIRE SYSTEM • PAGE 1 OF 2
+          </div>
+        </div>
+
+        {/* PAGE 2 */}
+        <div className="swift-page print-page relative flex flex-col" id="hsbc-printout-page2">
+          {/* Logo only Row */}
+          <div className="flex justify-between items-start mb-6">
+            <img src="/logos/hsbc.jpg" alt="HSBC" className="h-10 w-auto object-contain mt-2" />
+            <div className="w-[150px] h-[38px]"></div> {/* Spacer to keep alignment */}
+          </div>
+          
+          {/* Page 2 Interventions Text */}
+          <pre className="font-mono text-[11px] leading-[15px] whitespace-pre text-black flex-1 select-text">
+            {page2Text}
+          </pre>
+          
+          {/* Watermark/Footer */}
+          <div className="absolute bottom-6 right-8 text-xs font-mono text-gray-300 select-none pointer-events-none uppercase">
+            HSBC UK WIRE SYSTEM • PAGE 2 OF 2
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
+export default HSBCPrintout;

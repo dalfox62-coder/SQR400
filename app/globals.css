@@ -1,26 +1,93 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Custom styles */
+.mt103-line {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 4px 0;
+  font-size: 12px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.mt103-label {
+  font-weight: 700;
+  color: #1f2937;
+  min-width: 200px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.mt103-value {
+  color: #111827;
+  word-break: break-word;
+}
+
+.mt103-divider {
+  border-top: 1px dashed #d1d5db;
+  margin: 8px 0;
+}
+
+/* Print styles */
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+@media print {
+  html, body, main {
+    background: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 210mm !important;
+    height: auto !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  /* Reset outer layout wrappers, ensuring they do not occupy print space */
+  main > div,
+  main > div > div {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+    width: 100% !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .print-page {
+    display: block !important;
+    width: 210mm !important;
+    height: 297mm !important;
+    min-height: 297mm !important;
+    max-height: 297mm !important;
+    padding: 20mm !important;
+    margin: 0 auto !important;
+    border: none !important;
+    box-shadow: none !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    background: white !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+  }
+
+  .print-page:last-child {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Screen styles for print preview */
+.swift-page {
+  width: 210mm;
+  height: 297mm;
+  padding: 20mm;
+  background: white;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  position: relative;
+  font-family: Courier, 'Courier New', monospace;
+  color: black;
 }
