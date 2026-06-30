@@ -1,8 +1,9 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 
-// Dynamic Barcode Generator for authentic SWIFT printouts
+// Dynamic Barcode Generator for authentic SWIFT printouts (smaller size to match PDF)
 const Barcode = ({ value }) => {
   if (!value) return null;
   
@@ -24,22 +25,27 @@ const Barcode = ({ value }) => {
     let width = 0;
     const currentVal = pattern[i];
     while (i < pattern.length && pattern[i] === currentVal) {
-      width += 1.2; // slight scaling
+      width += 0.8; // compact width
       i++;
     }
     
     if (currentVal === "1") {
-      elements.push(<rect key={x} x={x} y={0} width={width} height={38} fill="black" />);
+      elements.push(<rect key={x} x={x} y={0} width={width} height={24} fill="black" />);
     }
     x += width;
   }
   
+  // Create H S B C 5 8 7 0 6 9 2 4 8 9 1 4 format
+  const spacedValue = value.split("").join(" ");
+  
   return (
-    <div className="flex flex-col items-center select-none bg-white p-1">
-      <svg width={Math.ceil(x)} height="38" className="block">
+    <div className="flex flex-col items-center select-none bg-white p-0.5">
+      <svg width={Math.ceil(x)} height="24" className="block">
         {elements}
       </svg>
-      <span className="text-[10px] tracking-[4px] font-mono mt-0.5 text-black font-bold uppercase mr-[-4px]">{value}</span>
+      <span className="text-[9px] font-bold font-mono text-black uppercase mt-1 select-text">
+        {spacedValue}
+      </span>
     </div>
   );
 };
@@ -91,7 +97,7 @@ const HSBCPrintout = ({ data, onBack }) => {
   const getCurrencyName = (ccy) => {
     const ccyUpper = ccy.toUpperCase();
     if (ccyUpper === "EUR" || ccyUpper === "EURO") return "EURO";
-    if (ccyUpper === "USD" || ccyUpper === "US DOLLAR") return "EURO"; // default to standard template fallback or keep euro
+    if (ccyUpper === "USD" || ccyUpper === "US DOLLAR") return "US DOLLAR";
     if (ccyUpper === "GBP" || ccyUpper === "BRITISH POUND") return "BRITISH POUND";
     if (ccyUpper === "IDR" || ccyUpper === "RUPIAH") return "INDONESIAN RUPIAH";
     return ccyUpper;
@@ -133,80 +139,106 @@ const HSBCPrintout = ({ data, onBack }) => {
   const cipher = (technical.cipher || `PTZH_DETH-${senderCode4}-${formattedDates.monthShort}${formattedDates.dayNum}-${charges}103`).toUpperCase();
   const transmissionCode = (technical.transmissionCode || `PRT_TPZH${formattedDates.yearNum}${formattedDates.monthNum}${formattedDates.dayNum}`).toUpperCase();
 
-  // Create Page 1 RAW SWIFT Text
-  const page1Text = `${formattedDates.dateTimeStr.padEnd(71)}SWIFT ACKS-8547-${formattedDates.yearMonthStr}
-                         ++++++++ ${institution.bankName || "HSBC UK BANK PLC"} ++++++++
-${formattedDates.dateLongStr.padEnd(80)}++++++103++
+  const lineLength = 94;
+
+  const centerDashes = (text) => {
+    const dashCount = lineLength - text.length;
+    const leftDashes = Math.floor(dashCount / 2);
+    const rightDashes = dashCount - leftDashes;
+    return "-".repeat(leftDashes) + text + "-".repeat(rightDashes);
+  };
+
+  // Build header line 1 dynamically to line up date, center bank name, and right-aligned swift acks code
+  const leftCol = formattedDates.dateTimeStr;
+  const centerCol = `++++++++ ${institution.bankName || "HSBC UK BANK PLC"} ++++++++`.toUpperCase();
+  const rightCol = `SWIFT ACKS-8547-${formattedDates.yearMonthStr}`;
+  const halfWidth = Math.floor(lineLength / 2);
+  const centerStart = halfWidth - Math.floor(centerCol.length / 2);
+  let headerLine1 = leftCol.padEnd(centerStart, " ") + centerCol;
+  headerLine1 = headerLine1.padEnd(lineLength - rightCol.length, " ") + rightCol;
+
+  // Build header line 2 dynamically
+  const dateLongStrUpper = formattedDates.dateLongStr.toUpperCase();
+  const msgTypeStr = "++++++103++";
+  const headerLine2 = dateLongStrUpper.padEnd(lineLength - msgTypeStr.length, " ") + msgTypeStr;
+
+  const senderLines = [
+    (institution.bankName || "HSBC UK BANK PLC").toUpperCase(),
+    (institution.address || "AYLESBURY, MARKET SQUARE, 8 MARKET SQUARE, AYLESBURY, HP 20 1TW, UK").toUpperCase(),
+    senderCode8
+  ];
+  const receiverLines = [
+    (receiverBank.bankName || "BANK NEGARA INDONESIA - PT (PERSERO)").toUpperCase(),
+    (receiverBank.address || "BNI BUILDING, FLOOR 7, JALAN JENDERAL SUDIRMAN 1, JAKARTA, INDONESIA").toUpperCase(),
+    receiverCode8
+  ];
+
+  const senderFormatted = "SENDER    : " + senderLines.join("\n            ");
+  const receiverFormatted = "RECEIVER  : " + receiverLines.join("\n            ");
+
+  // Create Page 1 RAW SWIFT Text with precise Courier alignment
+  const page1Text = `${headerLine1}
+${headerLine2}
 SINGLE CUSTOMER CASH TRANSFER
-----------------------------------------------------------------------------------------------
 NOTIFICATION (TRANSMISSION) OF ORIGINAL SENT TO SWIFT WIRE SYSTEM
 NETWORK DELIVERY STATUS   : NETWORK ACK
 
 PRIORITY/DELIVERY         : NORMAL/DELIVERY NOTIFICATION
-SRC RTE                   : ${technical.srcRte || "HBUKGB4BXXX"}
-DEST RTE                  : ${technical.destRte || "BNINIDJAXXX"}
-SESSION HEADER            : ${technical.sessionHeader || "HBUKGB4BXXX"}
-MESSAGE INPUT REFERENCE   : ${technical.msgInputRef || "HBUKGB4BXXX75412835942185"}
-MESSAGE OUTPUT REFERENCE  : ${technical.msgOutputRef || "BNINIDJAXXX76102436987104"}
--------------------------------------------MESSAGE HEADER-------------------------------------
-SENDER    : ${institution.bankName || "HSBC UK BANK PLC"}
-            ${institution.address || "AYLESBURY, MARKET SQUARE, 8 MARKET SQUARE, AYLESBURY, HP 20 1TW, UK"}
-            ${senderCode8}
-RECEIVER  : ${receiverBank.bankName || "BANK NEGARA INDONESIA - PT (PERSERO)"}
-            ${receiverBank.address || "BNI BUILDING, FLOOR 7, JALAN JENDERAL SUDIRMAN 1, JAKARTA, INDONESIA"}
-            ${receiverCode8}
----------------------------------------------MESSAGE TEXT-------------------------------------
-F20: SENDER’S REFERENCE
-     ${transaction.senderReference || "HSBC587069248914"}
+SRC RTE                   : ${(technical.srcRte || "HBUKGB4BXXX").toUpperCase()}
+DEST RTE                  : ${(technical.destRte || "BNINIDJAXXX").toUpperCase()}
+SESSION HEADER            : ${(technical.sessionHeader || "HBUKGB4BXXX").toUpperCase()}
+MESSAGE INPUT REFERENCE   : ${(technical.msgInputRef || "HBUKGB4BXXX75412835942185").toUpperCase()}
+MESSAGE OUTPUT REFERENCE  : ${(technical.msgOutputRef || "BNINIDJAXXX76102436987134").toUpperCase()}
+${centerDashes("MESSAGE HEADER")}
+${senderFormatted}
+${receiverFormatted}
+${centerDashes("MESSAGE TEXT")}
+F20: SENDER'S REFERENCE
+     ${(transaction.senderReference || "HSBC587069248914").toUpperCase()}
 F21: TRANSACTION CODE
-     ${transaction.transactionCode || "HBUKGB4B248914"}
+     ${(transaction.transactionCode || "HBUKGB4B248914").toUpperCase()}
 F23B: BANK OPERATION CODE
-      ${transaction.bankOperationCode || "CRED"}
+      ${(transaction.bankOperationCode || "CRED").toUpperCase()}
 F32A: VALUE DATE/ CUR / INTERBANK SETTLED AMOUNT
-      SAME DAY / ${currencyName}
+      SAME DAY / ${currencyName.toUpperCase()}
       ${ccySymbol}${amtFormatted}
 F33B: CURRENCY / INSTRUCTED AMOUNT
       ${ccySymbol}${amtFormatted}
-F50A: /${institution.accountNumber || "GB32HBUK40086810148040"}
-      ${institution.accountName || "XA FINANCIAL LTD"}
-      ${institution.address || "AYLESBURY, MARKET SQUARE, 8 MARKET SQUARE, AYLESBURY, HP 20 1TW, UK"}
-F52A: /${senderCode8}
-      ${institution.bankName || "HSBC UK BANK PLC"}
-      ${institution.address || "AYLESBURY, MARKET SQUARE, 8 MARKET SQUARE, AYLESBURY, HP 20 1TW, UK"}
-F57A: /${receiverBank.swiftCode || "BNINIDJAXXX"}
-      ${receiverBank.bankName || "BANK NEGARA INDONESIA - PT (PERSERO)"}
-      ${receiverBank.address || "BNI BUILDING, FLOOR 7, JALAN JENDERAL SUDIRMAN 1, JAKARTA, INDONESIA"}
-F59:
-     /${beneficiary.accountNumber || "8980888829"}
-     /${beneficiary.swiftCode || "BNINIDJAXXX"}
-     ${beneficiary.accountName || "PT ALDO PUTRA MANDIRI BANDUNG"}
-     ${beneficiary.address || "BNI BUILDING, JALAN ASIA AFRIKA, BANDUNG, INDONESIA"}
-
-
-
-F70: /REMITTANCE INFORMATION
-     ${transaction.remittanceInfo || "INVESTMENT"}
-F71A: DETAILS OF CHARGES
-      ${chargesFormatted}
-
-F72: /SENDER TO RECEIVER INFORMATION
-     PLEASE ADVICE THE BENEFICIARY OF THIS SWIFT.
-     THIS TRANSFER IS VALID UPON IDENTIFICATION, THE DAY OF RECEIPT.
-     THIS IRREVOCABLE CASH SWIFT/103 TRANSFER CAN BE RELIED UPON FOR FULL
-     CASH.FUNDS ARE CLEAN AND CLEAR, OF NON-CRIMINAL ORIGIN.
-F77B: /REGULATORY REPORTING
-      #${amtFormatted}#
--------------------------------------------MESSAGE TRAILER------------------------------------
-{CHK: ${technical.chk || "HBUKGB4B2119809863"}}
-PKI SIGNATURE: ${technical.pkiSignature || "MAC-EQUIVALENT"}`;
+F50A:           /${(institution.accountNumber || "GB32HBUK40086810148040").toUpperCase()}
+                ${(institution.accountName || "XA FINANCIAL LTD").toUpperCase()}
+                ${(institution.address || "AYLESBURY, MARKET SQUARE, 8 MARKET SQUARE, AYLESBURY, HP 20 1TW, UK").toUpperCase()}
+F52A:           /${senderCode8}
+                ${(institution.bankName || "HSBC UK BANK PLC").toUpperCase()}
+                ${(institution.address || "AYLESBURY, MARKET SQUARE, 8 MARKET SQUARE, AYLESBURY, HP 20 1TW, UK").toUpperCase()}
+F57A:           /${(receiverBank.swiftCode || "BNINIDJAXXX").toUpperCase()}
+                ${(receiverBank.bankName || "BANK NEGARA INDONESIA - PT (PERSERO)").toUpperCase()}
+                ${(receiverBank.address || "BNI BUILDING, FLOOR 7, JALAN JENDERAL SUDIRMAN 1, JAKARTA, INDONESIA").toUpperCase()}
+F59:            /${(beneficiary.accountNumber || "8460946829").toUpperCase()}
+                /${(beneficiary.swiftCode || "BNINIDJAXXX").toUpperCase()}
+                ${(beneficiary.accountName || "PT ALDO PUTRA MANDIRI BANDUNG").toUpperCase()}
+                ${(beneficiary.address || "BNI BUILDING, JALAN ASIA AFRIKA, BANDUNG, INDONESIA").toUpperCase()}
+F70:            /REMITTANCE INFORMATION
+                ${(transaction.remittanceInfo || "INVESTMENT").toUpperCase()}
+F71A:           DETAILS OF CHARGES
+                ${chargesFormatted.toUpperCase()}
+F72:            /SENDER TO RECEIVER INFORMATION
+                PLEASE ADVICE THE BENEFICIARY OF THIS SWIFT.
+                THIS TRANSFER IS VALID UPON IDENTIFICATION, THE DAY OF RECEIPT.
+                THIS IRREVOCABLE CASH SWIFT/103 TRANSFER CAN BE RELIED UPON FOR FULL
+                CASH.FUNDS ARE CLEAN AND CLEAR, OF NON-CRIMINAL ORIGIN.
+F77B:           /REGULATORY REPORTING
+                #${amtFormatted}#
+${centerDashes("MESSAGE TRAILER")}
+{CHK: ${(technical.chk || "HBUKGB4B2119809863").toUpperCase()}}
+PKI SIGNATURE: ${(technical.pkiSignature || "MAC-EQUIVALENT").toUpperCase()}`;
 
   // Create Page 2 RAW SWIFT Text
-  const page2Text = `-------------------------INTERVENTIONS--------------------------------------------------------
+  const page2Text = `${centerDashes("INTERVENTIONS")}
 CONFIRMED AND RECEIVED
-----------------------------------------------------------------------------------------------
+${"-".repeat(lineLength)}
 ANSWER BACK AND ACKNOWLEDGMENT MESSAGE AUTOMATED FILE TRANSFER (AFT)
 GATEWAY RESPONSE VALIDATION SERVICE PROVIDER LOG/APPLICATION GENERATED REPORT ACKNOWLEDGMENT
-& AUTHENTICATION ACK NAG DELIVERY
+& AUTHENTICATION ACK MSG DELIVERY
 
 FTA/FTI CONFIRMATION STATEMENT PASS/FAIL STATUS
 
@@ -226,7 +258,7 @@ FTA/FTI CONFIRMATION STATEMENT PASS/FAIL STATUS
 0180 FTX, -------------------------------- Valid
 0190 UNT, -------------------------------- Valid
 
---------------{XMT DELIVERY REPORT} ----------------------------------------------------------
+${centerDashes("{XMT DELIVERY REPORT}")}
 TRACK CODE: ${trackCode}
 CATEGORY: NETWORK REPORT
 CREATION DATE/TIME: ${formattedDates.dateTimeStr}
@@ -234,13 +266,13 @@ APPLICATION: SWIFT / 103
 OPERATION: SYSTEM
 TEXT {1:F01 ${formattedDates.yearNum}${senderCode8} ${institution.accountNumber || "GB32HBUK40086810148040"}} {2:P103${receiverBank.swiftCode || "BNINIDJAXXX"} ${beneficiary.accountNumber || "8980888829"}}
 {2:{254:124}{141:}
------------------------------------------------------------------------------------------------
+${"-".repeat(lineLength)}
 (+) END OF MESSAGE
-***************************************************************************************
-MESSAGE HAS BEEN TRANSMITTED SUCCESSFULLY (02) ************************
+${"*".repeat(lineLength)}
+MESSAGE HAS BEEN TRANSMITTED SUCCESSFULLY (02) ${"*".repeat(lineLength - 46)}
 CIPHER: ${cipher}
 END OF TRANSMISSION
-PRT_TPZH${formattedDates.yearNum}${formattedDates.monthNum}${formattedDates.dayNum}`;
+${transmissionCode}`;
 
   return (
     <div className="bg-gray-200 rounded-2xl p-4 md:p-6 print:bg-white print:p-0">
@@ -254,43 +286,43 @@ PRT_TPZH${formattedDates.yearNum}${formattedDates.monthNum}${formattedDates.dayN
         </button>
       </div>
 
-      {/* Pages Container (Stacked for Preview, Page Breaks for Print) */}
+      {/* Pages Container */}
       <div className="flex flex-col items-center gap-8 my-4 print:my-0 print:gap-0 bg-gray-600 py-8 px-4 rounded-xl print:bg-white print:p-0">
         
         {/* PAGE 1 */}
-        <div className="swift-page print-page relative flex flex-col" id="hsbc-printout-page1">
+        <div className="swift-page print-page relative flex flex-col bg-white" id="hsbc-printout-page1">
           {/* Logo & Barcode Row */}
-          <div className="flex justify-between items-start mb-6">
-            <img src="/logos/hsbc.jpg" alt="HSBC" className="h-10 w-auto object-contain mt-2" />
+          <div className="flex justify-between items-start mb-4">
+            <Image src="/logos/hsbc.jpg" alt="HSBC Logo" width={110} height={28} priority className="h-7 w-auto object-contain mt-1" />
             <Barcode value={transaction.senderReference || "HSBC587069248914"} />
           </div>
           
           {/* Page 1 SWIFT Text */}
-          <pre className="font-mono text-[11px] leading-[15px] whitespace-pre text-black flex-1 select-text">
+          <pre className="text-[11px] leading-[14px] whitespace-pre text-black flex-1 select-text" style={{ fontFamily: "'Courier New', Courier, monospace", fontWeight: "normal" }}>
             {page1Text}
           </pre>
           
           {/* Watermark/Footer */}
-          <div className="absolute bottom-6 right-8 text-xs font-mono text-gray-300 select-none pointer-events-none uppercase">
+          <div className="absolute bottom-4 right-6 text-[10px] font-mono text-gray-300 select-none pointer-events-none uppercase">
             HSBC UK WIRE SYSTEM • PAGE 1 OF 2
           </div>
         </div>
 
         {/* PAGE 2 */}
-        <div className="swift-page print-page relative flex flex-col" id="hsbc-printout-page2">
+        <div className="swift-page print-page relative flex flex-col bg-white" id="hsbc-printout-page2">
           {/* Logo only Row */}
-          <div className="flex justify-between items-start mb-6">
-            <img src="/logos/hsbc.jpg" alt="HSBC" className="h-10 w-auto object-contain mt-2" />
-            <div className="w-[150px] h-[38px]"></div> {/* Spacer to keep alignment */}
+          <div className="flex justify-between items-start mb-4">
+            <Image src="/logos/hsbc.jpg" alt="HSBC Logo" width={110} height={28} priority className="h-7 w-auto object-contain mt-1" />
+            <div className="w-[120px] h-[30px]"></div> {/* Spacer */}
           </div>
           
           {/* Page 2 Interventions Text */}
-          <pre className="font-mono text-[11px] leading-[15px] whitespace-pre text-black flex-1 select-text">
+          <pre className="text-[11px] leading-[14px] whitespace-pre text-black flex-1 select-text" style={{ fontFamily: "'Courier New', Courier, monospace", fontWeight: "normal" }}>
             {page2Text}
           </pre>
           
           {/* Watermark/Footer */}
-          <div className="absolute bottom-6 right-8 text-xs font-mono text-gray-300 select-none pointer-events-none uppercase">
+          <div className="absolute bottom-4 right-6 text-[10px] font-mono text-gray-300 select-none pointer-events-none uppercase">
             HSBC UK WIRE SYSTEM • PAGE 2 OF 2
           </div>
         </div>
