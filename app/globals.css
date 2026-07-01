@@ -38,14 +38,25 @@ html, body {
 }
 
 @media print {
-  /* Collapse all outer layout wrappers to prevent blank pages from parent padding/borders */
-  html, body, main, main *, div, section, article {
+  /* Set html/body print defaults */
+  html, body {
+    background: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Collapse outer Next.js & dashboard structural wrappers without affecting descendants */
+  main,
+  main > div,
+  main > div > div,
+  main > div > div > div,
+  main > div > div > div > div {
     margin: 0 !important;
     padding: 0 !important;
     border: none !important;
     box-shadow: none !important;
     background: transparent !important;
-    width: auto !important;
+    width: 100% !important;
     height: auto !important;
     max-width: none !important;
     max-height: none !important;
