@@ -11,8 +11,16 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
+  const [blockNumber, setBlockNumber] = useState(1982903);
 
-  // Clear errors when toggling tabs
+  // Live Web3 block ticks simulation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBlockNumber((prev) => prev + Math.floor(Math.random() * 2) + 1);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   useEffect(() => {
     setError("");
     setSuccess("");
@@ -36,17 +44,15 @@ export default function LoginPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Authentication failed");
+        throw new Error(data.error || "Portal access denied");
       }
 
       if (isSignUp) {
-        setSuccess("Account registered successfully! You can now sign in.");
+        setSuccess("Cryptographic identity verified! Access granted. Proceed to login.");
         setIsSignUp(false);
         setPassword("");
       } else {
-        // Sign In success
         localStorage.setItem("sqr400_session", JSON.stringify(data.user));
-        
         if (data.user.role === "admin") {
           router.push("/admin");
         } else {
@@ -61,94 +67,108 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-center items-center p-4 relative overflow-hidden font-sans select-none">
-      {/* Background Neon Glowing Orbs */}
-      <div className="absolute top-[-20%] left-[-20%] w-[60%] h-[60%] rounded-full bg-blue-600/10 blur-[180px] pointer-events-none" />
-      <div className="absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] rounded-full bg-purple-600/10 blur-[180px] pointer-events-none" />
-      <div className="absolute top-[40%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[300px] h-[300px] rounded-full bg-indigo-500/5 blur-[120px] pointer-events-none" />
+    <main className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-center items-center p-4 relative overflow-hidden font-mono select-none">
+      {/* Mesh Grid Pattern Background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-40 pointer-events-none" />
 
-      {/* Auth Card */}
-      <div className="w-full max-w-md bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-3xl p-8 shadow-2xl relative z-10">
-        {/* Glow Accent Line */}
-        <div className="absolute top-0 left-12 right-12 h-[2px] bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+      {/* Cyber Ambient Spotlights */}
+      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-cyan-500/10 blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-500/10 blur-[150px] pointer-events-none" />
 
-        {/* Shield Icon / Branding */}
+      {/* Web3 Node Statistics Bar */}
+      <div className="mb-6 bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-full px-5 py-2 flex items-center gap-6 text-[10px] text-slate-400 shadow-xl relative z-10">
+        <div className="flex items-center gap-2">
+          <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping" />
+          <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+          <span>MAINNET: ONLINE</span>
+        </div>
+        <div className="w-px h-3 bg-slate-800" />
+        <div>BLOCK: #{blockNumber}</div>
+        <div className="w-px h-3 bg-slate-800" />
+        <div>GAS: 0 GWEI</div>
+      </div>
+
+      {/* Glassmorphic Portal Box */}
+      <div className="w-full max-w-md bg-slate-900/30 backdrop-blur-2xl border border-slate-850 rounded-3xl p-8 shadow-2xl relative z-10">
+        {/* Glow Line Indicator */}
+        <div className="absolute top-0 left-6 right-6 h-[2px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
+
+        {/* Brand Header */}
         <div className="flex flex-col items-center mb-8">
-          <div className="w-16 h-16 bg-slate-950 border border-slate-800 rounded-2xl flex items-center justify-center mb-4 relative group shadow-inner">
-            {/* Pulsing indicator */}
-            <div className="absolute top-2 right-2 w-2.5 h-2.5 bg-blue-500 rounded-full animate-ping" />
-            <div className="absolute top-2 right-2 w-2.5 h-2.5 bg-blue-500 rounded-full" />
-            <span className="text-3xl">🔑</span>
+          <div className="w-16 h-16 bg-slate-950 border border-slate-800 rounded-2xl flex items-center justify-center mb-4 relative shadow-inner group">
+            {/* Holographic rings */}
+            <div className="absolute inset-[-4px] rounded-2xl border border-cyan-500/20 group-hover:scale-105 transition-all duration-300 pointer-events-none" />
+            <span className="text-3xl text-cyan-400">⚡</span>
           </div>
-          <h1 className="text-2xl font-black tracking-widest text-white uppercase text-center">
-            SQR400 <span className="text-blue-500">GATEWAY</span>
+          <h1 className="text-xl font-black tracking-widest text-white uppercase text-center font-mono">
+            SQR400 <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">GATEWAY</span>
           </h1>
-          <p className="text-[10px] text-slate-500 font-mono tracking-widest uppercase mt-1">
-            Secure Cryptographic SWIFT Interface
+          <p className="text-[9px] text-slate-500 font-mono tracking-widest uppercase mt-1">
+            Decentralized Cryptographic SWIFT Portal
           </p>
         </div>
 
-        {/* Switch Tabs */}
-        <div className="flex bg-slate-950 p-1 rounded-xl mb-6 border border-slate-850">
+        {/* Tab Buttons */}
+        <div className="flex bg-slate-950/80 p-1.5 rounded-2xl mb-6 border border-slate-850">
           <button
             type="button"
             onClick={() => setIsSignUp(false)}
-            className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all uppercase tracking-wider ${
+            className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all uppercase tracking-wider ${
               !isSignUp
-                ? "bg-slate-905 text-white shadow-md border border-slate-800"
-                : "text-slate-500 hover:text-slate-300"
+                ? "bg-slate-900 text-cyan-400 shadow-lg border border-slate-800"
+                : "text-slate-500 hover:text-slate-350"
             }`}
           >
-            Sign In
+            Connect Node
           </button>
           <button
             type="button"
             onClick={() => setIsSignUp(true)}
-            className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all uppercase tracking-wider ${
+            className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all uppercase tracking-wider ${
               isSignUp
-                ? "bg-slate-905 text-white shadow-md border border-slate-800"
-                : "text-slate-500 hover:text-slate-300"
+                ? "bg-slate-900 text-cyan-400 shadow-lg border border-slate-800"
+                : "text-slate-500 hover:text-slate-355"
             }`}
           >
-            Create Account
+            Register Key
           </button>
         </div>
 
         {/* Status Alerts */}
         {error && (
-          <div className="mb-5 p-3.5 bg-red-950/40 border border-red-900/50 text-red-200 text-xs rounded-xl flex items-center gap-2 font-medium">
-            <span className="text-sm">⚠️</span> {error}
+          <div className="mb-5 p-3.5 bg-red-950/30 border border-red-900/40 text-red-300 text-xs rounded-xl flex items-center gap-2 font-medium">
+            <span>[ERROR]:</span> {error}
           </div>
         )}
         {success && (
-          <div className="mb-5 p-3.5 bg-emerald-950/40 border border-emerald-900/50 text-emerald-200 text-xs rounded-xl flex items-center gap-2 font-medium">
-            <span className="text-sm">✅</span> {success}
+          <div className="mb-5 p-3.5 bg-emerald-950/30 border border-emerald-900/40 text-emerald-300 text-xs rounded-xl flex items-center gap-2 font-medium">
+            <span>[SUCCESS]:</span> {success}
           </div>
         )}
 
-        {/* Login Form */}
+        {/* Auth Inputs Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-1.5">
-              Username
+            <label className="text-[10px] font-bold text-slate-450 uppercase tracking-widest block mb-1.5">
+              [ NODE USERNAME ]
             </label>
             <input
               type="text"
               autoComplete="off"
-              className="w-full px-4 py-3 bg-slate-950 border-2 border-slate-850 focus:border-blue-500 rounded-xl text-sm text-slate-100 placeholder-slate-650 outline-none transition-all duration-200 focus:ring-2 focus:ring-blue-900/20"
-              placeholder="Enter account username"
+              className="w-full px-4 py-3 bg-slate-950/80 border border-slate-850 focus:border-cyan-500 rounded-xl text-sm text-slate-100 placeholder-slate-650 outline-none transition-all duration-300 focus:ring-2 focus:ring-cyan-500/10 focus:shadow-[0_0_15px_rgba(6,182,212,0.05)]"
+              placeholder="Enter node identifier"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
             />
           </div>
           <div>
-            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-1.5">
-              Secret Passcode
+            <label className="text-[10px] font-bold text-slate-455 uppercase tracking-widest block mb-1.5">
+              [ CRYPTO KEY PASSCODE ]
             </label>
             <input
               type="password"
-              className="w-full px-4 py-3 bg-slate-950 border-2 border-slate-850 focus:border-blue-500 rounded-xl text-sm text-slate-100 placeholder-slate-650 outline-none transition-all duration-200 focus:ring-2 focus:ring-blue-900/20"
+              className="w-full px-4 py-3 bg-slate-950/80 border border-slate-850 focus:border-cyan-500 rounded-xl text-sm text-slate-100 placeholder-slate-650 outline-none transition-all duration-300 focus:ring-2 focus:ring-cyan-500/10 focus:shadow-[0_0_15px_rgba(6,182,212,0.05)]"
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -159,16 +179,16 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-4 mt-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 disabled:opacity-50 text-white rounded-xl font-black text-xs tracking-widest uppercase transition-all duration-300 shadow-lg shadow-blue-500/10 hover:shadow-blue-500/25 active:scale-98"
+            className="w-full py-4 mt-2 bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-500 hover:to-purple-500 disabled:opacity-50 text-white rounded-xl font-bold text-xs tracking-widest uppercase transition-all duration-300 shadow-xl shadow-cyan-500/10 hover:shadow-cyan-500/25 active:scale-98"
           >
-            {loading ? "Decrypting credentials..." : isSignUp ? "Establish Account" : "Access Terminal"}
+            {loading ? "INITIALIZING SECURE SOCKETS..." : isSignUp ? "ESTABLISH DECENTRALIZED NODE KEY" : "AUTHENTICATE GATEWAY NODE"}
           </button>
         </form>
       </div>
 
       {/* Footer copyright */}
-      <div className="mt-8 text-[9px] font-mono text-slate-650 tracking-wider relative z-10">
-        SQR400 WIRE TRANSFER SYSTEM • ALL CONNECTIONS ENCRYPTED
+      <div className="mt-8 text-[9px] font-mono text-slate-650 tracking-widest relative z-10 uppercase">
+        SQR400 PROTOCOL • ALL CONNECTIONS ENCRYPTED UNDER SHA-256 PBKDF2
       </div>
     </main>
   );

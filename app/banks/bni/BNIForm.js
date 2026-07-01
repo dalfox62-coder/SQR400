@@ -63,21 +63,24 @@ const BNIForm = ({ onSubmit, initialData = {} }) => {
     });
   };
 
-  const inputClass = "w-full px-4 py-2.5 bg-slate-950 border-2 border-slate-800 focus:border-teal-600 rounded-xl focus:ring-2 focus:ring-teal-900/30 transition-all duration-200 text-sm text-slate-100 placeholder-slate-600 outline-none";
-  const selectClass = "w-full px-4 py-2.5 bg-slate-950 border-2 border-slate-800 focus:border-teal-600 rounded-xl focus:ring-2 focus:ring-teal-900/30 transition-all duration-200 text-sm text-slate-100 outline-none";
-  const labelClass = "text-xs font-bold text-slate-400 block mb-1.5 uppercase tracking-wider";
-  const sectionClass = "border border-slate-800 rounded-2xl p-5 bg-slate-950/40 mb-6";
+  const inputClass = "w-full px-4 py-2.5 bg-slate-950/80 border border-slate-850 focus:border-cyan-500 rounded-xl focus:ring-2 focus:ring-cyan-550/10 focus:shadow-[0_0_15px_rgba(6,182,212,0.05)] transition-all duration-300 text-sm text-slate-100 placeholder-slate-650 outline-none";
+  const selectClass = "w-full px-4 py-2.5 bg-slate-950/80 border border-slate-850 focus:border-cyan-500 rounded-xl focus:ring-2 focus:ring-cyan-550/10 focus:shadow-[0_0_15px_rgba(6,182,212,0.05)] transition-all duration-300 text-sm text-slate-100 outline-none";
+  const labelClass = "text-[9px] font-black text-slate-450 block mb-1.5 uppercase tracking-widest";
+  const sectionClass = "border border-slate-850 rounded-2xl p-5 bg-slate-950/20 mb-6 relative overflow-hidden";
 
   return (
-    <form onSubmit={handleSubmit} className="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl">
+    <form onSubmit={handleSubmit} className="bg-slate-900/30 border border-slate-850 rounded-3xl p-6 md:p-8 shadow-2xl backdrop-blur-md relative overflow-hidden">
+      {/* Glow Line Indicator */}
+      <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
+
       {/* Header BNI */}
-      <div className="flex items-center gap-4 mb-6 pb-5 border-b border-slate-800">
-        <div className="w-12 h-12 bg-teal-600 rounded-xl flex items-center justify-center text-white font-black text-xs tracking-wider shadow-lg shadow-teal-600/20">
+      <div className="flex items-center gap-4 mb-6 pb-5 border-b border-slate-850">
+        <div className="w-12 h-12 bg-teal-500/10 text-teal-400 border border-teal-900/30 rounded-xl flex items-center justify-center font-black text-xs tracking-wider shadow-lg">
           BNI
         </div>
         <div>
-          <h2 className="text-xl font-bold text-white tracking-wide">BNI Indonesia Terminal</h2>
-          <p className="text-xs text-slate-400">MT103 SWIFT Document Generator</p>
+          <h2 className="text-base font-bold text-white tracking-widest uppercase">BNI NODE</h2>
+          <p className="text-[9px] text-slate-500 font-mono tracking-wider uppercase">MT103 Transaction Parameters Configurator</p>
         </div>
       </div>
 
@@ -268,9 +271,9 @@ const BNIForm = ({ onSubmit, initialData = {} }) => {
       {/* SUBMIT BUTTON */}
       <button
         type="submit"
-        className="w-full py-4 bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white rounded-2xl font-black text-sm tracking-widest shadow-lg shadow-teal-600/20 hover:shadow-teal-600/35 transition-all duration-300 transform active:scale-[0.98] uppercase"
+        className="w-full py-4 bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-550 hover:to-purple-550 text-white rounded-2xl font-bold text-xs tracking-widest shadow-xl shadow-cyan-500/10 hover:shadow-cyan-500/25 transition-all duration-300 transform active:scale-[0.98] uppercase"
       >
-        ⚡ Generate BNI SWIFT MT103 Document
+        ⚡ BROADCAST TRANSACTION NODE & GENERATE MT103
       </button>
     </form>
   );

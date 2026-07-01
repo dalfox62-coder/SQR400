@@ -15,15 +15,5 @@
       "registeredAt": "2026-07-01T11:25:51.023Z"
     }
   ],
-  "traffic": [
-    {
-      "id": "1782905304187u0a4z",
-      "timestamp": "2026-07-01T11:28:24.187Z",
-      "username": "vinz2",
-      "bank": "HSBC UK",
-      "amount": "3500000",
-      "currency": "EUR",
-      "senderRef": "HSBC587069248914"
-    }
-  ]
+  "traffic": []
 }
