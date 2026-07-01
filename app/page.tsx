@@ -182,84 +182,90 @@ export default function Home() {
       <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-indigo-500/10 blur-[150px] pointer-events-none select-none no-print" />
 
       <div className="max-w-6xl mx-auto relative z-10">
-        {/* dApp Styled Header Navigation */}
-        <div className="bg-[#020617]/40 backdrop-blur-3xl border border-white/5 rounded-[2rem] p-6 lg:p-8 flex flex-col lg:flex-row justify-between items-center shadow-[0_0_40px_rgba(0,0,0,0.5)] no-print mb-10 gap-6">
+        {/* Premium Header Navigation */}
+        <div className="bg-[#0f172a]/60 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-4 md:p-6 flex flex-col xl:flex-row justify-between items-center shadow-[0_8px_30px_rgb(0,0,0,0.4)] no-print mb-10 gap-6 transition-all duration-300">
           
-          {/* Logo & Node Indicator */}
-          <div className="flex items-center gap-5">
-            <div className="w-12 h-12 bg-slate-900/50 border border-white/10 rounded-2xl flex items-center justify-center relative shadow-inner group">
-              <span className="text-2xl text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.5)] group-hover:scale-110 transition-transform duration-500">⚡</span>
-              <span className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full border-2 border-slate-900 animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
+          {/* Left: Logo & Title */}
+          <div className="flex items-center gap-4">
+            <div className="w-14 h-14 bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 rounded-2xl flex items-center justify-center relative shadow-inner group overflow-hidden shrink-0">
+              <div className="absolute inset-0 bg-cyan-400/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <span className="text-2xl text-cyan-400 drop-shadow-[0_0_12px_rgba(34,211,238,0.8)] relative z-10 group-hover:scale-110 transition-transform duration-500">⚡</span>
+              <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border border-slate-900 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
             </div>
-            <div>
-              <h1 className="text-2xl font-black tracking-widest text-white uppercase font-outfit">
-                SQR400 <span className="text-cyan-400 text-sm font-bold ml-2 px-2 py-0.5 bg-cyan-500/10 rounded-lg">v5.8</span>
+            <div className="flex flex-col justify-center">
+              <h1 className="text-xl font-black tracking-widest text-white uppercase font-outfit flex items-center gap-3">
+                SQR400 
+                <span className="text-[10px] text-cyan-400 border border-cyan-500/30 bg-cyan-500/10 px-2 py-0.5 rounded-md tracking-wider">v5.8</span>
               </h1>
-              <p className="text-xs text-slate-400 font-sans tracking-widest uppercase mt-1">
+              <p className="text-[11px] text-slate-400 font-sans tracking-[0.2em] uppercase mt-0.5">
                 Swift Crypto Bridge
               </p>
             </div>
           </div>
 
-          {/* Network status badges */}
-          <div className="flex flex-wrap items-center gap-4 text-xs font-semibold text-slate-400 font-outfit uppercase tracking-widest">
-            <div className="bg-white/5 border border-white/5 px-4 py-2 rounded-xl flex items-center gap-2">
+          {/* Center: Network Status Indicators */}
+          <div className="flex items-center bg-slate-950/50 rounded-2xl border border-white/5 p-1.5 shadow-inner w-full md:w-auto justify-center">
+            <div className="px-3 md:px-4 py-1.5 flex items-center gap-2">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-              <span className="text-slate-500">NET:</span>
-              <span className="text-white">Mainnet</span>
+              <span className="text-[10px] md:text-[11px] font-bold text-slate-300 tracking-widest uppercase">Mainnet</span>
             </div>
-            <div className="bg-white/5 border border-white/5 px-4 py-2 rounded-xl">
-              <span className="text-slate-500">Online:</span>{" "}
-              <span className="text-cyan-400">{stats.onlineCount}</span>
+            <div className="w-px h-5 bg-white/10 mx-0.5 md:mx-1" />
+            <div className="px-3 md:px-4 py-1.5 flex items-center gap-2">
+              <span className="text-[10px] md:text-[11px] font-bold text-slate-500 tracking-widest uppercase">Online</span>
+              <span className="text-[11px] md:text-[12px] font-black text-cyan-400">{stats.onlineCount}</span>
             </div>
-            <div className="bg-white/5 border border-white/5 px-4 py-2 rounded-xl">
-              <span className="text-slate-500">Active:</span>{" "}
-              <span className="text-indigo-400">{stats.activeCount}</span>
+            <div className="w-px h-5 bg-white/10 mx-0.5 md:mx-1" />
+            <div className="px-3 md:px-4 py-1.5 flex items-center gap-2">
+              <span className="text-[10px] md:text-[11px] font-bold text-slate-500 tracking-widest uppercase">Active</span>
+              <span className="text-[11px] md:text-[12px] font-black text-indigo-400">{stats.activeCount}</span>
             </div>
           </div>
 
-          {/* Action Navigation Buttons */}
-          <div className="flex items-center gap-4 text-sm font-semibold font-outfit">
+          {/* Right: Actions */}
+          <div className="flex flex-wrap items-center justify-center gap-3 w-full xl:w-auto">
             {session.role === "admin" && (
               <button
                 onClick={() => router.push("/admin")}
-                className="px-5 py-2.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 rounded-xl transition duration-300 border border-red-500/20 text-xs tracking-widest uppercase"
+                className="px-4 py-2.5 bg-gradient-to-r from-red-500/10 to-rose-500/10 hover:from-red-500/20 hover:to-rose-500/20 text-red-400 hover:text-red-300 rounded-xl transition duration-300 border border-red-500/20 text-[11px] font-bold tracking-widest uppercase flex items-center gap-2 shadow-sm"
               >
-                🔐 Admin Node
+                <span>🔐</span> Admin Node
               </button>
             )}
             
-            {/* Wallet Address username Badge */}
-            <div className="bg-gradient-to-r from-cyan-500/10 to-indigo-500/10 border border-cyan-500/20 rounded-xl px-5 py-2.5 text-xs text-cyan-400 tracking-widest shadow-inner">
-              🔑 {session.username.length > 10 ? `${session.username.substring(0, 7)}...` : session.username}
+            <div className="flex items-center bg-slate-900/80 rounded-xl border border-white/5 p-1 shadow-sm">
+              <button
+                onClick={() => {
+                  setSettingsUsername(session.username);
+                  setSettingsCurrentPassword("");
+                  setSettingsNewPassword("");
+                  setSettingsConfirmPassword("");
+                  setSettingsError("");
+                  setSettingsSuccess("");
+                  setShowSettings(true);
+                }}
+                className="px-4 py-2 hover:bg-white/5 rounded-lg transition-colors flex items-center gap-2 group"
+                title="Identity Settings"
+              >
+                <span className="text-[12px]">🔑</span>
+                <span className="text-[11px] font-bold text-slate-300 tracking-widest group-hover:text-white transition-colors">
+                  {session.username.length > 10 ? `${session.username.substring(0, 7)}...` : session.username}
+                </span>
+                <span className="text-[10px] text-slate-500 group-hover:text-cyan-400 transition-colors ml-1">⚙️</span>
+              </button>
+              
+              <div className="w-px h-5 bg-white/10 mx-1" />
+              
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 hover:bg-red-500/10 rounded-lg transition-colors flex items-center gap-2 group"
+              >
+                <span className="text-[11px] font-bold text-slate-400 group-hover:text-red-400 tracking-widest uppercase transition-colors">Logout</span>
+                <span className="text-[12px] group-hover:text-red-400 transition-colors grayscale group-hover:grayscale-0">🚪</span>
+              </button>
             </div>
-
-            <button
-              onClick={() => {
-                setSettingsUsername(session.username);
-                setSettingsCurrentPassword("");
-                setSettingsNewPassword("");
-                setSettingsConfirmPassword("");
-                setSettingsError("");
-                setSettingsSuccess("");
-                setShowSettings(true);
-              }}
-              className="p-3 bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white border border-white/5 rounded-xl transition duration-300 group"
-              title="Identity & Password Settings"
-            >
-              <span className="group-hover:rotate-45 block transition-transform duration-300">⚙️</span>
-            </button>
-
-            <button
-              onClick={handleLogout}
-              className="p-3 bg-white/5 hover:bg-red-500/20 text-slate-400 hover:text-red-400 border border-white/5 hover:border-red-500/30 rounded-xl transition duration-300"
-              title="Disconnect Node"
-            >
-              🔌
-            </button>
           </div>
         </div>
 

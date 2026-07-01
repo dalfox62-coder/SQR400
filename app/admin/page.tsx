@@ -134,52 +134,72 @@ export default function AdminPage() {
 
       <div className="max-w-6xl mx-auto relative z-10">
         
-        {/* Validator Control Header */}
-        <div className="bg-[#020617]/40 backdrop-blur-3xl border border-white/5 rounded-[2rem] p-6 lg:p-8 flex flex-col lg:flex-row justify-between items-center shadow-[0_0_40px_rgba(0,0,0,0.5)] mb-10 gap-6 no-print">
-          <div className="flex items-center gap-5">
-            <div className="w-12 h-12 bg-slate-900/50 border border-white/10 rounded-2xl flex items-center justify-center relative shadow-inner group">
-              <span className="text-2xl text-red-500 drop-shadow-[0_0_10px_rgba(239,68,68,0.5)] group-hover:scale-110 transition-transform duration-500">🛡️</span>
-              <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-slate-900 animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.5)]" />
+        {/* Premium Admin Header Navigation */}
+        <div className="bg-[#0f172a]/60 backdrop-blur-2xl border border-red-500/10 rounded-[2rem] p-4 md:p-6 flex flex-col xl:flex-row justify-between items-center shadow-[0_8px_30px_rgb(239,68,68,0.15)] no-print mb-10 gap-6 transition-all duration-300">
+          
+          {/* Left: Logo & Title */}
+          <div className="flex items-center gap-4">
+            <div className="w-14 h-14 bg-gradient-to-br from-slate-900 to-red-950 border border-red-500/20 rounded-2xl flex items-center justify-center relative shadow-inner group overflow-hidden shrink-0">
+              <div className="absolute inset-0 bg-red-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <span className="text-2xl text-red-500 drop-shadow-[0_0_12px_rgba(239,68,68,0.8)] relative z-10 group-hover:scale-110 transition-transform duration-500">🛡️</span>
+              <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-red-500 rounded-full border border-slate-900 animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.8)]" />
             </div>
-            <div>
-              <h1 className="text-2xl font-black tracking-widest text-white uppercase font-outfit">
-                SQR400 <span className="text-red-500 text-sm font-bold ml-2 px-2 py-0.5 bg-red-500/10 rounded-lg">VALIDATOR</span>
+            <div className="flex flex-col justify-center">
+              <h1 className="text-xl font-black tracking-widest text-white uppercase font-outfit flex items-center gap-3">
+                SQR400 
+                <span className="text-[10px] text-red-400 border border-red-500/30 bg-red-500/10 px-2 py-0.5 rounded-md tracking-wider">VALIDATOR</span>
               </h1>
-              <p className="text-xs text-slate-400 font-sans tracking-widest uppercase mt-1">
+              <p className="text-[11px] text-slate-400 font-sans tracking-[0.2em] uppercase mt-0.5">
                 Secure Ledger Management Portal
               </p>
             </div>
           </div>
 
-          {/* Node Metrics */}
-          <div className="flex flex-wrap items-center gap-4 text-xs font-semibold text-slate-400 font-outfit uppercase tracking-widest">
-            <div className="bg-red-500/5 border border-red-500/10 px-4 py-2 rounded-xl">
-              <span className="text-slate-500">ROLE:</span> <span className="text-red-400">ADMIN</span>
+          {/* Center: Node Metrics */}
+          <div className="flex items-center bg-slate-950/50 rounded-2xl border border-white/5 p-1.5 shadow-inner w-full md:w-auto justify-center">
+            <div className="px-3 md:px-4 py-1.5 flex items-center gap-2">
+              <span className="text-[10px] md:text-[11px] font-bold text-slate-500 tracking-widest uppercase">ROLE:</span>
+              <span className="text-[11px] md:text-[12px] font-black text-red-400">ADMIN</span>
             </div>
-            <div className="bg-white/5 border border-white/5 px-4 py-2 rounded-xl">
-              <span className="text-slate-500">Online:</span>{" "}
-              <span className="text-cyan-400">{stats.onlineCount}</span>
+            <div className="w-px h-5 bg-white/10 mx-0.5 md:mx-1" />
+            <div className="px-3 md:px-4 py-1.5 flex items-center gap-2">
+              <span className="text-[10px] md:text-[11px] font-bold text-slate-500 tracking-widest uppercase">Online</span>
+              <span className="text-[11px] md:text-[12px] font-black text-cyan-400">{stats.onlineCount}</span>
             </div>
-            <div className="bg-white/5 border border-white/5 px-4 py-2 rounded-xl">
-              <span className="text-slate-500">Active:</span>{" "}
-              <span className="text-indigo-400">{stats.activeCount}</span>
+            <div className="w-px h-5 bg-white/10 mx-0.5 md:mx-1" />
+            <div className="px-3 md:px-4 py-1.5 flex items-center gap-2">
+              <span className="text-[10px] md:text-[11px] font-bold text-slate-500 tracking-widest uppercase">Active</span>
+              <span className="text-[11px] md:text-[12px] font-black text-indigo-400">{stats.activeCount}</span>
             </div>
           </div>
 
-          {/* Control Buttons */}
-          <div className="flex items-center gap-4 text-sm font-semibold font-outfit">
+          {/* Right: Actions */}
+          <div className="flex flex-wrap items-center justify-center gap-3 w-full xl:w-auto">
             <button
               onClick={() => router.push("/")}
-              className="px-5 py-2.5 bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white rounded-xl transition duration-300 border border-white/5 text-xs tracking-widest uppercase"
+              className="px-4 py-2.5 bg-slate-800/50 hover:bg-slate-700 text-slate-300 hover:text-white rounded-xl transition duration-300 border border-slate-600/50 text-[11px] font-bold tracking-widest uppercase flex items-center gap-2 shadow-sm"
             >
-              🖥️ Console
+              <span>🖥️</span> Console
             </button>
-            <button
-              onClick={handleLogout}
-              className="px-5 py-2.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 rounded-xl transition duration-300 border border-red-500/20 text-xs tracking-widest uppercase"
-            >
-              🔒 Disconnect
-            </button>
+            
+            <div className="flex items-center bg-slate-900/80 rounded-xl border border-white/5 p-1 shadow-sm">
+              <div className="px-4 py-2 flex items-center gap-2 group cursor-default">
+                <span className="text-[12px]">🔑</span>
+                <span className="text-[11px] font-bold text-slate-300 tracking-widest transition-colors">
+                  {session.username.length > 10 ? `${session.username.substring(0, 7)}...` : session.username}
+                </span>
+              </div>
+              
+              <div className="w-px h-5 bg-white/10 mx-1" />
+              
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 hover:bg-red-500/10 rounded-lg transition-colors flex items-center gap-2 group"
+              >
+                <span className="text-[11px] font-bold text-slate-400 group-hover:text-red-400 tracking-widest uppercase transition-colors">Disconnect</span>
+                <span className="text-[12px] group-hover:text-red-400 transition-colors grayscale group-hover:grayscale-0">🔒</span>
+              </button>
+            </div>
           </div>
         </div>
 
