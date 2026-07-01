@@ -48,7 +48,7 @@ export async function POST(req: any) {
       sessionData.adminToken = getAdminVerifyToken();
     }
 
-    return NextResponse.json(sessionData);
+    return NextResponse.json({ user: sessionData });
   } catch (error) {
     console.error("Login Error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
