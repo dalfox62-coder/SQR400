@@ -8,6 +8,7 @@ export default function LoginPage() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [passkey, setPasskey] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
@@ -44,10 +45,12 @@ export default function LoginPage() {
     const endpoint = isSignUp ? "/api/auth/register" : "/api/auth/login";
 
     try {
+      const payload = isSignUp ? { username, password, passkey } : { username, password };
+      
       const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
@@ -60,6 +63,7 @@ export default function LoginPage() {
         setSuccess("Cryptographic identity verified! Access granted. Proceed to login.");
         setIsSignUp(false);
         setPassword("");
+        setPasskey("");
       } else {
         localStorage.setItem("sqr400_session", JSON.stringify(data.user));
         if (data.user.role === "admin") {
@@ -186,6 +190,22 @@ export default function LoginPage() {
               required
             />
           </div>
+
+          {isSignUp && (
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-slate-400 uppercase tracking-widest block font-outfit">
+                Authorization Passkey
+              </label>
+              <input
+                type="password"
+                className="w-full px-5 py-3.5 bg-slate-950/50 border border-white/5 focus:border-cyan-500/50 rounded-2xl text-sm text-slate-100 placeholder-slate-600 outline-none transition-all duration-300 focus:ring-4 focus:ring-cyan-500/10 focus:bg-slate-900/80 font-sans tracking-widest"
+                placeholder="Required for registration"
+                value={passkey}
+                onChange={(e) => setPasskey(e.target.value)}
+                required={isSignUp}
+              />
+            </div>
+          )}
 
           <button
             type="submit"
