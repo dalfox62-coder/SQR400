@@ -79,17 +79,3 @@ export const query = async (text: string, params?: any[]) => {
   }
 };
 
-// Optional helper to get all data (mostly to mimic old readDb structure if needed anywhere else)
-export const readDb = async () => {
-  try {
-    const usersRes = await query("SELECT username, role, registered_at as \"registeredAt\", password_hash as \"passwordHash\", password_salt as \"passwordSalt\" FROM users");
-    const trafficRes = await query("SELECT id, timestamp, username, bank, amount, currency, sender_ref as \"senderRef\" FROM traffic");
-    return {
-      users: usersRes.rows,
-      traffic: trafficRes.rows
-    };
-  } catch (error) {
-    console.error("Database read error:", error);
-    return { users: [], traffic: [] };
-  }
-};
