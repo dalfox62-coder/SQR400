@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import BankSelector from "./components/BankSelector";
 import HSBCForm from "./banks/hsbc/HSBCForm";
 import BNIForm from "./banks/bni/BNIForm";
@@ -11,18 +12,55 @@ import CitiForm from "./banks/citi/CitiForm";
 import TransactionResult from "./components/TransactionResult";
 
 export default function Home() {
+  const router = useRouter();
+  const [session, setSession] = useState(null);
   const [selectedBank, setSelectedBank] = useState("hsbc");
   const [transactionData, setTransactionData] = useState(null);
   const [showResult, setShowResult] = useState(false);
 
-  const handleSubmit = (data) => {
+  useEffect(() => {
+    // Route guard check
+    const storedSession = localStorage.getItem("sqr400_session");
+    if (!storedSession) {
+      router.push("/login");
+      return;
+    }
+    setSession(JSON.parse(storedSession));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router]);
+
+  const handleSubmit = async (data) => {
     setTransactionData(data);
     setShowResult(true);
     window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // Log user generation traffic on the backend
+    if (session) {
+      try {
+        await fetch("/api/traffic", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: session.username,
+            bank: data.selectedBank,
+            amount: data.transaction?.amount || "0",
+            currency: data.transaction?.currency || "EUR",
+            senderRef: data.transaction?.senderReference || "N/A",
+          }),
+        });
+      } catch (err) {
+        console.error("Failed to log printout generation traffic:", err);
+      }
+    }
   };
 
   const handleBack = () => {
     setShowResult(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("sqr400_session");
+    router.push("/login");
   };
 
   const renderForm = () => {
@@ -43,6 +81,8 @@ export default function Home() {
         return <HSBCForm onSubmit={handleSubmit} />;
     }
   };
+
+  if (!session) return null; // Avoid flashing content before redirect
 
   return (
     <main className="min-h-screen bg-slate-950 text-slate-100 py-8 px-4 md:px-8 font-sans antialiased relative overflow-hidden">
@@ -65,7 +105,7 @@ export default function Home() {
         </div>
 
         {/* Navigation */}
-        <div className="bg-slate-900/40 backdrop-blur-md border-b border-x border-slate-800 px-6 py-3 rounded-b-2xl flex flex-wrap gap-6 text-slate-400 text-xs font-semibold shadow-2xl no-print mb-8">
+        <div className="bg-slate-900/40 backdrop-blur-md border-b border-x border-slate-800 px-6 py-3 rounded-b-2xl flex flex-wrap gap-6 text-slate-400 text-xs font-semibold shadow-2xl no-print mb-8 items-center">
           <span className="hover:text-white cursor-pointer transition-colors duration-200 border-b border-transparent hover:border-blue-500 pb-1">
             Terminal Home
           </span>
@@ -75,15 +115,20 @@ export default function Home() {
           <span className="hover:text-white cursor-pointer transition-colors duration-200 border-b border-transparent hover:border-blue-500 pb-1">
             Pricing
           </span>
-          <span className="hover:text-white cursor-pointer transition-colors duration-200 border-b border-transparent hover:border-blue-500 pb-1">
-            Configuration
-          </span>
-          <span className="hover:text-white cursor-pointer transition-colors duration-200 border-b border-transparent hover:border-blue-500 pb-1">
-            Activity Log
-          </span>
-          <span className="hover:text-white cursor-pointer transition-colors duration-200 border-b border-transparent hover:border-blue-500 pb-1">
-            Terminal Help
-          </span>
+          {session.role === "admin" && (
+            <span
+              onClick={() => router.push("/admin")}
+              className="hover:text-red-400 text-red-500 cursor-pointer transition-colors duration-200 border-b border-transparent hover:border-red-500 pb-1 font-bold"
+            >
+              🔐 Admin Control
+            </span>
+          )}
+          <button
+            onClick={handleLogout}
+            className="hover:text-white text-slate-500 cursor-pointer transition-colors duration-205 border-b border-transparent hover:border-blue-500 pb-1 ml-auto text-xs outline-none"
+          >
+            Logout ({session.username})
+          </button>
         </div>
 
         {/* Bank Selector */}
