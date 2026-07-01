@@ -64,7 +64,8 @@ export const verifyPassword = (password: string, storedHash: string, storedSalt:
 
 // Dynamic generation of an Admin Security Session Validation Token
 export const getAdminVerifyToken = () => {
-  return crypto.createHmac("sha256", "SQR400_ADMIN_SECURE_SALT_99").update("vinz_admin_session").digest("hex");
+  const secret = process.env.ADMIN_TOKEN_SECRET || "SQR400_ADMIN_SECURE_SALT_99";
+  return crypto.createHmac("sha256", secret).update("vinz_admin_session").digest("hex");
 };
 
 // Instead of reading the whole JSON file, we'll provide helper functions for PG queries.

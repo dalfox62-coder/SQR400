@@ -4,14 +4,10 @@ import { query, normalizeUsername, hashPassword, sanitizeInput } from "../../../
 export async function POST(req: any) {
   try {
     const body = await req.json();
-    const { username, password, passkey } = body;
+    const { username, password } = body;
 
-    if (!username || !password || !passkey) {
-      return NextResponse.json({ error: "All fields are required" }, { status: 400 });
-    }
-
-    if (passkey !== "VINZ1") {
-      return NextResponse.json({ error: "Invalid registration node passkey" }, { status: 403 });
+    if (!username || !password) {
+      return NextResponse.json({ error: "Username and password are required" }, { status: 400 });
     }
 
     if (username.length < 4 || password.length < 6) {
