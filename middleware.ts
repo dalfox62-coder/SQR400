@@ -16,6 +16,8 @@ export default withAuth(
     // CSP: Only allow scripts from our origin
     response.headers.set("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;");
 
+    const isPublicDocPage = req.nextUrl.pathname.startsWith("/doc");
+
     if (isAuthPage) {
       if (isAuth) {
         return NextResponse.redirect(new URL("/", req.url));
@@ -23,7 +25,7 @@ export default withAuth(
       return response;
     }
 
-    if (!isAuth) {
+    if (!isAuth && !isPublicDocPage) {
       return NextResponse.redirect(new URL("/login", req.url));
     }
 
