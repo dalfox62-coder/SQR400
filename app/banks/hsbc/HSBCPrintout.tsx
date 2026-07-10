@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import QRCode from "react-qr-code";
 
 // Code-128 structured barcode element (optimized width & height for authentic SWIFT receipts)
 const Barcode = ({ value }) => {
@@ -27,14 +29,14 @@ const Barcode = ({ value }) => {
       idx++;
     }
     if (currentVal === "1") {
-      elements.push(<rect key={x} x={x} y={0} width={width} height={44} fill="black" />);
+      elements.push(<rect key={x} x={x} y={0} width={width} height={24} fill="black" />);
     }
     x += width;
   }
 
   return (
-    <div className="flex flex-col items-end">
-      <svg width={Math.ceil(x)} height="44" className="block">
+    <div className="flex flex-col items-end shrink-0">
+      <svg width={Math.ceil(x)} height="24" className="block">
         {elements}
       </svg>
       <span
@@ -53,7 +55,15 @@ const Barcode = ({ value }) => {
   );
 };
 
-const HSBCPrintout = ({ data, onBack }) => {
+const HSBCPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: () => void, isPublic?: boolean }) => {
+  const [baseUrl, setBaseUrl] = useState("https://sqr400-ten.vercel.app");
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.origin.includes("localhost")) {
+      setBaseUrl(window.location.origin);
+    }
+  }, []);
+
   const formatNumber = (num) => {
     if (!num) return "0.00";
     return new Intl.NumberFormat("en-US", {
@@ -294,30 +304,45 @@ ${transmissionCode}`;
   };
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 print:bg-white print:p-0 shadow-2xl">
+    <div className={isPublic ? "w-full flex flex-col items-center" : "bg-slate-900 border border-slate-800 rounded-3xl p-6 print:bg-white print:p-0 shadow-2xl"}>
       {/* Back and Print buttons */}
-      <div className="flex flex-wrap justify-between gap-3 mb-6 no-print">
-        <button
-          onClick={onBack}
-          className="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white rounded-xl font-bold transition-all duration-200 text-sm border border-slate-700"
-        >
-          ← Back to Form
-        </button>
-        <button
-          onClick={() => window.print()}
-          className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl font-bold transition-all duration-200 text-sm shadow-lg shadow-blue-500/20"
-        >
-          🖨️ Print / Download PDF
-        </button>
-      </div>
+      {!isPublic && (
+        <div className="flex flex-wrap justify-between gap-3 mb-6 no-print">
+          <button
+            onClick={onBack}
+            className="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white rounded-xl font-bold transition-all duration-200 text-sm border border-slate-700"
+          >
+            ← Back to Form
+          </button>
+          <button
+            onClick={() => window.print()}
+            className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl font-bold transition-all duration-200 text-sm shadow-lg shadow-blue-500/20"
+          >
+            🖨️ Print / Download PDF
+          </button>
+        </div>
+      )}
+      {isPublic && (
+        <div className="flex justify-center mb-6 no-print w-full">
+          <button
+            onClick={() => window.print()}
+            className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl font-bold transition-all duration-200 shadow-xl shadow-blue-500/20 flex items-center gap-2"
+          >
+            <span className="text-xl">🖨️</span> Print / Download PDF
+          </button>
+        </div>
+      )}
 
       {/* Pages Container */}
-      <div className="flex flex-col items-center gap-8 my-4 print:my-0 print:gap-0 bg-slate-950/60 py-8 px-4 rounded-2xl print:bg-white print:p-0">
+      <div 
+        className={`flex flex-col items-center gap-8 ${isPublic ? 'my-0 print:my-0' : 'my-4'} print:my-0 print:gap-0 ${isPublic ? 'bg-transparent py-0' : 'bg-slate-950/60 py-8 px-4 rounded-2xl'} print:bg-white print:p-0`}
+        style={{ WebkitTextSizeAdjust: "none", textSizeAdjust: "none" }}
+      >
         
         {/* PAGE 1 */}
-        <div className="swift-page print-page relative flex flex-col bg-white" id="hsbc-printout-page1">
+        <div className={`swift-page print-page relative flex flex-col bg-white ${isPublic ? 'shadow-2xl' : ''}`} id="hsbc-printout-page1">
           {/* Content Wrapper constrained strictly to 620px to prevent A4 screen/print overflow */}
-          <div className="w-[620px] mx-auto flex flex-col h-full justify-between">
+          <div className="w-[620px] mx-auto flex flex-col justify-between h-[98%]">
             <div>
               {/* Logo & Barcode Row */}
               <div className="flex justify-between items-end mb-8 w-full">
@@ -344,9 +369,9 @@ ${transmissionCode}`;
         </div>
 
         {/* PAGE 2 */}
-        <div className="swift-page print-page relative flex flex-col bg-white" id="hsbc-printout-page2">
+        <div className={`swift-page print-page relative flex flex-col bg-white ${isPublic ? 'shadow-2xl' : ''}`} id="hsbc-printout-page2">
           {/* Content Wrapper constrained strictly to 620px to prevent A4 screen/print overflow */}
-          <div className="w-[620px] mx-auto flex flex-col h-full justify-between">
+          <div className="w-[620px] mx-auto flex flex-col justify-between h-[98%]">
             <div>
               {/* Logo only Row */}
               <div className="flex justify-between items-end mb-8 w-full">
@@ -362,10 +387,22 @@ ${transmissionCode}`;
               <pre className="whitespace-pre select-text" style={preStyle}>
                 {page2Text}
               </pre>
+              
+              {/* 2D QR Code on Bottom Left */}
+              <div className="mt-4 pl-4 shrink-0">
+                <QRCode 
+                  value={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/"}
+                  size={85}
+                  level="H"
+                  fgColor="#000000"
+                  bgColor="#FFFFFF"
+                  className="mix-blend-multiply"
+                />
+              </div>
             </div>
             
             {/* Footer */}
-            <div className="text-[10px] font-mono text-gray-300 select-none pointer-events-none uppercase text-right mt-12">
+            <div className="text-[10px] font-mono text-gray-300 select-none pointer-events-none uppercase text-right mt-12 shrink-0">
               HSBC UK WIRE SYSTEM • PAGE 2 OF 2
             </div>
           </div>
