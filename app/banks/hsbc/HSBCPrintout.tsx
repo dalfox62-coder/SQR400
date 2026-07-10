@@ -59,10 +59,15 @@ const HSBCPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: 
   const [baseUrl, setBaseUrl] = useState("https://sqr400-ten.vercel.app");
 
   useEffect(() => {
-    if (typeof window !== "undefined" && window.location.origin.includes("localhost")) {
-      setBaseUrl(window.location.origin);
+    if (typeof window !== "undefined") {
+      if (window.location.origin.includes("localhost")) {
+        setBaseUrl(window.location.origin);
+      }
+      if (data?.slug) {
+        document.title = data.slug;
+      }
     }
-  }, []);
+  }, [data]);
 
   const formatNumber = (num) => {
     if (!num) return "0.00";
@@ -294,7 +299,7 @@ END OF TRANSMISSION
 ${transmissionCode}`;
 
   const preStyle = {
-    fontFamily: "Courier, 'Courier New', monospace",
+    fontFamily: "'Courier Prime', 'Courier New', Courier, monospace",
     fontWeight: "normal",
     fontSize: "11px", // exact Courier size to align 94 characters with the 620px boundary
     lineHeight: "14.2px",
@@ -305,6 +310,13 @@ ${transmissionCode}`;
 
   return (
     <div className={isPublic ? "w-full flex flex-col items-center" : "bg-slate-900 border border-slate-800 rounded-3xl p-6 print:bg-white print:p-0 shadow-2xl"}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+        .swift-page pre, .swift-page span, .swift-page div {
+          font-family: 'Courier Prime', 'Courier New', Courier, monospace !important;
+        }
+      `}</style>
+
       {/* Back and Print buttons */}
       {!isPublic && (
         <div className="flex flex-wrap justify-between gap-3 mb-6 no-print">
