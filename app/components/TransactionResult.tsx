@@ -32,7 +32,7 @@ const TransactionResult = ({ data, onBack }) => {
             Amount: {data?.transaction?.currency || "USD"} {data?.transaction?.amount || "0"}
           </p>
           <p className="text-base text-gray-500 mt-4">Printout untuk bank ini sedang dalam pengembangan.</p>
-          <p className="text-sm text-gray-400 mt-2">Saat ini hanya HSBC yang memiliki format printout lengkap.</p>
+          <p className="text-sm text-gray-400 mt-2">Saat ini hanya HSBC dan Deutsche Bank yang memiliki format printout lengkap.</p>
         </div>
       </div>
     </div>
