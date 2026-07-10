@@ -15,7 +15,7 @@ const TransactionResult = ({ data, onBack }) => {
 
   // Default fallback untuk bank lain (sementara)
   return (
-    <div className="bg-gray-200 rounded-2xl p-4 md:p-6">
+    <div translate="no" className="notranslate bg-gray-200 rounded-2xl p-4 md:p-6">
       <div className="flex flex-wrap justify-between gap-3 mb-6">
         <button onClick={onBack} className="px-5 py-2.5 bg-gray-300 hover:bg-gray-400 rounded-lg font-semibold transition text-base">
           ← Back to Form
