@@ -304,7 +304,7 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
         
         {/* PAGE 1 */}
         <div className={`swift-page print-page relative flex flex-col bg-white ${isPublic ? 'shadow-2xl' : ''}`} id="deutsche-printout-page1">
-          <div className="w-[620px] mx-auto flex flex-col h-full">
+          <div className="w-[620px] mx-auto flex flex-col">
             
             {/* Header: Barcode (Left), Logo (Right) */}
             <div className="flex justify-between items-start mb-2 w-full pt-4">
@@ -352,7 +352,7 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
 
         {/* PAGE 2 */}
         <div className={`swift-page print-page relative flex flex-col bg-white ${isPublic ? 'shadow-2xl' : ''}`} id="deutsche-printout-page2">
-          <div className="w-[620px] mx-auto flex flex-col h-full">
+          <div className="w-[620px] mx-auto flex flex-col">
             
             {/* Header: Barcode (Left), Logo (Right) */}
             <div className="flex justify-between items-start mb-6 w-full pt-4">
@@ -384,7 +384,7 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
             </pre>
             
             {/* 2D QR Code on Bottom Left */}
-            <div className="mt-4 pl-4">
+            <div className="mt-4 pl-4 shrink-0">
               <QRCode 
                 value={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/"}
                 size={85}
@@ -396,11 +396,11 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
             </div>
             
             {/* Footer with Signatures & Stamp */}
-            <div className="mt-2 flex flex-col w-full relative">
+            <div className="mt-2 flex flex-col w-full relative shrink-0">
               <img 
                 src="/logos/deutsche-signatures.png" 
                 alt="Authorized Signatures and Stamps" 
-                className="w-[95%] h-auto object-contain mx-auto mix-blend-multiply"
+                className="w-[95%] h-auto object-contain mx-auto mix-blend-multiply -mt-12"
               />
             </div>
           </div>
