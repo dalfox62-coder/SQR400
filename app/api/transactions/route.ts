@@ -33,6 +33,13 @@ export async function POST(req: Request) {
     const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase();
     slug = `${slug}-${randomSuffix}`;
 
+    // Cleanup old transactions (older than 5 hours) to keep DB clean
+    try {
+      await query("DELETE FROM transactions WHERE created_at < NOW() - INTERVAL '5 hours'");
+    } catch (cleanupError) {
+      console.error("Cleanup error during POST:", cleanupError);
+    }
+
     await query(
       "INSERT INTO transactions (slug, username, bank, data) VALUES ($1, $2, $3, $4)",
       [slug, sanitizeInput(username), sanitizeInput(bank), JSON.stringify(transactionData)]
@@ -52,6 +59,13 @@ export async function GET(req: Request) {
 
     if (!slug) {
       return NextResponse.json({ error: "Missing slug" }, { status: 400 });
+    }
+
+    // Cleanup old transactions (older than 5 hours) to keep DB clean
+    try {
+      await query("DELETE FROM transactions WHERE created_at < NOW() - INTERVAL '5 hours'");
+    } catch (cleanupError) {
+      console.error("Cleanup error during GET:", cleanupError);
     }
 
     const res = await query("SELECT data FROM transactions WHERE slug = $1", [slug]);

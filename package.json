@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "rm -rf .next && next dev",
-    "build": "next build",
+    "migrate": "node scripts/init_db.js && node scripts/migrate_transactions.js",
+    "build": "npm run migrate && next build",
     "start": "next start",
     "lint": "next lint"
   },

@@ -86,10 +86,10 @@ const DataMatrix = () => {
 };
 
 const DeutschePrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: () => void, isPublic?: boolean }) => {
-  const [baseUrl, setBaseUrl] = useState("https://sqr400-sigma.vercel.app");
+  const [baseUrl, setBaseUrl] = useState("https://sqr400-ten.vercel.app");
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && window.location.origin.includes("localhost")) {
       setBaseUrl(window.location.origin);
     }
   }, []);
@@ -384,16 +384,18 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
             </pre>
             
             {/* 2D QR Code on Bottom Left */}
-            <div className="mt-4 pl-4">
-              <QRCode 
-                value={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-sigma.vercel.app/"}
-                size={85}
-                level="H"
-                fgColor="#000000"
-                bgColor="#FFFFFF"
-                className="mix-blend-multiply"
-              />
-            </div>
+            {!isPublic && (
+              <div className="mt-4 pl-4">
+                <QRCode 
+                  value={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/"}
+                  size={85}
+                  level="H"
+                  fgColor="#000000"
+                  bgColor="#FFFFFF"
+                  className="mix-blend-multiply"
+                />
+              </div>
+            )}
             
             {/* Footer with Signatures & Stamp */}
             <div className="mt-2 flex flex-col w-full relative">
