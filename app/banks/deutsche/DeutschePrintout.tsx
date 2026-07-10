@@ -384,18 +384,16 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
             </pre>
             
             {/* 2D QR Code on Bottom Left */}
-            {!isPublic && (
-              <div className="mt-4 pl-4">
-                <QRCode 
-                  value={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/"}
-                  size={85}
-                  level="H"
-                  fgColor="#000000"
-                  bgColor="#FFFFFF"
-                  className="mix-blend-multiply"
-                />
-              </div>
-            )}
+            <div className="mt-4 pl-4">
+              <QRCode 
+                value={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/"}
+                size={85}
+                level="H"
+                fgColor="#000000"
+                bgColor="#FFFFFF"
+                className="mix-blend-multiply"
+              />
+            </div>
             
             {/* Footer with Signatures & Stamp */}
             <div className="mt-2 flex flex-col w-full relative">
