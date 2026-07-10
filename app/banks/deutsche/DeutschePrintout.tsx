@@ -106,7 +106,7 @@ const DeutschePrintout = ({ data, onBack, isPublic = false }: { data: any, onBac
     }).format(parseFloat(num));
   };
 
-  const getFormattedDates = (valueDateStr) => {
+  const getFormattedDates = (valueDateStr, transactionTimeStr) => {
     let dateObj = new Date();
     if (valueDateStr) {
       const parts = valueDateStr.split("-");
@@ -119,9 +119,11 @@ const DeutschePrintout = ({ data, onBack, isPublic = false }: { data: any, onBac
     const month = String(dateObj.getMonth() + 1).padStart(2, "0");
     const year = dateObj.getFullYear();
     
+    const timeStr = transactionTimeStr || "19:17:41";
+    
     return {
       dateStr: `${day}/${month}/${year}`,
-      timeStr: `19:17:41`
+      timeStr: timeStr
     };
   };
 
@@ -130,7 +132,7 @@ const DeutschePrintout = ({ data, onBack, isPublic = false }: { data: any, onBac
   const transaction = data.transaction || {};
   const beneficiary = data.beneficiary || {};
 
-  const dates = getFormattedDates(transaction.valueDate);
+  const dates = getFormattedDates(transaction.valueDate, transaction.transactionTime);
   const amtFormatted = formatNumber(transaction.amount);
   const currencyUpper = (transaction.currency || "EUR").toUpperCase();
   const charges = (transaction.charges || "OUR").toUpperCase();

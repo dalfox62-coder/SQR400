@@ -16,6 +16,7 @@ const DeutscheForm = ({ onSubmit, initialData = {} as any }: any) => {
       transactionCode: initialData.transaction?.transactionCode || "DEUTDEBB248914",
       bankOperationCode: initialData.transaction?.bankOperationCode || "CRED",
       valueDate: initialData.transaction?.valueDate || "2024-10-25",
+      transactionTime: initialData.transaction?.transactionTime || "19:17:41",
       currency: initialData.transaction?.currency || "EUR",
       amount: initialData.transaction?.amount || "250000",
       instructedAmount: initialData.transaction?.instructedAmount || "250000",
@@ -229,6 +230,16 @@ const DeutscheForm = ({ onSubmit, initialData = {} as any }: any) => {
               className="w-full px-3 py-2 bg-slate-950 border-2 border-slate-800 focus:border-blue-900 rounded-xl text-sm text-slate-100 outline-none focus:ring-2 focus:ring-blue-950/40"
               value={formData.transaction.valueDate}
               onChange={(e) => handleChange("transaction", "valueDate", e.target.value)}
+            />
+          </div>
+          <div>
+            <label className={labelClass}>Transaction Time</label>
+            <input
+              type="time"
+              step="1"
+              className="w-full px-3 py-2 bg-slate-950 border-2 border-slate-800 focus:border-blue-900 rounded-xl text-sm text-slate-100 outline-none focus:ring-2 focus:ring-blue-950/40"
+              value={formData.transaction.transactionTime}
+              onChange={(e) => handleChange("transaction", "transactionTime", e.target.value)}
             />
           </div>
           <div>
