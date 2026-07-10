@@ -12,6 +12,12 @@ export default function PublicDocumentPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Override viewport for this specific page so the A4 document fits on mobile screens without being cut off
+    const meta = document.querySelector('meta[name="viewport"]');
+    if (meta) {
+      meta.setAttribute('content', 'width=850, initial-scale=0.4');
+    }
+    
     if (!slug) return;
     const fetchDoc = async () => {
       try {
@@ -30,6 +36,13 @@ export default function PublicDocumentPage() {
       }
     };
     fetchDoc();
+
+    return () => {
+      // Restore viewport on unmount
+      if (meta) {
+        meta.setAttribute('content', 'width=device-width, initial-scale=1');
+      }
+    };
   }, [slug]);
 
   if (loading) {
@@ -52,7 +65,7 @@ export default function PublicDocumentPage() {
   // Right now only Deutsche is fully configured for QR code in this task, but we can switch if needed
   if (data.bankId === "deutsche") {
     return (
-      <div className="min-h-screen bg-[#525659] flex flex-col items-center py-8 px-2 overflow-x-auto">
+      <div className="min-h-screen bg-[#525659] print:bg-white flex flex-col items-center py-8 print:py-0 px-2 print:px-0 overflow-x-auto print:overflow-visible">
         <DeutschePrintout data={data} isPublic={true} />
       </div>
     );
