@@ -115,6 +115,15 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
             page-break-after: always;
             break-after: page;
           }
+          @page {
+            size: A4 portrait;
+          }
+          @page landscape-page {
+            size: A4 landscape;
+          }
+          .page-landscape {
+            page: landscape-page;
+          }
           .no-print {
             display: none !important;
           }
@@ -135,10 +144,10 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
         </button>
       </div>
 
-      <div id="printable-area" className="max-w-[210mm] mx-auto printable-container flex flex-col gap-8 print:gap-0">
+      <div id="printable-area" className="w-full mx-auto printable-container flex flex-col gap-8 print:gap-0 items-center">
         
         {/* PAGE 1 */}
-        <div className="p-10 page-break bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '297mm' }}>
+        <div className="w-[210mm] p-10 page-break bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '297mm' }}>
           
           {/* Vertical Barcode on the right edge */}
           <div className="absolute right-0 top-[220px] w-0 h-0">
@@ -185,7 +194,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
         </div>
 
         {/* PAGE 2 */}
-        <div className="p-10 page-break bg-black text-gray-200 print-bg shadow-2xl print:shadow-none" style={{ minHeight: '297mm', backgroundColor: 'black' }}>
+        <div className="w-[210mm] p-10 page-break bg-black text-gray-200 print-bg shadow-2xl print:shadow-none" style={{ minHeight: '297mm', backgroundColor: 'black' }}>
           <div className="flex justify-between items-start mb-6 bg-black p-4 print-bg" style={{ backgroundColor: 'black' }}>
             <div className="text-blue-600">
               <h1 className="text-3xl font-sans tracking-tight">Deutsche Bank</h1>
@@ -211,9 +220,9 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
         </div>
 
         {/* PAGE 3 */}
-        <div className="page-break bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '297mm' }}>
-           <div className="w-full h-24 bg-[#312571] print-bg flex items-end"></div>
-           <div className="px-10 py-6">
+        <div className="w-[297mm] page-break page-landscape bg-[#f0f8fb] text-black relative shadow-2xl print:shadow-none print-bg" style={{ minHeight: '210mm' }}>
+           <div className="w-full h-16 bg-[#312571] print-bg flex items-end"></div>
+           <div className="px-14 py-8">
               <div className="flex justify-between items-center mb-6">
                  <div className="flex items-center gap-3 text-[#0018a8]">
                     <div className="w-10 h-10 border-[3px] border-[#0018a8] relative p-1 bg-white">
@@ -224,32 +233,32 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                     <h1 className="text-4xl font-sans font-bold tracking-tight">Deutsche Bank</h1>
                  </div>
                  <div className="w-40 h-16 border-2 border-[#5b8ab5] rounded-full flex items-center justify-center relative overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center opacity-20">
-                      <div className="w-full h-[1px] bg-[#5b8ab5] absolute top-1/2"></div>
-                      <div className="w-[1px] h-full bg-[#5b8ab5] absolute left-1/2"></div>
-                      <div className="w-full h-[1px] bg-[#5b8ab5] absolute top-1/4"></div>
-                      <div className="w-[1px] h-full bg-[#5b8ab5] absolute left-1/4"></div>
-                    </div>
+                    <div className="absolute inset-0 flex items-center justify-center opacity-30">
+                       <div className="w-full h-[1px] bg-[#5b8ab5] absolute top-1/2"></div>
+                       <div className="w-[1px] h-full bg-[#5b8ab5] absolute left-1/2"></div>
+                       <div className="w-[85%] h-[55%] border border-[#5b8ab5] rounded-[100%] absolute"></div>
+                       <div className="w-[55%] h-[85%] border border-[#5b8ab5] rounded-[100%] absolute"></div>
+                     </div>
                     <span className="text-[#3b6d9e] font-serif font-bold text-3xl italic tracking-wider z-10">SWIFT</span>
                  </div>
               </div>
 
               <div className="grid grid-cols-[1.2fr_2.2fr_1.2fr] gap-0 border-b-2 border-black pb-2 mb-2">
                  <div>
-                    <div className="text-xs font-bold -mt-2 bg-white inline-block px-1 ml-2">Account</div>
+                    <div className="text-xs font-bold -mt-2 bg-[#ffffff] print-bg inline-block px-1 ml-2">Account</div>
                     <div className="border border-black p-2 mt-[-10px] text-sm font-sans pt-3 leading-tight min-h-[50px]">
                        {institution.swiftCode}<br/>{institution.accountNumber.substring(2)}
                     </div>
                  </div>
                  <div className="ml-2">
-                    <div className="text-xs font-bold -mt-2 bg-white inline-block px-1 ml-2">Instruction Type</div>
+                    <div className="text-xs font-bold -mt-2 bg-[#ffffff] print-bg inline-block px-1 ml-2">Instruction Type</div>
                     <div className="border border-black p-2 mt-[-10px] text-sm font-sans pt-3 leading-tight min-h-[50px] whitespace-nowrap">
                        MT 103 - Internal Receipt Instruction<br/>
                        Instruction Sub Type: CASH WIRE TRANSFER
                     </div>
                  </div>
                  <div className="ml-2">
-                    <div className="text-xs font-bold -mt-2 bg-white inline-block px-1 ml-2">GBS Screen</div>
+                    <div className="text-xs font-bold -mt-2 bg-[#ffffff] print-bg inline-block px-1 ml-2">GBS Screen</div>
                     <div className="border border-black p-2 mt-[-10px] text-[13px] font-sans pt-3 flex gap-4 h-[50px] items-center whitespace-nowrap">
                        <span>Indicator: MAT3D</span>
                        <span>Date 30.06.2025</span>
@@ -264,7 +273,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                     Account Name: {institution.accountName}
                  </div>
                  <div className="border border-black p-2 pt-4 relative">
-                    <div className="text-xs font-bold bg-white px-1 absolute -top-2 left-2">References</div>
+                    <div className="text-xs font-bold bg-[#ffffff] print-bg px-1 absolute -top-2 left-2">References</div>
                     References: {beneficiary.swiftCode}<br/>
                     Receiver: {beneficiary.accountName}<br/>
                     {beneficiary.bankName}<br/>
@@ -274,7 +283,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
 
               <div className="grid grid-cols-[1.2fr_1.8fr] gap-4 mb-4">
                  <div className="border border-black p-2 pt-4 relative min-h-[120px]">
-                    <div className="text-xs font-bold bg-white px-1 absolute -top-2 left-2">Status</div>
+                    <div className="text-xs font-bold bg-[#ffffff] print-bg px-1 absolute -top-2 left-2">Status</div>
                     <div className="text-xs font-sans mt-2 w-full pr-4">
                         <div className="grid grid-cols-[80px_70px_auto]">
                            <span>Received</span>
@@ -299,7 +308,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                  </div>
                  
                  <div className="border border-black p-2 pt-4 relative min-h-[120px] text-xs font-sans">
-                    <div className="text-xs font-bold bg-white px-1 absolute -top-2 left-2">User Activity</div>
+                    <div className="text-xs font-bold bg-[#ffffff] print-bg px-1 absolute -top-2 left-2">User Activity</div>
                     <div className="grid grid-cols-[140px_100px_auto] gap-y-1 mt-2">
                        <span>Keyed by:</span><span></span><span></span>
                        <span>Released by:</span><span>{postDateFormatted}</span><span>-  {postTime}</span>
@@ -311,7 +320,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
 
               <div className="grid grid-cols-2 gap-4 mb-6">
                  <div className="border border-black p-2 pt-4 relative">
-                    <div className="text-xs font-bold bg-white px-1 absolute -top-2 left-2">Status</div>
+                    <div className="text-xs font-bold bg-[#ffffff] print-bg px-1 absolute -top-2 left-2">Status</div>
                     <div className="flex gap-16 text-xs font-sans mt-1">
                        <span>NEW:</span>
                        <span>MTCH/NMAT</span>
@@ -325,12 +334,12 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
 
               <div className="grid grid-cols-[1.5fr_1fr] gap-4">
                  <div className="border border-black p-3 pt-4 relative min-h-[60px] text-xs font-sans">
-                    <div className="text-xs font-bold bg-white px-1 absolute -top-2 left-2">Securities</div>
+                    <div className="text-xs font-bold bg-[#ffffff] print-bg px-1 absolute -top-2 left-2">Securities</div>
                     <div>Ref. Code: {meta.refCode}</div>
                     <div>Description: CASH WIRE TRANSFER</div>
                  </div>
                  <div className="border border-black p-2 pt-4 relative bg-[#e0f7fa]/30 print-bg">
-                    <div className="text-xs font-bold bg-white px-1 absolute -top-2 left-2">Progress</div>
+                    <div className="text-xs font-bold bg-[#ffffff] print-bg px-1 absolute -top-2 left-2">Progress</div>
                     <div className="text-xs mb-2">Printing done...</div>
                     <div className="flex gap-[2px] h-6 w-3/4">
                        {[...Array(15)].map((_, i) => (
@@ -393,7 +402,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
         </div>
 
         {/* PAGE 4 */}
-        <div className="p-10 page-break bg-white text-black relative text-sm font-sans shadow-2xl print:shadow-none" style={{ minHeight: '297mm' }}>
+        <div className="w-[210mm] p-10 page-break bg-white text-black relative text-sm font-sans shadow-2xl print:shadow-none" style={{ minHeight: '297mm' }}>
            <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03]">
              <div className="text-[200px] font-bold text-gray-500 leading-none" style={{ backgroundImage: "repeating-linear-gradient(45deg, transparent, transparent 10px, #000 10px, #000 20px)", WebkitBackgroundClip: "text" }}>DB</div>
            </div>
@@ -545,7 +554,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
         </div>
 
         {/* PAGE 5 */}
-        <div className="p-10 page-break bg-white text-black text-sm font-sans shadow-2xl print:shadow-none print:m-0" style={{ minHeight: '297mm' }}>
+        <div className="w-[210mm] p-10 page-break bg-white text-black text-sm font-sans shadow-2xl print:shadow-none print:m-0" style={{ minHeight: '297mm' }}>
            <div className="flex justify-between items-start mb-12">
               <div className="text-[#0018a8]">
                  <h1 className="text-3xl font-sans font-bold tracking-tight">Deutsche Bank</h1>
