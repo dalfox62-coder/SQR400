@@ -138,7 +138,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
       <div id="printable-area" className="max-w-[210mm] mx-auto printable-container flex flex-col gap-8 print:gap-0">
         
         {/* PAGE 1 */}
-        <div className="p-10 page-break bg-white relative shadow-2xl print:shadow-none" style={{ minHeight: '297mm' }}>
+        <div className="p-10 page-break bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '297mm' }}>
           
           {/* Vertical Barcode on the right edge */}
           <div className="absolute right-0 top-[220px] w-0 h-0">
@@ -211,7 +211,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
         </div>
 
         {/* PAGE 3 */}
-        <div className="page-break bg-white relative shadow-2xl print:shadow-none" style={{ minHeight: '297mm' }}>
+        <div className="page-break bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '297mm' }}>
            <div className="w-full h-24 bg-[#312571] print-bg flex items-end"></div>
            <div className="px-10 py-6">
               <div className="flex justify-between items-center mb-6">
@@ -384,7 +384,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
         </div>
 
         {/* PAGE 4 */}
-        <div className="p-10 page-break bg-white relative text-sm font-sans shadow-2xl print:shadow-none" style={{ minHeight: '297mm' }}>
+        <div className="p-10 page-break bg-white text-black relative text-sm font-sans shadow-2xl print:shadow-none" style={{ minHeight: '297mm' }}>
            <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03]">
              <div className="text-[200px] font-bold text-gray-500 leading-none" style={{ backgroundImage: "repeating-linear-gradient(45deg, transparent, transparent 10px, #000 10px, #000 20px)", WebkitBackgroundClip: "text" }}>DB</div>
            </div>
@@ -536,7 +536,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
         </div>
 
         {/* PAGE 5 */}
-        <div className="p-10 page-break bg-white text-sm font-sans shadow-2xl print:shadow-none print:m-0" style={{ minHeight: '297mm' }}>
+        <div className="p-10 page-break bg-white text-black text-sm font-sans shadow-2xl print:shadow-none print:m-0" style={{ minHeight: '297mm' }}>
            <div className="flex justify-between items-start mb-12">
               <div className="text-[#0018a8]">
                  <h1 className="text-3xl font-sans font-bold tracking-tight">Deutsche Bank</h1>
