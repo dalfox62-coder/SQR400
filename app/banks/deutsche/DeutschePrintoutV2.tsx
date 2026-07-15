@@ -141,9 +141,11 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
         <div className="p-10 page-break bg-white relative" style={{ minHeight: '297mm' }}>
           
           {/* Vertical Barcode on the right edge */}
-          <div className="absolute right-10 top-52 transform rotate-90 origin-right flex flex-col items-center gap-1">
-             <div className="font-mono text-[11px] tracking-[0.2em]">{transaction.senderReference}</div>
-             <img src="/logos/deutsche-barcode.png" alt="Barcode" className="h-[35px] w-[300px] object-fill mix-blend-multiply" />
+          <div className="absolute right-0 top-[220px] w-0 h-0">
+            <div className="transform rotate-90 origin-top-left flex flex-col items-center gap-1 w-[350px]">
+               <div className="font-mono text-[11px] tracking-[0.2em]">{transaction.senderReference}</div>
+               <img src="/logos/deutsche-barcode.png" alt="Barcode" className="h-[35px] w-[350px] object-fill mix-blend-multiply" />
+            </div>
           </div>
 
           <div className="flex justify-between items-start mb-6">
