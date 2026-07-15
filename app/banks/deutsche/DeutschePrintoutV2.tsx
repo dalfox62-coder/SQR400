@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
+import QRCode from "react-qr-code";
 
 const formatNumber = (numStr) => {
   if (!numStr) return "";
@@ -20,6 +21,16 @@ const getPageBreakStyle = () => ({
 });
 
 const DeutschePrintoutV2 = ({ data, onBack }) => {
+  const [baseUrl, setBaseUrl] = useState("https://sqr400-ten.vercel.app");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (window.location.origin.includes("localhost")) {
+        setBaseUrl(window.location.origin);
+      }
+    }
+  }, []);
+
   const { institution, transaction, beneficiary, meta } = data;
   const postDateFormatted = transaction.valueDate ? new Date(transaction.valueDate).toLocaleDateString("en-GB").replace(/\//g, ".") : "30.06.2025";
   const postTime = transaction.postTime || "11:49:54";
@@ -127,7 +138,14 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
       <div id="printable-area" className="max-w-[210mm] mx-auto bg-white shadow-2xl printable-container">
         
         {/* PAGE 1 */}
-        <div className="p-10 page-break bg-white" style={{ minHeight: '297mm' }}>
+        <div className="p-10 page-break bg-white relative" style={{ minHeight: '297mm' }}>
+          
+          {/* Vertical Barcode on the right edge */}
+          <div className="absolute right-6 top-64 transform rotate-90 origin-right flex items-center gap-2">
+             <div className="font-mono text-[10px] tracking-widest">{transaction.senderReference}</div>
+             <img src="/logos/deutsche-barcode.png" alt="Barcode" className="h-[25px] w-[180px] object-cover mix-blend-multiply" />
+          </div>
+
           <div className="flex justify-between items-start mb-6">
             <div className="text-[#0018a8]">
               <h1 className="text-3xl font-sans tracking-tight">Deutsche Bank</h1>
@@ -151,14 +169,21 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
             {generateMT103Text(false)}
           </div>
           <div className="mt-8 flex justify-end">
-             <div className="w-32 h-32 border border-gray-300 p-1 flex">
-               <div className="w-full h-full bg-black/80" style={{ backgroundImage: "repeating-linear-gradient(45deg, transparent, transparent 2px, white 2px, white 4px)" }}></div>
+             <div className="pr-4 shrink-0">
+               <QRCode 
+                 value={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/"}
+                 size={100}
+                 level="H"
+                 fgColor="#000000"
+                 bgColor="#FFFFFF"
+                 className="mix-blend-multiply"
+               />
              </div>
           </div>
         </div>
 
         {/* PAGE 2 */}
-        <div className="p-10 page-break bg-white" style={{ minHeight: '297mm' }}>
+        <div className="p-10 page-break bg-black text-gray-200 print-bg" style={{ minHeight: '297mm', backgroundColor: 'black' }}>
           <div className="flex justify-between items-start mb-6 bg-black p-4 print-bg" style={{ backgroundColor: 'black' }}>
             <div className="text-blue-600">
               <h1 className="text-3xl font-sans tracking-tight">Deutsche Bank</h1>
@@ -178,7 +203,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
             </div>
           </div>
 
-          <div className="font-mono text-[10.5px] leading-snug whitespace-pre-wrap text-black">
+          <div className="font-mono text-[10.5px] leading-snug whitespace-pre-wrap text-gray-300">
             {generateMT103Text(true)}
           </div>
         </div>
