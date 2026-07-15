@@ -234,25 +234,25 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                  </div>
               </div>
 
-              <div className="grid grid-cols-[1.5fr_2fr_1fr] gap-0 border-b-2 border-black pb-2 mb-2">
+              <div className="grid grid-cols-[1.2fr_2.2fr_1.2fr] gap-0 border-b-2 border-black pb-2 mb-2">
                  <div>
                     <div className="text-xs font-bold -mt-2 bg-white inline-block px-1 ml-2">Account</div>
-                    <div className="border border-black p-2 mt-[-10px] text-sm font-sans pt-3 leading-tight">
+                    <div className="border border-black p-2 mt-[-10px] text-sm font-sans pt-3 leading-tight min-h-[50px]">
                        {institution.swiftCode}<br/>{institution.accountNumber.substring(2)}
                     </div>
                  </div>
                  <div className="ml-2">
                     <div className="text-xs font-bold -mt-2 bg-white inline-block px-1 ml-2">Instruction Type</div>
-                    <div className="border border-black p-2 mt-[-10px] text-sm font-sans pt-3 leading-tight">
+                    <div className="border border-black p-2 mt-[-10px] text-sm font-sans pt-3 leading-tight min-h-[50px] whitespace-nowrap">
                        MT 103 - Internal Receipt Instruction<br/>
                        Instruction Sub Type: CASH WIRE TRANSFER
                     </div>
                  </div>
                  <div className="ml-2">
                     <div className="text-xs font-bold -mt-2 bg-white inline-block px-1 ml-2">GBS Screen</div>
-                    <div className="border border-black p-2 mt-[-10px] text-sm font-sans pt-3 flex justify-between h-[45px] items-center">
+                    <div className="border border-black p-2 mt-[-10px] text-[13px] font-sans pt-3 flex gap-4 h-[50px] items-center whitespace-nowrap">
                        <span>Indicator: MAT3D</span>
-                       <span>Date {postDateFormatted}</span>
+                       <span>Date 30.06.2025</span>
                     </div>
                  </div>
               </div>
@@ -275,31 +275,32 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
               <div className="grid grid-cols-[1.2fr_1.8fr] gap-4 mb-4">
                  <div className="border border-black p-2 pt-4 relative min-h-[120px]">
                     <div className="text-xs font-bold bg-white px-1 absolute -top-2 left-2">Status</div>
-                    <div className="text-xs font-sans mt-2">
-                       <div className="flex gap-4">
-                          <span>Received</span>
-                          <span>Amount:</span>
-                          <span>{formatNumber(transaction.amount)}</span>
-                       </div>
-                       <div className="flex gap-4 ml-14 my-1">
-                          <span className="underline">Internal</span>
-                          <span className="underline">External</span>
-                       </div>
-                       <div className="flex gap-10 mb-3">
-                          <span>Currency:</span>
-                          <span>{transaction.currency}</span>
-                          <span>€</span>
-                       </div>
-                       <div className="flex gap-2">
-                          <span className="underline">PARTICIPANT:</span>
-                          <span>NOT. MOD</span>
-                       </div>
-                    </div>
+                    <div className="text-xs font-sans mt-2 w-full pr-4">
+                        <div className="grid grid-cols-[80px_70px_auto]">
+                           <span>Received</span>
+                           <span>Amount:</span>
+                           <span>{formatNumber(transaction.amount)}</span>
+                        </div>
+                        <div className="grid grid-cols-[80px_70px_auto] my-1">
+                           <span></span>
+                           <span className="underline text-[11px]">Internal</span>
+                           <span className="underline text-[11px]">External</span>
+                        </div>
+                        <div className="grid grid-cols-[80px_70px_auto] mb-3">
+                           <span>Currency:</span>
+                           <span>{transaction.currency}</span>
+                           <span>€</span>
+                        </div>
+                        <div className="flex gap-2">
+                           <span className="underline">PARTICIPANT:</span>
+                           <span>NOT. MOD</span>
+                        </div>
+                     </div>
                  </div>
                  
                  <div className="border border-black p-2 pt-4 relative min-h-[120px] text-xs font-sans">
                     <div className="text-xs font-bold bg-white px-1 absolute -top-2 left-2">User Activity</div>
-                    <div className="grid grid-cols-[auto_auto_auto] gap-x-8 gap-y-1 mt-2">
+                    <div className="grid grid-cols-[140px_100px_auto] gap-y-1 mt-2">
                        <span>Keyed by:</span><span></span><span></span>
                        <span>Released by:</span><span>{postDateFormatted}</span><span>-  {postTime}</span>
                        <span>Cancelled/Modified by:</span><span></span><span></span>
@@ -311,7 +312,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
               <div className="grid grid-cols-2 gap-4 mb-6">
                  <div className="border border-black p-2 pt-4 relative">
                     <div className="text-xs font-bold bg-white px-1 absolute -top-2 left-2">Status</div>
-                    <div className="flex justify-between text-xs font-sans mt-1">
+                    <div className="flex gap-16 text-xs font-sans mt-1">
                        <span>NEW:</span>
                        <span>MTCH/NMAT</span>
                        <span>NAMT.CMIS</span>
