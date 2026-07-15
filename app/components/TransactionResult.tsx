@@ -2,6 +2,7 @@
 
 import HSBCPrintout from "../banks/hsbc/HSBCPrintout";
 import DeutschePrintout from "../banks/deutsche/DeutschePrintout";
+import DeutschePrintoutV2 from "../banks/deutsche/DeutschePrintoutV2";
 
 const TransactionResult = ({ data, onBack }) => {
   // Cek bank ID, render sesuai bank
@@ -11,6 +12,10 @@ const TransactionResult = ({ data, onBack }) => {
   
   if (data?.bankId === "deutsche") {
     return <DeutschePrintout data={data} onBack={onBack} />;
+  }
+
+  if (data?.bankId === "deutsche_v2") {
+    return <DeutschePrintoutV2 data={data} onBack={onBack} />;
   }
 
   // Default fallback untuk bank lain (sementara)
