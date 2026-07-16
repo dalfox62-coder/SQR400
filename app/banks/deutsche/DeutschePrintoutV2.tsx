@@ -354,7 +354,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                 </div>
 
                 {/* Circular Stamp */}
-                <div className="absolute top-[215px] -right-[72px] w-36 h-36 flex items-center justify-center opacity-85 z-10 -rotate-[15deg]">
+                <div className="absolute top-[230px] -right-[72px] w-36 h-36 flex items-center justify-center opacity-85 z-10 -rotate-[15deg]">
                     <svg viewBox="0 0 100 100" className="w-full h-full absolute inset-0">
                       <path id="circlePath" d="M 10, 50 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="none" />
                       <text className="text-[10px] font-bold font-sans fill-[#0018a8]">
@@ -373,7 +373,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                 </div>
 
                 {/* Stamp Overlay */}
-                <div className="absolute top-[260px] -right-[150px] w-[340px] h-[140px] border-[3px] border-[#0018a8] text-[#0018a8] -rotate-[12deg] flex flex-col justify-center items-center opacity-85 pointer-events-none p-2 print-bg z-20">
+                <div className="absolute top-[320px] -right-[120px] w-[340px] h-[140px] border-[3px] border-[#0018a8] text-[#0018a8] -rotate-[12deg] flex flex-col justify-center items-center opacity-85 pointer-events-none p-2 print-bg z-20">
                     <div className="text-[10px] font-sans font-bold leading-tight text-center">
                       TAUNUSANLAGE 12, POSTCODE 60262 FRANKFURT AM MAIN, GERMANY
                     </div>
@@ -391,11 +391,12 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                        <span>Tel +496991000</span>
                        <span>Fax +496991034225</span>
                     </div>
-                    {/* Signature Script overlaying stamp */}
-                    <div className="absolute top-1 left-14 text-[#0018a8] text-5xl opacity-90 transform -rotate-[5deg] flex flex-col items-center" style={{ fontFamily: "'Brush Script MT', cursive" }}>
-                       <span>Christian</span>
-                       <span className="-mt-4">Sewing</span>
-                    </div>
+                </div>
+
+                {/* Signature */}
+                <div className="absolute top-[255px] -right-[40px] text-[#0018a8] text-4xl opacity-90 transform -rotate-[10deg] flex flex-col items-center z-30 pointer-events-none" style={{ fontFamily: "'Brush Script MT', cursive" }}>
+                   <span>Christian</span>
+                   <span className="-mt-4">Sewing</span>
                 </div>
               </div>
             </div>
