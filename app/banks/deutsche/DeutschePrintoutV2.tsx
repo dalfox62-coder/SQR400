@@ -428,12 +428,7 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
 
             {/* PAGE 4 */}
             <div className="print-page-wrapper w-[1050px] bg-white print:bg-white text-black relative text-sm font-sans shadow-2xl print:shadow-none overflow-hidden print-bg" style={{ minHeight: '750px' }}>
-               <div className="print-landscape-content w-full h-full relative p-10 bg-[#e8edf2] print-bg overflow-hidden">
-                  {/* Background repeating text */}
-                  <div className="absolute inset-0 flex flex-wrap text-[#d0d7e0] text-[13px] leading-[1.2] font-sans font-bold opacity-70 select-none z-0 print-bg overflow-hidden" style={{ wordBreak: 'break-all' }}>
-                     {Array(2500).fill('Deutsche Bank ').join('')}
-                  </div>
-
+               <div className="print-landscape-content w-full h-full relative p-10 bg-white print-bg overflow-hidden">
                   <div className="relative z-10 w-full h-full flex flex-col">
                   <div className="flex justify-end items-start mb-2">
                      <div className="text-right text-[#0018a8] flex flex-col items-end">
@@ -541,7 +536,7 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
 
                   {/* Signatures Image */}
                   <div className="w-full relative flex justify-center mt-2 mb-2 z-30 opacity-90">
-                     <img src="/images/page4_stamps_v2.png" alt="Signatures and Stamps" className="w-[95%] object-contain mix-blend-multiply" />
+                     <img src="/images/page4_stamps_v2.png" alt="Signatures and Stamps" className="w-[85%] object-contain mix-blend-multiply" />
                   </div>
                </div>
                </div>
@@ -628,11 +623,11 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
                      </div>
                   </div>
 
-                  <div className="flex items-end mt-8 text-[11px] w-full pl-[20%] relative">
-                     <div className="mb-10 z-10 whitespace-nowrap">Senior Corporate Officer OLE MATTHIESSEN</div>
-                     <div className="z-20 -mb-2 ml-4">
-                        <img src="/images/page5_stamps_v3.png" alt="Stamps" className="w-[220px] object-contain mix-blend-multiply opacity-90" />
+                  <div className="flex items-end mt-8 text-[11px] w-full pl-[5%] relative">
+                     <div className="z-20 -mb-2 mr-4">
+                        <img src="https://e.top4top.io/p_3849x07q81.png" alt="Stamps" className="w-[250px] object-contain mix-blend-multiply opacity-90" />
                      </div>
+                     <div className="mb-10 z-10 whitespace-nowrap">Senior Corporate Officer OLE MATTHIESSEN</div>
                   </div>
                </div>
                </div>
