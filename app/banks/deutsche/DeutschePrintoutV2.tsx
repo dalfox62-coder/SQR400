@@ -530,107 +530,94 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
             </div>
 
             {/* PAGE 5 */}
-            <div className="w-[210mm] p-10 page-break bg-white text-black text-sm font-sans shadow-2xl print:shadow-none print:m-0" style={{ minHeight: '297mm' }}>
-               <div className="flex justify-between items-start mb-12">
-                  <div className="text-[#0018a8]">
-                     <h1 className="text-3xl font-sans font-bold tracking-tight">Deutsche Bank</h1>
-                     <h2 className="text-xl font-sans text-cyan-600 font-semibold tracking-tight">Global Transaction Banking</h2>
-                  </div>
-                  <div className="w-48 h-16 bg-cover bg-center overflow-hidden flex justify-center">
-                     <svg viewBox="0 0 100 20" className="h-10 w-full mt-2" preserveAspectRatio="none">
-                        <path d="M0,0 h1 v20 h-1 z M2,0 h2 v20 h-2 z M5,0 h1 v20 h-1 z M7,0 h3 v20 h-3 z M12,0 h2 v20 h-2 z M15,0 h1 v20 h-1 z M17,0 h4 v20 h-4 z M22,0 h1 v20 h-1 z M24,0 h2 v20 h-2 z M28,0 h1 v20 h-1 z M30,0 h3 v20 h-3 z M35,0 h1 v20 h-1 z M38,0 h2 v20 h-2 z M41,0 h4 v20 h-4 z M46,0 h1 v20 h-1 z M49,0 h2 v20 h-2 z M52,0 h1 v20 h-1 z M55,0 h3 v20 h-3 z M59,0 h2 v20 h-2 z M62,0 h1 v20 h-1 z M65,0 h1 v20 h-1 z M68,0 h2 v20 h-2 z M72,0 h1 v20 h-1 z M75,0 h3 v20 h-3 z M79,0 h2 v20 h-2 z M83,0 h1 v20 h-1 z M86,0 h3 v20 h-3 z M91,0 h1 v20 h-1 z M94,0 h4 v20 h-4 z" fill="black" />
-                     </svg>
-                  </div>
-                  <div className="w-24 h-24 border-[6px] border-[#0018a8] relative p-1.5 bg-[#0018a8] print-bg">
-                     <div className="w-full h-full bg-[#0018a8] border border-white relative print-bg">
-                        <div className="w-[140%] h-[6px] bg-white origin-bottom-left -rotate-45 absolute bottom-1.5 left-0.5 print-bg"></div>
+            <div className="w-[297mm] p-10 page-break page-landscape bg-white text-black relative text-sm font-sans shadow-2xl print:shadow-none overflow-hidden print-bg" style={{ minHeight: '210mm' }}>
+               {/* Background repeating text */}
+               <div className="absolute inset-0 flex flex-wrap text-[#f0f3f5] text-[13px] leading-[1.2] font-sans font-bold opacity-70 select-none z-0 print-bg overflow-hidden" style={{ wordBreak: 'break-all' }}>
+                  {Array(2500).fill('Deutsche Bank ').join('')}
+               </div>
+
+               <div className="relative z-10 w-full h-full flex flex-col">
+                  <div className="flex justify-between items-start mb-6">
+                     <div className="text-[#0018a8]">
+                        <h1 className="text-[40px] font-sans font-bold tracking-tight">Deutsche Bank</h1>
+                        <h2 className="text-[22px] font-sans text-[#0081a8] tracking-normal mt-1">Global Transaction Banking</h2>
                      </div>
-                  </div>
-               </div>
-
-               <div className="flex justify-between text-xs mb-16">
-                  <div className="space-y-1">
-                     <div>Date: {postDateFormatted}</div>
-                     <div className="mt-4 mb-2">Sender:</div>
-                     <div>{institution.accountName}</div>
-                     <div>{institution.address}</div>
-                     <div className="mt-2">IBAN:{institution.accountNumber}</div>
-                  </div>
-                  <div className="text-right">
-                     <div>Deutsche Bank AG</div>
-                     <div>{institution.address}</div>
-                  </div>
-               </div>
-
-               <div className="text-center font-bold text-lg mb-8 tracking-wider">
-                  REMITTANCE ADVICE
-               </div>
-
-               <div className="flex gap-4 text-xs font-bold mb-6 uppercase">
-                  <div>ACCOUNT HOLDER: {institution.accountName}</div>
-                  <div>ACCOUNT SIGNATORY: {institution.signatory}</div>
-               </div>
-
-               <div className="text-xs w-full">
-                  <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1.5fr_2fr] gap-2 font-bold mb-6 border-b border-white pb-2">
-                     <div>ACCOUNT TYPE</div>
-                     <div>ACCOUNT NUMBER</div>
-                     <div className="text-center">CURRENCY</div>
-                     <div className="text-center">DATE</div>
-                     <div className="text-right">AMOUNT</div>
-                     <div className="text-center">BENEFICIARY</div>
-                  </div>
-
-                  <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1.5fr_2fr] gap-2 mb-16 items-start">
-                     <div>Corporate account<br /><br />{institution.accountName}</div>
-                     <div><br /><br />{institution.accountNumber.substring(12)}</div>
-                     <div className="text-center"><br /><br />{transaction.currency}</div>
-                     <div className="text-center"><br /><br />{postDateFormatted}</div>
-                     <div className="text-right"><br /><br />{formatNumber(transaction.amount)}</div>
-                     <div className="text-left pl-4 leading-relaxed">
-                        <br /><br />
-                        Address: INDONESIA<br /><br />
-                        {beneficiary.bankName}<br />
-                        Address {beneficiary.address}<br /><br />
-                        SWIFT: {beneficiary.swiftCode}<br />
-                        ACCOUNT NUMBER: {beneficiary.accountNumber}
-                     </div>
-                  </div>
-
-                  <div className="grid grid-cols-[1fr_2fr_2fr_2fr_2fr] gap-2 font-bold mb-6 uppercase text-[11px]">
-                     <div>DATE</div>
-                     <div>PREV.BALANCE</div>
-                     <div className="text-center">AUTHORITY</div>
-                     <div className="text-right">AMOUNT</div>
-                     <div className="text-right">BALANCE</div>
-                  </div>
-
-                  <div className="grid grid-cols-[1fr_2fr_2fr_2fr_2fr] gap-2 text-sm mb-16 items-center">
-                     <div>{postDateFormatted}</div>
-                     <div>€{formatNumber(transaction.previousBalance)}</div>
-                     <div className="text-center">CASH TRANSFER</div>
-                     <div className="text-right">€{formatNumber(transaction.amount)}</div>
-                     <div className="text-right">€{formatNumber(transaction.currentBalance)}</div>
-                  </div>
-               </div>
-
-               <div className="flex justify-between items-end mt-20 text-xs">
-                  <div>Senior Corporate Officer OLE MATTHIESSEN</div>
-                  <div className="relative">
-                     <div className="border border-[#7fb3d5] p-2 text-[10px] text-[#2874a6] w-64 absolute bottom-0 right-32 z-0 bg-white">
-                        <div className="mb-2 border-b border-[#7fb3d5] pb-1">Deutsche Bank AG Frankfurt AM Main, Taunusanlage-12, 6325</div>
-                        <div className="flex items-center gap-2 mb-2 font-bold text-lg">
-                           Deutsche Bank
-                           <div className="w-5 h-5 border border-[#2874a6] p-0.5">
-                              <div className="w-full h-full bg-[#2874a6]">
-                                 <div className="w-[120%] h-[1px] bg-white origin-bottom-left -rotate-45 absolute bottom-1 left-0.5"></div>
-                              </div>
-                           </div>
+                     <div className="w-[72px] h-[72px] border-[5px] border-[#0018a8] relative p-1 bg-[#0018a8] print-bg mr-4">
+                        <div className="w-full h-full bg-[#0018a8] border border-white relative print-bg">
+                           <div className="w-[140%] h-[3.5px] bg-white origin-bottom-left -rotate-45 absolute bottom-0.5 left-0.5 print-bg"></div>
                         </div>
-                        <div className="text-center font-bold">Tel.: 496991000 - Fax: +496991034225</div>
                      </div>
-                     <div className="text-5xl text-[#1f618d] absolute -top-8 right-20 transform -rotate-12 whitespace-nowrap z-10" style={{ fontFamily: "'Brush Script MT', cursive" }}>
-                        O Matih
+                  </div>
+
+                  <div className="flex justify-between text-[11px] mb-8 leading-tight">
+                     <div className="space-y-1">
+                        <div>Date: {postDateFormatted}</div>
+                        <div className="mt-3">Sender:</div>
+                        <div>{institution.accountName}</div>
+                        <div>{institution.address}</div>
+                        <div className="mt-1">IBAN:{institution.accountNumber}</div>
+                     </div>
+                     <div className="text-right text-[10px] mr-24">
+                        <div className="font-bold">Deutsche Bank AG</div>
+                        <div className="mt-1">Taunusalange 12, 60325 Frankfurt am Main</div>
+                     </div>
+                  </div>
+
+                  <div className="text-center font-bold text-base mb-8 tracking-wider">
+                     REMITTANCE ADVICE
+                  </div>
+
+                  <div className="flex gap-4 text-[10px] font-bold mb-6 uppercase">
+                     <div>ACCOUNT HOLDER: <span className="font-normal">{institution.accountName}</span></div>
+                     <div className="ml-4">ACCOUNT SIGNATORY: <span className="font-normal">{institution.signatory}</span></div>
+                  </div>
+
+                  <div className="w-full text-[10px]">
+                     <div className="grid grid-cols-[1.5fr_1.5fr_1fr_1fr_1.5fr_2fr] gap-2 font-bold mb-4 uppercase">
+                        <div>ACCOUNT TYPE</div>
+                        <div className="text-center">ACCOUNT NUMBER</div>
+                        <div className="text-center">CURRENCY</div>
+                        <div className="text-center">DATE</div>
+                        <div className="text-center">AMOUNT</div>
+                        <div className="text-center">BENEFICIARY</div>
+                     </div>
+
+                     <div className="grid grid-cols-[1.5fr_1.5fr_1fr_1fr_1.5fr_2fr] gap-2 mb-16 items-start">
+                        <div>Corporate account<br /><br />{institution.accountName}</div>
+                        <div className="text-center"><br /><br />{institution.accountNumber.substring(12)}</div>
+                        <div className="text-center uppercase"><br /><br />{transaction.currency}</div>
+                        <div className="text-center"><br /><br />{postDateFormatted}</div>
+                        <div className="text-center"><br /><br />{formatNumber(transaction.amount)}</div>
+                        <div className="text-left pl-8 leading-relaxed">
+                           Address: INDONESIA<br /><br />
+                           {beneficiary.bankName}<br /><br />
+                           Address {beneficiary.address}<br /><br />
+                           SWIFT: {beneficiary.swiftCode}<br /><br />
+                           ACCOUNT NUMBER: {beneficiary.accountNumber}
+                        </div>
+                     </div>
+
+                     <div className="grid grid-cols-[1fr_2fr_1.5fr_1.5fr_1.5fr] gap-2 font-bold mb-4 uppercase">
+                        <div>DATE</div>
+                        <div className="text-center">PREV.BALANCE</div>
+                        <div className="text-center">AUTHORITY</div>
+                        <div className="text-center">AMOUNT</div>
+                        <div className="text-center">BALANCE</div>
+                     </div>
+
+                     <div className="grid grid-cols-[1fr_2fr_1.5fr_1.5fr_1.5fr] gap-2 items-center mb-8">
+                        <div>{postDateFormatted}</div>
+                        <div className="text-center">€{formatNumber(transaction.previousBalance)}</div>
+                        <div className="text-center">CASH TRANSFER</div>
+                        <div className="text-center">€{formatNumber(transaction.amount)}</div>
+                        <div className="text-center">€{formatNumber(transaction.currentBalance)}</div>
+                     </div>
+                  </div>
+
+                  <div className="flex justify-between items-end mt-4 text-[11px] w-full relative">
+                     <div className="mb-8 z-10 w-[40%] text-center">Senior Corporate Officer OLE MATTHIESSEN</div>
+                     <div className="w-[60%] flex justify-center absolute right-0 bottom-[-20px] z-20">
+                        <img src="/images/page5_stamps.png" alt="Stamps" className="w-[90%] object-contain mix-blend-multiply opacity-90" />
                      </div>
                   </div>
                </div>
