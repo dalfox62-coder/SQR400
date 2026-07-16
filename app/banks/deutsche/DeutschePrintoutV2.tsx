@@ -452,34 +452,34 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                   </div>
 
                   <div className="w-full relative z-20">
-                     <table className="w-full border-collapse border border-gray-500 text-[11.5px] text-center bg-white/70 print-bg mb-4">
+                     <table className="w-full border-collapse border border-black text-[11.5px] text-center mb-4">
                         <thead>
-                           <tr className="bg-[#d2dce6] print-bg border-b border-gray-500">
-                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal text-left" colSpan={3}>Account Holder:</th>
+                           <tr className="bg-[#d2dce6] print-bg border-b border-black">
+                              <th className="border-r border-black py-1.5 px-2 font-normal text-left" colSpan={3}>Account Holder:</th>
                               <th className="py-1.5 px-2 font-normal text-left" colSpan={4}>Account Signatory:</th>
                            </tr>
-                           <tr className="bg-[#eef3f7] print-bg border-b border-gray-500">
-                              <td className="border-r border-gray-500 py-1.5 px-2 font-bold text-left underline" colSpan={3}>{institution.accountName}</td>
+                           <tr className="bg-transparent border-b border-black">
+                              <td className="border-r border-black py-1.5 px-2 font-bold text-left underline" colSpan={3}>{institution.accountName}</td>
                               <td className="py-1.5 px-2 font-bold text-left underline" colSpan={4}>{institution.signatory}</td>
                            </tr>
-                           <tr className="bg-[#d2dce6] print-bg font-bold border-b border-gray-500">
-                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal">Type</th>
-                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal">Account Number</th>
-                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal">Currency</th>
-                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal">Date</th>
-                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal">Debit</th>
-                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal">Credit</th>
+                           <tr className="bg-[#d2dce6] print-bg font-bold border-b border-black">
+                              <th className="border-r border-black py-1.5 px-2 font-normal">Type</th>
+                              <th className="border-r border-black py-1.5 px-2 font-normal">Account Number</th>
+                              <th className="border-r border-black py-1.5 px-2 font-normal">Currency</th>
+                              <th className="border-r border-black py-1.5 px-2 font-normal">Date</th>
+                              <th className="border-r border-black py-1.5 px-2 font-normal">Debit</th>
+                              <th className="border-r border-black py-1.5 px-2 font-normal">Credit</th>
                               <th className="py-1.5 px-2 font-normal text-center">Beneficiary</th>
                            </tr>
                         </thead>
-                        <tbody className="bg-[#eef3f7] print-bg border-b border-gray-500">
+                        <tbody className="bg-transparent border-b border-black">
                            <tr>
-                              <td className="border-r border-gray-500 py-4 px-2 font-bold">Corporate</td>
-                              <td className="border-r border-gray-500 py-4 px-2">{institution.accountNumber}</td>
-                              <td className="border-r border-gray-500 py-4 px-2">{transaction.currency}</td>
-                              <td className="border-r border-gray-500 py-4 px-2">{postDateFormatted}</td>
-                              <td className="border-r border-gray-500 py-4 px-2 text-right">{formatNumber(transaction.amount)}</td>
-                              <td className="border-r border-gray-500 py-4 px-2"></td>
+                              <td className="border-r border-black py-4 px-2 font-bold">Corporate</td>
+                              <td className="border-r border-black py-4 px-2">{institution.accountNumber}</td>
+                              <td className="border-r border-black py-4 px-2">{transaction.currency}</td>
+                              <td className="border-r border-black py-4 px-2">{postDateFormatted}</td>
+                              <td className="border-r border-black py-4 px-2 text-right">{formatNumber(transaction.amount)}</td>
+                              <td className="border-r border-black py-4 px-2"></td>
                               <td className="py-2 px-4 text-left text-[10px] leading-tight w-[30%]">
                                  Bank Name: {beneficiary.bankName}<br />
                                  Account name: {beneficiary.accountName}<br />
@@ -487,32 +487,32 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                                  SWIFT CODE: {beneficiary.swiftCode}
                               </td>
                            </tr>
-                           <tr className="bg-[#d2dce6] print-bg border-b border-gray-500">
+                           <tr className="bg-[#d2dce6] print-bg border-b border-black">
                               <td colSpan={7} className="py-1 text-center font-bold">SWIFT Transmission / Additional Fee: {transaction.swiftFee}</td>
                            </tr>
                         </tbody>
-                        <thead className="bg-[#d2dce6] print-bg border-b border-gray-500">
+                        <thead className="bg-[#d2dce6] print-bg border-b border-black">
                            <tr>
-                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal w-[12%]">Date</th>
-                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal w-[22%]">Previous Balance / Euro</th>
-                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal w-[22%]">Debit</th>
-                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal w-[15%]">Authority</th>
+                              <th className="border-r border-black py-1.5 px-2 font-normal w-[12%]">Date</th>
+                              <th className="border-r border-black py-1.5 px-2 font-normal w-[22%]">Previous Balance / Euro</th>
+                              <th className="border-r border-black py-1.5 px-2 font-normal w-[22%]">Debit</th>
+                              <th className="border-r border-black py-1.5 px-2 font-normal w-[15%]">Authority</th>
                               <th className="py-1.5 px-2 font-normal">Current Balance / Euro</th>
                            </tr>
                         </thead>
-                        <tbody className="bg-[#eef3f7] print-bg text-[11px]">
-                           <tr className="border-b border-gray-500">
-                              <td className="border-r border-gray-500 py-1 px-2 text-center">{postDateFormatted}</td>
-                              <td className="border-r border-gray-500 py-1 px-2 text-right">{formatNumber(transaction.previousBalance)}</td>
-                              <td className="border-r border-gray-500 py-1 px-2 text-right">{formatNumber(transaction.amount)}</td>
-                              <td className="border-r border-gray-500 py-1 px-2 text-center">CASH WIRE</td>
+                        <tbody className="bg-transparent text-[11px]">
+                           <tr className="border-b border-black">
+                              <td className="border-r border-black py-1 px-2 text-center">{postDateFormatted}</td>
+                              <td className="border-r border-black py-1 px-2 text-right">{formatNumber(transaction.previousBalance)}</td>
+                              <td className="border-r border-black py-1 px-2 text-right">{formatNumber(transaction.amount)}</td>
+                              <td className="border-r border-black py-1 px-2 text-center">CASH WIRE</td>
                               <td className="py-1 px-2 text-right font-bold underline">{formatNumber(transaction.currentBalance)}</td>
                            </tr>
                            <tr>
-                              <td className="border-r border-gray-500 py-1 px-2 text-center">{postDateFormatted}</td>
-                              <td className="border-r border-gray-500 py-1 px-2 text-right">{formatNumber(transaction.previousBalance)}</td>
-                              <td className="border-r border-gray-500 py-1 px-2 text-right">{formatNumber(transaction.senderCharges)}</td>
-                              <td className="border-r border-gray-500 py-1 px-2 text-center">Additional Fee</td>
+                              <td className="border-r border-black py-1 px-2 text-center">{postDateFormatted}</td>
+                              <td className="border-r border-black py-1 px-2 text-right">{formatNumber(transaction.previousBalance)}</td>
+                              <td className="border-r border-black py-1 px-2 text-right">{formatNumber(transaction.senderCharges)}</td>
+                              <td className="border-r border-black py-1 px-2 text-center">Additional Fee</td>
                               <td className="py-1 px-2 text-right">{formatNumber(transaction.previousBalance)}</td>
                            </tr>
                         </tbody>
