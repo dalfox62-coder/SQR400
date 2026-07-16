@@ -232,7 +232,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                     </div>
                     <h1 className="text-4xl font-sans font-bold tracking-tight">Deutsche Bank</h1>
                  </div>
-                 <div className="w-40 h-16 border-2 border-[#5b8ab5] rounded-full flex items-center justify-center relative overflow-hidden">
+                 <div className="w-40 h-16 border-2 border-[#5b8ab5] rounded-[100%] flex items-center justify-center relative overflow-hidden shrink-0">
                     <div className="absolute inset-0 flex items-center justify-center opacity-30">
                        <div className="w-full h-[1px] bg-[#5b8ab5] absolute top-1/2"></div>
                        <div className="w-[1px] h-full bg-[#5b8ab5] absolute left-1/2"></div>
@@ -243,6 +243,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                  </div>
               </div>
 
+              <div className="relative w-[85%]">
               <div className="grid grid-cols-[1.2fr_2.2fr_1.2fr] gap-0 border-b-2 border-black pb-2 mb-2">
                  <div>
                     <div className="text-xs font-bold -mt-2 bg-[#ffffff] print-bg inline-block px-1 ml-2">Account</div>
@@ -347,55 +348,160 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                        ))}
                     </div>
                     <div className="flex justify-center mt-4">
-                       <button className="px-6 py-1 bg-[#e0e0e0] border border-gray-400 font-bold shadow text-xs">OK</button>
-                    </div>
-                 </div>
-              </div>
-           </div>
-           
-            {/* Stamp Overlay */}
-            <div className="absolute top-[610px] right-6 w-[340px] h-[140px] border-[3px] border-[#0018a8] text-[#0018a8] -rotate-[12deg] flex flex-col justify-center items-center opacity-85 pointer-events-none p-2 print-bg z-20">
-                <div className="text-[10px] font-sans font-bold leading-tight text-center">
-                  TAUNUSANLAGE 12, POSTCODE 60262 FRANKFURT AM MAIN, GERMANY
+                <div className="grid grid-cols-[1.2fr_2.2fr_1.2fr] gap-0 border-b-2 border-black pb-2 mb-2">
+                   <div>
+                      <div className="text-xs font-bold -mt-2 bg-[#ffffff] print-bg inline-block px-1 ml-2">Account</div>
+                      <div className="border border-black p-2 mt-[-10px] text-sm font-sans pt-3 leading-tight min-h-[50px]">
+                         {institution.swiftCode}<br/>{institution.accountNumber.substring(2)}
+                      </div>
+                   </div>
+                   <div className="ml-2">
+                      <div className="text-xs font-bold -mt-2 bg-[#ffffff] print-bg inline-block px-1 ml-2">Instruction Type</div>
+                      <div className="border border-black p-2 mt-[-10px] text-sm font-sans pt-3 leading-tight min-h-[50px] whitespace-nowrap">
+                         MT 103 - Internal Receipt Instruction<br/>
+                         Instruction Sub Type: CASH WIRE TRANSFER
+                      </div>
+                   </div>
+                   <div className="ml-2">
+                      <div className="text-xs font-bold -mt-2 bg-[#ffffff] print-bg inline-block px-1 ml-2">GBS Screen</div>
+                      <div className="border border-black p-2 mt-[-10px] text-[13px] font-sans pt-3 flex gap-4 h-[50px] items-center whitespace-nowrap">
+                         <span>Indicator: MAT3D</span>
+                         <span>Date 30.06.2025</span>
+                      </div>
+                   </div>
                 </div>
-                <div className="w-full border-b border-[#0018a8] my-1"></div>
-                <div className="flex items-center gap-4 py-1">
-                   <div className="w-10 h-10 border-[2px] border-[#0018a8] relative p-1 bg-white shrink-0">
-                     <div className="w-full h-full bg-white border border-[#0018a8]">
-                       <div className="w-[120%] h-[2px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-1 left-0.5"></div>
+
+                <div className="grid grid-cols-2 gap-4 mb-4 text-xs font-sans">
+                   <div>
+                      References: {institution.swiftCode}<br/>
+                      Sender: {institution.bankName}<br/>
+                      Account Name: {institution.accountName}
+                   </div>
+                   <div className="border border-black p-2 pt-4 relative">
+                      <div className="text-xs font-bold bg-[#ffffff] print-bg px-1 absolute -top-2 left-2">References</div>
+                      References: {beneficiary.swiftCode}<br/>
+                      Receiver: {beneficiary.accountName}<br/>
+                      {beneficiary.bankName}<br/>
+                      Account No.: {beneficiary.accountNumber}
+                   </div>
+                </div>
+
+                <div className="grid grid-cols-[1.2fr_1.8fr] gap-4 mb-4">
+                   <div className="border border-black p-2 pt-4 relative min-h-[120px]">
+                      <div className="text-xs font-bold bg-[#ffffff] print-bg px-1 absolute -top-2 left-2">Status</div>
+                      <div className="text-xs font-sans mt-2 w-full pr-4">
+                          <div className="grid grid-cols-[80px_70px_auto]">
+                             <span>Received</span>
+                             <span>Amount:</span>
+                             <span>{formatNumber(transaction.amount)}</span>
+                          </div>
+                          <div className="grid grid-cols-[80px_70px_auto] my-1">
+                             <span></span>
+                             <span className="underline text-[11px]">Internal</span>
+                             <span className="underline text-[11px]">External</span>
+                          </div>
+                          <div className="grid grid-cols-[80px_70px_auto] mb-3">
+                             <span>Currency:</span>
+                             <span>{transaction.currency}</span>
+                             <span>€</span>
+                          </div>
+                          <div className="flex gap-2">
+                             <span className="underline">PARTICIPANT:</span>
+                             <span>NOT. MOD</span>
+                          </div>
+                       </div>
+                   </div>
+                   
+                   <div className="border border-black p-2 pt-4 relative min-h-[120px] text-xs font-sans">
+                      <div className="text-xs font-bold bg-[#ffffff] print-bg px-1 absolute -top-2 left-2">User Activity</div>
+                      <div className="grid grid-cols-[140px_100px_auto] gap-y-1 mt-2">
+                         <span>Keyed by:</span><span></span><span></span>
+                         <span>Released by:</span><span>{postDateFormatted}</span><span>-  {postTime}</span>
+                         <span>Cancelled/Modified by:</span><span></span><span></span>
+                         <span>Received by:</span><span>{postDateFormatted}</span><span>-  {meta.receivedTime}</span>
+                      </div>
+                   </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                   <div className="border border-black p-2 pt-4 relative">
+                      <div className="text-xs font-bold bg-[#ffffff] print-bg px-1 absolute -top-2 left-2">Status</div>
+                      <div className="flex gap-16 text-xs font-sans mt-1">
+                         <span>NEW:</span>
+                         <span>MTCH/NMAT</span>
+                         <span>NAMT.CMIS</span>
+                      </div>
+                   </div>
+                   <div className="text-xs font-sans p-2">
+                      Recipient Country: INDONESIA
+                   </div>
+                </div>
+
+                <div className="grid grid-cols-[1.5fr_1fr] gap-4">
+                   <div className="border border-black p-3 pt-4 relative min-h-[60px] text-xs font-sans">
+                      <div className="text-xs font-bold bg-[#ffffff] print-bg px-1 absolute -top-2 left-2">Securities</div>
+                      <div>Ref. Code: {meta.refCode}</div>
+                      <div>Description: CASH WIRE TRANSFER</div>
+                   </div>
+                   <div className="border border-black p-2 pt-4 relative bg-[#e0f7fa]/30 print-bg">
+                      <div className="text-xs font-bold bg-[#ffffff] print-bg px-1 absolute -top-2 left-2">Progress</div>
+                      <div className="text-xs mb-2">Printing done...</div>
+                      <div className="flex gap-[2px] h-6 w-3/4">
+                         {[...Array(15)].map((_, i) => (
+                           <div key={i} className="flex-1 bg-[#00bcd4] print-bg"></div>
+                         ))}
+                      </div>
+                      <div className="flex justify-center mt-4">
+                         <button className="px-6 py-1 bg-[#e0e0e0] border border-gray-400 font-bold shadow text-xs">OK</button>
+                      </div>
+                   </div>
+                </div>
+
+                {/* Circular Stamp */}
+                <div className="absolute top-[215px] -right-[72px] w-36 h-36 flex items-center justify-center opacity-85 z-10 -rotate-[15deg]">
+                    <svg viewBox="0 0 100 100" className="w-full h-full absolute inset-0">
+                      <path id="circlePath" d="M 10, 50 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="none" />
+                      <text className="text-[10px] font-bold font-sans fill-[#0018a8]">
+                        <textPath href="#circlePath" startOffset="12%">
+                          DEUTSCHE BANK AG FRANKFURT ★
+                        </textPath>
+                      </text>
+                      <circle cx="50" cy="50" r="48" fill="none" stroke="#0018a8" strokeWidth="1.5" />
+                      <circle cx="50" cy="50" r="32" fill="none" stroke="#0018a8" strokeWidth="0.5" />
+                    </svg>
+                    <div className="w-10 h-10 border-[2px] border-[#0018a8] relative p-0.5 bg-[#f0f8fb] z-10 print-bg">
+                       <div className="w-full h-full bg-[#f0f8fb] border border-[#0018a8] print-bg">
+                         <div className="w-[120%] h-[2px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-1 left-0.5"></div>
+                       </div>
                      </div>
-                   </div>
-                   <div className="text-3xl font-sans font-black tracking-tighter">Deutsche Bank</div>
                 </div>
-                <div className="w-full border-t border-[#0018a8] my-1"></div>
-                <div className="flex justify-between w-full text-[10px] font-bold font-sans">
-                   <span>Tel +496991000</span>
-                   <span>Fax +496991034225</span>
+
+                {/* Stamp Overlay */}
+                <div className="absolute top-[260px] -right-[150px] w-[340px] h-[140px] border-[3px] border-[#0018a8] text-[#0018a8] -rotate-[12deg] flex flex-col justify-center items-center opacity-85 pointer-events-none p-2 print-bg z-20">
+                    <div className="text-[10px] font-sans font-bold leading-tight text-center">
+                      TAUNUSANLAGE 12, POSTCODE 60262 FRANKFURT AM MAIN, GERMANY
+                    </div>
+                    <div className="w-full border-b border-[#0018a8] my-1"></div>
+                    <div className="flex items-center gap-4 py-1">
+                       <div className="w-10 h-10 border-[2px] border-[#0018a8] relative p-1 bg-[#f0f8fb] shrink-0 print-bg">
+                         <div className="w-full h-full bg-[#f0f8fb] border border-[#0018a8] print-bg">
+                           <div className="w-[120%] h-[2px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-1 left-0.5"></div>
+                         </div>
+                       </div>
+                       <div className="text-3xl font-sans font-black tracking-tighter">Deutsche Bank</div>
+                    </div>
+                    <div className="w-full border-t border-[#0018a8] my-1"></div>
+                    <div className="flex justify-between w-full text-[10px] font-bold font-sans">
+                       <span>Tel +496991000</span>
+                       <span>Fax +496991034225</span>
+                    </div>
+                    {/* Signature Script overlaying stamp */}
+                    <div className="absolute top-1 left-14 text-[#0018a8] text-5xl opacity-90 transform -rotate-[5deg] flex flex-col items-center" style={{ fontFamily: "'Brush Script MT', cursive" }}>
+                       <span>Christian</span>
+                       <span className="-mt-4">Sewing</span>
+                    </div>
                 </div>
-                {/* Signature Script overlaying stamp */}
-                <div className="absolute top-1 left-14 text-[#0018a8] text-5xl opacity-90 transform -rotate-[5deg] flex flex-col items-center" style={{ fontFamily: "'Brush Script MT', cursive" }}>
-                   <span>Christian</span>
-                   <span className="-mt-4">Sewing</span>
-                </div>
-            </div>
-            
-            {/* Circular Stamp */}
-            <div className="absolute top-[620px] right-[360px] w-36 h-36 flex items-center justify-center opacity-85 z-10 -rotate-[15deg]">
-                <svg viewBox="0 0 100 100" className="w-full h-full absolute inset-0">
-                  <path id="circlePath" d="M 10, 50 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="none" />
-                  <text className="text-[10px] font-bold font-sans fill-[#0018a8]">
-                    <textPath href="#circlePath" startOffset="12%">
-                      DEUTSCHE BANK AG FRANKFURT ★
-                    </textPath>
-                  </text>
-                  <circle cx="50" cy="50" r="48" fill="none" stroke="#0018a8" strokeWidth="1.5" />
-                  <circle cx="50" cy="50" r="32" fill="none" stroke="#0018a8" strokeWidth="0.5" />
-                </svg>
-                <div className="w-10 h-10 border-[2px] border-[#0018a8] relative p-0.5 bg-white z-10">
-                   <div className="w-full h-full bg-white border border-[#0018a8]">
-                     <div className="w-[120%] h-[2px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-1 left-0.5"></div>
-                   </div>
-                 </div>
+              </div>
             </div>
 
            <div className="absolute bottom-0 w-full h-16 bg-[#312571] print-bg"></div>
