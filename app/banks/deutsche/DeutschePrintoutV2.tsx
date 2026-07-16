@@ -354,7 +354,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                 </div>
 
                 {/* Circular Stamp */}
-                <div className="absolute top-[215px] -right-[72px] w-36 h-36 flex items-center justify-center opacity-85 z-10 -rotate-[15deg] pointer-events-none">
+                <div className="absolute top-[185px] -right-[72px] w-36 h-36 flex items-center justify-center opacity-85 z-10 -rotate-[15deg] pointer-events-none">
                     <svg viewBox="0 0 100 100" className="w-full h-full absolute inset-0">
                       <path id="circlePath" d="M 10, 50 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="none" />
                       <path id="circlePathBottom" d="M 10, 50 a 40,40 0 0,0 80,0" fill="none" />
@@ -379,7 +379,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                 </div>
 
                 {/* Stamp Overlay */}
-                <div className="absolute top-[280px] -right-[230px] w-[340px] h-[140px] border-[3px] border-[#0018a8] text-[#0018a8] -rotate-[18deg] flex flex-col justify-center items-center opacity-85 pointer-events-none p-2 print-bg z-20">
+                <div className="absolute top-[260px] -right-[230px] w-[340px] h-[140px] border-[3px] border-[#0018a8] text-[#0018a8] -rotate-[18deg] flex flex-col justify-center items-center opacity-85 pointer-events-none p-2 print-bg z-20">
                     <div className="text-[10px] font-sans font-bold leading-tight text-center">
                       TAUNUSANLAGE 12, POSTCODE 60262 FRANKFURT AM MAIN, GERMANY
                     </div>
@@ -400,7 +400,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                 </div>
 
                 {/* Signature */}
-                <div className="absolute top-[250px] -right-[30px] text-[#0018a8] text-5xl opacity-90 transform -rotate-[20deg] z-30 pointer-events-none tracking-tighter" style={{ fontFamily: "'Brush Script MT', cursive" }}>
+                <div className="absolute top-[225px] -right-[20px] text-[#0018a8] text-4xl opacity-90 transform -rotate-[20deg] z-30 pointer-events-none tracking-tighter" style={{ fontFamily: "'Brush Script MT', cursive" }}>
                    Christian Sewing
                 </div>
               </div>
