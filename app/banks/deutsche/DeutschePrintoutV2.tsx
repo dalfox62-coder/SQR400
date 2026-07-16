@@ -625,7 +625,7 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
 
                   <div className="flex items-end mt-8 text-[11px] w-full pl-[5%] relative">
                      <div className="z-20 -mb-2 mr-4">
-                        <img src="https://e.top4top.io/p_3849x07q81.png" alt="Stamps" className="w-[250px] object-contain mix-blend-multiply opacity-90" />
+                        <img src="/images/page5_stamp_v2.png" alt="Stamps" className="w-[250px] object-contain mix-blend-multiply opacity-90" />
                      </div>
                      <div className="mb-10 z-10 whitespace-nowrap">Senior Corporate Officer OLE MATTHIESSEN</div>
                   </div>
