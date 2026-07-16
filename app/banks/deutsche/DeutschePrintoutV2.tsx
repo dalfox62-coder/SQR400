@@ -400,7 +400,7 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
                         </div>
 
                         {/* Stamp Overlay */}
-                        <div className="absolute top-[30px] -right-[15px] w-[340px] h-[140px] border-[3px] border-[#0018a8] text-[#0018a8] -rotate-[16deg] flex flex-col justify-center items-center opacity-85 p-2 print-bg z-20">
+                        <div className="absolute top-[30px] -right-[45px] w-[340px] h-[140px] border-[3px] border-[#0018a8] text-[#0018a8] -rotate-[16deg] flex flex-col justify-center items-center opacity-85 p-2 print-bg z-20">
                            <div className="text-[10px] font-sans font-bold leading-tight text-center">
                               TAUNUSANLAGE 12, POSTCODE 60262 FRANKFURT AM MAIN, GERMANY
                            </div>
@@ -421,7 +421,7 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
                         </div>
 
                         {/* Signature */}
-                        <div className="absolute -top-[15px] -right-[20px] text-[#0018a8] text-[40px] opacity-90 transform -rotate-[20deg] z-30 tracking-tighter whitespace-nowrap" style={{ fontFamily: "'Brush Script MT', cursive" }}>
+                        <div className="absolute -top-[15px] -right-[50px] text-[#0018a8] text-[26px] opacity-90 transform -rotate-[20deg] z-30 tracking-tighter whitespace-nowrap" style={{ fontFamily: "'Brush Script MT', cursive" }}>
                            MR. CARSTEN LEWERENZ
                         </div>
                      </div>
