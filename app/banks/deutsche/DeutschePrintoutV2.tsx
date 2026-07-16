@@ -366,55 +366,58 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
                         </div>
                      </div>
 
-                     {/* Circular Stamp */}
-                     <div className="absolute top-[215px] -right-[72px] w-36 h-36 flex items-center justify-center opacity-85 z-10 -rotate-[15deg] pointer-events-none">
-                        <svg viewBox="0 0 100 100" className="w-full h-full absolute inset-0">
-                           <path id="circlePath" d="M 10, 50 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="none" />
-                           <path id="circlePathBottom" d="M 10, 50 a 40,40 0 0,0 80,0" fill="none" />
-                           <text className="text-[9.5px] font-bold font-sans fill-[#0018a8] tracking-widest">
-                              <textPath href="#circlePath" startOffset="11%">
-                                 DEUTSCHE BANK AG FRANKFURT ★
-                              </textPath>
-                           </text>
-                           <text className="text-[7.5px] font-bold font-sans fill-[#0018a8] tracking-widest">
-                              <textPath href="#circlePathBottom" startOffset="50%" textAnchor="middle">
-                                 ★ 000 669 67 TEL ★
-                              </textPath>
-                           </text>
-                           <circle cx="50" cy="50" r="48" fill="none" stroke="#0018a8" strokeWidth="1.5" />
-                           <circle cx="50" cy="50" r="32" fill="none" stroke="#0018a8" strokeWidth="0.5" />
-                        </svg>
-                        <div className="w-10 h-10 border-[2px] border-[#0018a8] relative p-0.5 bg-[#f0f8fb] z-10 print-bg">
-                           <div className="w-full h-full bg-[#f0f8fb] border border-[#0018a8] print-bg">
-                              <div className="w-[120%] h-[2px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-1 left-0.5"></div>
-                           </div>
-                        </div>
-                     </div>
-
-                     {/* Stamp Overlay */}
-                     <div className="absolute top-[280px] -right-[15px] w-[340px] h-[140px] border-[3px] border-[#0018a8] text-[#0018a8] -rotate-[16deg] flex flex-col justify-center items-center opacity-85 pointer-events-none p-2 print-bg z-20">
-                        <div className="text-[10px] font-sans font-bold leading-tight text-center">
-                           TAUNUSANLAGE 12, POSTCODE 60262 FRANKFURT AM MAIN, GERMANY
-                        </div>
-                        <div className="w-full border-b border-[#0018a8] my-1"></div>
-                        <div className="flex items-center gap-4 py-1">
-                           <div className="w-10 h-10 border-[2px] border-[#0018a8] relative p-1 bg-[#f0f8fb] shrink-0 print-bg">
+                     {/* Stamps and Signature Container */}
+                     <div className="absolute top-[320px] right-[50px] z-30 pointer-events-none transform scale-[0.6]">
+                        {/* Circular Stamp */}
+                        <div className="absolute -top-[35px] -right-[72px] w-36 h-36 flex items-center justify-center opacity-85 z-10 -rotate-[15deg]">
+                           <svg viewBox="0 0 100 100" className="w-full h-full absolute inset-0">
+                              <path id="circlePath" d="M 10, 50 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="none" />
+                              <path id="circlePathBottom" d="M 10, 50 a 40,40 0 0,0 80,0" fill="none" />
+                              <text className="text-[9.5px] font-bold font-sans fill-[#0018a8] tracking-widest">
+                                 <textPath href="#circlePath" startOffset="11%">
+                                    DEUTSCHE BANK AG FRANKFURT ★
+                                 </textPath>
+                              </text>
+                              <text className="text-[7.5px] font-bold font-sans fill-[#0018a8] tracking-widest">
+                                 <textPath href="#circlePathBottom" startOffset="50%" textAnchor="middle">
+                                    ★ 000 669 67 TEL ★
+                                 </textPath>
+                              </text>
+                              <circle cx="50" cy="50" r="48" fill="none" stroke="#0018a8" strokeWidth="1.5" />
+                              <circle cx="50" cy="50" r="32" fill="none" stroke="#0018a8" strokeWidth="0.5" />
+                           </svg>
+                           <div className="w-10 h-10 border-[2px] border-[#0018a8] relative p-0.5 bg-[#f0f8fb] z-10 print-bg">
                               <div className="w-full h-full bg-[#f0f8fb] border border-[#0018a8] print-bg">
                                  <div className="w-[120%] h-[2px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-1 left-0.5"></div>
                               </div>
                            </div>
-                           <div className="text-3xl font-sans font-black tracking-tighter">Deutsche Bank</div>
                         </div>
-                        <div className="w-full border-t border-[#0018a8] my-1"></div>
-                        <div className="flex justify-between w-full text-[10px] font-bold font-sans">
-                           <span>Tel +496991000</span>
-                           <span>Fax +496991034225</span>
-                        </div>
-                     </div>
 
-                     {/* Signature */}
-                     <div className="absolute top-[235px] -right-[20px] text-[#0018a8] text-[40px] opacity-90 transform -rotate-[20deg] z-30 pointer-events-none tracking-tighter" style={{ fontFamily: "'Brush Script MT', cursive" }}>
-                        MR. CARSTEN LEWERENZ
+                        {/* Stamp Overlay */}
+                        <div className="absolute top-[30px] -right-[15px] w-[340px] h-[140px] border-[3px] border-[#0018a8] text-[#0018a8] -rotate-[16deg] flex flex-col justify-center items-center opacity-85 p-2 print-bg z-20">
+                           <div className="text-[10px] font-sans font-bold leading-tight text-center">
+                              TAUNUSANLAGE 12, POSTCODE 60262 FRANKFURT AM MAIN, GERMANY
+                           </div>
+                           <div className="w-full border-b border-[#0018a8] my-1"></div>
+                           <div className="flex items-center gap-4 py-1">
+                              <div className="w-10 h-10 border-[2px] border-[#0018a8] relative p-1 bg-[#f0f8fb] shrink-0 print-bg">
+                                 <div className="w-full h-full bg-[#f0f8fb] border border-[#0018a8] print-bg">
+                                    <div className="w-[120%] h-[2px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-1 left-0.5"></div>
+                                 </div>
+                              </div>
+                              <div className="text-3xl font-sans font-black tracking-tighter">Deutsche Bank</div>
+                           </div>
+                           <div className="w-full border-t border-[#0018a8] my-1"></div>
+                           <div className="flex justify-between w-full text-[10px] font-bold font-sans">
+                              <span>Tel +496991000</span>
+                              <span>Fax +496991034225</span>
+                           </div>
+                        </div>
+
+                        {/* Signature */}
+                        <div className="absolute -top-[15px] -right-[20px] text-[#0018a8] text-[40px] opacity-90 transform -rotate-[20deg] z-30 tracking-tighter whitespace-nowrap" style={{ fontFamily: "'Brush Script MT', cursive" }}>
+                           MR. CARSTEN LEWERENZ
+                        </div>
                      </div>
                   </div>
                </div>
