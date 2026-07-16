@@ -452,7 +452,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                   </div>
 
                   <div className="w-full relative z-20">
-                     <table className="w-full border-collapse border border-black text-[11.5px] text-center mb-4">
+                     <table className="w-full border-collapse border border-black text-[11.5px] text-center">
                         <thead>
                            <tr className="bg-[#d2dce6] print-bg border-b border-black">
                               <th className="border-r border-black py-1.5 px-2 font-normal text-left" colSpan={3}>Account Holder:</th>
@@ -487,11 +487,14 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                                  SWIFT CODE: {beneficiary.swiftCode}
                               </td>
                            </tr>
-                           <tr className="bg-[#d2dce6] print-bg border-b border-black">
+                           <tr className="bg-[#d2dce6] print-bg">
                               <td colSpan={7} className="py-1 text-center font-bold">SWIFT Transmission / Additional Fee: {transaction.swiftFee}</td>
                            </tr>
                         </tbody>
-                        <thead className="bg-[#d2dce6] print-bg border-b border-black">
+                     </table>
+                     
+                     <table className="w-full border-collapse border-l border-r border-b border-black text-[11.5px] text-center mb-4">
+                        <thead className="bg-[#d2dce6] print-bg border-t border-b border-black">
                            <tr>
                               <th className="border-r border-black py-1.5 px-2 font-normal w-[12%]">Date</th>
                               <th className="border-r border-black py-1.5 px-2 font-normal w-[22%]">Previous Balance / Euro</th>
