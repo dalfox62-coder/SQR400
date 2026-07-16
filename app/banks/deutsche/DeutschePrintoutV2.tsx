@@ -411,9 +411,9 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
             </div>
 
             {/* PAGE 4 */}
-            <div className="w-[297mm] p-10 page-break page-landscape bg-white text-black relative text-sm font-sans shadow-2xl print:shadow-none overflow-hidden print-bg" style={{ minHeight: '210mm' }}>
+            <div className="w-[297mm] p-10 page-break page-landscape bg-[#e8edf2] text-black relative text-sm font-sans shadow-2xl print:shadow-none overflow-hidden print-bg" style={{ minHeight: '210mm' }}>
                {/* Background repeating text */}
-               <div className="absolute inset-0 flex flex-wrap text-gray-200 text-[12px] leading-[1.2] font-sans font-bold opacity-50 select-none z-0 print-bg overflow-hidden" style={{ wordBreak: 'break-all' }}>
+               <div className="absolute inset-0 flex flex-wrap text-[#d0d7e0] text-[13px] leading-[1.2] font-sans font-bold opacity-70 select-none z-0 print-bg overflow-hidden" style={{ wordBreak: 'break-all' }}>
                   {Array(2500).fill('Deutsche Bank ').join('')}
                </div>
 
@@ -435,11 +435,11 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                   <div className="flex justify-end text-[11px] mb-6">
                      <div className="text-right">
                         SWIFT BIC: {institution.swiftCode}<br />
-                        <a href="https://www.db.com" className="text-blue-700 underline font-bold">www.db.com</a>
+                        <a href="https://www.db.com" className="text-[#0018a8] underline font-bold">www.db.com</a>
                      </div>
                   </div>
 
-                  <div className="flex justify-between text-xs mb-6">
+                  <div className="flex justify-between text-[12.5px] mb-6 leading-relaxed">
                      <div>
                         To: {institution.accountName}<br />
                         Address: {institution.address}<br /><br />
@@ -452,117 +452,118 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                   </div>
 
                   <div className="w-full relative z-20">
-                     <table className="w-full border-collapse border border-gray-400 text-[11px] text-center bg-white/60 print-bg mb-4">
+                     <table className="w-full border-collapse border border-gray-500 text-[11.5px] text-center bg-white/70 print-bg mb-4">
                         <thead>
-                           <tr className="bg-[#e4ebf1] print-bg">
-                              <th className="border border-gray-400 py-1 px-2 font-normal text-left" colSpan={3}>Account Holder:</th>
-                              <th className="border border-gray-400 py-1 px-2 font-normal text-left" colSpan={4}>Account Signatory:</th>
+                           <tr className="bg-[#d2dce6] print-bg border-b border-gray-500">
+                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal text-left" colSpan={3}>Account Holder:</th>
+                              <th className="py-1.5 px-2 font-normal text-left" colSpan={4}>Account Signatory:</th>
                            </tr>
-                           <tr className="bg-[#f0f4f8] print-bg">
-                              <td className="border border-gray-400 py-1 px-2 font-bold text-left underline" colSpan={3}>{institution.accountName}</td>
-                              <td className="border border-gray-400 py-1 px-2 font-bold text-left underline" colSpan={4}>{institution.signatory}</td>
+                           <tr className="bg-[#eef3f7] print-bg border-b border-gray-500">
+                              <td className="border-r border-gray-500 py-1.5 px-2 font-bold text-left underline" colSpan={3}>{institution.accountName}</td>
+                              <td className="py-1.5 px-2 font-bold text-left underline" colSpan={4}>{institution.signatory}</td>
                            </tr>
-                           <tr className="bg-[#e4ebf1] print-bg font-bold">
-                              <th className="border border-gray-400 py-1 px-2 font-normal">Type</th>
-                              <th className="border border-gray-400 py-1 px-2 font-normal">Account Number</th>
-                              <th className="border border-gray-400 py-1 px-2 font-normal">Currency</th>
-                              <th className="border border-gray-400 py-1 px-2 font-normal">Date</th>
-                              <th className="border border-gray-400 py-1 px-2 font-normal">Debit</th>
-                              <th className="border border-gray-400 py-1 px-2 font-normal">Credit</th>
-                              <th className="border border-gray-400 py-1 px-2 font-normal text-left pl-4">Beneficiary</th>
+                           <tr className="bg-[#d2dce6] print-bg font-bold border-b border-gray-500">
+                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal">Type</th>
+                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal">Account Number</th>
+                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal">Currency</th>
+                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal">Date</th>
+                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal">Debit</th>
+                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal">Credit</th>
+                              <th className="py-1.5 px-2 font-normal text-center">Beneficiary</th>
                            </tr>
                         </thead>
-                        <tbody className="bg-white/80 print-bg">
+                        <tbody className="bg-[#eef3f7] print-bg border-b border-gray-500">
                            <tr>
-                              <td className="border border-gray-400 py-3 px-2 font-bold">Corporate</td>
-                              <td className="border border-gray-400 py-3 px-2">{institution.accountNumber}</td>
-                              <td className="border border-gray-400 py-3 px-2">{transaction.currency}</td>
-                              <td className="border border-gray-400 py-3 px-2">{postDateFormatted}</td>
-                              <td className="border border-gray-400 py-3 px-2 text-right">{formatNumber(transaction.amount)}</td>
-                              <td className="border border-gray-400 py-3 px-2"></td>
-                              <td className="border border-gray-400 py-1 px-4 text-left text-[10px] leading-tight w-[30%]">
+                              <td className="border-r border-gray-500 py-4 px-2 font-bold">Corporate</td>
+                              <td className="border-r border-gray-500 py-4 px-2">{institution.accountNumber}</td>
+                              <td className="border-r border-gray-500 py-4 px-2">{transaction.currency}</td>
+                              <td className="border-r border-gray-500 py-4 px-2">{postDateFormatted}</td>
+                              <td className="border-r border-gray-500 py-4 px-2 text-right">{formatNumber(transaction.amount)}</td>
+                              <td className="border-r border-gray-500 py-4 px-2"></td>
+                              <td className="py-2 px-4 text-left text-[10px] leading-tight w-[30%]">
                                  Bank Name: {beneficiary.bankName}<br />
                                  Account name: {beneficiary.accountName}<br />
                                  Account number: {beneficiary.accountNumber}<br />
                                  SWIFT CODE: {beneficiary.swiftCode}
                               </td>
                            </tr>
-                           <tr className="bg-[#e4ebf1] print-bg">
-                              <td colSpan={7} className="border border-gray-400 py-1 text-center font-bold">SWIFT Transmission / Additional Fee: {transaction.swiftFee}</td>
+                           <tr className="bg-[#d2dce6] print-bg border-b border-gray-500">
+                              <td colSpan={7} className="py-1 text-center font-bold">SWIFT Transmission / Additional Fee: {transaction.swiftFee}</td>
                            </tr>
                         </tbody>
-                        <thead className="bg-[#e4ebf1] print-bg">
+                        <thead className="bg-[#d2dce6] print-bg border-b border-gray-500">
                            <tr>
-                              <th className="border border-gray-400 py-1 px-2 font-normal w-[12%]">Date</th>
-                              <th className="border border-gray-400 py-1 px-2 font-normal w-[22%]">Previous Balance / Euro</th>
-                              <th className="border border-gray-400 py-1 px-2 font-normal w-[22%]">Debit</th>
-                              <th className="border border-gray-400 py-1 px-2 font-normal w-[15%]">Authority</th>
-                              <th className="border border-gray-400 py-1 px-2 font-normal">Current Balance / Euro</th>
+                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal w-[12%]">Date</th>
+                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal w-[22%]">Previous Balance / Euro</th>
+                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal w-[22%]">Debit</th>
+                              <th className="border-r border-gray-500 py-1.5 px-2 font-normal w-[15%]">Authority</th>
+                              <th className="py-1.5 px-2 font-normal">Current Balance / Euro</th>
                            </tr>
                         </thead>
-                        <tbody className="bg-white/80 print-bg text-[10.5px]">
-                           <tr>
-                              <td className="border border-gray-400 py-1 px-2 text-center">{postDateFormatted}</td>
-                              <td className="border border-gray-400 py-1 px-2 text-right">{formatNumber(transaction.previousBalance)}</td>
-                              <td className="border border-gray-400 py-1 px-2 text-right">{formatNumber(transaction.amount)}</td>
-                              <td className="border border-gray-400 py-1 px-2 text-center">CASH WIRE</td>
-                              <td className="border border-gray-400 py-1 px-2 text-right">{formatNumber(transaction.currentBalance)}</td>
+                        <tbody className="bg-[#eef3f7] print-bg text-[11px]">
+                           <tr className="border-b border-gray-500">
+                              <td className="border-r border-gray-500 py-1 px-2 text-center">{postDateFormatted}</td>
+                              <td className="border-r border-gray-500 py-1 px-2 text-right">{formatNumber(transaction.previousBalance)}</td>
+                              <td className="border-r border-gray-500 py-1 px-2 text-right">{formatNumber(transaction.amount)}</td>
+                              <td className="border-r border-gray-500 py-1 px-2 text-center">CASH WIRE</td>
+                              <td className="py-1 px-2 text-right font-bold underline">{formatNumber(transaction.currentBalance)}</td>
                            </tr>
                            <tr>
-                              <td className="border border-gray-400 py-1 px-2 text-center">{postDateFormatted}</td>
-                              <td className="border border-gray-400 py-1 px-2 text-right">{formatNumber(transaction.previousBalance)}</td>
-                              <td className="border border-gray-400 py-1 px-2 text-right">{formatNumber(transaction.senderCharges)}</td>
-                              <td className="border border-gray-400 py-1 px-2 text-center">Additional Fee</td>
-                              <td className="border border-gray-400 py-1 px-2 text-right">{formatNumber(transaction.previousBalance)}</td>
+                              <td className="border-r border-gray-500 py-1 px-2 text-center">{postDateFormatted}</td>
+                              <td className="border-r border-gray-500 py-1 px-2 text-right">{formatNumber(transaction.previousBalance)}</td>
+                              <td className="border-r border-gray-500 py-1 px-2 text-right">{formatNumber(transaction.senderCharges)}</td>
+                              <td className="border-r border-gray-500 py-1 px-2 text-center">Additional Fee</td>
+                              <td className="py-1 px-2 text-right">{formatNumber(transaction.previousBalance)}</td>
                            </tr>
                         </tbody>
                      </table>
                   </div>
 
-                  <div className="flex w-full mt-10 relative z-30">
-                     {/* Left Signature Block (Aligned under Date & Prev Balance = 12% + 22% = 34%) */}
-                     <div className="w-[34%] relative flex flex-col items-center">
-                        <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 opacity-80">
-                           <svg viewBox="0 0 100 100" className="w-[110px] h-[110px] -rotate-[10deg]">
-                              <path id="circlePath4" d="M 10, 50 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="none" />
-                              <text className="text-[10px] font-bold font-sans fill-[#0018a8] tracking-widest">
-                                 <textPath href="#circlePath4" startOffset="10%">DEUTSCHE BANK AG</textPath>
-                              </text>
-                              <text className="text-[10px] font-bold font-sans fill-[#0018a8] tracking-widest">
-                                 <textPath href="#circlePath4" startOffset="55%">FRANKFURT AM MAIN</textPath>
-                              </text>
-                              <circle cx="50" cy="50" r="48" fill="none" stroke="#0018a8" strokeWidth="1.5" />
-                              <circle cx="50" cy="50" r="32" fill="none" stroke="#0018a8" strokeWidth="0.5" />
-                           </svg>
-                           <div className="w-7 h-7 border-[1.5px] border-[#0018a8] absolute top-[41px] left-[41px] p-[1px] bg-transparent">
-                              <div className="w-full h-full border border-[#0018a8] relative overflow-hidden">
-                                 <div className="w-[140%] h-[1.5px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-0 left-0"></div>
-                              </div>
+                  {/* Signatures using Absolute Positioning based on Table Columns for perfect alignment */}
+                  <div className="w-full relative h-40 mt-4 z-30">
+                     
+                     {/* Circular Stamp (Centered around 16% width, under Date & Prev Balance) */}
+                     <div className="absolute left-[16%] top-2 opacity-85 -translate-x-1/2">
+                        <svg viewBox="0 0 100 100" className="w-[125px] h-[125px] -rotate-[10deg]">
+                           <path id="circlePath4" d="M 10, 50 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="none" />
+                           <text className="text-[10px] font-bold font-sans fill-[#0018a8] tracking-widest">
+                              <textPath href="#circlePath4" startOffset="10%">DEUTSCHE BANK AG</textPath>
+                           </text>
+                           <text className="text-[10px] font-bold font-sans fill-[#0018a8] tracking-widest">
+                              <textPath href="#circlePath4" startOffset="55%">FRANKFURT AM MAIN</textPath>
+                           </text>
+                           <circle cx="50" cy="50" r="48" fill="none" stroke="#0018a8" strokeWidth="1.5" />
+                           <circle cx="50" cy="50" r="32" fill="none" stroke="#0018a8" strokeWidth="0.5" />
+                        </svg>
+                        <div className="w-7 h-7 border-[1.5px] border-[#0018a8] absolute top-[48.5px] left-[48.5px] p-[1px] bg-transparent">
+                           <div className="w-full h-full border border-[#0018a8] relative overflow-hidden">
+                              <div className="w-[140%] h-[1.5px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-0 left-0"></div>
                            </div>
-                        </div>
-                        <div className="text-3xl text-[#0018a8] absolute -top-4 left-1/2 transform -translate-x-1/2 -rotate-12 whitespace-nowrap z-10" style={{ fontFamily: "'Brush Script MT', cursive" }}>
-                           James
-                        </div>
-                        <div className="mt-20 relative z-20 text-[9px] font-bold leading-tight text-center">
-                           JAMES VON MOLTKE (78414M)<br />
-                           MANAGING DIRECTOR<br />
-                           FOR AND BEHALF<br />
-                           DEUTSCHE BANK AG
                         </div>
                      </div>
 
-                     {/* Middle space (Aligned under Debit = 22%) */}
-                     <div className="w-[22%]"></div>
+                     {/* James Signature (Overlapping Stamp) */}
+                     <div className="text-[34px] text-[#0018a8] absolute left-[15%] top-0 -translate-x-1/2 -rotate-[15deg] whitespace-nowrap z-40" style={{ fontFamily: "'Brush Script MT', cursive" }}>
+                        James
+                     </div>
 
-                     {/* Right Signature Block (Aligned under Authority & Current Balance = 15% + 29% = 44%) */}
-                     <div className="w-[44%] relative flex flex-col items-center">
-                        <div className="border border-[#0018a8] p-1.5 text-[8px] text-[#0018a8] font-normal leading-tight w-[270px] absolute -top-12 left-1/2 transform -translate-x-1/2 z-0 bg-white/70 print-bg opacity-85">
+                     {/* James Printed Text (To the right of the stamp, starting at 24% width) */}
+                     <div className="absolute left-[24%] top-14 text-[9.5px] font-bold leading-[1.3] text-[#0018a8] text-left z-20">
+                        JAMES VON MOLTKE(78414M)<br />
+                        MANAGING DIRECTOR<br />
+                        FOR AND BEHALF<br />
+                        DEUTSCHE BANK AG
+                     </div>
+
+                     {/* Rectangular Stamp (Centered around 56% width, under Authority) */}
+                     <div className="absolute left-[56%] top-6 opacity-85 -translate-x-1/2 z-10">
+                        <div className="border-[2px] border-[#0018a8] p-1.5 text-[8px] text-[#0018a8] font-normal leading-tight w-[260px] bg-[#e8edf2] print-bg">
                            TAUNUSANLAGE 12, 60325 FRANKFURT AM MAIN, GERMANY<br />
                            <div className="flex justify-between items-center mt-1 border-t border-[#0018a8] pt-1">
                               <span className="font-bold text-sm">Deutsche Bank</span>
-                              <div className="w-4 h-4 border border-[#0018a8] p-0.5">
+                              <div className="w-5 h-5 border border-[#0018a8] p-[1.5px]">
                                  <div className="w-full h-full bg-[#0018a8] border border-[#0018a8] relative print-bg">
-                                    <div className="w-[140%] h-[1px] bg-white origin-bottom-left -rotate-45 absolute bottom-0.5 left-0 print-bg"></div>
+                                    <div className="w-[140%] h-[1.5px] bg-white origin-bottom-left -rotate-45 absolute bottom-0.5 left-0 print-bg"></div>
                                  </div>
                               </div>
                            </div>
@@ -571,15 +572,20 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                               <span>Fax: +49 69 910-34 225</span>
                            </div>
                         </div>
-                        <div className="text-3xl text-[#0018a8] absolute -top-12 left-1/2 transform -translate-x-1/2 -rotate-[15deg] whitespace-nowrap z-10" style={{ fontFamily: "'Brush Script MT', cursive" }}>
-                           Christian Sewing
-                        </div>
-                        <div className="mt-16 relative z-20 text-[9px] font-bold leading-tight text-center">
-                           MR. CHRISTIAN SEWING (9089)<br />
-                           FOR AND ON BEHALF OF<br />
-                           DEUTSCHE BANK AG
-                        </div>
                      </div>
+
+                     {/* Christian Sewing Signature (Overlapping Printed Text) */}
+                     <div className="text-[32px] text-[#0018a8] absolute left-[77%] top-0 -translate-x-1/2 -rotate-[18deg] whitespace-nowrap z-40" style={{ fontFamily: "'Brush Script MT', cursive" }}>
+                        Christian Sewing
+                     </div>
+
+                     {/* Christian Sewing Printed Text (To the right of the stamp, starting at 70% width) */}
+                     <div className="absolute left-[70%] top-12 text-[10px] font-bold leading-[1.3] text-[#0018a8] text-left z-20">
+                        MR. CHRISTIAN SEWING (9089)<br />
+                        FOR AND ON BEHALF OF<br />
+                        DEUTSCHE BANK AG
+                     </div>
+                     
                   </div>
                </div>
             </div>
