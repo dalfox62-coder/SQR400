@@ -519,11 +519,11 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                      </table>
                   </div>
 
-                  <div className="flex w-full mt-10 px-8 relative z-30">
-                     {/* Left Signature Block */}
-                     <div className="w-[35%] relative flex flex-col items-center">
-                        <div className="absolute -top-12 left-8 opacity-75">
-                           <svg viewBox="0 0 100 100" className="w-24 h-24 absolute inset-0 -rotate-[10deg]">
+                  <div className="flex w-full mt-10 relative z-30">
+                     {/* Left Signature Block (Aligned under Date & Prev Balance = 12% + 22% = 34%) */}
+                     <div className="w-[34%] relative flex flex-col items-center">
+                        <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 opacity-80">
+                           <svg viewBox="0 0 100 100" className="w-[110px] h-[110px] -rotate-[10deg]">
                               <path id="circlePath4" d="M 10, 50 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="none" />
                               <text className="text-[10px] font-bold font-sans fill-[#0018a8] tracking-widest">
                                  <textPath href="#circlePath4" startOffset="10%">DEUTSCHE BANK AG</textPath>
@@ -534,28 +534,29 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                               <circle cx="50" cy="50" r="48" fill="none" stroke="#0018a8" strokeWidth="1.5" />
                               <circle cx="50" cy="50" r="32" fill="none" stroke="#0018a8" strokeWidth="0.5" />
                            </svg>
-                           <div className="w-7 h-7 border-[1.5px] border-[#0018a8] absolute top-8 left-8 p-[1.5px] bg-transparent">
+                           <div className="w-7 h-7 border-[1.5px] border-[#0018a8] absolute top-[41px] left-[41px] p-[1px] bg-transparent">
                               <div className="w-full h-full border border-[#0018a8] relative overflow-hidden">
                                  <div className="w-[140%] h-[1.5px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-0 left-0"></div>
                               </div>
                            </div>
                         </div>
-                        <div className="text-[44px] text-[#0018a8] absolute -top-10 left-2 transform -rotate-12 whitespace-nowrap z-10" style={{ fontFamily: "'Brush Script MT', cursive" }}>
+                        <div className="text-3xl text-[#0018a8] absolute -top-4 left-1/2 transform -translate-x-1/2 -rotate-12 whitespace-nowrap z-10" style={{ fontFamily: "'Brush Script MT', cursive" }}>
                            James
                         </div>
-                        <div className="mt-8 relative z-20 text-[9px] font-bold leading-tight text-center">
-                           JAMES VON MOLTKE(78414M)<br />
+                        <div className="mt-20 relative z-20 text-[9px] font-bold leading-tight text-center">
+                           JAMES VON MOLTKE (78414M)<br />
                            MANAGING DIRECTOR<br />
                            FOR AND BEHALF<br />
                            DEUTSCHE BANK AG
                         </div>
                      </div>
 
-                     <div className="w-[30%]"></div>
+                     {/* Middle space (Aligned under Debit = 22%) */}
+                     <div className="w-[22%]"></div>
 
-                     {/* Right Signature Block */}
-                     <div className="w-[35%] relative flex flex-col items-center">
-                        <div className="border border-[#0018a8] p-1.5 text-[8px] text-[#0018a8] font-normal leading-tight w-64 absolute -top-10 -left-4 z-0 bg-white/70 print-bg opacity-85">
+                     {/* Right Signature Block (Aligned under Authority & Current Balance = 15% + 29% = 44%) */}
+                     <div className="w-[44%] relative flex flex-col items-center">
+                        <div className="border border-[#0018a8] p-1.5 text-[8px] text-[#0018a8] font-normal leading-tight w-[270px] absolute -top-12 left-1/2 transform -translate-x-1/2 z-0 bg-white/70 print-bg opacity-85">
                            TAUNUSANLAGE 12, 60325 FRANKFURT AM MAIN, GERMANY<br />
                            <div className="flex justify-between items-center mt-1 border-t border-[#0018a8] pt-1">
                               <span className="font-bold text-sm">Deutsche Bank</span>
@@ -570,10 +571,10 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                               <span>Fax: +49 69 910-34 225</span>
                            </div>
                         </div>
-                        <div className="text-[40px] text-[#0018a8] absolute -top-14 left-8 transform -rotate-[15deg] whitespace-nowrap z-10" style={{ fontFamily: "'Brush Script MT', cursive" }}>
+                        <div className="text-3xl text-[#0018a8] absolute -top-12 left-1/2 transform -translate-x-1/2 -rotate-[15deg] whitespace-nowrap z-10" style={{ fontFamily: "'Brush Script MT', cursive" }}>
                            Christian Sewing
                         </div>
-                        <div className="mt-8 relative z-20 text-[9px] font-bold leading-tight text-center pl-8">
+                        <div className="mt-16 relative z-20 text-[9px] font-bold leading-tight text-center">
                            MR. CHRISTIAN SEWING (9089)<br />
                            FOR AND ON BEHALF OF<br />
                            DEUTSCHE BANK AG
