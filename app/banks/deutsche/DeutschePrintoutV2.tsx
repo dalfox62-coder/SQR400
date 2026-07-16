@@ -92,7 +92,7 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
    };
 
    return (
-      <div translate="no" className={`notranslate min-h-screen pb-10 ${isPublic ? 'bg-slate-900' : 'bg-gray-200'}`}>
+      <div translate="no" className={`notranslate min-h-screen pb-10 print:pb-0 ${isPublic ? 'bg-slate-900' : 'bg-gray-200'}`}>
          <style dangerouslySetInnerHTML={{
             __html: `
         @media print {
@@ -125,6 +125,10 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
             margin: 0 auto !important;
             page-break-after: always;
             break-after: page;
+          }
+          .print-page-wrapper:last-child {
+            page-break-after: auto !important;
+            break-after: auto !important;
           }
           .print-landscape-content {
             transform: scale(0.7142);
