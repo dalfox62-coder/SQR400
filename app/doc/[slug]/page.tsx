@@ -16,7 +16,7 @@ export default function PublicDocumentPage() {
     // Override viewport for this specific page so the A4 document fits on mobile screens without being cut off
     const meta = document.querySelector('meta[name="viewport"]');
     if (meta) {
-      meta.setAttribute('content', 'width=850, initial-scale=0.4');
+      meta.setAttribute('content', 'width=1100, initial-scale=0.35, maximum-scale=2.0');
     }
     
     if (!slug) return;
