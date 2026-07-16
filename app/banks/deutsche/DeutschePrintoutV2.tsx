@@ -146,14 +146,16 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
       `}} />
 
          {/* Control Actions */}
-         <div className="max-w-5xl mx-auto pt-6 px-4 mb-6 flex flex-wrap justify-between gap-3 no-print">
-            <button onClick={onBack} className="px-5 py-2.5 bg-gray-300 hover:bg-gray-400 rounded-lg font-semibold transition text-base text-gray-800">
-               ← Back to Form
-            </button>
-            <button onClick={() => window.print()} className="px-5 py-2.5 bg-gradient-to-r from-blue-700 to-blue-900 hover:from-blue-800 hover:to-blue-950 text-white rounded-lg font-semibold transition text-base shadow-md">
-               🖨️ Print Document (5 Pages)
-            </button>
-         </div>
+         {!isPublic && (
+            <div className="max-w-5xl mx-auto pt-6 px-4 mb-6 flex flex-wrap justify-between gap-3 no-print">
+               <button onClick={onBack} className="px-5 py-2.5 bg-gray-300 hover:bg-gray-400 rounded-lg font-semibold transition text-base text-gray-800">
+                  ← Back to Form
+               </button>
+               <button onClick={() => window.print()} className="px-5 py-2.5 bg-gradient-to-r from-blue-700 to-blue-900 hover:from-blue-800 hover:to-blue-950 text-white rounded-lg font-semibold transition text-base shadow-md">
+                  🖨️ Print Document (5 Pages)
+               </button>
+            </div>
+         )}
 
          <div id="printable-area" className="w-full mx-auto printable-container flex flex-col gap-8 print:gap-0 items-center">
 
