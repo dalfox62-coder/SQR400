@@ -117,8 +117,8 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
             margin: 0;
           }
           .print-page-wrapper {
-            width: 210mm !important;
-            height: 297mm !important;
+            width: 750px !important;
+            height: 1050px !important;
             overflow: hidden !important;
             position: relative !important;
             box-shadow: none !important;
@@ -127,10 +127,10 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
             break-after: page;
           }
           .print-landscape-content {
-            transform: scale(0.707);
+            transform: scale(0.7142);
             transform-origin: top left;
-            width: 297mm !important;
-            height: 210mm !important;
+            width: 1050px !important;
+            height: 750px !important;
             overflow: hidden !important;
             position: absolute !important;
             top: 0 !important;
@@ -159,7 +159,7 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
          <div id="printable-area" className="w-full mx-auto printable-container flex flex-col gap-8 print:gap-0 items-center">
 
             {/* PAGE 1 */}
-            <div className="print-page-wrapper w-[210mm] p-10 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '297mm' }}>
+            <div className="print-page-wrapper w-[750px] p-10 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '1050px' }}>
 
                {/* Vertical Barcode on the right edge */}
                <div className="absolute right-0 top-[220px] w-0 h-0">
@@ -206,7 +206,7 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
             </div>
 
             {/* PAGE 2 */}
-            <div className="print-page-wrapper w-[210mm] p-10 bg-black text-gray-200 print-bg shadow-2xl print:shadow-none" style={{ minHeight: '297mm', backgroundColor: 'black' }}>
+            <div className="print-page-wrapper w-[750px] p-10 bg-black text-gray-200 print-bg shadow-2xl print:shadow-none" style={{ minHeight: '1050px', backgroundColor: 'black' }}>
                <div className="flex justify-between items-start mb-6 bg-black p-4 print-bg" style={{ backgroundColor: 'black' }}>
                   <div className="text-blue-600">
                      <h1 className="text-3xl font-sans tracking-tight">Deutsche Bank</h1>
@@ -232,7 +232,7 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
             </div>
 
             {/* PAGE 3 */}
-            <div className="print-page-wrapper w-[297mm] bg-white print:bg-white text-black relative shadow-2xl print:shadow-none print-bg" style={{ minHeight: '210mm' }}>
+            <div className="print-page-wrapper w-[1050px] bg-white print:bg-white text-black relative shadow-2xl print:shadow-none print-bg" style={{ minHeight: '750px' }}>
                <div className="print-landscape-content w-full h-full relative bg-[#f0f8fb] print-bg">
                   <div className="w-full h-16 bg-[#312571] print-bg flex items-end"></div>
                   <div className="px-14 py-8">
@@ -426,7 +426,7 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
             </div>
 
             {/* PAGE 4 */}
-            <div className="print-page-wrapper w-[297mm] bg-white print:bg-white text-black relative text-sm font-sans shadow-2xl print:shadow-none overflow-hidden print-bg" style={{ minHeight: '210mm' }}>
+            <div className="print-page-wrapper w-[1050px] bg-white print:bg-white text-black relative text-sm font-sans shadow-2xl print:shadow-none overflow-hidden print-bg" style={{ minHeight: '750px' }}>
                <div className="print-landscape-content w-full h-full relative p-10 bg-[#e8edf2] print-bg overflow-hidden">
                   {/* Background repeating text */}
                   <div className="absolute inset-0 flex flex-wrap text-[#d0d7e0] text-[13px] leading-[1.2] font-sans font-bold opacity-70 select-none z-0 print-bg overflow-hidden" style={{ wordBreak: 'break-all' }}>
@@ -547,7 +547,7 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
             </div>
 
             {/* PAGE 5 */}
-            <div className="print-page-wrapper w-[297mm] bg-white print:bg-white text-black relative text-sm font-sans shadow-2xl print:shadow-none overflow-hidden print-bg" style={{ minHeight: '210mm' }}>
+            <div className="print-page-wrapper w-[1050px] bg-white print:bg-white text-black relative text-sm font-sans shadow-2xl print:shadow-none overflow-hidden print-bg" style={{ minHeight: '750px' }}>
                <div className="print-landscape-content w-full h-full relative p-10 bg-white print-bg">
                   <div className="relative z-10 w-full h-full flex flex-col">
                   <div className="flex justify-between items-start mb-6">
