@@ -421,6 +421,7 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
                      </div>
                   </div>
                   </div>
+                  </div>
                   <div className="w-full h-16 bg-[#312571] print-bg mt-auto shrink-0"></div>
                </div>
             </div>
