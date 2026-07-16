@@ -531,11 +531,6 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
 
             {/* PAGE 5 */}
             <div className="w-[297mm] p-10 page-break page-landscape bg-white text-black relative text-sm font-sans shadow-2xl print:shadow-none overflow-hidden print-bg" style={{ minHeight: '210mm' }}>
-               {/* Background repeating text */}
-               <div className="absolute inset-0 flex flex-wrap text-[#f0f3f5] text-[13px] leading-[1.2] font-sans font-bold opacity-70 select-none z-0 print-bg overflow-hidden" style={{ wordBreak: 'break-all' }}>
-                  {Array(2500).fill('Deutsche Bank ').join('')}
-               </div>
-
                <div className="relative z-10 w-full h-full flex flex-col">
                   <div className="flex justify-between items-start mb-6">
                      <div className="text-[#0018a8]">
@@ -616,8 +611,8 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
 
                   <div className="flex justify-between items-end mt-4 text-[11px] w-full relative">
                      <div className="mb-8 z-10 w-[40%] text-center">Senior Corporate Officer OLE MATTHIESSEN</div>
-                     <div className="absolute right-[10%] bottom-[-15px] z-20 w-[45%] flex justify-center">
-                        <img src="/images/page5_stamps_v2.png" alt="Stamps" className="w-[360px] object-contain mix-blend-multiply opacity-90" />
+                     <div className="absolute right-[15%] bottom-[-15px] z-20 w-[40%] flex justify-center">
+                        <img src="/images/page5_stamps_v2.png" alt="Stamps" className="w-[220px] object-contain mix-blend-multiply opacity-90" />
                      </div>
                   </div>
                </div>
