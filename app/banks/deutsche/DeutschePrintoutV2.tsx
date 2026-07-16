@@ -20,14 +20,12 @@ const getPageBreakStyle = () => ({
    breakAfter: "page",
 });
 
-const DeutschePrintoutV2 = ({ data, onBack }) => {
+const DeutschePrintoutV2 = ({ data, onBack, isPublic = false }: { data: any, onBack?: () => void, isPublic?: boolean }) => {
    const [baseUrl, setBaseUrl] = useState("https://sqr400-ten.vercel.app");
 
    useEffect(() => {
       if (typeof window !== "undefined") {
-         if (window.location.origin.includes("localhost")) {
-            setBaseUrl(window.location.origin);
-         }
+         setBaseUrl(window.location.origin);
       }
    }, []);
 
@@ -84,7 +82,7 @@ ${isPage2 ? "" : "-------------------------------------MESSAGE TEXT-------------
 / ${beneficiary.accountNumber}
 / ${beneficiary.accountName}
 :70: Remittance Information
-${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
+${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
 :71A: Details of Charges
 / ${transaction.charges}
 :71F: Sender's Charges
@@ -94,7 +92,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
    };
 
    return (
-      <div translate="no" className="notranslate bg-gray-200 min-h-screen pb-10">
+      <div translate="no" className={`notranslate min-h-screen pb-10 ${isPublic ? 'bg-slate-900' : 'bg-gray-200'}`}>
          <style dangerouslySetInnerHTML={{
             __html: `
         @media print {
@@ -105,12 +103,10 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
             visibility: visible;
           }
           #printable-area {
-            position: absolute;
-            left: 0;
-            top: 0;
             width: 100%;
             background: white !important;
             padding: 0 !important;
+            margin: 0 !important;
           }
           .page-break {
             page-break-after: always;

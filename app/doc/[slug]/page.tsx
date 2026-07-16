@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import DeutschePrintout from "@/app/banks/deutsche/DeutschePrintout";
+import DeutschePrintoutV2 from "@/app/banks/deutsche/DeutschePrintoutV2";
 import HSBCPrintout from "@/app/banks/hsbc/HSBCPrintout";
 
 export default function PublicDocumentPage() {
@@ -67,6 +68,12 @@ export default function PublicDocumentPage() {
     return (
       <div translate="no" className="notranslate min-h-screen bg-[#525659] print:bg-white flex flex-col items-center py-8 print:py-0 px-2 print:px-0 overflow-x-auto print:overflow-visible">
         <DeutschePrintout data={data} isPublic={true} />
+      </div>
+    );
+  } else if (data.bankId === "deutsche-v2") {
+    return (
+      <div translate="no" className="notranslate min-h-screen bg-[#525659] print:bg-white flex flex-col items-center py-8 print:py-0 px-2 print:px-0 overflow-x-auto print:overflow-visible">
+        <DeutschePrintoutV2 data={data} isPublic={true} />
       </div>
     );
   } else if (data.bankId === "hsbc") {
