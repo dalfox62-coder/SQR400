@@ -402,7 +402,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
 
                      {/* Signature */}
                      <div className="absolute top-[235px] -right-[20px] text-[#0018a8] text-[40px] opacity-90 transform -rotate-[20deg] z-30 pointer-events-none tracking-tighter" style={{ fontFamily: "'Brush Script MT', cursive" }}>
-                        Christian Sewing
+                        MR. CARSTEN LEWERENZ
                      </div>
                   </div>
                </div>
