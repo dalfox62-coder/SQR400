@@ -521,7 +521,7 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
 
                   {/* Signatures Image */}
                   <div className="w-full relative flex justify-center mt-2 mb-2 z-30 opacity-90">
-                     <img src="/images/page4_stamps.png" alt="Signatures and Stamps" className="w-[95%] object-contain mix-blend-multiply" />
+                     <img src="/images/page4_stamps_v2.png" alt="Signatures and Stamps" className="w-[95%] object-contain mix-blend-multiply" />
                   </div>
                </div>
             </div>
