@@ -519,73 +519,9 @@ ${transaction.remittanceInfo.split('\n').map(line => `/ ${line}`).join('\n')}
                      </table>
                   </div>
 
-                  {/* Signatures using Absolute Positioning based on Table Columns for perfect alignment */}
-                  <div className="w-full relative h-40 mt-4 z-30">
-                     
-                     {/* Circular Stamp (Centered around 16% width, under Date & Prev Balance) */}
-                     <div className="absolute left-[16%] top-2 opacity-85 -translate-x-1/2">
-                        <svg viewBox="0 0 100 100" className="w-[125px] h-[125px] -rotate-[10deg]">
-                           <path id="circlePath4" d="M 10, 50 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="none" />
-                           <text className="text-[10px] font-bold font-sans fill-[#0018a8] tracking-widest">
-                              <textPath href="#circlePath4" startOffset="10%">DEUTSCHE BANK AG</textPath>
-                           </text>
-                           <text className="text-[10px] font-bold font-sans fill-[#0018a8] tracking-widest">
-                              <textPath href="#circlePath4" startOffset="55%">FRANKFURT AM MAIN</textPath>
-                           </text>
-                           <circle cx="50" cy="50" r="48" fill="none" stroke="#0018a8" strokeWidth="1.5" />
-                           <circle cx="50" cy="50" r="32" fill="none" stroke="#0018a8" strokeWidth="0.5" />
-                        </svg>
-                        <div className="w-7 h-7 border-[1.5px] border-[#0018a8] absolute top-[48.5px] left-[48.5px] p-[1px] bg-transparent">
-                           <div className="w-full h-full border border-[#0018a8] relative overflow-hidden">
-                              <div className="w-[140%] h-[1.5px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-0 left-0"></div>
-                           </div>
-                        </div>
-                     </div>
-
-                     {/* James Signature (Overlapping Stamp) */}
-                     <div className="text-[34px] text-[#0018a8] absolute left-[15%] top-0 -translate-x-1/2 -rotate-[15deg] whitespace-nowrap z-40" style={{ fontFamily: "'Brush Script MT', cursive" }}>
-                        James
-                     </div>
-
-                     {/* James Printed Text (To the right of the stamp, starting at 24% width) */}
-                     <div className="absolute left-[24%] top-14 text-[9.5px] font-bold leading-[1.3] text-[#0018a8] text-left z-20">
-                        JAMES VON MOLTKE(78414M)<br />
-                        MANAGING DIRECTOR<br />
-                        FOR AND BEHALF<br />
-                        DEUTSCHE BANK AG
-                     </div>
-
-                     {/* Rectangular Stamp (Centered around 56% width, under Authority) */}
-                     <div className="absolute left-[56%] top-6 opacity-85 -translate-x-1/2 z-10">
-                        <div className="border-[2px] border-[#0018a8] p-1.5 text-[8px] text-[#0018a8] font-normal leading-tight w-[260px] bg-[#e8edf2] print-bg">
-                           TAUNUSANLAGE 12, 60325 FRANKFURT AM MAIN, GERMANY<br />
-                           <div className="flex justify-between items-center mt-1 border-t border-[#0018a8] pt-1">
-                              <span className="font-bold text-sm">Deutsche Bank</span>
-                              <div className="w-5 h-5 border border-[#0018a8] p-[1.5px]">
-                                 <div className="w-full h-full bg-[#0018a8] border border-[#0018a8] relative print-bg">
-                                    <div className="w-[140%] h-[1.5px] bg-white origin-bottom-left -rotate-45 absolute bottom-0.5 left-0 print-bg"></div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div className="flex justify-between text-[6px] mt-1 border-t border-[#0018a8] pt-0.5">
-                              <span>Tel: +49 69 910-00</span>
-                              <span>Fax: +49 69 910-34 225</span>
-                           </div>
-                        </div>
-                     </div>
-
-                     {/* Christian Sewing Signature (Overlapping Printed Text) */}
-                     <div className="text-[32px] text-[#0018a8] absolute left-[77%] top-0 -translate-x-1/2 -rotate-[18deg] whitespace-nowrap z-40" style={{ fontFamily: "'Brush Script MT', cursive" }}>
-                        Christian Sewing
-                     </div>
-
-                     {/* Christian Sewing Printed Text (To the right of the stamp, starting at 70% width) */}
-                     <div className="absolute left-[70%] top-12 text-[10px] font-bold leading-[1.3] text-[#0018a8] text-left z-20">
-                        MR. CHRISTIAN SEWING (9089)<br />
-                        FOR AND ON BEHALF OF<br />
-                        DEUTSCHE BANK AG
-                     </div>
-                     
+                  {/* Signatures Image */}
+                  <div className="w-full relative flex justify-center mt-2 mb-2 z-30 opacity-90">
+                     <img src="/images/page4_stamps.png" alt="Signatures and Stamps" className="w-[95%] object-contain mix-blend-multiply" />
                   </div>
                </div>
             </div>
