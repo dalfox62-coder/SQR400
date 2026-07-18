@@ -51,7 +51,7 @@ ${isPage2 ? "          INSTANT TYPE, AND TRANSMISSION" : "----------------------
 / BANK NAME: ${beneficiary.bankName}
 / BANK ADDRESS: ${beneficiary.address}
 / ACCOUNT NAME: ${beneficiary.accountName}
-/ ACCOUNT/SORT NUMBER: ${beneficiary.accountNumber}
+/ ACCOUNT/SORT NUMBER: ${beneficiary.bankCode ? beneficiary.bankCode + beneficiary.accountNumber : beneficiary.accountNumber}
 / Session Number: ${transaction.sessionNumber}
 / Message Number: ${transaction.messageNumber}
 ${isPage2 ? "" : "-------------------------------------MESSAGE TEXT-------------------------"}
@@ -79,7 +79,7 @@ ${isPage2 ? "" : "-------------------------------------MESSAGE TEXT-------------
 / ${beneficiary.bankName}
 / ${beneficiary.address}
 :59: Beneficiary Customer
-/ ${beneficiary.accountNumber}
+/ ${beneficiary.bankCode ? beneficiary.bankCode + beneficiary.accountNumber : beneficiary.accountNumber}
 / ${beneficiary.accountName}
 :70: Remittance Information
 ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
@@ -297,7 +297,7 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
                            References: {beneficiary.swiftCode}<br />
                            Receiver: {beneficiary.accountName}<br />
                            {beneficiary.bankName}<br />
-                           Account No.: {beneficiary.accountNumber}
+                           Account No.: {beneficiary.bankCode ? beneficiary.bankCode + beneficiary.accountNumber : beneficiary.accountNumber}
                         </div>
                      </div>
 
@@ -501,7 +501,7 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
                               <td className="py-2 px-4 text-left text-[10px] leading-tight w-[30%]">
                                  Bank Name: {beneficiary.bankName}<br />
                                  Account name: {beneficiary.accountName}<br />
-                                 Account number: {beneficiary.accountNumber}<br />
+                                 Account number: {beneficiary.bankCode ? beneficiary.bankCode + beneficiary.accountNumber : beneficiary.accountNumber}<br />
                                  SWIFT CODE: {beneficiary.swiftCode}
                               </td>
                            </tr>
@@ -608,7 +608,7 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
                            {beneficiary.bankName}<br /><br />
                            Address {beneficiary.address}<br /><br />
                            SWIFT: {beneficiary.swiftCode}<br /><br />
-                           ACCOUNT NUMBER: {beneficiary.accountNumber}
+                           ACCOUNT NUMBER: {beneficiary.bankCode ? beneficiary.bankCode + beneficiary.accountNumber : beneficiary.accountNumber}
                         </div>
                      </div>
 

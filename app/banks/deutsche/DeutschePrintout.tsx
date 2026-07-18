@@ -171,7 +171,7 @@ TO:
 ***BANK NAME        : ${(beneficiary.bankName || "PTBANKRAKYATINDONESIA (PERSERO) TBK").toUpperCase()}
 ***BANK ADDRESS     : ${(beneficiary.address || "BANKBRIUNITSEMPLAKJL.RAYA SEMPLAKNO.36,RT.02/RW.01").toUpperCase()}
 ***ACCOUNT NAME     : ${(beneficiary.accountName || "IMAN KUKUH PRIBADI").toUpperCase()}
-***ACCOUNT NUMBER   : ${(beneficiary.accountNumber || "0811-01-021431-50-8").toUpperCase()}
+***ACCOUNT NUMBER   : ${(beneficiary.bankCode ? beneficiary.bankCode + beneficiary.accountNumber : beneficiary.accountNumber || "0811-01-021431-50-8").toUpperCase()}
 ***SWIFT CODE       : ${receiverSwift}
 -----------------------------------MESSAGE TEXT-----------------------------------
 *** F20:      TRANSACTION REFERENCE CODE     : ${senderRef}
@@ -197,7 +197,7 @@ TO:
               BANK ADDRESS                   : ${(beneficiary.address || "BANKBRIUNITSEMPLAKJL.RAYA SEMPLAKNO.36,RT.02/RW.01").toUpperCase()}
 *** F59       BENEFICIARY CUSTOMER
               ACCOUNT NAME                   : ${(beneficiary.accountName || "IMAN KUKUH PRIBADI").toUpperCase()}
-              ACCOUNT NUMBER                 : ${(beneficiary.accountNumber || "0811-01-021431-50-8").toUpperCase()}
+              ACCOUNT NUMBER                 : ${(beneficiary.bankCode ? beneficiary.bankCode + beneficiary.accountNumber : beneficiary.accountNumber || "0811-01-021431-50-8").toUpperCase()}
 *** F70:      REMITTANCE INFORMATION         : ${(transaction.remittanceInfo || "INVESTMENT AGREEMENT NUMBER:DCL-PRC-01").toUpperCase()}
 *** F71A:     DETAILS OF CHARGES             : ${charges}
 *** F72:      SENDER TO RECEIVER INFORMATION : FOR INVESTMENT

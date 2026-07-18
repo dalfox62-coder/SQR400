@@ -6,7 +6,7 @@ const DeutscheForm = ({ onSubmit, initialData = {} as any }: any) => {
   const [formData, setFormData] = useState({
     institution: {
       swiftCode: initialData.institution?.swiftCode || "DEUTDEFF9925",
-      accountNumber: initialData.institution?.accountNumber || "0359752300",
+      accountNumber: initialData.institution?.accountNumber || "DE07370700600359752300",
       accountName: initialData.institution?.accountName || "DEUTSCHE TRADING GMBH",
       bankName: initialData.institution?.bankName || "DEUTSCHE BANK AG",
       address: initialData.institution?.address || "DEUTSCHE BANK A.G. TAUNUSANLAFE 12, FERANKURT AM MAIN 60254 FERNKFURT GERMANY",
@@ -25,7 +25,8 @@ const DeutscheForm = ({ onSubmit, initialData = {} as any }: any) => {
     },
     beneficiary: {
       swiftCode: initialData.beneficiary?.swiftCode || "BNINIDJAXXX",
-      accountNumber: initialData.beneficiary?.accountNumber || "DE07370700600359752300",
+      bankCode: initialData.beneficiary?.bankCode || "",
+      accountNumber: initialData.beneficiary?.accountNumber || "0359752300",
       accountName: initialData.beneficiary?.accountName || "PT DEUTSCHE BENEFICIARY INDO",
       bankName: initialData.beneficiary?.bankName || "PT BANK NEGARA INDONESIA TBK",
       address: initialData.beneficiary?.address || "KCU KEDIRI, JL. BRAWIJAYA NO. 17, JAWA TIMUR",
@@ -166,6 +167,16 @@ const DeutscheForm = ({ onSubmit, initialData = {} as any }: any) => {
               value={formData.beneficiary.accountName}
               onChange={(e) => handleChange("beneficiary", "accountName", e.target.value)}
               required
+            />
+          </div>
+          <div>
+            <label className={labelClass}>Bank Code</label>
+            <input
+              type="text"
+              className={inputClass}
+              value={formData.beneficiary.bankCode}
+              onChange={(e) => handleChange("beneficiary", "bankCode", e.target.value)}
+              placeholder="e.g. 37070060"
             />
           </div>
           <div>
