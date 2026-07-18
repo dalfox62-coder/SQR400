@@ -41,8 +41,8 @@ ${isPage2 ? "          INSTANT TYPE, AND TRANSMISSION" : "----------------------
 / Document History: ${meta.documentHistory}
 / Post Date: ${postDateFormatted} ${postTime}
 / Message Type/Type: MT103 CASH WIRE TRANSFER
-/ Message Reference: ${transaction.senderReference}
-/ SENDER: ${institution.swiftCode}
+/ Message Reference: 20230413${institution.swiftCode}20230413
+/ SENDER: ${institution.swiftCode?.substring(0, 8)}
 / BANK NAME: ${institution.bankName}
 / BANK ADDRESS: ${institution.address}
 / BANK ACCOUNT NAME: ${institution.accountName}
