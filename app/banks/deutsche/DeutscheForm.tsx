@@ -5,15 +5,15 @@ import { useState } from "react";
 const DeutscheForm = ({ onSubmit, initialData = {} as any }: any) => {
   const [formData, setFormData] = useState({
     institution: {
-      swiftCode: initialData.institution?.swiftCode || "DEUTDEBB",
+      swiftCode: initialData.institution?.swiftCode || "DEUTDEFF9925",
       accountNumber: initialData.institution?.accountNumber || "DE1234567890123456",
       accountName: initialData.institution?.accountName || "DEUTSCHE TRADING GMBH",
       bankName: initialData.institution?.bankName || "DEUTSCHE BANK AG",
       address: initialData.institution?.address || "OTTE SUHR ALLEE 6-16, 108833, BERLIN, GERMANY",
     },
     transaction: {
-      senderReference: initialData.transaction?.senderReference || "DEUT587069248914",
-      transactionCode: initialData.transaction?.transactionCode || "DEUTDEBB248914",
+      senderReference: initialData.transaction?.senderReference || "DEUTDEFF992541320116 ",
+      transactionCode: initialData.transaction?.transactionCode || "DEUTDEFF992541320116",
       bankOperationCode: initialData.transaction?.bankOperationCode || "CRED",
       valueDate: initialData.transaction?.valueDate || "2024-10-25",
       transactionTime: initialData.transaction?.transactionTime || "19:17:41",
@@ -32,7 +32,7 @@ const DeutscheForm = ({ onSubmit, initialData = {} as any }: any) => {
     },
     sender: {
       bankName: initialData.sender?.bankName || "DEUTSCHE BANK",
-      senderServer: initialData.sender?.senderServer || "DEUTDEBBXXX",
+      senderServer: initialData.sender?.senderServer || "DEUTDEFF9925",
       instrument: initialData.sender?.instrument || "MT103",
     },
   });

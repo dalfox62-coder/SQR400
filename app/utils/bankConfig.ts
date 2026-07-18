@@ -44,7 +44,7 @@ export const bankConfigs = {
   deutsche_v2: {
     id: "deutsche_v2",
     name: "Deutsche Bank V2",
-    code: "DEUTDEFFXXX",
+    code: "DEUTDEFF9925",
     logo: "/logos/deutsche.png",
     bankFullName: "DEUTSCHE BANK AG",
     address: "TAUNUSANLAGE 12, 60325 FRANKFURT AM MAIN GERMANY",
