@@ -21,7 +21,7 @@ const DeutscheFormV2 = ({ onSubmit, initialData = {} as any }: any) => {
       currency: initialData.transaction?.currency || "EUR",
       amount: initialData.transaction?.amount || "1500000001456.00",
       instructedAmount: initialData.transaction?.instructedAmount || "1500000001456.00",
-      remittanceInfo: initialData.transaction?.remittanceInfo || "INVESTMENT PAYMENT UNDER AGREEMENT NO. DCL-PRC-0625\nAGREEMENT DATE: JUNE 06, 2025",
+      remittanceInfo: initialData.transaction?.remittanceInfo || "INVOICE SETTLEMENT",
       charges: initialData.transaction?.charges || "OUR",
       senderCharges: initialData.transaction?.senderCharges || "940.00",
       swiftFee: initialData.transaction?.swiftFee || "926.62",

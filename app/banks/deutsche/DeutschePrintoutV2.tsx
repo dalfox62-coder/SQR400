@@ -33,9 +33,24 @@ const DeutschePrintoutV2 = ({ data, onBack, isPublic = false }: { data: any, onB
    const postDateFormatted = transaction.valueDate ? new Date(transaction.valueDate).toLocaleDateString("en-GB").replace(/\//g, ".") : "30.06.2025";
    const postTime = transaction.postTime || "11:49:54";
 
+   
+   const topHeaderDate = transaction.valueDate 
+      ? new Date(transaction.valueDate).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }).toUpperCase() 
+      : "MONDAY, JUNE 30, 2025";
+   
+   const acksDateStr = transaction.valueDate
+      ? (() => {
+           const d = new Date(transaction.valueDate);
+           const day = String(d.getDate()).padStart(2, '0');
+           const month = String(d.getMonth() + 1).padStart(2, '0');
+           const year = d.getFullYear();
+           return `${day}${month}-${year}`;
+        })()
+      : "3006-2025";
+
    const generateMT103Text = (isPage2 = false) => {
-      return `MONDAY, JUNE 30, 2025 11:49:54
-INTERNATIONAL SWIFT MT103 ACKS-3006-2025-1 CUSTOMER'S COPY ${institution.address}
+      return `${topHeaderDate} ${postTime}
+INTERNATIONAL SWIFT MT103 ACKS-${acksDateStr}-1 CUSTOMER'S COPY ${institution.address}
 ${isPage2 ? "          INSTANT TYPE, AND TRANSMISSION" : "-------------------------------INSTANT TYPE, AND TRANSMISSION"}
 / User: ${meta.user}
 / Document History: ${meta.documentHistory}
@@ -67,7 +82,7 @@ ${isPage2 ? "" : "-------------------------------------MESSAGE TEXT-------------
 / ${formatNumber(transaction.amount)}
 :33B: Currency/Instructed Amount
 / ${transaction.currency}
-/ ${formatNumber(transaction.instructedAmount)}
+/ ${formatNumber(transaction.amount)}
 :50F: Ordering Customer-Name & Address
 0/ ${institution.accountNumber}
 1/ ${institution.accountName}
@@ -281,7 +296,7 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
                            <div className="text-xs font-bold -mt-2 bg-[#ffffff] print-bg inline-block px-1 ml-2">GBS Screen</div>
                            <div className="border border-black p-2 mt-[-10px] text-[13px] font-sans pt-3 flex gap-4 h-[50px] items-center whitespace-nowrap">
                               <span>Indicator: MAT3D</span>
-                              <span>Date 30.06.2025</span>
+                              <span>Date {postDateFormatted}</span>
                            </div>
                         </div>
                      </div>
