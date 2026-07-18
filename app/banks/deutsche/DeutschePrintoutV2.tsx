@@ -423,7 +423,7 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
                         {/* Stamp Overlay */}
                         <div className="absolute top-[30px] -right-[45px] w-[340px] h-[140px] border-[3px] border-[#0018a8] text-[#0018a8] -rotate-[16deg] flex flex-col justify-center items-center opacity-85 p-2 print-bg z-20">
                            <div className="text-[10px] font-sans font-bold leading-tight text-center">
-                              TAUNUSANLAFE 12, POSTCODE 60262 FRANKFURT AM MAIN, GERMANY
+                              {institution.address}
                            </div>
                            <div className="w-full border-b border-[#0018a8] my-1"></div>
                            <div className="flex items-center gap-4 py-1">
@@ -595,7 +595,7 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
                      </div>
                      <div className="text-right text-[10px] mr-24">
                         <div className="font-bold">Deutsche Bank AG</div>
-                        <div className="mt-1">Taunusalange 12, 60325 Frankfurt am Main</div>
+                        <div className="mt-1">{institution.address || "DEUTSCHE BANK A.G. TAUNUSANLAFE 12, FERANKURT AM MAIN 60254 FERNKFURT GERMANY"}</div>
                      </div>
                   </div>
 
