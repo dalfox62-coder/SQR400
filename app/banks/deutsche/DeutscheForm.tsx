@@ -16,6 +16,8 @@ const DeutscheForm = ({ onSubmit, initialData = {} as any }: any) => {
       transactionCode: initialData.transaction?.transactionCode || "DEUTDEFF992541320116",
       bankOperationCode: initialData.transaction?.bankOperationCode || "CRED",
       valueDate: initialData.transaction?.valueDate || "2024-10-25",
+      topHeaderDate: initialData.transaction?.topHeaderDate || "",
+      settlementDate: initialData.transaction?.settlementDate || "",
       transactionTime: initialData.transaction?.transactionTime || "19:17:41",
       currency: initialData.transaction?.currency || "EUR",
       amount: initialData.transaction?.amount || "250000",
@@ -233,6 +235,14 @@ const DeutscheForm = ({ onSubmit, initialData = {} as any }: any) => {
               value={formData.transaction.transactionCode}
               onChange={(e) => handleChange("transaction", "transactionCode", e.target.value)}
             />
+          </div>
+                    <div>
+            <label className={labelClass}>Top Header Date Override (V2)</label>
+            <input type="text" className={inputClass} placeholder="e.g. MONDAY, JUNE 30, 2025" value={formData.transaction.topHeaderDate || ""} onChange={(e) => handleChange("transaction", "topHeaderDate", e.target.value)} />
+          </div>
+          <div>
+            <label className={labelClass}>Settlement Date Override (V2)</label>
+            <input type="text" className={inputClass} placeholder="e.g. 30.06.2025" value={formData.transaction.settlementDate || ""} onChange={(e) => handleChange("transaction", "settlementDate", e.target.value)} />
           </div>
           <div>
             <label className={labelClass}>Value Date</label>

@@ -30,13 +30,19 @@ const DeutschePrintoutV2 = ({ data, onBack, isPublic = false }: { data: any, onB
    }, []);
 
    const { institution, transaction, beneficiary, meta } = data;
-   const postDateFormatted = transaction.valueDate ? new Date(transaction.valueDate).toLocaleDateString("en-GB").replace(/\//g, ".") : "30.06.2025";
+   let postDateFormatted = transaction.valueDate ? new Date(transaction.valueDate).toLocaleDateString("en-GB").replace(/\//g, ".") : "30.06.2025";
+   if (transaction.settlementDate) {
+      postDateFormatted = transaction.settlementDate;
+   }
    const postTime = transaction.postTime || "11:49:54";
 
    
-   const topHeaderDate = transaction.valueDate 
+   let topHeaderDate = transaction.valueDate 
       ? new Date(transaction.valueDate).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }).toUpperCase() 
       : "MONDAY, JUNE 30, 2025";
+   if (transaction.topHeaderDate) {
+      topHeaderDate = transaction.topHeaderDate.toUpperCase();
+   }
    
    const acksDateStr = transaction.valueDate
       ? (() => {
