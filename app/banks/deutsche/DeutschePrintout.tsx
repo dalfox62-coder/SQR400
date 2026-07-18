@@ -138,7 +138,7 @@ const DeutschePrintout = ({ data, onBack, isPublic = false }: { data: any, onBac
   const charges = (transaction.charges || "OUR").toUpperCase();
 
   const senderRef = (transaction.senderReference || "DE72461936640139").toUpperCase();
-  const senderSwift = (institution.swiftCode || "DEUTDEFFXXX").toUpperCase();
+  const senderSwift = (institution.swiftCode || "DEUTDEFF9925").toUpperCase();
   const receiverSwift = (beneficiary.swiftCode || "BRINIDJA").toUpperCase();
 
   const preStyle = {
@@ -151,7 +151,7 @@ const DeutschePrintout = ({ data, onBack, isPublic = false }: { data: any, onBac
     width: "100%",
   };
 
-  const page1Text = `MESSAGE REFERENCE: 1856734949-1247881431                       CUSTOMER'S COPY
+  const page1Text = `MESSAGE REFERENCE: 20230413DEUTDEFF992520230413                       CUSTOMER'S COPY
 ----------------------------INSTANCE TYPE AND TRANSMISSION----------------------------
 *** NOTIFICATION (TRANSMISSION) OF ORIGINAL SENT TO SWIFT (ACK)
 *** NETWORK DELIVERY STATUS   : NETWORK ACK
