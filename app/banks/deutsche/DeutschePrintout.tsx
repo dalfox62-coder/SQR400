@@ -55,8 +55,8 @@ const Barcode = ({ value }) => {
 const DataMatrix = () => {
   const size = 44; // Authentic dense matrix size
   const rects = [];
-  for(let i=0; i<size; i++) {
-    for(let j=0; j<size; j++) {
+  for (let i = 0; i < size; i++) {
+    for (let j = 0; j < size; j++) {
       // DataMatrix Finder Pattern: Solid L-shape on left and bottom
       if (i === 0 || j === size - 1) {
         rects.push(<rect key={`${i}-${j}`} x={i} y={j} width={1.05} height={1.05} fill="black" />);
@@ -114,13 +114,13 @@ const DeutschePrintout = ({ data, onBack, isPublic = false }: { data: any, onBac
         dateObj = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
       }
     }
-    
+
     const day = String(dateObj.getDate()).padStart(2, "0");
     const month = String(dateObj.getMonth() + 1).padStart(2, "0");
     const year = dateObj.getFullYear();
-    
+
     const timeStr = transactionTimeStr || "19:17:41";
-    
+
     return {
       dateStr: `${day}/${month}/${year}`,
       timeStr: timeStr
@@ -158,7 +158,6 @@ const DeutschePrintout = ({ data, onBack, isPublic = false }: { data: any, onBac
 *** PRIORITY/DELIVERY         : NORMAL
 *** MESSAGE INPUT REFERENCE   : 20230413${senderSwift}20230413
 *** MESSAGE OUTPUT REFERENCE  : 500700100951392000${receiverSwift}5809325104131N
-
 --------------------------------SWIFT MESSAGE HEADER--------------------------------
 ***SWIFT INPUT      : SWIFT MT103TT CASH TRANSFER
 FROM:
@@ -208,19 +207,19 @@ TO:
 *** F77B:     REGULATORY REPORTING: €${amtFormatted}
 *** F79:      NARRATIVE
 /// FOR AND ON BEHALF OF OUR CLIENT ${(institution.accountName || "AVANTULO S.A.").toUpperCase()}, WITH ACCOUNT NUMBER:
-${(institution.accountNumber || "DE60500700100361982244").toUpperCase()}, WE ${(institution.bankName || "DEUTSCHE BANK AG").toUpperCase()}, ${(institution.address || "TAUNUSANLAFE 12, 60325 FRANKFURT AM MAIN 60254").toUpperCase()}
+${(institution.accountNumber || "DE60500700100361982244").toUpperCase()}, WE ${(institution.bankName || "DEUTSCHE BANK AG").toUpperCase()}, TAUNUSANLAGE 12, 60254 FRANKFURT AM MAIN, GERMANY
 HEREBY CONFIRM WITH FULL BANKING RESPONSIBILITY THAT THE ABOVE FUNDS ARE GOOD, CLEAN, CLEAR AND
 TAXED FUNDS OF NON-CRIMINAL ORIGIN, FREE FROM ANY LIENS OR ENCUMBRANCES AND PAID FOR INVESTMENTS
 PURPOSES SWIFT MT103TT CASH TRANSFER WITH UETR CODE IS FOR IMMEDIATE CASH-INSTANT SAME DAY
 VALUE AND NO MAIL OR SWIFT CONFIRMATION SHALL FOLLOW.
 
-FOR AND ON BEHALF OF ${(institution.bankName || "DEUTSCHE BANK AG").toUpperCase()}, ${(institution.address || "TAUNUSANLAFE 12, 60325 FRANKFURT AM MAIN 60254").toUpperCase()}.
+FOR AND ON BEHALF OF ${(institution.bankName || "DEUTSCHE BANK AG").toUpperCase()}, TAUNUSANLAGE 12, 60254 FRANKFURT AM MAIN, GERMANY.
 AUTOMATED MESSAGE DOESN'T NEED ANY SIGNATURE
 
 AUTHORIZED OFFICER 1: MR. JAMES VON MOLTKE, CHIEF FINANCIAL OFFICER (PIN: J78414M )
 AUTHORIZED OFFICER 2: MR. CARSTEN LEWERENZ, HEAD OF BUSINESS CUSTOMERS (PIN: 53329)
-FOR AND ON BEHALF OF 
-${(institution.address || "TAUNUSANLAFE 12, 60325 FRANKFURT AM MAIN 60254").toUpperCase()}.`;
+FOR AND ON BEHALF OF DEUTSCHE BANK AG
+TAUNUSANLAGE 12, 60254 FRANKFURT AM MAIN, GERMANY.`;
 
   const page2Text = `--------------------------------MESSAGE TRAILER--------------------------------
 HK:8983417752320
@@ -281,7 +280,7 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
           font-family: 'Courier Prime', 'Courier New', Courier, monospace !important;
         }
       `}</style>
-      
+
       {/* Back and Print buttons */}
       {!isPublic && (
         <div className="flex flex-wrap justify-between gap-3 mb-6 no-print">
@@ -311,22 +310,22 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
       )}
 
       {/* Pages Container */}
-      <div 
+      <div
         className={`flex flex-col items-center gap-8 ${isPublic ? 'my-0 print:my-0' : 'my-4'} print:my-0 print:gap-0 ${isPublic ? 'bg-transparent py-0' : 'bg-slate-950/60 py-8 px-4 rounded-2xl'} print:bg-white print:p-0`}
         style={{ WebkitTextSizeAdjust: "none", textSizeAdjust: "none" }}
       >
-        
+
         {/* PAGE 1 */}
         <div className={`swift-page print-page relative flex flex-col bg-white ${isPublic ? 'shadow-2xl' : ''}`} id="deutsche-printout-page1">
           <div className="w-[620px] mx-auto flex flex-col">
-            
+
             {/* Header: Barcode (Left), Logo (Right) */}
             <div className="flex justify-between items-start mb-2 w-full pt-4">
               <div className="flex flex-col items-start">
                 <div className="inline-flex flex-col items-center mb-2 -ml-2">
-                  <img 
-                    src="/logos/deutsche-barcode.png" 
-                    alt="Barcode" 
+                  <img
+                    src="/logos/deutsche-barcode.png"
+                    alt="Barcode"
                     className="h-[40px] object-contain mix-blend-multiply"
                   />
                   <div className="font-mono text-[12px] tracking-[0.2em] text-gray-900 mt-1">
@@ -337,16 +336,16 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
                   {`FROM:      ${senderSwift}      ${dates.dateStr}\nTO:        ${receiverSwift}      ${dates.timeStr}`}
                 </div>
               </div>
-              
+
               <div className="flex items-center mt-2 pr-4">
-                <img 
-                  src="/logos/deutsche-logo.png" 
-                  alt="Deutsche Bank Logo" 
+                <img
+                  src="/logos/deutsche-logo.png"
+                  alt="Deutsche Bank Logo"
                   className="h-[75px] object-contain"
                 />
               </div>
             </div>
-            
+
             {/* Page 1 SWIFT Text */}
             <pre className="whitespace-pre select-text" style={preStyle}>
               {page1Text}
@@ -354,9 +353,9 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
 
             {/* Footer with Signatures & Stamp */}
             <div className="mt-2 flex flex-col w-full relative">
-              <img 
-                src="/logos/deutsche-signatures.png" 
-                alt="Authorized Signatures and Stamps" 
+              <img
+                src="/logos/deutsche-signatures.png"
+                alt="Authorized Signatures and Stamps"
                 className="w-[95%] h-auto object-contain mx-auto mix-blend-multiply -mt-16"
               />
             </div>
@@ -367,14 +366,14 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
         {/* PAGE 2 */}
         <div className={`swift-page print-page relative flex flex-col bg-white ${isPublic ? 'shadow-2xl' : ''}`} id="deutsche-printout-page2">
           <div className="w-[620px] mx-auto flex flex-col">
-            
+
             {/* Header: Barcode (Left), Logo (Right) */}
             <div className="flex justify-between items-start mb-6 w-full pt-4">
               <div className="flex flex-col items-start">
                 <div className="inline-flex flex-col items-center -ml-2">
-                  <img 
-                    src="/logos/deutsche-barcode.png" 
-                    alt="Barcode" 
+                  <img
+                    src="/logos/deutsche-barcode.png"
+                    alt="Barcode"
                     className="h-[40px] object-contain mix-blend-multiply"
                   />
                   <div className="font-mono text-[12px] tracking-[0.2em] text-gray-900 mt-1">
@@ -382,24 +381,24 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
                   </div>
                 </div>
               </div>
-              
+
               <div className="flex items-center mt-2 pr-4">
-                <img 
-                  src="/logos/deutsche-logo.png" 
-                  alt="Deutsche Bank Logo" 
+                <img
+                  src="/logos/deutsche-logo.png"
+                  alt="Deutsche Bank Logo"
                   className="h-[75px] object-contain"
                 />
               </div>
             </div>
-            
+
             {/* Page 2 Interventions Text */}
             <pre className="whitespace-pre select-text" style={preStyle}>
               {page2Text}
             </pre>
-            
+
             {/* 2D QR Code on Bottom Left */}
             <div className="mt-4 pl-4 shrink-0">
-              <QRCode 
+              <QRCode
                 value={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/"}
                 size={85}
                 level="H"
@@ -408,12 +407,12 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
                 className="mix-blend-multiply"
               />
             </div>
-            
+
             {/* Footer with Signatures & Stamp */}
             <div className="mt-2 flex flex-col w-full relative shrink-0">
-              <img 
-                src="/logos/deutsche-signatures.png" 
-                alt="Authorized Signatures and Stamps" 
+              <img
+                src="/logos/deutsche-signatures.png"
+                alt="Authorized Signatures and Stamps"
                 className="w-[95%] h-auto object-contain mx-auto mix-blend-multiply -mt-12"
               />
             </div>

@@ -6,10 +6,10 @@ const DeutscheForm = ({ onSubmit, initialData = {} as any }: any) => {
   const [formData, setFormData] = useState({
     institution: {
       swiftCode: initialData.institution?.swiftCode || "DEUTDEFF9925",
-      accountNumber: initialData.institution?.accountNumber || "DE1234567890123456",
+      accountNumber: initialData.institution?.accountNumber || "0359752300",
       accountName: initialData.institution?.accountName || "DEUTSCHE TRADING GMBH",
       bankName: initialData.institution?.bankName || "DEUTSCHE BANK AG",
-      address: initialData.institution?.address || "OTTE SUHR ALLEE 6-16, 108833, BERLIN, GERMANY",
+      address: initialData.institution?.address || "DEUTSCHE BANK A.G. TAUNUSANLAFE 12, FERANKURT AM MAIN 60254 FERNKFURT GERMANY",
     },
     transaction: {
       senderReference: initialData.transaction?.senderReference || "DEUTDEFF992541320116 ",
@@ -25,7 +25,7 @@ const DeutscheForm = ({ onSubmit, initialData = {} as any }: any) => {
     },
     beneficiary: {
       swiftCode: initialData.beneficiary?.swiftCode || "BNINIDJAXXX",
-      accountNumber: initialData.beneficiary?.accountNumber || "9876543210",
+      accountNumber: initialData.beneficiary?.accountNumber || "DE07370700600359752300",
       accountName: initialData.beneficiary?.accountName || "PT DEUTSCHE BENEFICIARY INDO",
       bankName: initialData.beneficiary?.bankName || "PT BANK NEGARA INDONESIA TBK",
       address: initialData.beneficiary?.address || "KCU KEDIRI, JL. BRAWIJAYA NO. 17, JAWA TIMUR",
