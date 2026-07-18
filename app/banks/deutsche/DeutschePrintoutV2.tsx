@@ -499,7 +499,7 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
                         {/* Stamp Overlay */}
                         <div className="absolute top-[30px] -right-[45px] w-[340px] h-[140px] border-[3px] border-[#0018a8] text-[#0018a8] -rotate-[16deg] flex flex-col justify-center items-center opacity-85 p-2 print-bg z-20">
                            <div className="text-[10px] font-sans font-bold leading-tight text-center">
-                              TAUNUSANLAGE 12, POSTCODE 60262 FRANKFURT AM MAIN, GERMANY
+                              TAUNUSANLAFE 12, POSTCODE 60262 FRANKFURT AM MAIN, GERMANY
                            </div>
                            <div className="w-full border-b border-[#0018a8] my-1"></div>
                            <div className="flex items-center gap-4 py-1">
