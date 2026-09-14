@@ -13,6 +13,7 @@ const DeutscheFormV2 = ({ onSubmit, initialData = {} as any }: any) => {
       signatory: initialData.institution?.signatory || "MR. OBUCHOWICZ RYSZARD ANDRZEJ",
     },
     transaction: {
+      messageReference: initialData.transaction?.messageReference || "20230413DEUTDEFF992520230413",
       senderReference: initialData.transaction?.senderReference || "DEUTDEFF25300611495414461835",
       transactionCode: initialData.transaction?.transactionCode || "DEUT690754321567098723456",
       bankOperationCode: initialData.transaction?.bankOperationCode || "CASH",
@@ -158,6 +159,10 @@ const DeutscheFormV2 = ({ onSubmit, initialData = {} as any }: any) => {
           <span>📝</span> TRANSACTION & BALANCES
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className={labelClass}>Message Reference</label>
+            <input type="text" className={inputClass} value={formData.transaction.messageReference} onChange={(e) => handleChange("transaction", "messageReference", e.target.value)} />
+          </div>
           <div>
             <label className={labelClass}>Sender Reference</label>
             <input type="text" className={inputClass} value={formData.transaction.senderReference} onChange={(e) => handleChange("transaction", "senderReference", e.target.value)} />
