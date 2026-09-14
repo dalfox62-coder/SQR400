@@ -53,7 +53,7 @@ const CISPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
         <div className={`w-[210mm] max-w-[210mm] mx-auto bg-white p-[15mm] text-black ${isPublic ? 'shadow-2xl' : 'shadow-2xl'} print:shadow-none print:p-0 relative font-sans text-sm print-page`} style={{ fontFamily: "Arial, sans-serif" }}>
         
         {/* Title */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-6">
           <h1 className="text-2xl font-bold tracking-wide">CLIENT INFORMATION SHEET</h1>
         </div>
 
@@ -63,7 +63,7 @@ const CISPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
         </div>
 
         {/* Table */}
-        <table className="w-full border-collapse border border-black mb-8 text-[13.5px]">
+        <table className="w-full border-collapse border border-black mb-6 text-[13.5px]">
           <tbody>
             <tr className="border-b border-black">
               <td className="w-1/3 border-r border-black py-2 px-3">Company Name:</td>
@@ -137,16 +137,16 @@ const CISPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
         </table>
 
         {/* Oath */}
-        <div className="mb-6 text-[14px]">
+        <div className="mb-4 text-[14px]">
           I, {company.representedBy}, hereby swear under penalty of perjury, that the information provided herein is accurate and true as of this date: <span className="text-blue-700">{meta.oathDate}</span>
         </div>
 
         {/* Signature Section */}
-        <div className="mb-4 text-[14px]">
+        <div className="mb-2 text-[14px]">
           For and on behalf of {company.companyName}:
         </div>
 
-        <div className="mb-8 mt-4 relative w-[350px] h-[150px]">
+        <div className="mb-4 mt-2 relative w-[350px] h-[130px]">
           <Image 
             src="/pat-signature.jpeg" 
             alt="Signature and Stamp" 
@@ -156,7 +156,7 @@ const CISPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
           />
         </div>
 
-        <div className="mt-8 text-[14px]">
+        <div className="mt-4 text-[14px]">
           <div className="flex mb-3">
             <span className="mr-2">Signature:</span>
             <span className="flex-grow border-b border-black inline-block w-64 max-w-[300px]"></span>
