@@ -70,10 +70,10 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
           </div>
 
           <div className="relative z-10 p-[12mm] px-[15mm]">
-            <div className="absolute top-[12mm] left-[15mm] bg-[#eef5fb] p-[2px] z-20">
+            <div className="absolute top-[6mm] left-[8mm] bg-[#e6f0fa] p-[8px] z-20">
                <QRCode
                   value={qrValue}
-                  size={75}
+                  size={95}
                   level="M"
                   fgColor="#000000"
                   bgColor="transparent"
@@ -134,10 +134,7 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
               <div className="mb-4 w-64 leading-tight">{bank.bankAddress}</div>
             </div>
 
-            {/* Spacer to push signatures down */}
-            <div className="h-[20px] w-full"></div>
-
-            <div className="relative w-full flex justify-between pr-8">
+            <div className="relative w-full flex justify-between pr-8 text-[10px] -mt-6">
                <div className="flex flex-col">
                  <div className="uppercase mb-1">AUTHORIZED OFFICER</div>
                  <div className="uppercase mb-1">{officers.officer1Name}</div>
