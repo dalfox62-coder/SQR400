@@ -62,7 +62,7 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
         className={`flex flex-col items-center gap-8 ${isPublic ? 'my-0 print:my-0' : 'my-4'} print:my-0 print:gap-0 ${isPublic ? 'bg-transparent py-0' : 'bg-slate-950/60 py-8 px-4 rounded-2xl'} print:bg-white print:p-0`}
       >
         <div 
-          className={`w-[210mm] min-h-[297mm] max-w-[210mm] mx-auto bg-white text-black ${isPublic ? 'shadow-2xl' : 'shadow-2xl'} print:shadow-none print:p-0 relative font-sans text-[12px] print-page overflow-hidden`} 
+          className={`w-[210mm] min-w-[210mm] min-h-[297mm] max-w-[210mm] shrink-0 mx-auto bg-white text-black ${isPublic ? 'shadow-2xl' : 'shadow-2xl'} print:shadow-none print:p-0 relative font-sans text-[12px] print-page overflow-hidden`} 
           style={{ fontFamily: "Arial, sans-serif" }}
         >
           
@@ -72,10 +72,10 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
           </div>
 
           {/* Cover for baked-in QR, Barcode, and Date */}
-          <div className="absolute top-0 left-[12px] w-[170px] h-[160px] bg-[#e3eff9] z-20 flex flex-col items-center justify-start pt-[20px] rounded-b-md">
+          <div className="absolute top-0 left-[15px] w-[180px] h-[190px] bg-[#e3eff9] z-20 flex flex-col items-center justify-start pt-[25px] rounded-b-md shadow-sm">
              <QRCode
                 value={qrValue}
-                size={95}
+                size={110}
                 level="M"
                 fgColor="#000000"
                 bgColor="transparent"
@@ -84,7 +84,7 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
 
           <div className="relative z-10 p-[12mm] px-[15mm]">
             {/* Spacer for top header (QR code and logos) */}
-            <div className="relative h-[20px] w-full">
+            <div className="relative h-[50px] w-full">
             </div>
 
             <div className="flex flex-col items-center mb-4 mt-2">
@@ -93,7 +93,7 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
               </div>
             </div>
 
-            <div className="mb-6 uppercase mt-12 relative z-30">
+            <div className="mb-6 uppercase mt-6 relative z-30">
               DATE: {meta.date}
             </div>
 
