@@ -113,18 +113,20 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
               <div className="mb-4 w-64 leading-tight">{bank.bankAddress}</div>
             </div>
 
-            {/* Spacer for bottom stamp */}
-            <div className="h-[140px] w-full"></div>
+            {/* Spacer to push signatures down */}
+            <div className="h-[20px] w-full"></div>
 
-            <div className="relative w-full h-[60px] flex justify-between">
-               <div className="flex flex-col justify-end pb-2">
+            <div className="relative w-full flex justify-between pr-8">
+               <div className="flex flex-col">
+                 <div className="uppercase mb-1">AUTHORIZED OFFICER</div>
+                 <div className="uppercase mb-1">{officers.officer1Name}</div>
                  <div className="uppercase">{officers.officer1Title}</div>
-                 <div className="uppercase">{officers.officer1Name}</div>
                </div>
                
-               <div className="flex flex-col justify-end pb-2 text-right">
+               <div className="flex flex-col text-left w-64">
+                 <div className="uppercase mb-1">AUTHORIZED OFFICER</div>
+                 <div className="uppercase mb-1">{officers.officer2Name}</div>
                  <div className="uppercase">{officers.officer2Title}</div>
-                 <div className="uppercase">{officers.officer2Name}</div>
                </div>
             </div>
 
