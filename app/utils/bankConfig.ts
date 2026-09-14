@@ -1,4 +1,18 @@
 export const bankConfigs = {
+  cis: {
+    id: "cis",
+    name: "CIS (CLIENT INFO)",
+    code: "CLIENT INFO",
+    logo: "/logos/deutsche.png",
+    bankFullName: "DEUTSCHE BANK AG",
+    address: "DEUTSCHE BANK A.G. TAUNUSANLAFE 12, FERANKURT AM MAIN 60254 FERNKFURT GERMANY",
+    receiverBank: "",
+    receiverAddress: "",
+    country: "Germany",
+    template: "cis",
+    color: "blue",
+    accentColor: "from-blue-600 to-indigo-700",
+  },
   hsbc: {
     id: "hsbc",
     name: "HSBC UK",
