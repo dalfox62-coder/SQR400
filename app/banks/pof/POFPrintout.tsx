@@ -62,7 +62,7 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
         className={`flex flex-col items-center gap-8 ${isPublic ? 'my-0 print:my-0' : 'my-4'} print:my-0 print:gap-0 ${isPublic ? 'bg-transparent py-0' : 'bg-slate-950/60 py-8 px-4 rounded-2xl'} print:bg-white print:p-0`}
       >
         <div 
-          className={`w-[210mm] min-h-[297mm] max-w-[210mm] mx-auto text-black ${isPublic ? 'shadow-2xl' : 'shadow-2xl'} print:shadow-none print:p-0 relative font-sans text-[12px] print-page overflow-hidden`} 
+          className={`w-[210mm] min-h-[297mm] max-w-[210mm] mx-auto bg-white text-black ${isPublic ? 'shadow-2xl' : 'shadow-2xl'} print:shadow-none print:p-0 relative font-sans text-[12px] print-page overflow-hidden`} 
           style={{ 
             fontFamily: "Arial, sans-serif",
             backgroundImage: "url('/pof-source-v2.png')",
