@@ -352,12 +352,22 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
             </pre>
 
             {/* Footer with Signatures & Stamp */}
-            <div className="mt-2 flex flex-col w-full relative">
-              <img
-                src="/logos/deutsche-signatures.png"
-                alt="Authorized Signatures and Stamps"
-                className="w-[95%] h-auto object-contain mx-auto mix-blend-multiply -mt-16"
-              />
+            <div className="mt-8 mb-4 w-full relative opacity-90 text-black font-sans shrink-0">
+               <div className="w-full flex justify-between px-8 text-[11px] mb-2 font-bold">
+                  <div className="flex flex-col">
+                     <div className="uppercase">AUTHORIZED OFFICER</div>
+                     <div className="uppercase">MARCUS SCHENCK (PIN75456CFO)</div>
+                     <div className="uppercase">CHIEF OPERATING OFFICER</div>
+                  </div>
+                  <div className="flex flex-col text-left">
+                     <div className="uppercase">AUTHORIZED OFFICER</div>
+                     <div className="uppercase">CHRISTIAN SEWING - ID CS9089</div>
+                     <div className="uppercase">CHIEF EXECUTIVE OFFICER</div>
+                  </div>
+               </div>
+               <div className="flex justify-center">
+                  <img src="/images/1-removebg-preview.png" alt="Signatures and Stamps" className="w-[85%] object-contain mix-blend-multiply -mt-2" />
+               </div>
             </div>
 
           </div>
@@ -409,12 +419,22 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
             </div>
 
             {/* Footer with Signatures & Stamp */}
-            <div className="mt-2 flex flex-col w-full relative shrink-0">
-              <img
-                src="/logos/deutsche-signatures.png"
-                alt="Authorized Signatures and Stamps"
-                className="w-[95%] h-auto object-contain mx-auto mix-blend-multiply -mt-12"
-              />
+            <div className="mt-8 mb-4 w-full relative opacity-90 text-black font-sans shrink-0">
+               <div className="w-full flex justify-between px-8 text-[11px] mb-2 font-bold">
+                  <div className="flex flex-col">
+                     <div className="uppercase">AUTHORIZED OFFICER</div>
+                     <div className="uppercase">MARCUS SCHENCK (PIN75456CFO)</div>
+                     <div className="uppercase">CHIEF OPERATING OFFICER</div>
+                  </div>
+                  <div className="flex flex-col text-left">
+                     <div className="uppercase">AUTHORIZED OFFICER</div>
+                     <div className="uppercase">CHRISTIAN SEWING - ID CS9089</div>
+                     <div className="uppercase">CHIEF EXECUTIVE OFFICER</div>
+                  </div>
+               </div>
+               <div className="flex justify-center">
+                  <img src="/images/1-removebg-preview.png" alt="Signatures and Stamps" className="w-[85%] object-contain mix-blend-multiply -mt-2" />
+               </div>
             </div>
           </div>
         </div>
