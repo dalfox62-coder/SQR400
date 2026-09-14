@@ -40,72 +40,72 @@ const CISPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
         <table className="w-full border-collapse border border-black mb-8 text-[13.5px]">
           <tbody>
             <tr className="border-b border-black">
-              <td className="w-1/3 border-r border-black p-1.5 pl-2">Company Name:</td>
-              <td className="w-2/3 p-1.5 pl-2 uppercase">{company.companyName}</td>
+              <td className="w-1/3 border-r border-black py-2 px-3">Company Name:</td>
+              <td className="w-2/3 py-2 px-3 uppercase">{company.companyName}</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5 pl-2">Company Reg. Address:</td>
-              <td className="p-1.5 pl-2 uppercase">{company.companyRegAddress}</td>
+              <td className="border-r border-black py-2 px-3">Company Reg. Address:</td>
+              <td className="py-2 px-3 uppercase">{company.companyRegAddress}</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5 pl-2">Company Reg. No:</td>
-              <td className="p-1.5 pl-2 uppercase">{company.companyRegNo}</td>
+              <td className="border-r border-black py-2 px-3">Company Reg. No:</td>
+              <td className="py-2 px-3 uppercase">{company.companyRegNo}</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5 pl-2">Represented by:</td>
-              <td className="p-1.5 pl-2 uppercase">{company.representedBy}</td>
+              <td className="border-r border-black py-2 px-3">Represented by:</td>
+              <td className="py-2 px-3 uppercase">{company.representedBy}</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5 pl-2">Title:</td>
-              <td className="p-1.5 pl-2 uppercase">{company.title}</td>
+              <td className="border-r border-black py-2 px-3">Title:</td>
+              <td className="py-2 px-3 uppercase">{company.title}</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5 pl-2">Passport №:</td>
-              <td className="p-1.5 pl-2 uppercase">{company.passportNo}</td>
+              <td className="border-r border-black py-2 px-3">Passport №:</td>
+              <td className="py-2 px-3 uppercase">{company.passportNo}</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5 pl-2">Date of Issue:</td>
-              <td className="p-1.5 pl-2 uppercase">{company.dateOfIssue}</td>
+              <td className="border-r border-black py-2 px-3">Date of Issue:</td>
+              <td className="py-2 px-3 uppercase">{company.dateOfIssue}</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5 pl-2">Date of Expiry:</td>
-              <td className="p-1.5 pl-2 uppercase">{company.dateOfExpiry}</td>
+              <td className="border-r border-black py-2 px-3">Date of Expiry:</td>
+              <td className="py-2 px-3 uppercase">{company.dateOfExpiry}</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5 pl-2">Place of Issue:</td>
-              <td className="p-1.5 pl-2 uppercase">{company.placeOfIssue}</td>
+              <td className="border-r border-black py-2 px-3">Place of Issue:</td>
+              <td className="py-2 px-3 uppercase">{company.placeOfIssue}</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5 pl-2">Bank Name:</td>
-              <td className="p-1.5 pl-2 uppercase">{bank.bankName}</td>
+              <td className="border-r border-black py-2 px-3">Bank Name:</td>
+              <td className="py-2 px-3 uppercase">{bank.bankName}</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5 pl-2">Bank Address:</td>
-              <td className="p-1.5 pl-2">{bank.bankAddress}</td>
+              <td className="border-r border-black py-2 px-3">Bank Address:</td>
+              <td className="py-2 px-3">{bank.bankAddress}</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5 pl-2">Swift Code:</td>
-              <td className="p-1.5 pl-2 uppercase">{bank.swiftCode}</td>
+              <td className="border-r border-black py-2 px-3">Swift Code:</td>
+              <td className="py-2 px-3 uppercase">{bank.swiftCode}</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5 pl-2">Account Number :</td>
-              <td className="p-1.5 pl-2 uppercase">{bank.accountNumber}</td>
+              <td className="border-r border-black py-2 px-3">Account Number :</td>
+              <td className="py-2 px-3 uppercase">{bank.accountNumber}</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5 pl-2">IBAN :</td>
-              <td className="p-1.5 pl-2 uppercase">{bank.iban}</td>
+              <td className="border-r border-black py-2 px-3">IBAN :</td>
+              <td className="py-2 px-3 uppercase">{bank.iban}</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5 pl-2">Account Name:</td>
-              <td className="p-1.5 pl-2 uppercase">{bank.accountName}</td>
+              <td className="border-r border-black py-2 px-3">Account Name:</td>
+              <td className="py-2 px-3 uppercase">{bank.accountName}</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5 pl-2">Bank Officer:</td>
-              <td className="p-1.5 pl-2 uppercase">{bank.bankOfficer}</td>
+              <td className="border-r border-black py-2 px-3">Bank Officer:</td>
+              <td className="py-2 px-3 uppercase">{bank.bankOfficer}</td>
             </tr>
             <tr>
-              <td className="border-r border-black p-1.5 pl-2">Bank E-Mail:</td>
-              <td className="p-1.5 pl-2 text-blue-600 underline">{bank.bankEmail}</td>
+              <td className="border-r border-black py-2 px-3">Bank E-Mail:</td>
+              <td className="py-2 px-3 text-blue-600 underline">{bank.bankEmail}</td>
             </tr>
           </tbody>
         </table>
