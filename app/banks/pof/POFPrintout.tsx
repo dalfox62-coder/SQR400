@@ -66,7 +66,7 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
           
           {/* Full Page Background Image */}
           <div className="absolute inset-0 z-0">
-             <Image src="/pof-source.png" alt="background" layout="fill" objectFit="fill" />
+             <Image src="/pof-source-v2.png" alt="background" layout="fill" objectFit="fill" />
           </div>
 
           <div className="relative z-10 p-[12mm] px-[15mm]">
@@ -87,8 +87,6 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
               <div className="font-bold text-[16px]">
                 BANK PROOF OF FUNDS
               </div>
-              <div className="h-[2px] bg-black w-[195px] mt-[1px]"></div>
-              <div className="h-[1px] bg-black w-[195px] mt-[2px]"></div>
             </div>
 
             <div className="mb-6 uppercase">

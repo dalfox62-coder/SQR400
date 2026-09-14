@@ -575,15 +575,15 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
                            <div className="uppercase">CHIEF EXECUTIVE OFFICER</div>
                         </div>
                      </div>
-                     <div className="relative w-full mt-2 h-[120px] flex items-center justify-between px-16">
+                     <div className="relative w-full mt-2 h-[150px] flex items-center justify-between px-16">
                         <div className="w-[30%] flex justify-start pl-4">
-                           <img src="/images/1.png" alt="Signature 1" className="max-h-[80px] w-auto object-contain mix-blend-multiply" />
+                           <img src="/images/1.png" alt="Signature 1" className="w-[90%] h-auto object-contain mix-blend-multiply" />
                         </div>
-                        <div className="w-[40%] flex justify-center">
-                           <img src="/images/2.png" alt="Stamp" className="max-h-[120px] w-auto object-contain mix-blend-multiply" />
+                        <div className="w-[40%] flex justify-center -mt-8">
+                           <img src="/images/2.png" alt="Stamp" className="w-[100%] h-auto object-contain mix-blend-multiply" />
                         </div>
                         <div className="w-[30%] flex justify-end pr-4">
-                           <img src="/images/3.png" alt="Signature 2" className="max-h-[80px] w-auto object-contain mix-blend-multiply" />
+                           <img src="/images/3.png" alt="Signature 2" className="w-[90%] h-auto object-contain mix-blend-multiply" />
                         </div>
                      </div>
                   </div>

@@ -369,7 +369,7 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
                   <div className="w-[33%] flex justify-start pl-4">
                      <img src="/images/1.png" alt="Signature 1" className="w-[90%] h-auto object-contain mix-blend-multiply" />
                   </div>
-                  <div className="w-[34%] flex justify-center">
+                  <div className="w-[34%] flex justify-center -mt-8">
                      <img src="/images/2.png" alt="Stamp" className="w-[100%] h-auto object-contain mix-blend-multiply" />
                   </div>
                   <div className="w-[33%] flex justify-end pr-4">
@@ -444,7 +444,7 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
                   <div className="w-[33%] flex justify-start pl-4">
                      <img src="/images/1.png" alt="Signature 1" className="w-[90%] h-auto object-contain mix-blend-multiply" />
                   </div>
-                  <div className="w-[34%] flex justify-center">
+                  <div className="w-[34%] flex justify-center -mt-8">
                      <img src="/images/2.png" alt="Stamp" className="w-[100%] h-auto object-contain mix-blend-multiply" />
                   </div>
                   <div className="w-[33%] flex justify-end pr-4">
