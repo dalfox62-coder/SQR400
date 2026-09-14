@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import QRCode from "react-qr-code";
 
 const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: () => void, isPublic?: boolean }) => {
   useEffect(() => {
@@ -16,6 +17,13 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
   const account = data.accountInfo || {};
   const transaction = data.transactionInfo || {};
   const officers = data.officers || {};
+
+  const [baseUrl, setBaseUrl] = useState("");
+  useEffect(() => {
+    setBaseUrl(window.location.origin);
+  }, []);
+
+  const qrValue = data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/";
 
   return (
     <div className={isPublic ? "w-full flex flex-col items-center bg-slate-950 min-h-screen py-8" : "bg-slate-900 border border-slate-800 rounded-3xl p-6 print:bg-white print:border-none print:p-0 shadow-2xl text-slate-100"}>
@@ -62,6 +70,15 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
           </div>
 
           <div className="relative z-10 p-[12mm] px-[15mm]">
+            <div className="absolute top-[12mm] left-[15mm] bg-[#eef5fb] p-[2px] z-20">
+               <QRCode
+                  value={qrValue}
+                  size={75}
+                  level="M"
+                  fgColor="#000000"
+                  bgColor="transparent"
+               />
+            </div>
             {/* Spacer for top header (QR code and logos) */}
             <div className="h-[80px] w-full"></div>
 
