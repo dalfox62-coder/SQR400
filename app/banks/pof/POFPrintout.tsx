@@ -65,8 +65,12 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
             {/* Spacer for top header (QR code and logos) */}
             <div className="h-[80px] w-full"></div>
 
-            <div className="text-center font-bold underline mb-4 text-[14px]">
-              BANK PROOF OF FUNDS
+            <div className="flex flex-col items-center mb-4">
+              <div className="font-bold text-[16px]">
+                BANK PROOF OF FUNDS
+              </div>
+              <div className="h-[2px] bg-black w-[195px] mt-[1px]"></div>
+              <div className="h-[1px] bg-black w-[195px] mt-[2px]"></div>
             </div>
 
             <div className="mb-6 uppercase">
