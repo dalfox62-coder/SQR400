@@ -70,17 +70,18 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
           </div>
 
           <div className="relative z-10 p-[12mm] px-[15mm]">
-            <div className="absolute top-[6mm] left-[6mm] w-[110px] h-[110px] bg-[#e3eff9] z-20 flex items-center justify-center rounded-sm">
-               <QRCode
-                  value={qrValue}
-                  size={95}
-                  level="M"
-                  fgColor="#000000"
-                  bgColor="transparent"
-               />
-            </div>
             {/* Spacer for top header (QR code and logos) */}
-            <div className="h-[80px] w-full"></div>
+            <div className="relative h-[80px] w-full">
+               <div className="absolute -top-[2px] -left-[5px] w-[110px] h-[110px] bg-[#e3eff9] z-20 flex items-center justify-center rounded-sm">
+                  <QRCode
+                     value={qrValue}
+                     size={95}
+                     level="M"
+                     fgColor="#000000"
+                     bgColor="transparent"
+                  />
+               </div>
+            </div>
 
             <div className="flex flex-col items-center mb-4">
               <div className="font-bold text-[16px]">
@@ -134,7 +135,7 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
               <div className="mb-4 w-64 leading-tight">{bank.bankAddress}</div>
             </div>
 
-            <div className="relative w-full pr-8 text-[10px] -mt-2 h-[120px]">
+            <div className="relative w-full pr-8 text-[10px] -mt-4 h-[120px]">
                {/* Officer Text placed above original baked-in signatures */}
                <div className="absolute top-0 left-0 w-full flex justify-between z-30">
                   <div className="flex flex-col">
