@@ -70,7 +70,7 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
           </div>
 
           <div className="relative z-10 p-[12mm] px-[15mm]">
-            <div className="absolute top-[6mm] left-[8mm] bg-[#e6f0fa] p-[8px] z-20">
+            <div className="absolute top-[48px] left-[53px] w-[105px] h-[105px] bg-[#e3eff9] z-20 flex items-center justify-center rounded-sm">
                <QRCode
                   value={qrValue}
                   size={95}
@@ -134,17 +134,28 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
               <div className="mb-4 w-64 leading-tight">{bank.bankAddress}</div>
             </div>
 
-            <div className="relative w-full flex justify-between pr-8 text-[10px] -mt-6">
-               <div className="flex flex-col">
-                 <div className="uppercase mb-1">AUTHORIZED OFFICER</div>
-                 <div className="uppercase mb-1">{officers.officer1Name}</div>
-                 <div className="uppercase">{officers.officer1Title}</div>
-               </div>
+            <div className="relative w-full pr-8 text-[10px] mt-2 h-[120px]">
+               {/* Mask to cover old baked-in signatures */}
+               <div className="absolute top-0 left-0 w-full h-[120px] bg-[#e3eff9] z-10"></div>
                
-               <div className="flex flex-col text-left w-64">
-                 <div className="uppercase mb-1">AUTHORIZED OFFICER</div>
-                 <div className="uppercase mb-1">{officers.officer2Name}</div>
-                 <div className="uppercase">{officers.officer2Title}</div>
+               {/* New Signatures Image */}
+               <div className="absolute top-4 left-0 w-full flex justify-center z-20">
+                  <img src="/images/1-removebg-preview.png" alt="Signatures and Stamps" className="w-[85%] h-auto object-contain mix-blend-multiply" />
+               </div>
+
+               {/* Officer Text over mask and signatures */}
+               <div className="absolute top-0 left-0 w-full flex justify-between z-30">
+                  <div className="flex flex-col">
+                    <div className="uppercase mb-1">AUTHORIZED OFFICER</div>
+                    <div className="uppercase mb-1">{officers.officer1Name}</div>
+                    <div className="uppercase">{officers.officer1Title}</div>
+                  </div>
+                  
+                  <div className="flex flex-col text-left w-64">
+                    <div className="uppercase mb-1">AUTHORIZED OFFICER</div>
+                    <div className="uppercase mb-1">{officers.officer2Name}</div>
+                    <div className="uppercase">{officers.officer2Title}</div>
+                  </div>
                </div>
             </div>
 
