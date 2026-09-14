@@ -575,7 +575,7 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
                            <div className="uppercase">CHIEF EXECUTIVE OFFICER</div>
                         </div>
                      </div>
-                     <div className="relative w-full mt-2 h-[150px] flex items-center justify-between px-16">
+                     <div className="relative w-full -mt-4 h-[150px] flex items-center justify-between px-16">
                         <div className="w-[30%] flex justify-start pl-4">
                            <img src="/images/1.png" alt="Signature 1" className="w-[90%] h-auto object-contain mix-blend-multiply" />
                         </div>

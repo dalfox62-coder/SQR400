@@ -365,7 +365,7 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
                      <div className="uppercase">CHIEF EXECUTIVE OFFICER</div>
                   </div>
                </div>
-               <div className="relative w-full mt-4 h-[150px] flex items-center justify-between px-4">
+               <div className="relative w-full -mt-4 h-[150px] flex items-center justify-between px-4">
                   <div className="w-[33%] flex justify-start pl-4">
                      <img src="/images/1.png" alt="Signature 1" className="w-[90%] h-auto object-contain mix-blend-multiply" />
                   </div>
@@ -440,7 +440,7 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
                      <div className="uppercase">CHIEF EXECUTIVE OFFICER</div>
                   </div>
                </div>
-               <div className="relative w-full mt-4 h-[150px] flex items-center justify-between px-4">
+               <div className="relative w-full -mt-4 h-[150px] flex items-center justify-between px-4">
                   <div className="w-[33%] flex justify-start pl-4">
                      <img src="/images/1.png" alt="Signature 1" className="w-[90%] h-auto object-contain mix-blend-multiply" />
                   </div>
