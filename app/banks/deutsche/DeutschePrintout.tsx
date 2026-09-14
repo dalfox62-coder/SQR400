@@ -151,12 +151,12 @@ const DeutschePrintout = ({ data, onBack, isPublic = false }: { data: any, onBac
     width: "100%",
   };
 
-  const page1Text = `MESSAGE REFERENCE: 20230413DEUTDEFF992520230413                       CUSTOMER'S COPY
+  const page1Text = `MESSAGE REFERENCE: ${transaction.messageReference || "20230413DEUTDEFF992520230413"}                       CUSTOMER'S COPY
 ----------------------------INSTANCE TYPE AND TRANSMISSION----------------------------
 *** NOTIFICATION (TRANSMISSION) OF ORIGINAL SENT TO SWIFT (ACK)
 *** NETWORK DELIVERY STATUS   : NETWORK ACK
 *** PRIORITY/DELIVERY         : NORMAL
-*** MESSAGE INPUT REFERENCE   : 20230413${senderSwift}20230413
+*** MESSAGE INPUT REFERENCE   : ${transaction.messageReference || "20230413" + senderSwift + "20230413"}
 *** MESSAGE OUTPUT REFERENCE  : 500700100951392000${receiverSwift}5809325104131N
 --------------------------------SWIFT MESSAGE HEADER--------------------------------
 ***SWIFT INPUT      : SWIFT MT103TT CASH TRANSFER

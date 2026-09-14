@@ -12,6 +12,7 @@ const DeutscheForm = ({ onSubmit, initialData = {} as any }: any) => {
       address: initialData.institution?.address || "DEUTSCHE BANK A.G. TAUNUSANLAFE 12, FERANKURT AM MAIN 60254 FERNKFURT GERMANY",
     },
     transaction: {
+      messageReference: initialData.transaction?.messageReference || "20230413DEUTDEFF992520230413",
       senderReference: initialData.transaction?.senderReference || "DEUTDEFF992541320116 ",
       transactionCode: initialData.transaction?.transactionCode || "DEUTDEFF992541320116",
       bankOperationCode: initialData.transaction?.bankOperationCode || "CRED",
@@ -218,6 +219,15 @@ const DeutscheForm = ({ onSubmit, initialData = {} as any }: any) => {
         </h3>
         <p className="text-sm text-slate-500 italic mb-4">Value Date, Amount and Currency Info</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className={labelClass}>Message Reference</label>
+            <input
+              type="text"
+              className={inputClass}
+              value={formData.transaction.messageReference}
+              onChange={(e) => handleChange("transaction", "messageReference", e.target.value)}
+            />
+          </div>
           <div>
             <label className={labelClass}>Sender Reference</label>
             <input
