@@ -1,4 +1,18 @@
 export const bankConfigs = {
+  pof: {
+    id: "pof",
+    name: "POF (PROOF OF FUND)",
+    code: "DEUTSCHE POF",
+    logo: "/logos/deutsche.png",
+    bankFullName: "DEUTSCHE BANK AG",
+    address: "DEUTSCHE BANK A.G.",
+    receiverBank: "",
+    receiverAddress: "",
+    country: "Germany/UK",
+    template: "pof",
+    color: "blue",
+    accentColor: "from-blue-600 to-indigo-700",
+  },
   cis: {
     id: "cis",
     name: "CIS (CLIENT INFO)",

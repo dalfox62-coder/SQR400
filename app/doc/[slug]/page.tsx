@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import DeutschePrintout from "@/app/banks/deutsche/DeutschePrintout";
 import DeutschePrintoutV2 from "@/app/banks/deutsche/DeutschePrintoutV2";
 import HSBCPrintout from "@/app/banks/hsbc/HSBCPrintout";
+import POFPrintout from "@/app/banks/pof/POFPrintout";
 
 export default function PublicDocumentPage() {
   const { slug } = useParams();
@@ -80,6 +81,12 @@ export default function PublicDocumentPage() {
     return (
       <div translate="no" className="notranslate min-h-screen bg-[#525659] print:bg-white flex flex-col items-center py-8 print:py-0 px-2 print:px-0 overflow-x-auto print:overflow-visible">
         <HSBCPrintout data={data} isPublic={true} />
+      </div>
+    );
+  } else if (data.bankId === "pof") {
+    return (
+      <div translate="no" className="notranslate min-h-screen bg-[#525659] print:bg-white flex flex-col items-center py-8 print:py-0 px-2 print:px-0 overflow-x-auto print:overflow-visible">
+        <POFPrintout data={data} isPublic={true} />
       </div>
     );
   }
