@@ -71,8 +71,8 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
 
           <div className="relative z-10 p-[12mm] px-[15mm]">
             {/* Spacer for top header (QR code and logos) */}
-            <div className="relative h-[80px] w-full">
-               <div className="absolute -top-[38px] -left-[25px] w-[180px] h-[120px] bg-[#e3eff9] z-20 flex items-center justify-center rounded-sm">
+            <div className="relative h-[40px] w-full">
+               <div className="absolute -top-[55px] -left-[10px] w-[180px] h-[130px] bg-[#e3eff9] z-20 flex items-center justify-center rounded-sm">
                   <QRCode
                      value={qrValue}
                      size={95}
@@ -83,7 +83,7 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
                </div>
             </div>
 
-            <div className="flex flex-col items-center mb-4">
+            <div className="flex flex-col items-center mb-4 mt-2">
               <div className="font-bold text-[16px]">
                 BANK PROOF OF FUNDS
               </div>
