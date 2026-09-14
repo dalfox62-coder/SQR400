@@ -14,17 +14,43 @@ const CISPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
   const meta = data.meta || {};
 
   return (
-    <div className={`bg-white text-black min-h-screen ${isPublic ? '' : 'p-4 md:p-8'}`}>
-      {!isPublic && onBack && (
-        <button
-          onClick={onBack}
-          className="mb-6 px-4 py-2 bg-slate-800 text-white rounded hover:bg-slate-700 transition no-print"
-        >
-          ← Back to Edit
-        </button>
+    <div className={isPublic ? "w-full flex flex-col items-center" : "bg-slate-900 border border-slate-800 rounded-3xl p-6 print:bg-white print:border-none print:p-0 shadow-2xl text-slate-100"}>
+      
+      {/* Back and Print buttons */}
+      {!isPublic && (
+        <div className="flex flex-wrap justify-between gap-3 mb-6 no-print">
+          {onBack ? (
+            <button
+              onClick={onBack}
+              className="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white rounded-xl font-bold transition-all duration-200 text-sm border border-slate-700"
+            >
+              ← Back to Form
+            </button>
+          ) : <div />}
+          <button
+            onClick={() => window.print()}
+            className="px-6 py-2.5 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white rounded-xl font-bold transition-all duration-200 text-sm shadow-lg shadow-cyan-500/20"
+          >
+            🖨️ Print / Download PDF
+          </button>
+        </div>
+      )}
+      {isPublic && (
+        <div className="flex justify-center mb-6 no-print w-full">
+          <button
+            onClick={() => window.print()}
+            className="px-8 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white rounded-xl font-bold transition-all duration-200 shadow-xl shadow-cyan-500/20 flex items-center gap-2"
+          >
+            <span className="text-xl">🖨️</span> Print / Download PDF
+          </button>
+        </div>
       )}
 
-      <div className="max-w-[210mm] mx-auto bg-white p-[15mm] shadow-none print:shadow-none print:p-0 relative font-sans text-sm" style={{ fontFamily: "Arial, sans-serif" }}>
+      {/* Pages Container */}
+      <div 
+        className={`flex flex-col items-center gap-8 ${isPublic ? 'my-0 print:my-0' : 'my-4'} print:my-0 print:gap-0 ${isPublic ? 'bg-transparent py-0' : 'bg-slate-950/60 py-8 px-4 rounded-2xl'} print:bg-white print:p-0`}
+      >
+        <div className={`w-[210mm] max-w-[210mm] mx-auto bg-white p-[15mm] text-black ${isPublic ? 'shadow-2xl' : 'shadow-2xl'} print:shadow-none print:p-0 relative font-sans text-sm print-page`} style={{ fontFamily: "Arial, sans-serif" }}>
         
         {/* Title */}
         <div className="text-center mb-8">
@@ -141,20 +167,7 @@ const CISPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
         </div>
 
       </div>
-
-      {!isPublic && (
-        <div className="fixed bottom-8 right-8 no-print z-50">
-          <button
-            onClick={() => window.print()}
-            className="bg-cyan-600 hover:bg-cyan-500 text-white rounded-full p-4 shadow-lg hover:shadow-cyan-500/50 transition-all transform hover:scale-110 flex items-center justify-center group"
-            title="Print Document"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 group-hover:animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-            </svg>
-          </button>
-        </div>
-      )}
+      </div>
     </div>
   );
 };
