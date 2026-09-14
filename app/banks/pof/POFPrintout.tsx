@@ -65,7 +65,7 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
           className={`w-[210mm] min-h-[297mm] max-w-[210mm] mx-auto bg-white text-black ${isPublic ? 'shadow-2xl' : 'shadow-2xl'} print:shadow-none print:p-0 relative font-sans text-[12px] print-page overflow-hidden`} 
           style={{ 
             fontFamily: "Arial, sans-serif",
-            backgroundImage: "url('/pof-source-v2.png')",
+            backgroundImage: "url('/pof-bg-new.png')",
             backgroundSize: "100% 100%",
             backgroundRepeat: "no-repeat"
           }}
