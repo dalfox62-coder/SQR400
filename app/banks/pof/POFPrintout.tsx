@@ -134,16 +134,8 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
               <div className="mb-4 w-64 leading-tight">{bank.bankAddress}</div>
             </div>
 
-            <div className="relative w-full pr-8 text-[10px] mt-0 h-[140px]">
-               {/* Mask to cover old baked-in signatures */}
-               <div className="absolute -top-4 left-0 w-[110%] -ml-[5%] h-[150px] bg-[#e3eff9] z-10"></div>
-               
-               {/* New Signatures Image */}
-               <div className="absolute top-[35px] left-0 w-full flex justify-center z-20">
-                  <img src="/images/1-removebg-preview.png" alt="Signatures and Stamps" className="h-[90px] w-auto object-contain mix-blend-multiply" />
-               </div>
-
-               {/* Officer Text over mask and signatures */}
+            <div className="relative w-full pr-8 text-[10px] -mt-2 h-[120px]">
+               {/* Officer Text placed above original baked-in signatures */}
                <div className="absolute top-0 left-0 w-full flex justify-between z-30">
                   <div className="flex flex-col">
                     <div className="uppercase mb-1">AUTHORIZED OFFICER</div>
