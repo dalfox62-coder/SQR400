@@ -72,8 +72,8 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
           </div>
 
           {/* Cover for baked-in QR, Barcode, and Date */}
-          <div className="absolute top-0 z-20 flex flex-col items-center justify-start pt-[12%] rounded-b-md shadow-sm bg-[#e3eff9]"
-               style={{ left: '7.2%', width: '16%', height: '14%' }}>
+          <div className="absolute top-0 z-20 flex flex-col items-center justify-start pt-[5%] rounded-b-md shadow-sm bg-[#e3eff9]"
+               style={{ left: '7.2%', width: '14.5%', height: '11.5%' }}>
              <QRCode
                 value={qrValue}
                 size={256}
