@@ -71,27 +71,29 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
              <img src="/pof-bg-new.png" alt="POF Background" className="w-full h-full object-fill" />
           </div>
 
+          {/* Cover for baked-in QR, Barcode, and Date */}
+          <div className="absolute top-0 left-[15px] w-[210px] h-[200px] bg-[#e3eff9] z-20 flex flex-col items-center justify-start pt-6 rounded-b-md">
+             <QRCode
+                value={qrValue}
+                size={120}
+                level="M"
+                fgColor="#000000"
+                bgColor="transparent"
+             />
+          </div>
+
           <div className="relative z-10 p-[12mm] px-[15mm]">
             {/* Spacer for top header (QR code and logos) */}
-            <div className="relative h-[65px] w-full">
-               <div className="absolute -top-[55px] -left-[10px] w-[180px] h-[130px] bg-[#e3eff9] z-20 flex items-center justify-center rounded-sm">
-                  <QRCode
-                     value={qrValue}
-                     size={95}
-                     level="M"
-                     fgColor="#000000"
-                     bgColor="transparent"
-                  />
-               </div>
+            <div className="relative h-[20px] w-full">
             </div>
 
             <div className="flex flex-col items-center mb-4 mt-2">
-              <div className="font-bold text-[16px]">
+              <div className="font-bold text-[16px] relative z-30">
                 BANK PROOF OF FUNDS
               </div>
             </div>
 
-            <div className="mb-6 uppercase">
+            <div className="mb-6 uppercase mt-12 relative z-30">
               DATE: {meta.date}
             </div>
 
