@@ -133,7 +133,7 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
               <div className="mb-4 w-64 leading-tight">{bank.bankAddress}</div>
             </div>
 
-            <div className="relative w-full pr-8 text-[10px] -mt-4 h-[120px]">
+            <div className="relative w-full pr-8 text-[10px] mt-8 h-[120px]">
                {/* Officer Text placed above original baked-in signatures */}
                <div className="absolute top-0 left-0 w-full flex justify-between z-30">
                   <div className="flex flex-col">
