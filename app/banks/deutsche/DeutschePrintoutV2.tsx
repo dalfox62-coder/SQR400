@@ -561,9 +561,23 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
                      </table>
                   </div>
 
-                  {/* Signatures Image */}
-                  <div className="w-full relative flex justify-center mt-2 mb-2 z-30 opacity-90">
-                     <img src="/images/page4_stamps_v2.png" alt="Signatures and Stamps" className="w-[85%] object-contain mix-blend-multiply" />
+                  {/* Signatures Image & Names */}
+                  <div className="w-full relative mt-8 mb-4 z-30 opacity-90 text-black">
+                     <div className="w-full flex justify-between px-16 text-[12px] mb-2">
+                        <div className="flex flex-col">
+                           <div className="uppercase">AUTHORIZED OFFICER</div>
+                           <div className="uppercase">MARCUS SCHENCK (PIN75456CFO)</div>
+                           <div className="uppercase">CHIEF OPERATING OFFICER</div>
+                        </div>
+                        <div className="flex flex-col text-left">
+                           <div className="uppercase">AUTHORIZED OFFICER</div>
+                           <div className="uppercase">CHRISTIAN SEWING - ID CS9089</div>
+                           <div className="uppercase">CHIEF EXECUTIVE OFFICER</div>
+                        </div>
+                     </div>
+                     <div className="flex justify-center">
+                        <img src="/images/1-removebg-preview.png" alt="Signatures and Stamps" className="w-[85%] object-contain mix-blend-multiply" />
+                     </div>
                   </div>
                </div>
                </div>
