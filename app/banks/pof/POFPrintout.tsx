@@ -62,7 +62,7 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
         className={`flex flex-col items-center gap-8 ${isPublic ? 'my-0 print:my-0' : 'my-4'} print:my-0 print:gap-0 ${isPublic ? 'bg-transparent py-0' : 'bg-slate-950/60 py-8 px-4 rounded-2xl'} print:bg-white print:p-0`}
       >
         <div 
-          className={`w-[210mm] min-w-[210mm] min-h-[297mm] max-w-[210mm] shrink-0 mx-auto bg-white text-black ${isPublic ? 'shadow-2xl' : 'shadow-2xl'} print:shadow-none print:p-0 relative font-sans text-[12px] print-page overflow-hidden`} 
+          className={`w-[794px] min-w-[794px] min-h-[1123px] max-w-[794px] shrink-0 mx-auto bg-white text-black ${isPublic ? 'shadow-2xl' : 'shadow-2xl'} print:shadow-none print:p-0 relative font-sans text-[12px] print-page overflow-hidden`} 
           style={{ fontFamily: "Arial, sans-serif" }}
         >
           
@@ -72,7 +72,7 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
           </div>
 
           {/* Cover for baked-in QR, Barcode, and Date */}
-          <div className="absolute top-0 left-[15px] w-[180px] h-[190px] bg-[#e3eff9] z-20 flex flex-col items-center justify-start pt-[25px] rounded-b-md shadow-sm">
+          <div className="absolute top-0 left-[15px] w-[180px] h-[210px] bg-[#e3eff9] z-20 flex flex-col items-center justify-start pt-[25px] rounded-b-md shadow-sm">
              <QRCode
                 value={qrValue}
                 size={110}
