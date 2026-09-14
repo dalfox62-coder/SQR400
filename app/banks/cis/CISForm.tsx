@@ -29,6 +29,8 @@ const CISForm = ({ onSubmit, initialData = {} as any }: any) => {
       oathDate: initialData.meta?.oathDate || "January 18, 2023",
       template: "cis",
     },
+    bankId: "cis",
+    selectedBank: "CIS (CLIENT INFO)"
   });
 
   const handleChange = (section: string, field: string, value: string) => {
