@@ -54,27 +54,16 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
       <div 
         className={`flex flex-col items-center gap-8 ${isPublic ? 'my-0 print:my-0' : 'my-4'} print:my-0 print:gap-0 ${isPublic ? 'bg-transparent py-0' : 'bg-slate-950/60 py-8 px-4 rounded-2xl'} print:bg-white print:p-0`}
       >
-        <div className={`w-[210mm] min-h-[297mm] max-w-[210mm] mx-auto bg-white p-[12mm] px-[15mm] text-black ${isPublic ? 'shadow-2xl' : 'shadow-2xl'} print:shadow-none print:p-0 relative font-sans text-[12px] print-page overflow-hidden`} style={{ fontFamily: "Arial, sans-serif" }}>
+        <div className={`w-[210mm] min-h-[297mm] max-w-[210mm] mx-auto bg-white text-black ${isPublic ? 'shadow-2xl' : 'shadow-2xl'} print:shadow-none print:p-0 relative font-sans text-[12px] print-page overflow-hidden`} style={{ fontFamily: "Arial, sans-serif" }}>
           
-          {/* Watermark Logo Background (faint) */}
-          <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none flex items-center justify-center">
-            <div className="relative w-[80%] h-[80%]">
-               <Image src="/logos/deutsche.png" alt="watermark" layout="fill" objectFit="contain" />
-            </div>
+          {/* Full Page Background Image */}
+          <div className="absolute inset-0 z-0">
+             <Image src="/pof-source.png" alt="background" layout="fill" objectFit="fill" />
           </div>
 
-          <div className="relative z-10">
-            {/* Header section: Top Left Stamp and Top Right Logo */}
-            <div className="flex justify-between items-start mb-8 h-[70px]">
-              {/* Top Left Stamp cropped from source */}
-              <div className="relative w-[200px] h-[70px] overflow-hidden mix-blend-multiply">
-                 <Image src="/pof-source.png" alt="Top Left" layout="fill" objectFit="cover" objectPosition="0% 0%" className="scale-[2.5] origin-top-left" />
-              </div>
-              {/* Top Right Logo cropped from source */}
-              <div className="relative w-[250px] h-[70px] overflow-hidden mix-blend-multiply">
-                 <Image src="/pof-source.png" alt="Top Right" layout="fill" objectFit="cover" objectPosition="100% 0%" className="scale-[2.5] origin-top-right" />
-              </div>
-            </div>
+          <div className="relative z-10 p-[12mm] px-[15mm]">
+            {/* Spacer for top header (QR code and logos) */}
+            <div className="h-[80px] w-full"></div>
 
             <div className="text-center font-bold underline mb-4 text-[14px]">
               BANK PROOF OF FUNDS
@@ -124,21 +113,16 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
               <div className="mb-4 w-64 leading-tight">{bank.bankAddress}</div>
             </div>
 
-            {/* Signatures & Stamp Cropped from source */}
-            <div className="relative w-full h-[220px] mt-2 overflow-hidden mix-blend-multiply">
-               <Image src="/pof-source.png" alt="Signatures and Stamp" layout="fill" objectFit="cover" objectPosition="50% 100%" className="scale-[1.2] origin-bottom" />
-               
-               {/* Overlays to place dynamic text over the signatures area if needed, 
-                   but the user's image has the names baked in. 
-                   We will place the dynamic names below it or on top of it. 
-                   For now, we'll just render the dynamic text above the image, masking out the old text by using absolute divs. */}
-               
-               <div className="absolute bottom-0 left-0 w-[300px] h-[60px] bg-white flex flex-col justify-end pb-2">
+            {/* Spacer for bottom stamp */}
+            <div className="h-[140px] w-full"></div>
+
+            <div className="relative w-full h-[60px] flex justify-between">
+               <div className="flex flex-col justify-end pb-2">
                  <div className="uppercase">{officers.officer1Title}</div>
                  <div className="uppercase">{officers.officer1Name}</div>
                </div>
                
-               <div className="absolute bottom-0 right-0 w-[300px] h-[60px] bg-white flex flex-col justify-end pb-2 text-right">
+               <div className="flex flex-col justify-end pb-2 text-right">
                  <div className="uppercase">{officers.officer2Title}</div>
                  <div className="uppercase">{officers.officer2Name}</div>
                </div>
