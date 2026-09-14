@@ -562,8 +562,8 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
                   </div>
 
                   {/* Signatures Image & Names */}
-                  <div className="w-full relative mt-4 mb-4 z-30 opacity-90 text-black">
-                     <div className="w-full flex justify-between px-16 text-[11px] mb-2 font-bold">
+                  <div className="-mt-2 w-full relative mb-0 z-30 opacity-90 text-black">
+                     <div className="w-full flex justify-between px-16 text-[11px] mb-0 font-bold">
                         <div className="flex flex-col">
                            <div className="uppercase">AUTHORIZED OFFICER</div>
                            <div className="uppercase">MARCUS SCHENCK (PIN75456CFO)</div>
@@ -576,7 +576,7 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
                         </div>
                      </div>
                      <div className="flex justify-center">
-                        <img src="/images/1-removebg-preview.png" alt="Signatures and Stamps" className="w-[80%] h-auto object-contain mix-blend-multiply" />
+                        <img src="/images/1-removebg-preview.png" alt="Signatures and Stamps" className="w-[80%] h-auto object-contain mix-blend-multiply -mt-8" />
                      </div>
                   </div>
                </div>

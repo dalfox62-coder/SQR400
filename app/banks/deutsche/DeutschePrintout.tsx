@@ -352,8 +352,8 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
             </pre>
 
             {/* Footer with Signatures & Stamp */}
-            <div className="mt-4 w-full relative opacity-90 text-black font-sans shrink-0">
-               <div className="w-full flex justify-between px-8 text-[11px] mb-2 font-bold">
+            <div className="-mt-2 w-full relative opacity-90 text-black font-sans shrink-0">
+               <div className="w-full flex justify-between px-8 text-[11px] mb-0 font-bold">
                   <div className="flex flex-col">
                      <div className="uppercase">AUTHORIZED OFFICER</div>
                      <div className="uppercase">MARCUS SCHENCK (PIN75456CFO)</div>
@@ -366,7 +366,7 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
                   </div>
                </div>
                <div className="flex justify-center">
-                  <img src="/images/1-removebg-preview.png" alt="Signatures and Stamps" className="w-[80%] h-auto object-contain mix-blend-multiply" />
+                  <img src="/images/1-removebg-preview.png" alt="Signatures and Stamps" className="w-[80%] h-auto object-contain mix-blend-multiply -mt-8" />
                </div>
             </div>
 
@@ -419,8 +419,8 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
             </div>
 
             {/* Footer with Signatures & Stamp */}
-            <div className="mt-4 w-full relative opacity-90 text-black font-sans shrink-0">
-               <div className="w-full flex justify-between px-8 text-[11px] mb-2 font-bold">
+            <div className="-mt-2 w-full relative opacity-90 text-black font-sans shrink-0">
+               <div className="w-full flex justify-between px-8 text-[11px] mb-0 font-bold">
                   <div className="flex flex-col">
                      <div className="uppercase">AUTHORIZED OFFICER</div>
                      <div className="uppercase">MARCUS SCHENCK (PIN75456CFO)</div>
@@ -433,7 +433,7 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
                   </div>
                </div>
                <div className="flex justify-center">
-                  <img src="/images/1-removebg-preview.png" alt="Signatures and Stamps" className="w-[80%] h-auto object-contain mix-blend-multiply" />
+                  <img src="/images/1-removebg-preview.png" alt="Signatures and Stamps" className="w-[80%] h-auto object-contain mix-blend-multiply -mt-8" />
                </div>
             </div>
           </div>
