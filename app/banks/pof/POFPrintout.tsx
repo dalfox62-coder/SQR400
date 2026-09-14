@@ -66,7 +66,7 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
           
           {/* Full Page Background Image */}
           <div className="absolute inset-0 z-0">
-             <Image src="/pof-source-v2.png" alt="background" layout="fill" objectFit="fill" />
+             <img src="/pof-source-v2.png" alt="POF Background" className="w-full h-full object-fill" />
           </div>
 
           <div className="relative z-10 p-[12mm] px-[15mm]">
@@ -96,7 +96,7 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
             <div className="mb-6 uppercase leading-relaxed text-justify">
               WE, {bank.bankName}, {bank.bankAddress}, CONFIRM WITH FULL BANK RESPONSIBILITY THAT THE ACCOUNT HOLDERS.
               <br/><br/>
-              {account.accountName}, REPRESENTED BY {account.accountSignatory}, HAVE CASH FUNDS OF {transaction.amountWords.toUpperCase()} ({transaction.currencyCode}{transaction.amountNumeric}) PRESENTLY ON DEPOSIT IN THE ABOVE REFERENCED ACCOUNT AS DESCRIBED BELOW:
+              {account.accountName}, REPRESENTED BY {account.accountSignatory}, HAVE CASH FUNDS OF {transaction.amountWords?.toUpperCase()} ({transaction.currencyCode}{transaction.amountNumeric}) PRESENTLY ON DEPOSIT IN THE ABOVE REFERENCED ACCOUNT AS DESCRIBED BELOW:
             </div>
 
             {/* Table-like aligned info */}
