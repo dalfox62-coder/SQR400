@@ -63,14 +63,14 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
       >
         <div 
           className={`w-[210mm] min-h-[297mm] max-w-[210mm] mx-auto bg-white text-black ${isPublic ? 'shadow-2xl' : 'shadow-2xl'} print:shadow-none print:p-0 relative font-sans text-[12px] print-page overflow-hidden`} 
-          style={{ 
-            fontFamily: "Arial, sans-serif",
-            backgroundImage: "url('/pof-bg-new.png')",
-            backgroundSize: "100% 100%",
-            backgroundRepeat: "no-repeat"
-          }}
+          style={{ fontFamily: "Arial, sans-serif" }}
         >
           
+          {/* Full Page Background Image */}
+          <div className="absolute inset-0 z-0">
+             <img src="/pof-bg-new.png" alt="POF Background" className="w-full h-full object-fill" />
+          </div>
+
           <div className="relative z-10 p-[12mm] px-[15mm]">
             {/* Spacer for top header (QR code and logos) */}
             <div className="relative h-[65px] w-full">
