@@ -72,10 +72,10 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
           <div className="relative z-10 p-[12mm] px-[15mm]">
             {/* Spacer for top header (QR code and logos) */}
             <div className="relative h-[80px] w-full">
-               <div className="absolute -top-[38px] -left-[10px] w-[140px] h-[85px] bg-[#e3eff9] z-20 flex items-center justify-center rounded-sm">
+               <div className="absolute -top-[38px] -left-[25px] w-[180px] h-[120px] bg-[#e3eff9] z-20 flex items-center justify-center rounded-sm">
                   <QRCode
                      value={qrValue}
-                     size={75}
+                     size={95}
                      level="M"
                      fgColor="#000000"
                      bgColor="transparent"
