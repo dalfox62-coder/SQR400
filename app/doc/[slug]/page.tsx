@@ -67,25 +67,25 @@ export default function PublicDocumentPage() {
   // Right now only Deutsche is fully configured for QR code in this task, but we can switch if needed
   if (data.bankId === "deutsche") {
     return (
-      <div translate="no" className="notranslate min-h-screen bg-[#525659] print:bg-white flex flex-col items-center py-8 print:py-0 px-2 print:px-0 overflow-x-auto print:overflow-visible">
+      <div translate="no" className="notranslate min-h-screen bg-gray-100 print:bg-white flex flex-col items-center py-8 print:py-0 px-2 print:px-0 overflow-x-auto print:overflow-visible">
         <DeutschePrintout data={data} isPublic={true} />
       </div>
     );
   } else if (data.bankId === "deutsche_v2") {
     return (
-      <div translate="no" className="notranslate min-h-screen bg-[#525659] print:bg-white flex flex-col items-center py-8 print:py-0 px-2 print:px-0 overflow-x-auto print:overflow-visible">
+      <div translate="no" className="notranslate min-h-screen bg-gray-100 print:bg-white flex flex-col items-center py-8 print:py-0 px-2 print:px-0 overflow-x-auto print:overflow-visible">
         <DeutschePrintoutV2 data={data} isPublic={true} />
       </div>
     );
   } else if (data.bankId === "hsbc") {
     return (
-      <div translate="no" className="notranslate min-h-screen bg-[#525659] print:bg-white flex flex-col items-center py-8 print:py-0 px-2 print:px-0 overflow-x-auto print:overflow-visible">
+      <div translate="no" className="notranslate min-h-screen bg-gray-100 print:bg-white flex flex-col items-center py-8 print:py-0 px-2 print:px-0 overflow-x-auto print:overflow-visible">
         <HSBCPrintout data={data} isPublic={true} />
       </div>
     );
   } else if (data.bankId === "pof") {
     return (
-      <div translate="no" className="notranslate min-h-screen bg-[#525659] print:bg-white flex flex-col items-center py-8 print:py-0 px-2 print:px-0 overflow-x-auto print:overflow-visible">
+      <div translate="no" className="notranslate min-h-screen bg-gray-100 print:bg-white flex flex-col items-center py-8 print:py-0 px-2 print:px-0 overflow-x-auto print:overflow-visible">
         <POFPrintout data={data} isPublic={true} />
       </div>
     );

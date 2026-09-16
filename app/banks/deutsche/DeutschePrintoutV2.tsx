@@ -219,14 +219,15 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
                </div>
                <div className="mt-4 flex justify-end">
                   <div className="pr-4 shrink-0">
-                     <QRCode
-                        value={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/"}
-                        size={85}
-                        level="H"
-                        fgColor="#000000"
-                        bgColor="#FFFFFF"
-                        className="mix-blend-multiply"
-                     />
+                     <a href={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/"} target="_blank" rel="noopener noreferrer">
+                        <QRCode
+                           value={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/"}
+                           size={85}
+                           level="H"
+                           fgColor="#000000"
+                           bgColor="#FFFFFF"
+                        />
+                     </a>
                   </div>
                </div>
             </div>
