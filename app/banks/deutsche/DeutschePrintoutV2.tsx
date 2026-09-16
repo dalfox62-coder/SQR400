@@ -543,6 +543,7 @@ TIME                          : ${postTime}`;
                   </div>
                </div>
             </div>
+            </div>
 
             {/* PAGE 6 (Landscape Detail Override) */}
             <div className="print-landscape-wrapper bg-white shadow-2xl print:shadow-none print-bg overflow-hidden relative" style={{ pageBreakAfter: 'auto' }}>
@@ -639,7 +640,6 @@ TIME                          : ${postTime}`;
 
                   </div>
                </div>
-         </div>
          </div>
          </div>
          </div>
