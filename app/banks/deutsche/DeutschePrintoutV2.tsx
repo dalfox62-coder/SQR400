@@ -279,15 +279,6 @@ TIME                          : ${postTime}`;
 
             {/* PAGE 1 */}
             <div className="print-page-wrapper w-[750px] px-10 py-6 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '1050px' }}>
-
-               {/* Vertical Barcode on the right edge */}
-               <div className="absolute right-4 top-[220px] w-[50px] h-[350px] flex items-center justify-center">
-                  <div className="transform rotate-90 flex flex-col items-center gap-1 w-[350px] whitespace-nowrap">
-                     <div className="font-mono text-[11px] tracking-[0.2em]">{transaction.senderReference}</div>
-                     <img src="/logos/deutsche-barcode.png" alt="Barcode" className="h-[35px] w-[350px] object-fill mix-blend-multiply" />
-                  </div>
-               </div>
-
                <div className="flex justify-between items-start mb-4">
                   <div className="text-[#0018a8]">
                      <h1 className="text-3xl font-sans tracking-tight">Deutsche Bank</h1>
@@ -310,6 +301,56 @@ TIME                          : ${postTime}`;
                <div className="font-mono text-[9px] leading-[1.15] whitespace-pre-wrap text-black">
                   {generateMT103Text(false)}
                </div>
+            </div>
+
+            {/* PAGE 1-B (MT202) */}
+            <div className="print-page-wrapper w-[750px] px-10 py-6 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '1050px' }}>
+               <div className="flex justify-between items-start mb-4">
+                  <div className="text-[#0018a8]">
+                     <h1 className="text-3xl font-sans tracking-tight">Deutsche Bank</h1>
+                     <h2 className="text-xl font-sans text-blue-500">OnlineBanking & Brokerage</h2>
+                  </div>
+                  <div className="text-right text-[#0018a8] flex flex-col items-end">
+                     <div className="flex items-center gap-3">
+                        <h1 className="text-4xl font-sans font-bold tracking-tight">Deutsche Bank</h1>
+                        <div className="w-10 h-10 border-[3px] border-[#0018a8] relative p-1">
+                           <div className="w-full h-full bg-white border border-[#0018a8]">
+                              <div className="w-[120%] h-[3px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-1.5 left-1"></div>
+                           </div>
+                        </div>
+                     </div>
+                     <h2 className="text-lg font-sans">Aktiengesellschaft</h2>
+                     <div className="mt-2 font-bold text-lg underline"><a href="https://www.deutsche-bank.de">https://www.deutsche-bank.de</a></div>
+                  </div>
+               </div>
+               <div className="font-mono text-[9px] leading-[1.15] whitespace-pre-wrap text-black">
+                  {generateMT202Text()}
+               </div>
+            </div>
+
+            {/* PAGE 1-C (Network Delivery) */}
+            <div className="print-page-wrapper w-[750px] px-10 py-6 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '1050px' }}>
+               <div className="flex justify-between items-start mb-4">
+                  <div className="text-[#0018a8]">
+                     <h1 className="text-3xl font-sans tracking-tight">Deutsche Bank</h1>
+                     <h2 className="text-xl font-sans text-blue-500">OnlineBanking & Brokerage</h2>
+                  </div>
+                  <div className="text-right text-[#0018a8] flex flex-col items-end">
+                     <div className="flex items-center gap-3">
+                        <h1 className="text-4xl font-sans font-bold tracking-tight">Deutsche Bank</h1>
+                        <div className="w-10 h-10 border-[3px] border-[#0018a8] relative p-1">
+                           <div className="w-full h-full bg-white border border-[#0018a8]">
+                              <div className="w-[120%] h-[3px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-1.5 left-1"></div>
+                           </div>
+                        </div>
+                     </div>
+                     <h2 className="text-lg font-sans">Aktiengesellschaft</h2>
+                     <div className="mt-2 font-bold text-lg underline"><a href="https://www.deutsche-bank.de">https://www.deutsche-bank.de</a></div>
+                  </div>
+               </div>
+               <div className="font-mono text-[9px] leading-[1.15] whitespace-pre-wrap text-black">
+                  {generateNetworkDeliveryText()}
+               </div>
                <div className="mt-4 flex justify-end">
                   <div className="pr-4 shrink-0">
                      <a href={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/"} target="_blank" rel="noopener noreferrer">
@@ -321,97 +362,9 @@ TIME                          : ${postTime}`;
                            bgColor="#FFFFFF"
                         />
                      </a>
-                   </div>
-                </div>
-             </div>
-
-             {/* PAGE 1-B (MT202) */}
-             <div className="print-page-wrapper w-[750px] px-10 py-6 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '1050px' }}>
-                <div className="absolute right-4 top-[220px] w-[50px] h-[350px] flex items-center justify-center">
-                   <div className="transform rotate-90 flex flex-col items-center gap-1 w-[350px] whitespace-nowrap">
-                      <div className="font-mono text-[11px] tracking-[0.2em]">{transaction.senderReference}</div>
-                      <img src="/logos/deutsche-barcode.png" alt="Barcode" className="h-[35px] w-[350px] object-fill mix-blend-multiply" />
-                   </div>
-                </div>
-                <div className="flex justify-between items-start mb-4">
-                   <div className="text-[#0018a8]">
-                      <h1 className="text-3xl font-sans tracking-tight">Deutsche Bank</h1>
-                      <h2 className="text-xl font-sans text-blue-500">OnlineBanking & Brokerage</h2>
-                   </div>
-                   <div className="text-right text-[#0018a8] flex flex-col items-end">
-                      <div className="flex items-center gap-3">
-                         <h1 className="text-4xl font-sans font-bold tracking-tight">Deutsche Bank</h1>
-                         <div className="w-10 h-10 border-[3px] border-[#0018a8] relative p-1">
-                            <div className="w-full h-full bg-white border border-[#0018a8]">
-                               <div className="w-[120%] h-[3px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-1.5 left-1"></div>
-                            </div>
-                         </div>
-                      </div>
-                      <h2 className="text-lg font-sans">Aktiengesellschaft</h2>
-                      <div className="mt-2 font-bold text-lg underline"><a href="https://www.deutsche-bank.de">https://www.deutsche-bank.de</a></div>
-                   </div>
-                </div>
-                <div className="font-mono text-[9px] leading-[1.15] whitespace-pre-wrap text-black">
-                   {generateMT202Text()}
-                </div>
-                <div className="mt-4 flex justify-end">
-                   <div className="pr-4 shrink-0">
-                      <a href={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/"} target="_blank" rel="noopener noreferrer">
-                         <QRCode
-                            value={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/"}
-                            size={85}
-                            level="H"
-                            fgColor="#000000"
-                            bgColor="#FFFFFF"
-                         />
-                      </a>
-                   </div>
-                </div>
-             </div>
-
-             {/* PAGE 1-C (Network Delivery) */}
-             <div className="print-page-wrapper w-[750px] px-10 py-6 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '1050px' }}>
-                <div className="absolute right-4 top-[220px] w-[50px] h-[350px] flex items-center justify-center">
-                   <div className="transform rotate-90 flex flex-col items-center gap-1 w-[350px] whitespace-nowrap">
-                      <div className="font-mono text-[11px] tracking-[0.2em]">{transaction.senderReference}</div>
-                      <img src="/logos/deutsche-barcode.png" alt="Barcode" className="h-[35px] w-[350px] object-fill mix-blend-multiply" />
-                   </div>
-                </div>
-                <div className="flex justify-between items-start mb-4">
-                   <div className="text-[#0018a8]">
-                      <h1 className="text-3xl font-sans tracking-tight">Deutsche Bank</h1>
-                      <h2 className="text-xl font-sans text-blue-500">OnlineBanking & Brokerage</h2>
-                   </div>
-                   <div className="text-right text-[#0018a8] flex flex-col items-end">
-                      <div className="flex items-center gap-3">
-                         <h1 className="text-4xl font-sans font-bold tracking-tight">Deutsche Bank</h1>
-                         <div className="w-10 h-10 border-[3px] border-[#0018a8] relative p-1">
-                            <div className="w-full h-full bg-white border border-[#0018a8]">
-                               <div className="w-[120%] h-[3px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-1.5 left-1"></div>
-                            </div>
-                         </div>
-                      </div>
-                      <h2 className="text-lg font-sans">Aktiengesellschaft</h2>
-                      <div className="mt-2 font-bold text-lg underline"><a href="https://www.deutsche-bank.de">https://www.deutsche-bank.de</a></div>
-                   </div>
-                </div>
-                <div className="font-mono text-[9px] leading-[1.15] whitespace-pre-wrap text-black">
-                   {generateNetworkDeliveryText()}
-                </div>
-                <div className="mt-4 flex justify-end">
-                   <div className="pr-4 shrink-0">
-                      <a href={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/"} target="_blank" rel="noopener noreferrer">
-                         <QRCode
-                            value={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/"}
-                            size={85}
-                            level="H"
-                            fgColor="#000000"
-                            bgColor="#FFFFFF"
-                         />
-                      </a>
-                   </div>
-                </div>
-             </div>
+                  </div>
+               </div>
+            </div>
 
              {/* PAGE 2 */}
             <div className="print-page-wrapper w-[750px] px-10 py-6 bg-black text-gray-200 print-bg shadow-2xl print:shadow-none relative" style={{ minHeight: '1050px', backgroundColor: 'black' }}>
