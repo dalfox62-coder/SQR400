@@ -64,6 +64,16 @@ const DeutschePrintoutV2 = ({ data, onBack, isPublic = false }: { data: any, onB
         })()
       : "250630";
 
+   const tableDateStr = transaction.valueDate
+      ? (() => {
+           const d = new Date(transaction.valueDate);
+           const day = String(d.getDate()).padStart(2, '0');
+           const month = String(d.getMonth() + 1).padStart(2, '0');
+           const year = d.getFullYear();
+           return `${day}/${month}/${year}`;
+        })()
+      : "21/05/2025";
+
    const generateMT103Text = (isPage2 = false) => {
       return `${topHeaderDate} ${postTime}
 INTERNATIONAL SWIFT I/103.202 ACKS-${acksDateStr}-1 CUSTOMER'S COPY ${institution.address}
@@ -530,6 +540,103 @@ TIME                          : ${postTime}`;
                   <div style={{ top: '73%', left: '7%' }} className="absolute text-[10.5px] leading-relaxed">
                      Ref. Code: {meta.refCode}<br/>
                      Description: {transaction.securitiesDescription || "CASH WIRE TRANSFER"}
+                  </div>
+               </div>
+            </div>
+
+            {/* PAGE 6 (Landscape Detail Override) */}
+            <div className="print-landscape-wrapper bg-white shadow-2xl print:shadow-none print-bg overflow-hidden relative" style={{ pageBreakAfter: 'auto' }}>
+               <div className="print-landscape-inner absolute inset-0 w-full h-full">
+                  <img src="/deutsche-landscape-2-bg.jpeg" alt="Background 2" className="absolute inset-0 w-full h-full object-fill z-0" />
+                  
+                  <div className="absolute inset-0 z-10 font-sans text-black whitespace-nowrap tracking-tight">
+                     
+                     {/* Top Right Logo Text */}
+                     <div className="absolute top-[13%] right-[8%] text-[10px] leading-[1.2] font-sans text-right">
+                        SWIFT BIC: {institution.swiftCode}<br/>
+                        <a href="https://www.db.com" className="text-blue-600 underline text-[9.5px]">www.db.com</a>
+                     </div>
+
+                     {/* Top Left Text */}
+                     <div className="absolute top-[17%] left-[10%] text-[11px] leading-snug font-sans">
+                        To: {institution.accountName}<br/>
+                        Address: {institution.address}<br/>
+                        Attn: {institution.signatory}
+                     </div>
+
+                     {/* Top Right Date Text */}
+                     <div className="absolute top-[23%] right-[8%] text-[11px] leading-snug font-sans text-right">
+                        <div className="flex justify-end gap-2"><span>Date:</span> <span>{tableDateStr}</span></div>
+                        <div className="flex justify-end gap-2"><span>Transfer Reference No:</span> <span>{transaction.senderReference}</span></div>
+                     </div>
+
+                     {/* The Table */}
+                     <div className="absolute top-[43%] left-[5%] right-[5%] border border-black text-[10.5px] font-sans tracking-tight bg-transparent z-20">
+                        {/* Row 1 */}
+                        <div className="flex border-b border-black bg-[#d1d5db]/80">
+                           <div className="w-[50%] border-r border-black text-center py-0.5">Account Holder:</div>
+                           <div className="w-[50%] text-center py-0.5">Account Signatory:</div>
+                        </div>
+                        {/* Row 2 */}
+                        <div className="flex border-b border-black bg-white/70 backdrop-blur-sm">
+                           <div className="w-[50%] border-r border-black text-center py-1 font-bold text-[13px]">{institution.accountName}</div>
+                           <div className="w-[50%] text-center py-1 font-bold text-[13px]">{institution.signatory}</div>
+                        </div>
+                        {/* Row 3 */}
+                        <div className="flex border-b border-black bg-[#d1d5db]/80">
+                           <div className="w-[9%] border-r border-black text-center py-0.5">Type</div>
+                           <div className="w-[20%] border-r border-black text-center py-0.5">Account Number</div>
+                           <div className="w-[7%] border-r border-black text-center py-0.5">Currency</div>
+                           <div className="w-[9%] border-r border-black text-center py-0.5">Date</div>
+                           <div className="w-[14%] border-r border-black text-center py-0.5">Debit</div>
+                           <div className="w-[12%] border-r border-black text-center py-0.5">Credit</div>
+                           <div className="w-[29%] text-center py-0.5">Beneficiary</div>
+                        </div>
+                        {/* Row 4 */}
+                        <div className="flex border-b border-black bg-white/70 backdrop-blur-sm">
+                           <div className="w-[9%] border-r border-black text-center py-2 flex items-center justify-center">Corporate</div>
+                           <div className="w-[20%] border-r border-black text-center py-2 flex items-center justify-center">{institution.accountCode}{institution.accountNumber}</div>
+                           <div className="w-[7%] border-r border-black text-center py-2 flex items-center justify-center">{transaction.currency}</div>
+                           <div className="w-[9%] border-r border-black text-center py-2 flex items-center justify-center">{tableDateStr}</div>
+                           <div className="w-[14%] border-r border-black text-center py-2 flex items-center justify-center">{formatNumber(transaction.amount)}</div>
+                           <div className="w-[12%] border-r border-black text-center py-2 flex items-center justify-center"></div>
+                           <div className="w-[29%] py-1 px-1.5 text-[9.5px] leading-[1.2] text-left">
+                              Bank Name: {beneficiary.bankName}<br/>
+                              Account name: {beneficiary.accountName}<br/>
+                              Account number: {beneficiary.bankCode ? beneficiary.bankCode + beneficiary.accountNumber : beneficiary.accountNumber}<br/>
+                              SWIFT CODE:{beneficiary.swiftCode}
+                           </div>
+                        </div>
+                        {/* Row 5 */}
+                        <div className="flex border-b border-black bg-[#d1d5db]/80">
+                           <div className="w-full text-center py-0.5">SWIFT Transmission / Additional Fee: {transaction.swiftFee}</div>
+                        </div>
+                        {/* Row 6 */}
+                        <div className="flex border-b border-black bg-[#d1d5db]/80">
+                           <div className="w-[10%] border-r border-black text-center py-0.5">Date</div>
+                           <div className="w-[35%] border-r border-black text-center py-0.5">Previous Balance / Euro</div>
+                           <div className="w-[14%] border-r border-black text-center py-0.5">Debit</div>
+                           <div className="w-[12%] border-r border-black text-center py-0.5">Authority</div>
+                           <div className="w-[29%] text-center py-0.5">Current Balance / Euro</div>
+                        </div>
+                        {/* Row 7 */}
+                        <div className="flex border-b border-black bg-white/70 backdrop-blur-sm">
+                           <div className="w-[10%] border-r border-black text-center py-1 flex items-center justify-center">{tableDateStr}</div>
+                           <div className="w-[35%] border-r border-black text-center py-1 flex items-center justify-end pr-8">{formatNumber(transaction.previousBalance)}</div>
+                           <div className="w-[14%] border-r border-black text-center py-1 flex items-center justify-end pr-2">{formatNumber(transaction.amount)}</div>
+                           <div className="w-[12%] border-r border-black text-center py-1 flex items-center justify-center">CASHWIRE</div>
+                           <div className="w-[29%] text-center py-1 flex items-center justify-end pr-10">{formatNumber(transaction.currentBalance)}</div>
+                        </div>
+                        {/* Row 8 */}
+                        <div className="flex bg-white/70 backdrop-blur-sm">
+                           <div className="w-[10%] border-r border-black text-center py-1 flex items-center justify-center">{tableDateStr}</div>
+                           <div className="w-[35%] border-r border-black text-center py-1 flex items-center justify-end pr-8">{formatNumber(transaction.previousBalance)}</div>
+                           <div className="w-[14%] border-r border-black text-center py-1 flex items-center justify-end pr-2">{formatNumber(transaction.senderCharges)}</div>
+                           <div className="w-[12%] border-r border-black text-center py-1 flex items-center justify-center">Additional Fee</div>
+                           <div className="w-[29%] text-center py-1 flex items-center justify-end pr-10">{formatNumber(transaction.currentBalance)}</div>
+                        </div>
+                     </div>
+
                   </div>
                </div>
             </div>
