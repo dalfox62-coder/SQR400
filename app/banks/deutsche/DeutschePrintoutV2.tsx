@@ -429,12 +429,12 @@ TIME                          : ${postTime}`;
                   <img src="/deutsche-landscape-bg.jpeg" alt="Background" className="absolute inset-0 w-full h-full object-fill z-0" />
                   <div className="absolute inset-0 z-10 font-sans text-black whitespace-nowrap tracking-tight">
                   {/* Account Box */}
-                  <div style={{ top: '25.5%', left: '6.5%', width: '15.5%', height: '7%' }} className="absolute text-[10.5px] leading-tight text-center flex flex-col justify-center">
+                  <div style={{ top: '25.5%', left: '6%', width: '16%', height: '7%' }} className="absolute text-[10.5px] leading-tight text-center flex flex-col justify-center">
                      {institution.accountCode}<br/>{institution.accountNumber}
                   </div>
                   
                   {/* Instruction Type Box */}
-                  <div style={{ top: '25.5%', left: '23%', width: '35%', height: '7%' }} className="absolute text-[10.5px] leading-tight text-center flex flex-col justify-center">
+                  <div style={{ top: '25.5%', left: '22%', width: '36%', height: '7%' }} className="absolute text-[10.5px] leading-tight text-center flex flex-col justify-center">
                      {transaction.instructionType || "MT 103 - Internal Receipt Instruction"}<br/>Instruction Sub Type: {transaction.instructionSubType || "CASH WIRE TRANSFER"}
                   </div>
                   
@@ -467,20 +467,20 @@ TIME                          : ${postTime}`;
                         <span className="font-bold text-right tracking-tight">{formatNumber(transaction.amount)}</span>
                      </div>
                   </div>
-                  <div style={{ top: '51.5%', left: '7%', width: '29%' }} className="absolute text-[10.5px]">
+                  <div style={{ top: '52%', left: '7%', width: '29%' }} className="absolute text-[10.5px]">
                      <div className="flex justify-center gap-6">
                         <span className="underline">Internal</span>
                         <span className="underline">External</span>
                      </div>
                   </div>
-                  <div style={{ top: '54.5%', left: '7%', width: '29%' }} className="absolute text-[10.5px]">
+                  <div style={{ top: '53.5%', left: '7%', width: '29%' }} className="absolute text-[10.5px]">
                      <div className="flex justify-between px-2 pr-4">
                         <span>Currency:</span>
                         <span>{transaction.currency} {transaction.currencyFraction || "1/4"}</span>
                         <span>Released by:</span>
                      </div>
                   </div>
-                  <div style={{ top: '58.5%', left: '7%', width: '29%' }} className="absolute text-[10.5px]">
+                  <div style={{ top: '56%', left: '7%', width: '29%' }} className="absolute text-[10.5px]">
                      <div className="pl-2">
                         <span className="underline">PARTICIPANT:</span> {transaction.participant || "NOT.MOD"}
                      </div>
@@ -506,7 +506,7 @@ TIME                          : ${postTime}`;
                   </div>
                   
                   {/* Status Bottom */}
-                  <div style={{ top: '63%', left: '7%', width: '29%' }} className="absolute text-[10.5px] flex justify-between px-2 pr-6">
+                  <div style={{ top: '64.5%', left: '7%', width: '29%' }} className="absolute text-[10.5px] flex justify-between px-2 pr-6">
                      <span>NEW:</span>
                      <span>MTCH/NMAT</span>
                      <span>NAMT.CMIS</span>
@@ -518,7 +518,7 @@ TIME                          : ${postTime}`;
                   </div>
                   
                   {/* Securities */}
-                  <div style={{ top: '71.5%', left: '7%' }} className="absolute text-[10.5px] leading-relaxed">
+                  <div style={{ top: '73%', left: '7%' }} className="absolute text-[10.5px] leading-relaxed">
                      Ref. Code: {meta.refCode}<br/>
                      Description: {transaction.securitiesDescription || "CASH WIRE TRANSFER"}
                   </div>
