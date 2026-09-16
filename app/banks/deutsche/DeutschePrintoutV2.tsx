@@ -157,6 +157,8 @@ ANSWER BACK PAGE CONFIRMATION SYSTEM
 2/ 300 DELAWARE AVE, SUITE 210, WILMINGTON, DE19801, USA
 3/ ${beneficiary.swiftCode}
 ------------------------------------------------------------------------------------------------------------------`;
+   };
+
    const generateNetworkDeliveryText = () => {
       return `02829298 CNT,                  VALID
 071392 RFF-DTM,                VALID

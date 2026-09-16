@@ -1,0 +1,791 @@
+  1:   0 | "use client";
+  2:   0 | 
+  3:   0 | import React, { useEffect, useState } from "react";
+  4:   0 | import Head from "next/head";
+  5:   0 | import QRCode from "react-qr-code";
+  6:   0 | 
+  7:   1 | const formatNumber = (numStr: any) => {
+  8:   1 | if (!numStr) return "";
+  9:   1 | const num = parseFloat(numStr.replace(/,/g, ""));
+ 10:   1 | if (isNaN(num)) return numStr;
+ 11:   1 | return num.toLocaleString("en-US", { minimumFractionDigits: 
+ 12:   0 | };
+ 13:   0 | 
+ 14:   1 | const formatAmountStr = (amount: any, currency: any) => {
+ 15:   1 | return `${formatNumber(amount)}`;
+ 16:   0 | };
+ 17:   0 | 
+ 18:   1 | const getPageBreakStyle = () => ({
+ 19:   1 | pageBreakAfter: "always",
+ 20:   1 | breakAfter: "page",
+ 21:   0 | });
+ 22:   0 | 
+ 23:   1 | const DeutschePrintoutV2 = ({ data, onBack, isPublic = false
+ 24:   1 | const [baseUrl, setBaseUrl] = useState("https://sqr400-ten.v
+ 25:   1 | 
+ 26:   2 | useEffect(() => {
+ 27:   3 | if (typeof window !== "undefined") {
+ 28:   3 | setBaseUrl(window.location.origin);
+ 29:   2 | }
+ 30:   1 | }, []);
+ 31:   1 | 
+ 32:   1 | const { institution, transaction, beneficiary, meta } = data
+ 33:   1 | let postDateFormatted = transaction.valueDate ? new Date(tra
+ 34:   2 | if (transaction.settlementDate) {
+ 35:   2 | postDateFormatted = transaction.settlementDate;
+ 36:   1 | }
+ 37:   1 | const postTime = transaction.postTime || "11:49:54";
+ 38:   1 | 
+ 39:   1 | 
+ 40:   1 | let topHeaderDate = transaction.valueDate
+ 41:   1 | ? new Date(transaction.valueDate).toLocaleDateString('en-US'
+ 42:   1 | : "MONDAY, JUNE 30, 2025";
+ 43:   2 | if (transaction.topHeaderDate) {
+ 44:   2 | topHeaderDate = transaction.topHeaderDate.toUpperCase();
+ 45:   1 | }
+ 46:   1 | 
+ 47:   1 | const acksDateStr = transaction.valueDate
+ 48:   2 | ? (() => {
+ 49:   2 | const d = new Date(transaction.valueDate);
+ 50:   2 | const day = String(d.getDate()).padStart(2, '0');
+ 51:   2 | const month = String(d.getMonth() + 1).padStart(2, '0');
+ 52:   2 | const year = d.getFullYear();
+ 53:   2 | return `${day}${month}-${year}`;
+ 54:   1 | })()
+ 55:   1 | : "3006-2025";
+ 56:   1 | 
+ 57:   2 | const generateMT103Text = (isPage2 = false) => {
+ 58:   2 | return `${topHeaderDate} ${postTime}
+ 59:   2 | INTERNATIONAL SWIFT I/103.202 ACKS-${acksDateStr}-1 CUSTOMER
+ 60:   2 | ${isPage2 ? "------------------------------ -INSTANT TYPE, A
+ 61:   2 | / User: ${meta?.user}
+ 62:   2 | / Document History: ${meta?.documentHistory}
+ 63:   2 | / Post Date: ${postDateFormatted} ${postTime}
+ 64:   2 | / Message Type/Type: MT103 CASH WIRE TRANSFER VIA COMMON ACC
+ 65:   2 | / Message Reference: ${transaction.messageReference || "DEUT
+ 66:   2 | / SENDER: ${institution.swiftCode}
+ 67:   2 | / BANK NAME: ${institution.bankName}
+ 68:   2 | / BANK ADDRESS: ${institution.address}
+ 69:   2 | / BANK ACCOUNT NAME: ${institution.accountName}
+ 70:   2 | / BANK ACCOUNT NO: ${institution.accountNumber}
+ 71:   2 | / RECEIVER: ${beneficiary.swiftCode}
+ 72:   2 | / BANK NAME: ${beneficiary.bankName}
+ 73:   2 | / BANK ADDRESS: ${beneficiary.address}
+ 74:   2 | / ACCOUNT NAME: ${beneficiary.accountName}
+ 75:   2 | / ACCOUNT/SORT NUMBER: ${beneficiary.bankCode ? beneficiary.
+ 76:   2 | / Session Number: ${transaction.sessionNumber || "3476"}
+ 77:   2 | / Message Number: ${transaction.messageNumber || "987654"}
+ 78:   2 | -------------------------------- TEXT ----------------------
+ 79:   2 | :20: Sender's Reference
+ 80:   2 | / ${transaction.senderReference}
+ 81:   2 | :21: Transaction Code
+ 82:   2 | / ${transaction.transactionCode}
+ 83:   2 | :23B: Bank Operation Code
+ 84:   2 | / ${transaction.bankOperationCode || "CASH"}
+ 85:   2 | :32A: Value Date/ Currency/Interbank Settled Amount
+ 86:   2 | / ${postDateFormatted}
+ 87:   2 | / ${transaction.currency}
+ 88:   2 | / ${formatNumber(transaction.amount)}
+ 89:   2 | :33B: Currency/Instructed Amount
+ 90:   2 | / ${transaction.currency}
+ 91:   2 | / ${formatNumber(transaction.amount)}
+ 92:   2 | :50F: Ordering Customer-Name & Address
+ 93:   2 | 0/ ${institution.accountNumber}
+ 94:   2 | 1/ ${institution.accountName}
+ 95:   2 | 2/ ${institution.address?.split(',')[0] || ''}
+ 96:   2 | 3/ ${institution.country || 'GERMANY'}
+ 97:   2 | 4/ ${institution.swiftCode}
+ 98:   2 | :57A: Account with Institution
+ 99:   2 | / ${beneficiary.swiftCode}
+100:   2 | / ${beneficiary.bankName}
+101:   2 | / ${beneficiary.address}
+102:   2 | :59: Beneficiary Customer
+103:   2 | / ${beneficiary.bankCode ? beneficiary.bankCode + beneficiar
+104:   2 | / ${beneficiary.accountName}
+105:   2 | :70: Remittance Information
+106:   2 | ${transaction.remittanceInfo ? transaction.remittanceInfo.sp
+107:   2 | :71A: Details of Transaction
+108:   2 | / AGREEMENT NUMBER: ${transaction.remittanceInfo ? transacti
+109:   2 | / AGREEMENT DATE: MAY 19, 2025
+110:   2 | :71F: Sender's Charges
+111:   2 | / ${transaction.currency}
+112:   2 | / ${formatNumber(transaction.senderCharges || 798.00)}
+113:   2 | ------------------------------------------------------------
+114:   1 | };
+115:   1 | 
+116:   2 | const generateMT202Text = () => {
+117:   2 | return `----------------------------------------------------
+118:   2 | ANSWER BACK PAGE CONFIRMATION SYSTEM
+119:   2 | / User: ${meta?.user}
+120:   2 | / Document History: ${meta?.documentHistory}
+121:   2 | / Post Date: ${postDateFormatted} ${postTime}
+122:   2 | / Message Type/Type: MT-202
+123:   2 | / Message Reference: ${transaction.messageReference || "DEUT
+124:   2 | / SENDER: ${institution.swiftCode}
+125:   2 | / BANK NAME: ${institution.bankName}
+126:   2 | / BANK ADDRESS: ${institution.address}
+127:   2 | / BANK ACCOUNT NAME: ${institution.accountName}
+128:   2 | / BANK ACCOUNT NO: ${institution.accountNumber}
+129:   2 | / RECEIVER: ${beneficiary.swiftCode}
+130:   2 | / BANK NAME: ${beneficiary.bankName}
+131:   2 | / BANK ADDRESS: ${beneficiary.address}
+132:   2 | / ACCOUNT NAME: ${beneficiary.accountName}
+133:   2 | / ACCOUNT/SORT NUMBER: ${beneficiary.bankCode ? beneficiary.
+134:   2 | / Session Number: ${transaction.sessionNumber || "3476"}
+135:   2 | / Message Number: ${transaction.messageNumber || "987654"}
+136:   2 | ------------------------------------------------------------
+137:   2 | :20: Sender Reference Number
+138:   2 | / ${transaction.senderReference}
+139:   2 | :21: Related Ref
+140:   2 | / ${transaction.senderReference}
+141:   2 | :32A: Value Date, Currency Code, Amount
+142:   2 | / ${postDateFormatted}
+143:   2 | / ${transaction.currency}
+144:   2 | / ${formatNumber(transaction.amount)}
+145:   2 | :58A: Beneficiary Institution-Bic
+146:   2 | / ${beneficiary.swiftCode}
+147:   2 | / ${beneficiary.bankName}
+148:   2 | / ${beneficiary.address}
+149:   2 | :50F: Ordering Customer-Name & Address
+150:   2 | 0/ ${institution.accountNumber}
+151:   2 | 1/ ${institution.accountName}
+152:   2 | 2/ MORGARTENSTRASSE 3, 6003 LUZERN, SWITZERLAND
+153:   2 | 3/ ${institution.swiftCode}
+154:   2 | :59: Beneficiary Customer- Name & Address
+155:   2 | 0/ ${beneficiary.bankCode ? beneficiary.bankCode + beneficia
+156:   2 | 1/ ${beneficiary.accountName}
+157:   2 | 2/ 300 DELAWARE AVE, SUITE 210, WILMINGTON, DE19801, USA
+158:   2 | 3/ ${beneficiary.swiftCode}
+159:   2 | ------------------------------------------------------------
+160:   1 | };
+161:   1 | 
+162:   2 | const generateNetworkDeliveryText = () => {
+163:   2 | return `02829298 CNT,                  VALID
+164:   2 | 071392 RFF-DTM,                VALID
+165:   2 | 08D28270 RFF,                  VALID
+166:   2 | 092875 DTM,                    VALID
+167:   2 | 0D92020 USB-CTA-COM,           VALID
+168:   2 | 87293 USB,                     VALID
+169:   2 | OD8282 CTA,                    VALID
+170:   2 | OD828291 COM,                  VALID
+171:   2 | 071392 ERC-FTX-5G4,            VALID
+172:   2 | 87293 ERC,                     VALID
+173:   2 | 0892894 FTX,                   VALID
+174:   2 | 09203395 RFF-FTX,              VALID
+175:   2 | 0829396 REF,                   VALID
+176:   2 | 0829397 FTX,                   VALID
+177:   2 | 02829298 UNT,                  VALID
+178:   2 | 
+179:   2 | SERVER GLOBAL ID (ORIGIN) : DE0584
+180:   2 | SERVER GLOBAL IP  : 100.311.60.2/25/131.340/134 IDENTITY
+181:   2 | CODE : 43C DB JS DE 16DEXX
+182:   2 | APPLICATION WIRE TRANSFER INTERNATIONAL
+183:   2 | 
+184:   2 | NETWORK DELIVERY STATUS       : NETWORK ACK
+185:   2 | PRIORITY                      : DELIVERY
+186:   2 | URGENT                        : DELIVERED
+187:   2 | REMARK                        : OK
+188:   2 | AMOUNT                        : €${formatNumber(transaction.
+189:   2 | ORIGIN                        : ${institution.bankName}//${i
+190:   2 | DESTINATION                   : ${beneficiary.bankName}//${b
+191:   2 | SIZE                          : OK
+192:   2 | DELIVERED END MESSAGE         : MT103 CASH WIRE TRANSFER VIA
+193:   2 | MAC                           : AZ0006UZ415IT16
+194:   2 | CHK                           : CHK12479643218W019
+195:   2 | DATE                          : ${postDateFormatted}
+196:   2 | TIME                          : ${postTime}`;
+197:   1 | };
+198:   1 | 
+199:   1 | return (
+200:   1 | <div translate="no" className={`notranslate min-h-screen pb-
+201:   3 | <style dangerouslySetInnerHTML={{
+202:   3 | __html: `
+203:   4 | @media print {
+204:   5 | body * {
+205:   5 | visibility: hidden;
+206:   4 | }
+207:   5 | #printable-area, #printable-area * {
+208:   5 | visibility: visible;
+209:   4 | }
+210:   5 | #printable-area {
+211:   5 | width: 100%;
+212:   5 | background: white !important;
+213:   5 | padding: 0 !important;
+214:   5 | margin: 0 !important;
+215:   4 | }
+216:   5 | .page-break {
+217:   5 | page-break-after: always;
+218:   5 | break-after: page;
+219:   4 | }
+220:   5 | @page {
+221:   5 | size: A4 portrait;
+222:   5 | margin: 0;
+223:   4 | }
+224:   5 | .print-page-wrapper {
+225:   5 | width: 750px !important;
+226:   5 | height: 1050px !important;
+227:   5 | overflow: hidden !important;
+228:   5 | position: relative !important;
+229:   5 | box-shadow: none !important;
+230:   5 | margin: 0 auto !important;
+231:   5 | page-break-after: always;
+232:   5 | break-after: page;
+233:   4 | }
+234:   5 | .print-page-wrapper:last-child {
+235:   5 | page-break-after: auto !important;
+236:   5 | break-after: auto !important;
+237:   4 | }
+238:   5 | .print-landscape-content {
+239:   5 | transform: scale(0.7142);
+240:   5 | transform-origin: top left;
+241:   5 | width: 1050px !important;
+242:   5 | min-height: 1050px !important;
+243:   5 | position: absolute !important;
+244:   5 | top: 0 !important;
+245:   5 | left: 0 !important;
+246:   4 | }
+247:   5 | .no-print {
+248:   5 | display: none !important;
+249:   4 | }
+250:   5 | .print-bg {
+251:   5 | -webkit-print-color-adjust: exact !important;
+252:   5 | print-color-adjust: exact !important;
+253:   4 | }
+254:   3 | }
+255:   1 | `}} />
+256:   1 | 
+257:   1 | {/* Control Actions */}
+258:   1 | <div className="max-w-5xl mx-auto pt-6 px-4 mb-6 flex flex-w
+259:   2 | {!isPublic && (
+260:   2 | <button onClick={onBack} className="px-5 py-2.5 bg-gray-300 
+261:   2 | ← Back to Form
+262:   2 | </button>
+263:   1 | )}
+264:   1 | <button onClick={() => window.print()} className="px-5 py-2.
+265:   1 | 🖨️ Download / Save as PDF
+266:   1 | </button>
+267:   1 | </div>
+268:   1 | 
+269:   1 | <div id="printable-area" className="w-full mx-auto printable
+270:   1 | 
+271:   1 | {/* PAGE 1 */}
+272:   1 | <div className="print-page-wrapper w-[750px] px-10 py-6 bg-w
+273:   1 | 
+274:   1 | {/* Vertical Barcode on the right edge */}
+275:   1 | <div className="absolute right-4 top-[220px] w-[50px] h-[350
+276:   1 | <div className="transform rotate-90 flex flex-col items-cent
+277:   1 | <div className="font-mono text-[11px] tracking-[0.2em]">{tra
+278:   1 | <img src="/logos/deutsche-barcode.png" alt="Barcode" classNa
+279:   1 | </div>
+280:   1 | </div>
+281:   1 | 
+282:   1 | <div className="flex justify-between items-start mb-4">
+283:   1 | <div className="text-[#0018a8]">
+284:   1 | <h1 className="text-3xl font-sans tracking-tight">Deutsche B
+285:   1 | <h2 className="text-xl font-sans text-blue-500">OnlineBankin
+286:   1 | </div>
+287:   1 | <div className="text-right text-[#0018a8] flex flex-col item
+288:   1 | <div className="flex items-center gap-3">
+289:   1 | <h1 className="text-4xl font-sans font-bold tracking-tight">
+290:   1 | <div className="w-10 h-10 border-[3px] border-[#0018a8] rela
+291:   1 | <div className="w-full h-full bg-white border border-[#0018a
+292:   1 | <div className="w-[120%] h-[3px] bg-[#0018a8] origin-bottom-
+293:   1 | </div>
+294:   1 | </div>
+295:   1 | </div>
+296:   1 | <h2 className="text-lg font-sans">Aktiengesellschaft</h2>
+297:   1 | <div className="mt-2 font-bold text-lg underline"><a href="h
+298:   1 | </div>
+299:   1 | </div>
+300:   1 | 
+301:   1 | <div className="font-mono text-[9px] leading-[1.15] whitespa
+302:   1 | {generateMT103Text(false)}
+303:   1 | </div>
+304:   1 | <div className="mt-4 flex justify-end">
+305:   1 | <div className="pr-4 shrink-0">
+306:   1 | <a href={data.slug ? `${baseUrl}/doc/${data.slug}` : "https:
+307:   1 | <QRCode
+308:   1 | value={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://
+309:   1 | size={85}
+310:   1 | level="H"
+311:   1 | fgColor="#000000"
+312:   1 | bgColor="#FFFFFF"
+313:   1 | />
+314:   1 | </a>
+315:   1 | </div>
+316:   1 | </div>
+317:   1 | </div>
+318:   1 | 
+319:   1 | {/* PAGE 2 */}
+320:   1 | <div className="print-page-wrapper w-[750px] px-10 py-6 bg-b
+321:   1 | {/* Full Page Background Image */}
+322:   1 | <div className="absolute inset-0 z-0">
+323:   1 | <img src="/deutsche-v2-bg.jpeg" alt="Deutsche Background" cl
+324:   1 | </div>
+325:   1 | 
+326:   1 | <div className="relative z-10 pt-[160px] pl-[15px]">
+327:   1 | <div className="font-mono text-[11px] leading-[1.15] whitesp
+328:   1 | {generateMT103Text(true)}
+329:   1 | </div>
+330:   1 | </div>
+331:   1 | </div>
+332:   1 | 
+333:   1 | {/* PAGE 3 */}
+334:   1 | <div className="print-page-wrapper w-[750px] px-10 py-6 bg-b
+335:   1 | {/* Full Page Background Image */}
+336:   1 | <div className="absolute inset-0 z-0">
+337:   1 | <img src="/deutsche-v2-bg.jpeg" alt="Deutsche Background" cl
+338:   1 | </div>
+339:   1 | 
+340:   1 | <div className="relative z-10 pt-[160px] pl-[15px]">
+341:   1 | <div className="font-mono text-[11px] leading-[1.15] whitesp
+342:   1 | {generateMT202Text()}
+343:   1 | </div>
+344:   1 | </div>
+345:   1 | </div>
+346:   1 | 
+347:   1 | {/* PAGE 4 (Network Delivery Status) */}
+348:   1 | <div className="print-page-wrapper w-[750px] px-10 py-6 bg-b
+349:   1 | {/* Full Page Background Image */}
+350:   1 | <div className="absolute inset-0 z-0">
+351:   1 | <img src="/deutsche-v2-bg.jpeg" alt="Deutsche Background" cl
+352:   1 | </div>
+353:   1 | 
+354:   1 | <div className="relative z-10 pt-[160px] pl-[15px]">
+355:   1 | <div className="font-mono text-[11px] leading-[1.15] whitesp
+356:   1 | {generateNetworkDeliveryText()}
+357:   1 | </div>
+358:   1 | </div>
+359:   1 | </div>
+360:   1 | 
+361:   1 | {/* PAGE 5 */}
+362:   1 | <div className="print-page-wrapper w-[1050px] bg-white print
+363:   1 | <div className="print-landscape-content w-full relative bg-[
+364:   1 | <div>
+365:   1 | <div className="w-full h-16 bg-[#312571] print-bg flex items
+366:   1 | <div className="px-14 py-8">
+367:   1 | <div className="flex justify-between items-center mb-6">
+368:   1 | <div className="flex items-center gap-3 text-[#0018a8]">
+369:   1 | <div className="w-10 h-10 border-[3px] border-[#0018a8] rela
+370:   1 | <div className="w-full h-full bg-white border border-[#0018a
+371:   1 | <div className="w-[120%] h-[3px] bg-[#0018a8] origin-bottom-
+372:   1 | </div>
+373:   1 | </div>
+374:   1 | <h1 className="text-4xl font-sans font-bold tracking-tight">
+375:   1 | </div>
+376:   1 | <div className="w-40 h-16 border-2 border-[#5b8ab5] rounded-
+377:   1 | <div className="absolute inset-0 flex items-center justify-c
+378:   1 | <div className="w-full h-[1px] bg-[#5b8ab5] absolute top-1/2
+379:   1 | <div className="w-[1px] h-full bg-[#5b8ab5] absolute left-1/
+380:   1 | <div className="w-[85%] h-[55%] border border-[#5b8ab5] roun
+381:   1 | <div className="w-[55%] h-[85%] border border-[#5b8ab5] roun
+382:   1 | </div>
+383:   1 | <span className="text-[#3b6d9e] font-serif font-bold text-3x
+384:   1 | </div>
+385:   1 | </div>
+386:   1 | 
+387:   1 | <div className="relative w-[85%]">
+388:   1 | <div className="grid grid-cols-[1.2fr_2.2fr_1.2fr] gap-0 bor
+389:   1 | <div>
+390:   1 | <div className="text-xs font-bold -mt-2 bg-[#ffffff] print-b
+391:   1 | <div className="border border-black p-2 mt-[-10px] text-sm f
+392:   1 | {institution.swiftCode}<br />{institution.accountNumber.subs
+393:   1 | </div>
+394:   1 | </div>
+395:   1 | <div className="ml-2">
+396:   1 | <div className="text-xs font-bold -mt-2 bg-[#ffffff] print-b
+397:   1 | <div className="border border-black p-2 mt-[-10px] text-sm f
+398:   1 | MT 103 - Internal Receipt Instruction<br />
+399:   1 | Instruction Sub Type: CASH WIRE TRANSFER
+400:   1 | </div>
+401:   1 | </div>
+402:   1 | <div className="ml-2">
+403:   1 | <div className="text-xs font-bold -mt-2 bg-[#ffffff] print-b
+404:   1 | <div className="border border-black p-2 mt-[-10px] text-[13p
+405:   1 | <span>Indicator: MAT3D</span>
+406:   1 | <span>Date {postDateFormatted}</span>
+407:   1 | </div>
+408:   1 | </div>
+409:   1 | </div>
+410:   1 | 
+411:   1 | <div className="grid grid-cols-2 gap-4 mb-4 text-xs font-san
+412:   1 | <div>
+413:   1 | References: {institution.swiftCode}<br />
+414:   1 | Sender: {institution.bankName}<br />
+415:   1 | Account Name: {institution.accountName}
+416:   1 | </div>
+417:   1 | <div className="border border-black p-2 pt-4 relative">
+418:   1 | <div className="text-xs font-bold bg-[#ffffff] print-bg px-1
+419:   1 | References: {beneficiary.swiftCode}<br />
+420:   1 | Receiver: {beneficiary.accountName}<br />
+421:   1 | {beneficiary.bankName}<br />
+422:   1 | Account No.: {beneficiary.bankCode ? beneficiary.bankCode + 
+423:   1 | </div>
+424:   1 | </div>
+425:   1 | 
+426:   1 | <div className="grid grid-cols-[1.2fr_1.8fr] gap-4 mb-4">
+427:   1 | <div className="border border-black p-2 pt-4 relative min-h-
+428:   1 | <div className="text-xs font-bold bg-[#ffffff] print-bg px-1
+429:   1 | <div className="text-xs font-sans mt-2 w-full pr-4">
+430:   1 | <div className="grid grid-cols-[80px_70px_auto]">
+431:   1 | <span>Received</span>
+432:   1 | <span>Amount:</span>
+433:   1 | <span>{formatNumber(transaction.amount)}</span>
+434:   1 | </div>
+435:   1 | <div className="grid grid-cols-[80px_70px_auto] my-1">
+436:   1 | <span></span>
+437:   1 | <span className="underline text-[11px]">Internal</span>
+438:   1 | <span className="underline text-[11px]">External</span>
+439:   1 | </div>
+440:   1 | <div className="grid grid-cols-[80px_70px_auto] mb-3">
+441:   1 | <span>Currency:</span>
+442:   1 | <span>{transaction.currency}</span>
+443:   1 | <span>€</span>
+444:   1 | </div>
+445:   1 | <div className="flex gap-2">
+446:   1 | <span className="underline">PARTICIPANT:</span>
+447:   1 | <span>NOT. MOD</span>
+448:   1 | </div>
+449:   1 | </div>
+450:   1 | </div>
+451:   1 | 
+452:   1 | <div className="border border-black p-2 pt-4 relative min-h-
+453:   1 | <div className="text-xs font-bold bg-[#ffffff] print-bg px-1
+454:   1 | <div className="grid grid-cols-[140px_100px_auto] gap-y-1 mt
+455:   1 | <span>Keyed by:</span><span></span><span></span>
+456:   1 | <span>Released by:</span><span>{postDateFormatted}</span><sp
+457:   1 | <span>Cancelled/Modified by:</span><span></span><span></span
+458:   1 | <span>Received by:</span><span>{postDateFormatted}</span><sp
+459:   1 | </div>
+460:   1 | </div>
+461:   1 | </div>
+462:   1 | 
+463:   1 | <div className="grid grid-cols-2 gap-4 mb-6">
+464:   1 | <div className="border border-black p-2 pt-4 relative">
+465:   1 | <div className="text-xs font-bold bg-[#ffffff] print-bg px-1
+466:   1 | <div className="flex gap-16 text-xs font-sans mt-1">
+467:   1 | <span>NEW:</span>
+468:   1 | <span>MTCH/NMAT</span>
+469:   1 | <span>NAMT.CMIS</span>
+470:   1 | </div>
+471:   1 | </div>
+472:   1 | <div className="text-xs font-sans p-2">
+473:   1 | Recipient Country: INDONESIA
+474:   1 | </div>
+475:   1 | </div>
+476:   1 | 
+477:   1 | <div className="grid grid-cols-[1.5fr_1fr] gap-4">
+478:   1 | <div className="border border-black p-3 pt-4 relative min-h-
+479:   1 | <div className="text-xs font-bold bg-[#ffffff] print-bg px-1
+480:   1 | <div>Ref. Code: {meta.refCode}</div>
+481:   1 | <div>Description: CASH WIRE TRANSFER</div>
+482:   1 | </div>
+483:   1 | <div className="border border-black p-2 pt-4 relative bg-[#e
+484:   1 | <div className="text-xs font-bold bg-[#ffffff] print-bg px-1
+485:   1 | <div className="text-xs mb-2">Printing done...</div>
+486:   1 | <div className="flex gap-[2px] h-6 w-3/4">
+487:   2 | {[...Array(15)].map((_, i) => (
+488:   2 | <div key={i} className="flex-1 bg-[#00bcd4] print-bg"></div>
+489:   1 | ))}
+490:   1 | </div>
+491:   1 | <div className="flex justify-center mt-4">
+492:   1 | <button className="px-6 py-1 bg-[#e0e0e0] border border-gray
+493:   1 | </div>
+494:   1 | </div>
+495:   1 | </div>
+496:   1 | 
+497:   1 | {/* Stamps and Signature Container */}
+498:   1 | <div className="absolute top-[320px] right-[50px] z-30 point
+499:   1 | {/* Circular Stamp */}
+500:   1 | <div className="absolute -top-[35px] -right-[72px] w-36 h-36
+501:   1 | <svg viewBox="0 0 100 100" className="w-full h-full absolute
+502:   1 | <path id="circlePath" d="M 10, 50 a 40,40 0 1,1 80,0 a 40,40
+503:   1 | <path id="circlePathBottom" d="M 10, 50 a 40,40 0 0,0 80,0" 
+504:   1 | <text className="text-[9.5px] font-bold font-sans fill-[#001
+505:   1 | <textPath href="#circlePath" startOffset="11%">
+506:   1 | DEUTSCHE BANK AG FRANKFURT ★
+507:   1 | </textPath>
+508:   1 | </text>
+509:   1 | <text className="text-[7.5px] font-bold font-sans fill-[#001
+510:   1 | <textPath href="#circlePathBottom" startOffset="50%" textAnc
+511:   1 | ★ 000 669 67 TEL ★
+512:   1 | </textPath>
+513:   1 | </text>
+514:   1 | <circle cx="50" cy="50" r="48" fill="none" stroke="#0018a8" 
+515:   1 | <circle cx="50" cy="50" r="32" fill="none" stroke="#0018a8" 
+516:   1 | </svg>
+517:   1 | <div className="w-10 h-10 border-[2px] border-[#0018a8] rela
+518:   1 | <div className="w-full h-full bg-[#f0f8fb] border border-[#0
+519:   1 | <div className="w-[120%] h-[2px] bg-[#0018a8] origin-bottom-
+520:   1 | </div>
+521:   1 | </div>
+522:   1 | </div>
+523:   1 | 
+524:   1 | {/* Stamp Overlay */}
+525:   1 | <div className="absolute top-[30px] -right-[45px] w-[340px] 
+526:   1 | <div className="text-[10px] font-sans font-bold leading-tigh
+527:   1 | {institution.address}
+528:   1 | </div>
+529:   1 | <div className="w-full border-b border-[#0018a8] my-1"></div
+530:   1 | <div className="flex items-center gap-4 py-1">
+531:   1 | <div className="w-10 h-10 border-[2px] border-[#0018a8] rela
+532:   1 | <div className="w-full h-full bg-[#f0f8fb] border border-[#0
+533:   1 | <div className="w-[120%] h-[2px] bg-[#0018a8] origin-bottom-
+534:   1 | </div>
+535:   1 | </div>
+536:   1 | <div className="text-3xl font-sans font-black tracking-tight
+537:   1 | </div>
+538:   1 | <div className="w-full border-t border-[#0018a8] my-1"></div
+539:   1 | <div className="flex justify-between w-full text-[10px] font
+540:   1 | <span>Tel +496991000</span>
+541:   1 | <span>Fax +496991034225</span>
+542:   1 | </div>
+543:   1 | </div>
+544:   1 | 
+545:   1 | {/* Signature */}
+546:   1 | <div className="absolute -top-[15px] -right-[50px] text-[#00
+547:   1 | MR. CARSTEN LEWERENZ
+548:   1 | </div>
+549:   1 | </div>
+550:   1 | </div>
+551:   1 | </div>
+552:   1 | </div>
+553:   1 | <div className="w-full h-16 bg-[#312571] print-bg mt-auto sh
+554:   1 | </div>
+555:   1 | </div>
+556:   1 | 
+557:   1 | {/* PAGE 4 */}
+558:   1 | <div className="print-page-wrapper w-[1050px] bg-white print
+559:   1 | <div className="print-landscape-content w-full relative p-10
+560:   1 | <div className="relative z-10 w-full h-full flex flex-col">
+561:   1 | <div className="flex justify-end items-start mb-2">
+562:   1 | <div className="text-right text-[#0018a8] flex flex-col item
+563:   1 | <div className="flex items-center gap-3">
+564:   1 | <h1 className="text-5xl font-sans font-bold tracking-tight">
+565:   1 | <div className="w-12 h-12 border-[4px] border-[#0018a8] rela
+566:   1 | <div className="w-full h-full bg-[#0018a8] border border-whi
+567:   1 | <div className="w-[140%] h-[4px] bg-white origin-bottom-left
+568:   1 | </div>
+569:   1 | </div>
+570:   1 | </div>
+571:   1 | <h2 className="text-sm font-sans font-bold mt-1">Deutsche Ba
+572:   1 | </div>
+573:   1 | </div>
+574:   1 | 
+575:   1 | <div className="flex justify-end text-[11px] mb-6">
+576:   1 | <div className="text-right">
+577:   1 | SWIFT BIC: {institution.swiftCode}<br />
+578:   1 | <a href="https://www.db.com" className="text-[#0018a8] under
+579:   1 | </div>
+580:   1 | </div>
+581:   1 | 
+582:   1 | <div className="flex justify-between text-[12.5px] mb-6 lead
+583:   1 | <div>
+584:   1 | To: {institution.accountName}<br />
+585:   1 | Address: {institution.address}<br /><br />
+586:   1 | Attn: {institution.signatory}
+587:   1 | </div>
+588:   1 | <div className="text-right">
+589:   1 | Date: {postDateFormatted}<br />
+590:   1 | Transfer Reference No: {transaction.senderReference}
+591:   1 | </div>
+592:   1 | </div>
+593:   1 | 
+594:   1 | <div className="w-full relative z-20">
+595:   1 | <table className="w-full border-collapse border border-black
+596:   1 | <thead>
+597:   1 | <tr className="bg-[#d2dce6] print-bg border-b border-black">
+598:   1 | <th className="border-r border-black py-1.5 px-2 font-normal
+599:   1 | <th className="py-1.5 px-2 font-normal text-left" colSpan={4
+600:   1 | </tr>
+601:   1 | <tr className="bg-transparent border-b border-black">
+602:   1 | <td className="border-r border-black py-1.5 px-2 font-bold t
+603:   1 | <td className="py-1.5 px-2 font-bold text-left underline" co
+604:   1 | </tr>
+605:   1 | <tr className="bg-[#d2dce6] print-bg font-bold border-b bord
+606:   1 | <th className="border-r border-black py-1.5 px-2 font-normal
+607:   1 | <th className="border-r border-black py-1.5 px-2 font-normal
+608:   1 | <th className="border-r border-black py-1.5 px-2 font-normal
+609:   1 | <th className="border-r border-black py-1.5 px-2 font-normal
+610:   1 | <th className="border-r border-black py-1.5 px-2 font-normal
+611:   1 | <th className="border-r border-black py-1.5 px-2 font-normal
+612:   1 | <th className="py-1.5 px-2 font-normal text-center">Benefici
+613:   1 | </tr>
+614:   1 | </thead>
+615:   1 | <tbody className="bg-transparent border-b border-black">
+616:   1 | <tr>
+617:   1 | <td className="border-r border-black py-4 px-2 font-bold">Co
+618:   1 | <td className="border-r border-black py-4 px-2">{institution
+619:   1 | <td className="border-r border-black py-4 px-2">{transaction
+620:   1 | <td className="border-r border-black py-4 px-2">{postDateFor
+621:   1 | <td className="border-r border-black py-4 px-2 text-right">{
+622:   1 | <td className="border-r border-black py-4 px-2"></td>
+623:   1 | <td className="py-2 px-4 text-left text-[10px] leading-tight
+624:   1 | Bank Name: {beneficiary.bankName}<br />
+625:   1 | Account name: {beneficiary.accountName}<br />
+626:   1 | Account number: {beneficiary.bankCode ? beneficiary.bankCode
+627:   1 | SWIFT CODE: {beneficiary.swiftCode}
+628:   1 | </td>
+629:   1 | </tr>
+630:   1 | <tr className="bg-[#d2dce6] print-bg">
+631:   1 | <td colSpan={7} className="py-1 text-center font-bold">SWIFT
+632:   1 | </tr>
+633:   1 | </tbody>
+634:   1 | </table>
+635:   1 | 
+636:   1 | <table className="w-full border-collapse border-l border-r b
+637:   1 | <thead className="bg-[#d2dce6] print-bg border-t border-b bo
+638:   1 | <tr>
+639:   1 | <th className="border-r border-black py-1.5 px-2 font-normal
+640:   1 | <th className="border-r border-black py-1.5 px-2 font-normal
+641:   1 | <th className="border-r border-black py-1.5 px-2 font-normal
+642:   1 | <th className="border-r border-black py-1.5 px-2 font-normal
+643:   1 | <th className="py-1.5 px-2 font-normal">Current Balance / Eu
+644:   1 | </tr>
+645:   1 | </thead>
+646:   1 | <tbody className="bg-transparent text-[11px]">
+647:   1 | <tr className="border-b border-black">
+648:   1 | <td className="border-r border-black py-1 px-2 text-center">
+649:   1 | <td className="border-r border-black py-1 px-2 text-right">{
+650:   1 | <td className="border-r border-black py-1 px-2 text-right">{
+651:   1 | <td className="border-r border-black py-1 px-2 text-center">
+652:   1 | <td className="py-1 px-2 text-right font-bold underline">{fo
+653:   1 | </tr>
+654:   1 | <tr>
+655:   1 | <td className="border-r border-black py-1 px-2 text-center">
+656:   1 | <td className="border-r border-black py-1 px-2 text-right">{
+657:   1 | <td className="border-r border-black py-1 px-2 text-right">{
+658:   1 | <td className="border-r border-black py-1 px-2 text-center">
+659:   1 | <td className="py-1 px-2 text-right">{formatNumber(transacti
+660:   1 | </tr>
+661:   1 | </tbody>
+662:   1 | </table>
+663:   1 | </div>
+664:   1 | 
+665:   1 | {/* Signatures Image & Names */}
+666:   1 | <div className="mt-4 w-full relative mb-0 z-30 opacity-90 te
+667:   1 | <div className="w-full flex justify-between px-16 text-[11px
+668:   1 | <div className="flex flex-col">
+669:   1 | <div className="uppercase">AUTHORIZED OFFICER</div>
+670:   1 | <div className="uppercase">MARCUS SCHENCK (PIN75456CFO)</div
+671:   1 | <div className="uppercase">CHIEF OPERATING OFFICER</div>
+672:   1 | </div>
+673:   1 | <div className="flex flex-col text-left">
+674:   1 | <div className="uppercase">AUTHORIZED OFFICER</div>
+675:   1 | <div className="uppercase">CHRISTIAN SEWING - ID CS9089</div
+676:   1 | <div className="uppercase">CHIEF EXECUTIVE OFFICER</div>
+677:   1 | </div>
+678:   1 | </div>
+679:   1 | <div className="relative w-full -mt-4 h-[150px] flex items-c
+680:   1 | <div className="w-[30%] flex justify-start pl-4">
+681:   1 | <img src="/images/1.png" alt="Signature 1" className="w-[90%
+682:   1 | </div>
+683:   1 | <div className="w-[40%] flex justify-center -mt-8">
+684:   1 | <img src="/images/2.png" alt="Stamp" className="w-[100%] h-a
+685:   1 | </div>
+686:   1 | <div className="w-[30%] flex justify-end pr-4">
+687:   1 | <img src="/images/3.png" alt="Signature 2" className="w-[90%
+688:   1 | </div>
+689:   1 | </div>
+690:   1 | </div>
+691:   1 | </div>
+692:   1 | </div>
+693:   1 | </div>
+694:   1 | 
+695:   1 | {/* PAGE 5 */}
+696:   1 | <div className="print-page-wrapper w-[1050px] bg-white print
+697:   1 | <div className="print-landscape-content w-full relative p-10
+698:   1 | <div className="relative z-10 w-full h-full flex flex-col">
+699:   1 | <div className="flex justify-between items-start mb-6">
+700:   1 | <div className="text-[#0018a8]">
+701:   1 | <h1 className="text-[40px] font-sans font-bold tracking-tigh
+702:   1 | <h2 className="text-[22px] font-sans text-[#0081a8] tracking
+703:   1 | </div>
+704:   1 | <div className="w-[72px] h-[72px] border-[5px] border-[#0018
+705:   1 | <div className="w-full h-full bg-[#0018a8] border border-whi
+706:   1 | <div className="w-[140%] h-[3.5px] bg-white origin-bottom-le
+707:   1 | </div>
+708:   1 | </div>
+709:   1 | </div>
+710:   1 | 
+711:   1 | <div className="flex justify-between text-[11px] mb-8 leadin
+712:   1 | <div className="space-y-1">
+713:   1 | <div>Date: {postDateFormatted}</div>
+714:   1 | <div className="mt-3">Sender:</div>
+715:   1 | <div>{institution.accountName}</div>
+716:   1 | <div>{institution.address}</div>
+717:   1 | <div className="mt-1">IBAN:{institution.accountNumber}</div>
+718:   1 | </div>
+719:   1 | <div className="text-right text-[10px] mr-24">
+720:   1 | <div className="font-bold">Deutsche Bank AG</div>
+721:   1 | <div className="mt-1">{institution.address || "DEUTSCHE BANK
+722:   1 | </div>
+723:   1 | </div>
+724:   1 | 
+725:   1 | <div className="text-center font-bold text-base mb-8 trackin
+726:   1 | REMITTANCE ADVICE
+727:   1 | </div>
+728:   1 | 
+729:   1 | <div className="flex gap-4 text-[10px] font-bold mb-6 upperc
+730:   1 | <div>ACCOUNT HOLDER: <span className="font-normal">{institut
+731:   1 | <div className="ml-4">ACCOUNT SIGNATORY: <span className="fo
+732:   1 | </div>
+733:   1 | 
+734:   1 | <div className="w-full text-[10px]">
+735:   1 | <div className="grid grid-cols-[1.5fr_1.5fr_1fr_1fr_1.5fr_2f
+736:   1 | <div>ACCOUNT TYPE</div>
+737:   1 | <div className="text-center">ACCOUNT NUMBER</div>
+738:   1 | <div className="text-center">CURRENCY</div>
+739:   1 | <div className="text-center">DATE</div>
+740:   1 | <div className="text-center">AMOUNT</div>
+741:   1 | <div className="text-center">BENEFICIARY</div>
+742:   1 | </div>
+743:   1 | 
+744:   1 | <div className="grid grid-cols-[1.5fr_1.5fr_1fr_1fr_1.5fr_2f
+745:   1 | <div>Corporate account<br /><br />{institution.accountName}<
+746:   1 | <div className="text-center"><br /><br />{institution.accoun
+747:   1 | <div className="text-center uppercase"><br /><br />{transact
+748:   1 | <div className="text-center"><br /><br />{postDateFormatted}
+749:   1 | <div className="text-center"><br /><br />{formatNumber(trans
+750:   1 | <div className="text-left pl-8 leading-relaxed">
+751:   1 | Address: INDONESIA<br /><br />
+752:   1 | {beneficiary.bankName}<br /><br />
+753:   1 | Address {beneficiary.address}<br /><br />
+754:   1 | SWIFT: {beneficiary.swiftCode}<br /><br />
+755:   1 | ACCOUNT NUMBER: {beneficiary.bankCode ? beneficiary.bankCode
+756:   1 | </div>
+757:   1 | </div>
+758:   1 | 
+759:   1 | <div className="grid grid-cols-[1fr_2fr_1.5fr_1.5fr_1.5fr] g
+760:   1 | <div>DATE</div>
+761:   1 | <div className="text-center">PREV.BALANCE</div>
+762:   1 | <div className="text-center">AUTHORITY</div>
+763:   1 | <div className="text-center">AMOUNT</div>
+764:   1 | <div className="text-center">BALANCE</div>
+765:   1 | </div>
+766:   1 | 
+767:   1 | <div className="grid grid-cols-[1fr_2fr_1.5fr_1.5fr_1.5fr] g
+768:   1 | <div>{postDateFormatted}</div>
+769:   1 | <div className="text-center">€{formatNumber(transaction.prev
+770:   1 | <div className="text-center">CASH TRANSFER</div>
+771:   1 | <div className="text-center">€{formatNumber(transaction.amou
+772:   1 | <div className="text-center">€{formatNumber(transaction.curr
+773:   1 | </div>
+774:   1 | </div>
+775:   1 | 
+776:   1 | <div className="flex items-end mt-8 text-[11px] w-full pl-[5
+777:   1 | <div className="z-20 -mb-2 mr-4">
+778:   1 | <img src="/images/page5_stamp_v2.png" alt="Stamps" className
+779:   1 | </div>
+780:   1 | <div className="mb-10 z-10 whitespace-nowrap">Senior Corpora
+781:   1 | </div>
+782:   1 | </div>
+783:   1 | </div>
+784:   1 | </div>
+785:   1 | 
+786:   1 | </div>
+787:   1 | </div>
+788:   1 | );
+789:   0 | };
+790:   0 | 
+791:   0 | export default DeutschePrintoutV2;
