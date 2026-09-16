@@ -640,6 +640,8 @@ TIME                          : ${postTime}`;
 
                   </div>
                </div>
+            </div>
+            
             {/* PAGE 7 (Remittance Advice) */}
             <div className="print-landscape-wrapper bg-white shadow-2xl print:shadow-none overflow-hidden relative" style={{ pageBreakAfter: 'auto' }}>
                <div className="print-landscape-inner absolute inset-0 w-full h-full bg-white font-sans text-black pt-16 px-16 pb-12">
@@ -743,7 +745,6 @@ TIME                          : ${postTime}`;
                   </div>
                </div>
             </div>
-         </div>
          </div>
          </div>
       </div>
