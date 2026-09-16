@@ -429,30 +429,30 @@ TIME                          : ${postTime}`;
                   <img src="/deutsche-landscape-bg.jpeg" alt="Background" className="absolute inset-0 w-full h-full object-fill z-0" />
                   <div className="absolute inset-0 z-10 font-sans text-black whitespace-nowrap tracking-tight">
                   {/* Account Box */}
-                  <div className="absolute top-[29%] left-[6.5%] w-[16%] text-[10.5px] leading-tight text-center flex flex-col justify-center">
+                  <div style={{ top: '29%', left: '6.5%', width: '16%' }} className="absolute text-[10.5px] leading-tight text-center flex flex-col justify-center">
                      {institution.accountCode}<br/>{institution.accountNumber}
                   </div>
                   
                   {/* Instruction Type Box */}
-                  <div className="absolute top-[29%] left-[23.5%] w-[35%] text-[10.5px] leading-tight text-center flex flex-col justify-center">
+                  <div style={{ top: '29%', left: '23.5%', width: '35%' }} className="absolute text-[10.5px] leading-tight text-center flex flex-col justify-center">
                      {transaction.instructionType || "MT 103 - Internal Receipt Instruction"}<br/>Instruction Sub Type: {transaction.instructionSubType || "CASH WIRE TRANSFER"}
                   </div>
                   
                   {/* GBS Screen Box */}
-                  <div className="absolute top-[29.5%] left-[60.5%] w-[16%] text-[10px] leading-tight flex justify-between items-center px-2">
+                  <div style={{ top: '29.5%', left: '59%', width: '17%' }} className="absolute text-[10px] leading-tight flex justify-between items-center px-2">
                      <span>Indicator: MAT3D</span>
                      <span>Date {postDateFormatted}</span>
                   </div>
                   
                   {/* References Left */}
-                  <div className="absolute top-[38%] left-[7.5%] w-[30%] text-[10.5px] leading-[1.4]">
-                     References: {transaction.senderReference}<br/>
+                  <div style={{ top: '40%', left: '7%' }} className="absolute text-[10.5px] leading-[1.4]">
+                     References: {institution.swiftCode}<br/>
                      Sender: {institution.bankName}<br/>
                      Account Name: {institution.accountName}
                   </div>
                   
                   {/* References Right */}
-                  <div className="absolute top-[38%] left-[39.5%] w-[42%] text-[10.5px] leading-[1.3]">
+                  <div style={{ top: '40%', left: '37.5%' }} className="absolute text-[10.5px] leading-[1.3]">
                      References: {beneficiary.swiftCode}<br/>
                      Receiver: {beneficiary.accountName}<br/>
                      Client {beneficiary.bankName}<br/>
@@ -460,7 +460,7 @@ TIME                          : ${postTime}`;
                   </div>
                   
                   {/* Status Left */}
-                  <div className="absolute top-[50.5%] left-[7.5%] w-[30%] text-[10.5px] leading-[1.4]">
+                  <div style={{ top: '53.5%', left: '7%', width: '30%' }} className="absolute text-[10.5px] leading-[1.4]">
                      <div className="flex justify-between px-2">
                         <span>Received</span>
                         <span>Amount:</span>
@@ -481,28 +481,38 @@ TIME                          : ${postTime}`;
                   </div>
                   
                   {/* User Activity */}
-                  <div className="absolute top-[50.5%] left-[39.5%] w-[42%] text-[10.5px] leading-[1.4]">
-                     <div className="grid grid-cols-[130px_90px_auto_auto] gap-y-1 items-center">
-                        <span>Keyed by:</span><span>{postDateFormatted}</span><span className="text-center">-</span><span className="text-right">09:44:52</span>
-                        <span>Cancelled/Modified by:</span><span></span><span></span><span></span>
-                        <span>Received by:</span><span>{postDateFormatted}</span><span className="text-center">-</span><span className="text-right">{meta.receivedTime}</span>
+                  <div style={{ top: '53.5%', left: '37.5%', width: '42%' }} className="absolute text-[10.5px] leading-[1.4] flex flex-col gap-1">
+                     <div className="flex">
+                        <span className="w-[140px]">Keyed by:</span>
+                        <span className="w-[80px] text-center">{postDateFormatted}</span>
+                        <span className="w-[40px] text-center">-</span>
+                        <span>09:44:52</span>
+                     </div>
+                     <div className="flex">
+                        <span className="w-[140px]">Cancelled/Modified by:</span>
+                     </div>
+                     <div className="flex">
+                        <span className="w-[140px]">Received by:</span>
+                        <span className="w-[80px] text-center">{postDateFormatted}</span>
+                        <span className="w-[40px] text-center">-</span>
+                        <span>{meta.receivedTime}</span>
                      </div>
                   </div>
                   
                   {/* Status Bottom */}
-                  <div className="absolute top-[65.5%] left-[7.5%] w-[30%] text-[10.5px] flex justify-between px-2">
+                  <div style={{ top: '70%', left: '7%', width: '30%' }} className="absolute text-[10.5px] flex justify-between px-2">
                      <span>NEW:</span>
                      <span>MTCH/NMAT</span>
                      <span>NAMT.CMIS</span>
                   </div>
                   
                   {/* Recipient Country */}
-                  <div className="absolute top-[64.5%] left-[45.5%] text-[10.5px]">
+                  <div style={{ top: '69%' , left: '44%' }} className="absolute text-[10.5px]">
                      Recipient Country: {transaction.country || 'GERMANY'}
                   </div>
                   
                   {/* Securities */}
-                  <div className="absolute top-[73.5%] left-[7.5%] w-[30%] text-[10.5px] leading-relaxed">
+                  <div style={{ top: '79%', left: '7%' }} className="absolute text-[10.5px] leading-relaxed">
                      Ref. Code: {meta.refCode}<br/>
                      Description: {transaction.securitiesDescription || "CASH WIRE TRANSFER"}
                   </div>
