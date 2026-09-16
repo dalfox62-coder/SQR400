@@ -160,21 +160,30 @@ ANSWER BACK PAGE CONFIRMATION SYSTEM
    };
 
    const generateNetworkDeliveryText = () => {
-      return `02829298 CNT,                  VALID
-071392 RFF-DTM,                VALID
-08D28270 RFF,                  VALID
-092875 DTM,                    VALID
-0D92020 USB-CTA-COM,           VALID
-87293 USB,                     VALID
-OD8282 CTA,                    VALID
-OD828291 COM,                  VALID
-071392 ERC-FTX-5G4,            VALID
-87293 ERC,                     VALID
-0892894 FTX,                   VALID
-09203395 RFF-FTX,              VALID
-0829396 REF,                   VALID
-0829397 FTX,                   VALID
-02829298 UNT,                  VALID
+      const validLines = [
+         "02829298 CNT,",
+         "071392 RFF-DTM,",
+         "08D28270 RFF,",
+         "092875 DTM,",
+         "0D92020 USB-CTA-COM,",
+         "87293 USB,",
+         "OD8282 CTA,",
+         "OD828291 COM,",
+         "071392 ERC-FTX-5G4,",
+         "87293 ERC,",
+         "0892894 FTX,",
+         "09203395 RFF-FTX,",
+         "0829396 REF,",
+         "0829397 FTX,",
+         "02829298 UNT,"
+      ];
+      
+      const indentedValidBlock = validLines.map(line => {
+         const dotsNeeded = 61 - line.length - 5;
+         return "                    " + line + ".".repeat(Math.max(0, dotsNeeded)) + "VALID";
+      }).join('\n');
+
+      return `${indentedValidBlock}
 
 SERVER GLOBAL ID (ORIGIN) : DE0584
 SERVER GLOBAL IP  : 100.311.60.2/25/131.340/134 IDENTITY
