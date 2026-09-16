@@ -233,28 +233,16 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
             </div>
 
             {/* PAGE 2 */}
-            <div className="print-page-wrapper w-[750px] px-10 py-6 bg-black text-gray-200 print-bg shadow-2xl print:shadow-none" style={{ minHeight: '1050px', backgroundColor: 'black' }}>
-               <div className="flex justify-between items-start mb-4 bg-black p-4 print-bg" style={{ backgroundColor: 'black' }}>
-                  <div className="text-white">
-                     <h1 className="text-3xl font-sans tracking-tight">Deutsche Bank</h1>
-                     <h2 className="text-xl font-sans text-blue-400">OnlineBanking & Brokerage</h2>
-                  </div>
-                  <div className="text-right flex flex-col items-end">
-                     <div className="flex items-center gap-3 text-[#0018a8]">
-                        <h1 className="text-4xl font-sans font-bold tracking-tight">Deutsche Bank</h1>
-                        <div className="w-10 h-10 border-[3px] border-[#0018a8] relative p-1 bg-black print-bg" style={{ backgroundColor: 'black' }}>
-                           <div className="w-full h-full bg-black border border-[#0018a8]" style={{ backgroundColor: 'black' }}>
-                              <div className="w-[120%] h-[3px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-1.5 left-1"></div>
-                           </div>
-                        </div>
-                     </div>
-                     <h2 className="text-lg font-sans text-[#0018a8]">Aktiengesellschaft</h2>
-                     <div className="mt-2 font-bold text-lg underline"><a href="https://www.deutsche-bank.de" className="text-[#0018a8]">https://www.deutsche-bank.de</a></div>
-                  </div>
+            <div className="print-page-wrapper w-[750px] px-10 py-6 bg-black text-gray-200 print-bg shadow-2xl print:shadow-none relative" style={{ minHeight: '1050px', backgroundColor: 'black' }}>
+               {/* Full Page Background Image */}
+               <div className="absolute inset-0 z-0">
+                  <img src="/deutsche-v2-bg.jpeg" alt="Deutsche Background" className="w-full h-full object-fill" />
                </div>
-
-               <div className="font-mono text-[9px] leading-[1.15] whitespace-pre-wrap text-gray-300">
-                  {generateMT103Text(true)}
+               
+               <div className="relative z-10 pt-[220px]">
+                  <div className="font-mono text-[9px] leading-[1.15] whitespace-pre-wrap text-gray-300">
+                     {generateMT103Text(true)}
+                  </div>
                </div>
             </div>
 
