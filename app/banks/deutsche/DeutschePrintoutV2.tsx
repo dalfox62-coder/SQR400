@@ -244,31 +244,6 @@ TIME                          : ${postTime}`;
             page-break-after: auto !important;
             break-after: auto !important;
           }
-          .print-landscape-wrapper {
-            width: 1050px !important;
-            height: 693px !important;
-            overflow: hidden !important;
-            position: relative !important;
-            box-shadow: none !important;
-            margin: 0 auto !important;
-            page-break-after: always;
-            break-after: page;
-          }
-          @media print {
-            .print-landscape-wrapper {
-               width: 750px !important;
-               height: 1050px !important;
-            }
-            .print-landscape-inner {
-               transform: scale(0.7142);
-               transform-origin: top left;
-               width: 1050px !important;
-               height: 693px !important;
-               position: absolute;
-               top: 0;
-               left: 0;
-            }
-          }
           .no-print {
             display: none !important;
           }
@@ -276,6 +251,29 @@ TIME                          : ${postTime}`;
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
           }
+          .print-landscape-wrapper {
+             width: 750px !important;
+             height: 1050px !important;
+          }
+          .print-landscape-inner {
+             transform: scale(0.7142);
+             transform-origin: top left;
+             width: 1050px !important;
+             height: 693px !important;
+             position: absolute;
+             top: 0;
+             left: 0;
+          }
+        }
+        .print-landscape-wrapper {
+          width: 1050px !important;
+          height: 693px !important;
+          overflow: hidden !important;
+          position: relative !important;
+          box-shadow: none !important;
+          margin: 0 auto !important;
+          page-break-after: always;
+          break-after: page;
         }
       `}} />
 
@@ -512,6 +510,7 @@ TIME                          : ${postTime}`;
             </div>
             </div>
 
+         </div>
          </div>
       </div>
    );
