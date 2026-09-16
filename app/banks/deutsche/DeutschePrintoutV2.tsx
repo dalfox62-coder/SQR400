@@ -111,8 +111,52 @@ ${transaction.remittanceInfo ? transaction.remittanceInfo.split('\n').map((line:
 / ${transaction.currency}
 / ${formatNumber(transaction.senderCharges || 798.00)}
 ------------------------------------------------------------------------------------------------------`;
+   };
+
    const generateMT202Text = () => {
-      return "TEST MT202 TEXT";
+      return `------------------------------------------------------------------------------------------------------------------
+ANSWER BACK PAGE CONFIRMATION SYSTEM
+/ User: ${meta?.user}
+/ Document History: ${meta?.documentHistory}
+/ Post Date: ${postDateFormatted} ${postTime}
+/ Message Type/Type: MT-202
+/ Message Reference: ${transaction.messageReference || "DEUTDEFF25210509445214461835"}
+/ SENDER: ${institution.swiftCode}
+/ BANK NAME: ${institution.bankName}
+/ BANK ADDRESS: ${institution.address}
+/ BANK ACCOUNT NAME: ${institution.accountName}
+/ BANK ACCOUNT NO: ${institution.accountNumber}
+/ RECEIVER: ${beneficiary.swiftCode}
+/ BANK NAME: ${beneficiary.bankName}
+/ BANK ADDRESS: ${beneficiary.address}
+/ ACCOUNT NAME: ${beneficiary.accountName}
+/ ACCOUNT/SORT NUMBER: ${beneficiary.bankCode ? beneficiary.bankCode + beneficiary.accountNumber : beneficiary.accountNumber}
+/ Session Number: ${transaction.sessionNumber || "3476"}
+/ Message Number: ${transaction.messageNumber || "987654"}
+------------------------------------------------------------------------------------------------------------------
+:20: Sender Reference Number
+/ ${transaction.senderReference}
+:21: Related Ref
+/ ${transaction.senderReference}
+:32A: Value Date, Currency Code, Amount
+/ ${postDateFormatted}
+/ ${transaction.currency}
+/ ${formatNumber(transaction.amount)}
+:58A: Beneficiary Institution-Bic
+/ ${beneficiary.swiftCode}
+/ ${beneficiary.bankName}
+/ ${beneficiary.address}
+:50F: Ordering Customer-Name & Address
+0/ ${institution.accountNumber}
+1/ ${institution.accountName}
+2/ MORGARTENSTRASSE 3, 6003 LUZERN, SWITZERLAND
+3/ ${institution.swiftCode}
+:59: Beneficiary Customer- Name & Address
+0/ ${beneficiary.bankCode ? beneficiary.bankCode + beneficiary.accountNumber : beneficiary.accountNumber}
+1/ ${beneficiary.accountName}
+2/ 300 DELAWARE AVE, SUITE 210, WILMINGTON, DE19801, USA
+3/ ${beneficiary.swiftCode}
+------------------------------------------------------------------------------------------------------------------`;
    };
 
    return (
@@ -253,7 +297,7 @@ ${transaction.remittanceInfo ? transaction.remittanceInfo.split('\n').map((line:
             <div className="print-page-wrapper w-[750px] px-10 py-6 bg-black text-gray-200 print-bg shadow-2xl print:shadow-none relative" style={{ minHeight: '1050px', backgroundColor: 'black' }}>
                {/* Full Page Background Image */}
                <div className="absolute inset-0 z-0">
-                  {/* img src="/deutsche-v2-bg.jpeg" alt="Deutsche Background" className="w-full h-full object-fill" / */}
+                  <img src="/deutsche-v2-bg.jpeg" alt="Deutsche Background" className="w-full h-full object-fill" />
                </div>
                
                <div className="relative z-10 pt-[160px] pl-[15px]">
