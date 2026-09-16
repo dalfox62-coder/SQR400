@@ -6,7 +6,8 @@ const DeutscheFormV2 = ({ onSubmit, initialData = {} as any }: any) => {
   const [formData, setFormData] = useState({
     institution: {
       swiftCode: initialData.institution?.swiftCode || "DEUTDEFFXXX",
-      accountNumber: initialData.institution?.accountNumber || "DE43500700100927361600",
+      accountCode: initialData.institution?.accountCode || "DE435007001",
+      accountNumber: initialData.institution?.accountNumber || "00927361600",
       accountName: initialData.institution?.accountName || "KELLCOR INVESTMENT GMBH",
       bankName: initialData.institution?.bankName || "DEUTSCHE BANK AG",
       address: initialData.institution?.address || "DEUTSCHE BANK A.G. TAUNUSANLAFE 12, FERANKURT AM MAIN 60254 FERNKFURT GERMANY",
@@ -17,11 +18,14 @@ const DeutscheFormV2 = ({ onSubmit, initialData = {} as any }: any) => {
       senderReference: initialData.transaction?.senderReference || "DEUTDEFF25300611495414461835",
       transactionCode: initialData.transaction?.transactionCode || "DEUT690754321567098723456",
       bankOperationCode: initialData.transaction?.bankOperationCode || "CASH",
+      instructionType: initialData.transaction?.instructionType || "MT 103 - Internal Receipt Instruction",
+      instructionSubType: initialData.transaction?.instructionSubType || "CASH WIRE TRANSFER",
       valueDate: initialData.transaction?.valueDate || "2025-06-30",
       topHeaderDate: initialData.transaction?.topHeaderDate || "",
       settlementDate: initialData.transaction?.settlementDate || "",
       postTime: initialData.transaction?.postTime || "11:49:54",
       currency: initialData.transaction?.currency || "EUR",
+      currencyFraction: initialData.transaction?.currencyFraction || "1/4",
       amount: initialData.transaction?.amount || "1500000001456.00",
       instructedAmount: initialData.transaction?.instructedAmount || "1500000001456.00",
       remittanceInfo: initialData.transaction?.remittanceInfo || "INVOICE SETTLEMENT",
@@ -32,6 +36,9 @@ const DeutscheFormV2 = ({ onSubmit, initialData = {} as any }: any) => {
       currentBalance: initialData.transaction?.currentBalance || "7463003849544.00",
       messageNumber: initialData.transaction?.messageNumber || "658906",
       sessionNumber: initialData.transaction?.sessionNumber || "3216",
+      country: initialData.transaction?.country || "GERMANY",
+      participant: initialData.transaction?.participant || "NOT.MOD",
+      securitiesDescription: initialData.transaction?.securitiesDescription || "CASH WIRE TRANSFER",
     },
     beneficiary: {
       swiftCode: initialData.beneficiary?.swiftCode || "BRINIDJA",
@@ -104,7 +111,11 @@ const DeutscheFormV2 = ({ onSubmit, initialData = {} as any }: any) => {
             <input type="text" className={inputClass} value={formData.institution.swiftCode} onChange={(e) => handleChange("institution", "swiftCode", e.target.value)} required />
           </div>
           <div>
-            <label className={labelClass}>Account Number</label>
+            <label className={labelClass}>Account Code (First Line)</label>
+            <input type="text" className={inputClass} value={formData.institution.accountCode} onChange={(e) => handleChange("institution", "accountCode", e.target.value)} />
+          </div>
+          <div>
+            <label className={labelClass}>Account Number (Second Line)</label>
             <input type="text" className={inputClass} value={formData.institution.accountNumber} onChange={(e) => handleChange("institution", "accountNumber", e.target.value)} />
           </div>
           <div>
@@ -176,6 +187,14 @@ const DeutscheFormV2 = ({ onSubmit, initialData = {} as any }: any) => {
             <input type="text" className={inputClass} placeholder="e.g. MONDAY, JUNE 30, 2025" value={formData.transaction.topHeaderDate || ""} onChange={(e) => handleChange("transaction", "topHeaderDate", e.target.value)} />
           </div>
           <div>
+            <label className={labelClass}>Instruction Type</label>
+            <input type="text" className={inputClass} value={formData.transaction.instructionType} onChange={(e) => handleChange("transaction", "instructionType", e.target.value)} />
+          </div>
+          <div>
+            <label className={labelClass}>Instruction Sub Type</label>
+            <input type="text" className={inputClass} value={formData.transaction.instructionSubType} onChange={(e) => handleChange("transaction", "instructionSubType", e.target.value)} />
+          </div>
+          <div>
             <label className={labelClass}>Settlement Date Override (V2)</label>
             <input type="text" className={inputClass} placeholder="e.g. 30.06.2025" value={formData.transaction.settlementDate || ""} onChange={(e) => handleChange("transaction", "settlementDate", e.target.value)} />
           </div>
@@ -189,11 +208,14 @@ const DeutscheFormV2 = ({ onSubmit, initialData = {} as any }: any) => {
           </div>
           <div>
             <label className={labelClass}>Currency</label>
-            <select className={selectClass} value={formData.transaction.currency} onChange={(e) => handleChange("transaction", "currency", e.target.value)}>
-              <option value="EUR">EUR - Euro</option>
-              <option value="USD">USD - US Dollar</option>
-              <option value="GBP">GBP - British Pound</option>
-            </select>
+            <div className="flex gap-2">
+              <select className={selectClass} value={formData.transaction.currency} onChange={(e) => handleChange("transaction", "currency", e.target.value)}>
+                <option value="EUR">EUR - Euro</option>
+                <option value="USD">USD - US Dollar</option>
+                <option value="GBP">GBP - British Pound</option>
+              </select>
+              <input type="text" className={`${inputClass} w-24`} placeholder="e.g. 1/4" value={formData.transaction.currencyFraction} onChange={(e) => handleChange("transaction", "currencyFraction", e.target.value)} />
+            </div>
           </div>
           <div>
             <label className={labelClass}>Amount *</label>
@@ -214,6 +236,18 @@ const DeutscheFormV2 = ({ onSubmit, initialData = {} as any }: any) => {
           <div>
             <label className={labelClass}>SWIFT Additional Fee</label>
             <input type="text" className={inputClass} value={formData.transaction.swiftFee} onChange={(e) => handleChange("transaction", "swiftFee", e.target.value)} />
+          </div>
+          <div>
+            <label className={labelClass}>Recipient Country</label>
+            <input type="text" className={inputClass} value={formData.transaction.country} onChange={(e) => handleChange("transaction", "country", e.target.value)} />
+          </div>
+          <div>
+            <label className={labelClass}>Participant</label>
+            <input type="text" className={inputClass} value={formData.transaction.participant} onChange={(e) => handleChange("transaction", "participant", e.target.value)} />
+          </div>
+          <div>
+            <label className={labelClass}>Securities Description</label>
+            <input type="text" className={inputClass} value={formData.transaction.securitiesDescription} onChange={(e) => handleChange("transaction", "securitiesDescription", e.target.value)} />
           </div>
           <div className="md:col-span-2">
             <label className={labelClass}>Remittance Info (70)</label>

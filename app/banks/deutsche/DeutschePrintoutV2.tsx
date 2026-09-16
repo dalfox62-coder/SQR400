@@ -431,13 +431,13 @@ TIME                          : ${postTime}`;
                   <img src="/deutsche-landscape-bg.jpeg" alt="Background" className="absolute inset-0 w-full h-full object-fill z-0" />
                   <div className="absolute inset-0 z-10 font-sans text-black whitespace-nowrap tracking-tight">
                   {/* Account Box */}
-                  <div className="absolute top-[29%] left-[6.5%] w-[16%] text-[10px] leading-tight text-center flex flex-col justify-center">
-                     {institution.swiftCode}<br/>{institution.accountNumber}
+                  <div className="absolute top-[29%] left-[6.5%] w-[16%] text-[10.5px] leading-tight text-center flex flex-col justify-center">
+                     {institution.accountCode}<br/>{institution.accountNumber}
                   </div>
                   
                   {/* Instruction Type Box */}
-                  <div className="absolute top-[29%] left-[23.5%] w-[35%] text-[10px] leading-tight text-center flex flex-col justify-center">
-                     MT 103 - Internal Receipt Instruction<br/>Instruction Sub Type: CASH WIRE TRANSFER
+                  <div className="absolute top-[29%] left-[23.5%] w-[35%] text-[10.5px] leading-tight text-center flex flex-col justify-center">
+                     {transaction.instructionType || "MT 103 - Internal Receipt Instruction"}<br/>Instruction Sub Type: {transaction.instructionSubType || "CASH WIRE TRANSFER"}
                   </div>
                   
                   {/* GBS Screen Box */}
@@ -474,20 +474,20 @@ TIME                          : ${postTime}`;
                      </div>
                      <div className="flex justify-between px-2">
                         <span>Currency:</span>
-                        <span>{transaction.currency} 1/4</span>
+                        <span>{transaction.currency} {transaction.currencyFraction || "1/4"}</span>
                         <span>Released by:</span>
                      </div>
                      <div className="mt-[8px] pl-2">
-                        <span className="underline">PARTICIPANT:</span> NOT.MOD
+                        <span className="underline">PARTICIPANT:</span> {transaction.participant || "NOT.MOD"}
                      </div>
                   </div>
                   
                   {/* User Activity */}
                   <div className="absolute top-[50.5%] left-[39.5%] w-[42%] text-[10.5px] leading-[1.4]">
-                     <div className="grid grid-cols-[130px_90px_auto] gap-y-1">
-                        <span>Keyed by:</span><span>{postDateFormatted}</span><span className="text-right">09:44:52</span>
-                        <span>Cancelled/Modified by:</span><span></span><span></span>
-                        <span>Received by:</span><span>{postDateFormatted}</span><span className="text-right">{meta.receivedTime}</span>
+                     <div className="grid grid-cols-[130px_90px_auto_auto] gap-y-1 items-center">
+                        <span>Keyed by:</span><span>{postDateFormatted}</span><span className="text-center">-</span><span className="text-right">09:44:52</span>
+                        <span>Cancelled/Modified by:</span><span></span><span></span><span></span>
+                        <span>Received by:</span><span>{postDateFormatted}</span><span className="text-center">-</span><span className="text-right">{meta.receivedTime}</span>
                      </div>
                   </div>
                   
@@ -506,7 +506,7 @@ TIME                          : ${postTime}`;
                   {/* Securities */}
                   <div className="absolute top-[73.5%] left-[7.5%] w-[30%] text-[10.5px] leading-relaxed">
                      Ref. Code: {meta.refCode}<br/>
-                     Description: CASH WIRE TRANSFER
+                     Description: {transaction.securitiesDescription || "CASH WIRE TRANSFER"}
                   </div>
                </div>
             </div>
