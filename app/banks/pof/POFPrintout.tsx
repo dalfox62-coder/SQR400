@@ -66,28 +66,18 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
           style={{ fontFamily: "Arial, sans-serif" }}
         >
           
-          {/* Dynamic Full Page Background Watermark */}
-          <div className="absolute inset-0 z-0 overflow-hidden bg-white pointer-events-none print-bg">
-             <div className="absolute inset-0 flex flex-wrap opacity-[0.25] mix-blend-multiply" style={{ color: '#8fb1d1' }}>
-                {Array.from({ length: 600 }).map((_, i) => (
-                   <span key={i} className="font-bold text-[13px] whitespace-nowrap mr-2 mb-1 select-none">
-                      {bank.bankName || 'BANK NAME'}
-                   </span>
-                ))}
-             </div>
-             <div className="absolute inset-0 flex items-center justify-center opacity-10">
-                <span className="text-[400px] font-black tracking-tighter text-[#8fb1d1] select-none" style={{ transform: 'rotate(-25deg)' }}>
-                   {(bank.bankName || 'B').charAt(0).toUpperCase()}
-                </span>
-             </div>
+          {/* Full Page Background Image */}
+          <div className="absolute inset-0 z-0">
+             <img src="/pof-bg-new.png" alt="POF Background" className="w-full h-full object-fill" />
           </div>
 
-          {/* QR Code */}
-          <div className="absolute top-[3%] left-[8%] z-20 flex flex-col items-center justify-start">
+          {/* Cover for baked-in QR, Barcode, and Date */}
+          <div className="absolute top-0 z-20 flex flex-col items-center justify-start pt-[2%] rounded-b-md shadow-sm bg-[#e3eff9]"
+               style={{ left: '8.8%', width: '15.5%', height: '11.5%' }}>
              <QRCode
                 value={qrValue}
                 size={256}
-                style={{ width: '90px', height: '90px' }}
+                style={{ width: '85%', height: 'auto', maxWidth: '120px' }}
                 level="M"
                 fgColor="#000000"
                 bgColor="transparent"
@@ -96,7 +86,7 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
 
           <div className="relative z-10 p-[12mm] px-[15mm]">
             {/* Spacer for top header (QR code and logos) */}
-            <div className="relative h-[80px] w-full">
+            <div className="relative h-[50px] w-full">
             </div>
 
             <div className="flex flex-col items-center mb-4 mt-2">
