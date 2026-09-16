@@ -4,14 +4,14 @@ import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import QRCode from "react-qr-code";
 
-const formatNumber = (numStr) => {
+const formatNumber = (numStr: any) => {
    if (!numStr) return "";
    const num = parseFloat(numStr.replace(/,/g, ""));
    if (isNaN(num)) return numStr;
    return num.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 };
 
-const formatAmountStr = (amount, currency) => {
+const formatAmountStr = (amount: any, currency: any) => {
    return `${formatNumber(amount)}`;
 };
 
@@ -58,8 +58,8 @@ const DeutschePrintoutV2 = ({ data, onBack, isPublic = false }: { data: any, onB
       return `${topHeaderDate} ${postTime}
 INTERNATIONAL SWIFT I/103.202 ACKS-${acksDateStr}-1 CUSTOMER'S COPY ${institution.address}
 ${isPage2 ? "------------------------------ -INSTANT TYPE, AND TRANSMISSION---------------------------------------" : "-------------------------------INSTANT TYPE, AND TRANSMISSION"}
-/ User: ${meta.user}
-/ Document History: ${meta.documentHistory}
+/ User: ${meta?.user}
+/ Document History: ${meta?.documentHistory}
 / Post Date: ${postDateFormatted} ${postTime}
 / Message Type/Type: MT103 CASH WIRE TRANSFER VIA COMMON ACCOUNT
 / Message Reference: ${transaction.messageReference || "DEUTDEFF25210509445214461835"}
@@ -114,8 +114,8 @@ ${transaction.remittanceInfo ? transaction.remittanceInfo.split('\n').map((line:
    const generateMT202Text = () => {
       return `------------------------------------------------------------------------------------------------------------------
 ANSWER BACK PAGE CONFIRMATION SYSTEM
-/ User: ${meta.user}
-/ Document History: ${meta.documentHistory}
+/ User: ${meta?.user}
+/ Document History: ${meta?.documentHistory}
 / Post Date: ${postDateFormatted} ${postTime}
 / Message Type/Type: MT-202
 / Message Reference: ${transaction.messageReference || "DEUTDEFF25210509445214461835"}
