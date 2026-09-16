@@ -157,6 +157,41 @@ ANSWER BACK PAGE CONFIRMATION SYSTEM
 2/ 300 DELAWARE AVE, SUITE 210, WILMINGTON, DE19801, USA
 3/ ${beneficiary.swiftCode}
 ------------------------------------------------------------------------------------------------------------------`;
+   const generateNetworkDeliveryText = () => {
+      return `02829298 CNT,                  VALID
+071392 RFF-DTM,                VALID
+08D28270 RFF,                  VALID
+092875 DTM,                    VALID
+0D92020 USB-CTA-COM,           VALID
+87293 USB,                     VALID
+OD8282 CTA,                    VALID
+OD828291 COM,                  VALID
+071392 ERC-FTX-5G4,            VALID
+87293 ERC,                     VALID
+0892894 FTX,                   VALID
+09203395 RFF-FTX,              VALID
+0829396 REF,                   VALID
+0829397 FTX,                   VALID
+02829298 UNT,                  VALID
+
+SERVER GLOBAL ID (ORIGIN) : DE0584
+SERVER GLOBAL IP  : 100.311.60.2/25/131.340/134 IDENTITY
+CODE : 43C DB JS DE 16DEXX
+APPLICATION WIRE TRANSFER INTERNATIONAL
+
+NETWORK DELIVERY STATUS       : NETWORK ACK
+PRIORITY                      : DELIVERY
+URGENT                        : DELIVERED
+REMARK                        : OK
+AMOUNT                        : €${formatNumber(transaction.amount)}
+ORIGIN                        : ${institution.bankName}//${institution.address}
+DESTINATION                   : ${beneficiary.bankName}//${beneficiary.address}
+SIZE                          : OK
+DELIVERED END MESSAGE         : MT103 CASH WIRE TRANSFER VIA COMMON ACCOUNT
+MAC                           : AZ0006UZ415IT16
+CHK                           : CHK12479643218W019
+DATE                          : ${postDateFormatted}
+TIME                          : ${postTime}`;
    };
 
    return (
@@ -307,7 +342,21 @@ ANSWER BACK PAGE CONFIRMATION SYSTEM
                </div>
             </div>
 
-            {/* PAGE 4 */}
+            {/* PAGE 4 (Network Delivery Status) */}
+            <div className="print-page-wrapper w-[750px] px-10 py-6 bg-black text-gray-200 print-bg shadow-2xl print:shadow-none relative" style={{ minHeight: '1050px', backgroundColor: 'black' }}>
+               {/* Full Page Background Image */}
+               <div className="absolute inset-0 z-0">
+                  <img src="/deutsche-v2-bg.jpeg" alt="Deutsche Background" className="w-full h-full object-fill" />
+               </div>
+               
+               <div className="relative z-10 pt-[160px] pl-[15px]">
+                  <div className="font-mono text-[11px] leading-[1.15] whitespace-pre-wrap text-white font-semibold tracking-wide">
+                     {generateNetworkDeliveryText()}
+                  </div>
+               </div>
+            </div>
+
+            {/* PAGE 5 */}
             <div className="print-page-wrapper w-[1050px] bg-white print:bg-white text-black relative shadow-2xl print:shadow-none print-bg" style={{ minHeight: '750px' }}>
                <div className="print-landscape-content w-full relative bg-[#f0f8fb] print-bg flex flex-col justify-between" style={{ minHeight: '1050px' }}>
                   <div>
