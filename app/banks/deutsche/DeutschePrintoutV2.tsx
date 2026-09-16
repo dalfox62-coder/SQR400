@@ -644,18 +644,18 @@ TIME                          : ${postTime}`;
             
             {/* PAGE 7 (Remittance Advice) */}
             <div className="print-landscape-wrapper bg-white shadow-2xl print:shadow-none overflow-hidden relative" style={{ pageBreakAfter: 'auto' }}>
-               <div className="print-landscape-inner absolute inset-0 w-full h-full bg-white font-sans text-black pt-16 px-16 pb-12">
+               <div className="print-landscape-inner absolute inset-0 w-full h-full bg-white font-sans text-black pt-10 px-12 pb-10">
                   {/* Outer Border */}
                   <div className="absolute inset-4 border border-gray-300 pointer-events-none"></div>
 
                   {/* Top Header */}
-                  <div className="flex justify-between items-start mb-8">
+                  <div className="flex justify-between items-start mb-4">
                      <div className="flex flex-col">
-                        <h1 className="text-[#0018a8] font-bold text-[38px] tracking-tight leading-none mb-1">Deutsche Bank</h1>
-                        <h2 className="text-[#0099cc] font-semibold text-[24px] tracking-tight leading-none">Global Transaction Banking</h2>
+                        <h1 className="text-[#0018a8] font-bold text-[36px] tracking-tight leading-none mb-1">Deutsche Bank</h1>
+                        <h2 className="text-[#0099cc] font-semibold text-[22px] tracking-tight leading-none">Global Transaction Banking</h2>
                      </div>
                      <div className="mt-[-5px]">
-                        <svg width="100" height="100" viewBox="0 0 100 100">
+                        <svg width="80" height="80" viewBox="0 0 100 100">
                            <rect x="4" y="4" width="92" height="92" fill="none" stroke="#0018a8" strokeWidth="8"/>
                            <path d="M 28 85 L 18 80 L 72 15 L 82 20 Z" fill="#0018a8"/>
                         </svg>
@@ -663,7 +663,7 @@ TIME                          : ${postTime}`;
                   </div>
 
                   {/* Top Info */}
-                  <div className="flex justify-between items-start mt-10 text-[12.5px] leading-snug">
+                  <div className="flex justify-between items-start mt-6 text-[12.5px] leading-snug">
                      <div className="flex flex-col gap-[2px]">
                         <div>Date: {tableDateStr}</div>
                         <div>Sender:</div>
@@ -678,19 +678,19 @@ TIME                          : ${postTime}`;
                   </div>
 
                   {/* Title */}
-                  <div className="text-center font-bold text-[18px] tracking-wider mt-16 mb-12">
+                  <div className="text-center font-bold text-[18px] tracking-wider mt-8 mb-8">
                      REMITTANCE ADVICE
                   </div>
 
                   {/* Account Info */}
-                  <div className="flex gap-16 text-[11px] font-bold mb-6">
+                  <div className="flex gap-16 text-[11px] font-bold mb-4">
                      <div>ACCOUNT HOLDER: <span className="font-normal">{institution.accountName}</span></div>
                      <div>ACCOUNT SIGNATORY: <span className="font-normal">{institution.signatory}</span></div>
                   </div>
 
                   {/* Table 1 */}
-                  <div className="text-[11px] w-full mb-16">
-                     <div className="flex font-bold pb-3 border-b border-transparent">
+                  <div className="text-[11px] w-full mb-8">
+                     <div className="flex font-bold pb-2 border-b border-transparent">
                         <div className="w-[18%]">ACCOUNT TYPE</div>
                         <div className="w-[20%] text-center">BENEFICIARY/NUMBER</div>
                         <div className="w-[12%] text-center">CURRENCY</div>
@@ -698,7 +698,7 @@ TIME                          : ${postTime}`;
                         <div className="w-[15%] text-right pr-6">AMOUNT</div>
                         <div className="w-[20%]"></div>
                      </div>
-                     <div className="flex pt-3 items-start">
+                     <div className="flex pt-2 items-start">
                         <div className="w-[18%] leading-snug">Corporate account<br/>{institution.accountName}</div>
                         <div className="w-[20%] text-center pt-2">{institution.accountNumber}</div>
                         <div className="w-[12%] text-center pt-2">{transaction.currency}</div>
@@ -716,15 +716,15 @@ TIME                          : ${postTime}`;
                   </div>
 
                   {/* Table 2 */}
-                  <div className="text-[11px] w-full mt-16">
-                     <div className="flex font-bold pb-4 border-b border-transparent">
+                  <div className="text-[11px] w-full mt-10">
+                     <div className="flex font-bold pb-3 border-b border-transparent">
                         <div className="w-[15%]">DATE</div>
                         <div className="w-[25%] text-center">PREV.BALANCE</div>
                         <div className="w-[20%] text-center">AUTHORITY</div>
                         <div className="w-[20%] text-center">AMOUNT</div>
                         <div className="w-[20%] text-right pr-8">BALANCE</div>
                      </div>
-                     <div className="flex pt-4">
+                     <div className="flex pt-3">
                         <div className="w-[15%]">{tableDateStr}</div>
                         <div className="w-[25%] text-center">{transaction.currency === 'EUR' ? '€' : transaction.currency === 'USD' ? '$' : transaction.currency === 'GBP' ? '£' : transaction.currency}{formatNumber(transaction.previousBalance)}</div>
                         <div className="w-[20%] text-center">CASH TRANSFER</div>
@@ -734,13 +734,13 @@ TIME                          : ${postTime}`;
                   </div>
 
                   {/* Signatures & Stamp */}
-                  <div className="flex items-center mt-20 relative">
-                     <div className="flex gap-4 text-[12px] ml-24 z-10">
+                  <div className="flex items-center mt-12 relative">
+                     <div className="flex gap-4 text-[12px] ml-16 z-10">
                         <span>Senior Corporate Officer</span>
                         <span className="font-bold uppercase">{transaction.participant || 'OLE MATTHIESSEN'}</span>
                      </div>
-                     <div className="absolute right-[40%] bottom-[-50px] z-0">
-                        <img src="/images/page5_stamps.png" alt="Stamp" className="h-[140px] object-contain opacity-85 mix-blend-multiply" />
+                     <div className="absolute right-[35%] bottom-[-20px] z-0">
+                        <img src="/images/page5_stamps.png" alt="Stamp" className="h-[120px] object-contain opacity-85 mix-blend-multiply" />
                      </div>
                   </div>
                </div>
