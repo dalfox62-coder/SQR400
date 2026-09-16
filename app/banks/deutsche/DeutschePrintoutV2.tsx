@@ -103,9 +103,9 @@ ${isPage2 ? "------------------------------ -INSTANT TYPE, AND TRANSMISSION-----
 / ${beneficiary.bankCode ? beneficiary.bankCode + beneficiary.accountNumber : beneficiary.accountNumber}
 / ${beneficiary.accountName}
 :70: Remittance Information
-${transaction.remittanceInfo ? transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n') : "/ KELL-IN/UEF/MT103/202/1,9B/05-2025"}
+${transaction.remittanceInfo ? transaction.remittanceInfo.split('\n').map((line: string) => `/ ${line}`).join('\n') : "/ KELL-IN/UEF/MT103/202/1,9B/05-2025"}
 :71A: Details of Transaction
-/ AGREEMENT NUMBER: ${transaction.remittanceInfo ? transaction.remittanceInfo.split('\\n')[0].replace('AGREEMENT NUMBER:', '').trim() : "KELL-IN/UEF/MT103/202/1,9B/05-2025"}
+/ AGREEMENT NUMBER: ${transaction.remittanceInfo ? transaction.remittanceInfo.split('\n')[0].replace('AGREEMENT NUMBER:', '').trim() : "KELL-IN/UEF/MT103/202/1,9B/05-2025"}
 / AGREEMENT DATE: MAY 19, 2025
 :71F: Sender's Charges
 / ${transaction.currency}
