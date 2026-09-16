@@ -249,8 +249,14 @@ TIME                          : ${postTime}`;
             size: A4 portrait;
             margin: 0;
           }
+          body {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            background-color: white !important;
+          }
           .print-page-wrapper {
             width: 750px !important;
+            min-width: 750px !important;
             height: 1050px !important;
             overflow: hidden !important;
             position: relative !important;
@@ -272,6 +278,7 @@ TIME                          : ${postTime}`;
           }
           .print-landscape-wrapper {
              width: 750px !important;
+             min-width: 750px !important;
              height: 1050px !important;
           }
           .print-landscape-inner {
@@ -286,6 +293,7 @@ TIME                          : ${postTime}`;
         }
         .print-landscape-wrapper {
           width: 1050px !important;
+          min-width: 1050px !important;
           height: 693px !important;
           overflow: hidden !important;
           position: relative !important;
@@ -390,7 +398,7 @@ TIME                          : ${postTime}`;
                      <a href={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/"} target="_blank" rel="noopener noreferrer">
                         <QRCode
                            value={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/"}
-                           size={85}
+                           size={110}
                            level="H"
                            fgColor="#000000"
                            bgColor="#FFFFFF"
