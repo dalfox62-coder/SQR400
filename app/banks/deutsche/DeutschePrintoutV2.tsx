@@ -56,14 +56,14 @@ const DeutschePrintoutV2 = ({ data, onBack, isPublic = false }: { data: any, onB
 
    const generateMT103Text = (isPage2 = false) => {
       return `${topHeaderDate} ${postTime}
-INTERNATIONAL SWIFT MT103 ACKS-${acksDateStr}-1 CUSTOMER'S COPY ${institution.address}
-${isPage2 ? "          INSTANT TYPE, AND TRANSMISSION" : "-------------------------------INSTANT TYPE, AND TRANSMISSION"}
+INTERNATIONAL SWIFT I/103.202 ACKS-${acksDateStr}-1 CUSTOMER'S COPY ${institution.address}
+${isPage2 ? "------------------------------ -INSTANT TYPE, AND TRANSMISSION---------------------------------------" : "-------------------------------INSTANT TYPE, AND TRANSMISSION"}
 / User: ${meta.user}
 / Document History: ${meta.documentHistory}
 / Post Date: ${postDateFormatted} ${postTime}
-/ Message Type/Type: MT103 CASH WIRE TRANSFER
-/ Message Reference: ${transaction.messageReference || "20230413" + institution.swiftCode + "20230413"}
-/ SENDER: ${institution.swiftCode.substring(0, 8)}
+/ Message Type/Type: MT103 CASH WIRE TRANSFER VIA COMMON ACCOUNT
+/ Message Reference: ${transaction.messageReference || "DEUTDEFF25210509445214461835"}
+/ SENDER: ${institution.swiftCode}
 / BANK NAME: ${institution.bankName}
 / BANK ADDRESS: ${institution.address}
 / BANK ACCOUNT NAME: ${institution.accountName}
@@ -73,15 +73,15 @@ ${isPage2 ? "          INSTANT TYPE, AND TRANSMISSION" : "----------------------
 / BANK ADDRESS: ${beneficiary.address}
 / ACCOUNT NAME: ${beneficiary.accountName}
 / ACCOUNT/SORT NUMBER: ${beneficiary.bankCode ? beneficiary.bankCode + beneficiary.accountNumber : beneficiary.accountNumber}
-/ Session Number: ${transaction.sessionNumber}
-/ Message Number: ${transaction.messageNumber}
-${isPage2 ? "" : "-------------------------------------MESSAGE TEXT-------------------------"}
+/ Session Number: ${transaction.sessionNumber || "3476"}
+/ Message Number: ${transaction.messageNumber || "987654"}
+-------------------------------- TEXT --------------------------------------------------------
 :20: Sender's Reference
 / ${transaction.senderReference}
 :21: Transaction Code
 / ${transaction.transactionCode}
 :23B: Bank Operation Code
-/ ${transaction.bankOperationCode}
+/ ${transaction.bankOperationCode || "CASH"}
 :32A: Value Date/ Currency/Interbank Settled Amount
 / ${postDateFormatted}
 / ${transaction.currency}
@@ -103,13 +103,14 @@ ${isPage2 ? "" : "-------------------------------------MESSAGE TEXT-------------
 / ${beneficiary.bankCode ? beneficiary.bankCode + beneficiary.accountNumber : beneficiary.accountNumber}
 / ${beneficiary.accountName}
 :70: Remittance Information
-${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
-:71A: Details of Charges
-/ ${transaction.charges}
+${transaction.remittanceInfo ? transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n') : "/ KELL-IN/UEF/MT103/202/1,9B/05-2025"}
+:71A: Details of Transaction
+/ AGREEMENT NUMBER: ${transaction.remittanceInfo ? transaction.remittanceInfo.split('\\n')[0].replace('AGREEMENT NUMBER:', '').trim() : "KELL-IN/UEF/MT103/202/1,9B/05-2025"}
+/ AGREEMENT DATE: MAY 19, 2025
 :71F: Sender's Charges
 / ${transaction.currency}
-/ ${formatNumber(transaction.senderCharges)}
-`;
+/ ${formatNumber(transaction.senderCharges || 798.00)}
+------------------------------------------------------------------------------------------------------`;
    };
 
    return (
@@ -239,8 +240,8 @@ ${transaction.remittanceInfo.split('\\n').map(line => `/ ${line}`).join('\\n')}
                   <img src="/deutsche-v2-bg.jpeg" alt="Deutsche Background" className="w-full h-full object-fill" />
                </div>
                
-               <div className="relative z-10 pt-[220px]">
-                  <div className="font-mono text-[9px] leading-[1.15] whitespace-pre-wrap text-gray-300">
+               <div className="relative z-10 pt-[160px] pl-[15px]">
+                  <div className="font-mono text-[11px] leading-[1.15] whitespace-pre-wrap text-white font-semibold tracking-wide">
                      {generateMT103Text(true)}
                   </div>
                </div>
