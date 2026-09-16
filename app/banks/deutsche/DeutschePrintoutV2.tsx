@@ -244,14 +244,30 @@ TIME                          : ${postTime}`;
             page-break-after: auto !important;
             break-after: auto !important;
           }
-          .print-landscape-content {
-            transform: scale(0.7142);
-            transform-origin: top left;
+          .print-landscape-wrapper {
             width: 1050px !important;
-            min-height: 1050px !important;
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
+            height: 693px !important;
+            overflow: hidden !important;
+            position: relative !important;
+            box-shadow: none !important;
+            margin: 0 auto !important;
+            page-break-after: always;
+            break-after: page;
+          }
+          @media print {
+            .print-landscape-wrapper {
+               width: 750px !important;
+               height: 1050px !important;
+            }
+            .print-landscape-inner {
+               transform: scale(0.7142);
+               transform-origin: top left;
+               width: 1050px !important;
+               height: 693px !important;
+               position: absolute;
+               top: 0;
+               left: 0;
+            }
           }
           .no-print {
             display: none !important;
@@ -275,7 +291,8 @@ TIME                          : ${postTime}`;
             </button>
          </div>
 
-         <div id="printable-area" className="w-full mx-auto printable-container flex flex-col gap-8 print:gap-0 items-center">
+         <div id="printable-area" className="w-full overflow-x-auto pb-10 printable-container">
+            <div className="w-fit mx-auto flex flex-col gap-8 print:gap-0 items-center min-w-[750px]">
 
             {/* PAGE 1 */}
             <div className="print-page-wrapper w-[750px] px-10 py-6 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '1050px' }}>
@@ -409,34 +426,35 @@ TIME                          : ${postTime}`;
             </div>
 
             {/* PAGE 5 (Landscape Override) */}
-            <div className="print-page-wrapper w-[1050px] relative shadow-2xl print:shadow-none print-bg overflow-hidden" style={{ height: '693px' }}>
-               <img src="/deutsche-landscape-bg.jpeg" alt="Background" className="absolute inset-0 w-full h-full object-fill z-0" />
-               <div className="absolute inset-0 z-10 font-sans text-black whitespace-nowrap tracking-tight">
+            <div className="print-landscape-wrapper bg-white shadow-2xl print:shadow-none print-bg overflow-hidden relative">
+               <div className="print-landscape-inner absolute inset-0 w-full h-full">
+                  <img src="/deutsche-landscape-bg.jpeg" alt="Background" className="absolute inset-0 w-full h-full object-fill z-0" />
+                  <div className="absolute inset-0 z-10 font-sans text-black whitespace-nowrap tracking-tight">
                   {/* Account Box */}
-                  <div className="absolute top-[26.5%] left-[10.5%] text-[11px] leading-tight text-center">
+                  <div className="absolute top-[29%] left-[6.5%] w-[16%] text-[10px] leading-tight text-center flex flex-col justify-center">
                      {institution.swiftCode}<br/>{institution.accountNumber}
                   </div>
                   
                   {/* Instruction Type Box */}
-                  <div className="absolute top-[26.5%] left-[22.5%] text-[11px] leading-tight">
+                  <div className="absolute top-[29%] left-[23.5%] w-[35%] text-[10px] leading-tight text-center flex flex-col justify-center">
                      MT 103 - Internal Receipt Instruction<br/>Instruction Sub Type: CASH WIRE TRANSFER
                   </div>
                   
                   {/* GBS Screen Box */}
-                  <div className="absolute top-[28.5%] left-[59.5%] text-[10px] leading-tight w-[180px] flex justify-between">
+                  <div className="absolute top-[29.5%] left-[60.5%] w-[16%] text-[10px] leading-tight flex justify-between items-center px-2">
                      <span>Indicator: MAT3D</span>
                      <span>Date {postDateFormatted}</span>
                   </div>
                   
                   {/* References Left */}
-                  <div className="absolute top-[35.5%] left-[6.5%] text-[11px] leading-[1.4]">
+                  <div className="absolute top-[38%] left-[7.5%] w-[30%] text-[10.5px] leading-[1.4]">
                      References: {transaction.senderReference}<br/>
                      Sender: {institution.bankName}<br/>
                      Account Name: {institution.accountName}
                   </div>
                   
                   {/* References Right */}
-                  <div className="absolute top-[34.5%] left-[37%] text-[11px] leading-[1.3]">
+                  <div className="absolute top-[38%] left-[39.5%] w-[42%] text-[10.5px] leading-[1.3]">
                      References: {beneficiary.swiftCode}<br/>
                      Receiver: {beneficiary.accountName}<br/>
                      Client {beneficiary.bankName}<br/>
@@ -444,29 +462,28 @@ TIME                          : ${postTime}`;
                   </div>
                   
                   {/* Status Left */}
-                  <div className="absolute top-[47%] left-[7.5%] text-[11px] leading-[1.4]">
-                     <div className="flex gap-4">
-                        <span className="w-16">Received</span>
+                  <div className="absolute top-[50.5%] left-[7.5%] w-[30%] text-[10.5px] leading-[1.4]">
+                     <div className="flex justify-between px-2">
+                        <span>Received</span>
                         <span>Amount:</span>
-                        <span className="ml-4">{formatNumber(transaction.amount)}</span>
+                        <span className="font-bold">{formatNumber(transaction.amount)}</span>
                      </div>
-                     <div className="flex gap-4 my-[1px]">
-                        <span className="w-16"></span>
-                        <span className="underline ml-6">Internal</span>
-                        <span className="underline ml-1">External</span>
+                     <div className="flex justify-center gap-6 my-[2px]">
+                        <span className="underline">Internal</span>
+                        <span className="underline">External</span>
                      </div>
-                     <div className="flex gap-4">
-                        <span className="w-16">Currency:</span>
+                     <div className="flex justify-between px-2">
+                        <span>Currency:</span>
                         <span>{transaction.currency} 1/4</span>
-                        <span className="ml-6">Released by:</span>
+                        <span>Released by:</span>
                      </div>
-                     <div className="mt-[6px]">
+                     <div className="mt-[8px] pl-2">
                         <span className="underline">PARTICIPANT:</span> NOT.MOD
                      </div>
                   </div>
                   
                   {/* User Activity */}
-                  <div className="absolute top-[49%] left-[38%] text-[11px] leading-[1.4]">
+                  <div className="absolute top-[50.5%] left-[39.5%] w-[42%] text-[10.5px] leading-[1.4]">
                      <div className="grid grid-cols-[130px_90px_auto] gap-y-1">
                         <span>Keyed by:</span><span>{postDateFormatted}</span><span className="text-right">09:44:52</span>
                         <span>Cancelled/Modified by:</span><span></span><span></span>
@@ -475,23 +492,24 @@ TIME                          : ${postTime}`;
                   </div>
                   
                   {/* Status Bottom */}
-                  <div className="absolute top-[62.5%] left-[7.5%] text-[11px] w-[310px] flex justify-between">
+                  <div className="absolute top-[65.5%] left-[7.5%] w-[30%] text-[10.5px] flex justify-between px-2">
                      <span>NEW:</span>
                      <span>MTCH/NMAT</span>
                      <span>NAMT.CMIS</span>
                   </div>
                   
                   {/* Recipient Country */}
-                  <div className="absolute top-[61.5%] left-[44%] text-[11px]">
+                  <div className="absolute top-[64.5%] left-[45.5%] text-[10.5px]">
                      Recipient Country: {transaction.country || 'GERMANY'}
                   </div>
                   
                   {/* Securities */}
-                  <div className="absolute top-[70%] left-[8.5%] text-[11px] leading-relaxed">
+                  <div className="absolute top-[73.5%] left-[7.5%] w-[30%] text-[10.5px] leading-relaxed">
                      Ref. Code: {meta.refCode}<br/>
                      Description: CASH WIRE TRANSFER
                   </div>
                </div>
+            </div>
             </div>
 
          </div>
