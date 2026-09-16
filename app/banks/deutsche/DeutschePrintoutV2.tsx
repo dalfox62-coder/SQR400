@@ -452,7 +452,7 @@ TIME                          : ${postTime}`;
                   </div>
                   
                   {/* References Right */}
-                  <div style={{ top: '36.5%', left: '38%', width: '40%' }} className="absolute text-[10px] leading-[1.15]">
+                  <div style={{ top: '36%', left: '38%', width: '40%' }} className="absolute text-[10px] leading-[1.1]">
                      References: {beneficiary.swiftCode}<br/>
                      Receiver: {beneficiary.accountName}<br/>
                      Client {beneficiary.bankName}<br/>
@@ -460,22 +460,24 @@ TIME                          : ${postTime}`;
                   </div>
                   
                   {/* Status Left */}
-                  <div style={{ top: '47.5%', left: '7%', width: '29%' }} className="absolute text-[10.5px] leading-[1.4]">
+                  <div style={{ top: '47.5%', left: '7%', width: '29%' }} className="absolute text-[10.5px] leading-[1.2]">
                      <div className="grid grid-cols-[80px_60px_auto] px-2 items-center">
                         <span>Received</span>
                         <span>Amount:</span>
                         <span className="font-bold text-right tracking-tight">{formatNumber(transaction.amount)}</span>
                      </div>
-                     <div className="flex justify-center gap-6 my-[2px]">
+                     <div className="h-[8px]"></div>
+                     <div className="flex justify-center gap-6">
                         <span className="underline">Internal</span>
                         <span className="underline">External</span>
                      </div>
-                     <div className="flex justify-between px-2 pr-4">
+                     <div className="flex justify-between px-2 pr-4 mt-[2px]">
                         <span>Currency:</span>
                         <span>{transaction.currency} {transaction.currencyFraction || "1/4"}</span>
                         <span>Released by:</span>
                      </div>
-                     <div className="mt-[8px] pl-2">
+                     <div className="h-[9px]"></div>
+                     <div className="pl-2">
                         <span className="underline">PARTICIPANT:</span> {transaction.participant || "NOT.MOD"}
                      </div>
                   </div>
