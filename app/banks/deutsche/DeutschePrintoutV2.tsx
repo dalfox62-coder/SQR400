@@ -429,12 +429,12 @@ TIME                          : ${postTime}`;
                   <img src="/deutsche-landscape-bg.jpeg" alt="Background" className="absolute inset-0 w-full h-full object-fill z-0" />
                   <div className="absolute inset-0 z-10 font-sans text-black whitespace-nowrap tracking-tight">
                   {/* Account Box */}
-                  <div style={{ top: '25.5%', left: '5.5%', width: '17.5%', height: '7%' }} className="absolute text-[10.5px] leading-tight text-center flex flex-col justify-center">
+                  <div style={{ top: '25.5%', left: '6.5%', width: '15.5%', height: '7%' }} className="absolute text-[10.5px] leading-tight text-center flex flex-col justify-center">
                      {institution.accountCode}<br/>{institution.accountNumber}
                   </div>
                   
                   {/* Instruction Type Box */}
-                  <div style={{ top: '25.5%', left: '22.5%', width: '36.5%', height: '7%' }} className="absolute text-[10.5px] leading-tight text-center flex flex-col justify-center">
+                  <div style={{ top: '25.5%', left: '23%', width: '35%', height: '7%' }} className="absolute text-[10.5px] leading-tight text-center flex flex-col justify-center">
                      {transaction.instructionType || "MT 103 - Internal Receipt Instruction"}<br/>Instruction Sub Type: {transaction.instructionSubType || "CASH WIRE TRANSFER"}
                   </div>
                   
