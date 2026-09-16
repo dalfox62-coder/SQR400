@@ -21,6 +21,7 @@ const DeutscheFormV2 = ({ onSubmit, initialData = {} as any }: any) => {
       instructionType: initialData.transaction?.instructionType || "MT 103 - Internal Receipt Instruction",
       instructionSubType: initialData.transaction?.instructionSubType || "CASH WIRE TRANSFER",
       valueDate: initialData.transaction?.valueDate || "2025-06-30",
+      agreementDate: initialData.transaction?.agreementDate || "MAY 19, 2025",
       topHeaderDate: initialData.transaction?.topHeaderDate || "",
       settlementDate: initialData.transaction?.settlementDate || "",
       postTime: initialData.transaction?.postTime || "11:49:54",
@@ -197,6 +198,10 @@ const DeutscheFormV2 = ({ onSubmit, initialData = {} as any }: any) => {
           <div>
             <label className={labelClass}>Settlement Date Override (V2)</label>
             <input type="text" className={inputClass} placeholder="e.g. 30.06.2025" value={formData.transaction.settlementDate || ""} onChange={(e) => handleChange("transaction", "settlementDate", e.target.value)} />
+          </div>
+          <div>
+            <label className={labelClass}>Agreement Date (71A)</label>
+            <input type="text" className={inputClass} placeholder="e.g. MAY 19, 2025" value={formData.transaction.agreementDate} onChange={(e) => handleChange("transaction", "agreementDate", e.target.value)} />
           </div>
           <div>
             <label className={labelClass}>Value Date</label>

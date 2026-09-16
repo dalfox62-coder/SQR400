@@ -54,10 +54,20 @@ const DeutschePrintoutV2 = ({ data, onBack, isPublic = false }: { data: any, onB
         })()
       : "3006-2025";
 
+   const swiftDateStr = transaction.valueDate
+      ? (() => {
+           const d = new Date(transaction.valueDate);
+           const day = String(d.getDate()).padStart(2, '0');
+           const month = String(d.getMonth() + 1).padStart(2, '0');
+           const year = String(d.getFullYear()).slice(2);
+           return `${year}${month}${day}`;
+        })()
+      : "250630";
+
    const generateMT103Text = (isPage2 = false) => {
       return `${topHeaderDate} ${postTime}
 INTERNATIONAL SWIFT I/103.202 ACKS-${acksDateStr}-1 CUSTOMER'S COPY ${institution.address}
-${isPage2 ? "------------------------------ -INSTANT TYPE, AND TRANSMISSION---------------------------------------" : "-------------------------------INSTANT TYPE, AND TRANSMISSION"}
+-------------------------------INSTANT TYPE, AND TRANSMISSION---------------------------------------
 / User: ${meta?.user}
 / Document History: ${meta?.documentHistory}
 / Post Date: ${postDateFormatted} ${postTime}
@@ -75,7 +85,6 @@ ${isPage2 ? "------------------------------ -INSTANT TYPE, AND TRANSMISSION-----
 / ACCOUNT/SORT NUMBER: ${beneficiary.bankCode ? beneficiary.bankCode + beneficiary.accountNumber : beneficiary.accountNumber}
 / Session Number: ${transaction.sessionNumber || "3476"}
 / Message Number: ${transaction.messageNumber || "987654"}
--------------------------------- TEXT --------------------------------------------------------
 :20: Sender's Reference
 / ${transaction.senderReference}
 :21: Transaction Code
@@ -83,7 +92,7 @@ ${isPage2 ? "------------------------------ -INSTANT TYPE, AND TRANSMISSION-----
 :23B: Bank Operation Code
 / ${transaction.bankOperationCode || "CASH"}
 :32A: Value Date/ Currency/Interbank Settled Amount
-/ ${postDateFormatted}
+/ ${swiftDateStr}
 / ${transaction.currency}
 / ${formatNumber(transaction.amount)}
 :33B: Currency/Instructed Amount
@@ -106,7 +115,7 @@ ${isPage2 ? "------------------------------ -INSTANT TYPE, AND TRANSMISSION-----
 ${transaction.remittanceInfo ? transaction.remittanceInfo.split('\n').map((line: string) => `/ ${line}`).join('\n') : "/ KELL-IN/UEF/MT103/202/1,9B/05-2025"}
 :71A: Details of Transaction
 / AGREEMENT NUMBER: ${transaction.remittanceInfo ? transaction.remittanceInfo.split('\n')[0].replace('AGREEMENT NUMBER:', '').trim() : "KELL-IN/UEF/MT103/202/1,9B/05-2025"}
-/ AGREEMENT DATE: MAY 19, 2025
+/ AGREEMENT DATE: ${transaction.agreementDate || "MAY 19, 2025"}
 :71F: Sender's Charges
 / ${transaction.currency}
 / ${formatNumber(transaction.senderCharges || 798.00)}
@@ -139,7 +148,7 @@ ANSWER BACK PAGE CONFIRMATION SYSTEM
 :21: Related Ref
 / ${transaction.senderReference}
 :32A: Value Date, Currency Code, Amount
-/ ${postDateFormatted}
+/ ${swiftDateStr}
 / ${transaction.currency}
 / ${formatNumber(transaction.amount)}
 :58A: Beneficiary Institution-Bic
