@@ -241,6 +241,9 @@ TIME                          : ${postTime}`;
             padding: 0 !important;
             margin: 0 !important;
           }
+            .print-page-wrapper {
+               margin: 0 auto !important;
+            }
           .page-break {
             page-break-after: always;
             break-after: page;
@@ -322,7 +325,7 @@ TIME                          : ${postTime}`;
          </div>
 
          <div id="printable-area" className="w-full overflow-x-auto pb-10 printable-container">
-            <div className="w-fit mx-auto flex flex-col gap-8 print:gap-0 items-center min-w-[750px]">
+            <div className="w-fit mx-auto flex flex-col print:block gap-8 print:gap-0 items-center min-w-[750px] print:w-full print:min-w-0">
 
             {/* PAGE 1 */}
             <div className="print-page-wrapper w-[750px] px-10 py-6 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '1050px' }}>
