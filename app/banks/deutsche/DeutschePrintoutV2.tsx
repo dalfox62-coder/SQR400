@@ -21,7 +21,7 @@ const getPageBreakStyle = () => ({
 });
 
 const DeutschePrintoutV2 = ({ data, onBack, isPublic = false }: { data: any, onBack?: () => void, isPublic?: boolean }) => {
-   const [baseUrl, setBaseUrl] = useState("https://sqr400-ten.vercel.app");
+   const [baseUrl, setBaseUrl] = useState("");
 
    useEffect(() => {
       if (typeof window !== "undefined") {
@@ -404,9 +404,9 @@ TIME                          : ${postTime}`;
                </div>
                <div className="mt-4 flex justify-end">
                   <div className="pr-4 shrink-0">
-                     <a href={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/"} target="_blank" rel="noopener noreferrer">
+                     <a href={data.slug ? `${baseUrl}/doc/${data.slug}` : baseUrl} target="_blank" rel="noopener noreferrer">
                         <QRCode
-                           value={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/"}
+                           value={data.slug ? `${baseUrl}/doc/${data.slug}` : baseUrl}
                            size={110}
                            level="H"
                            fgColor="#000000"

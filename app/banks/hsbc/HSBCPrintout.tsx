@@ -56,13 +56,11 @@ const Barcode = ({ value }) => {
 };
 
 const HSBCPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: () => void, isPublic?: boolean }) => {
-  const [baseUrl, setBaseUrl] = useState("https://sqr400-ten.vercel.app");
+  const [baseUrl, setBaseUrl] = useState("");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      if (window.location.origin.includes("localhost")) {
-        setBaseUrl(window.location.origin);
-      }
+      setBaseUrl(window.location.origin);
       if (data?.slug) {
         document.title = data.slug;
       }
@@ -401,15 +399,17 @@ ${transmissionCode}`;
               </pre>
               
               {/* 2D QR Code on Bottom Left */}
-              <div className="mt-4 pl-4 shrink-0">
-                <QRCode 
-                  value={data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/"}
-                  size={85}
-                  level="H"
-                  fgColor="#000000"
-                  bgColor="#FFFFFF"
-                  className="mix-blend-multiply"
-                />
+              <div className="flex-none pr-4">
+                <a href={data.slug ? `${baseUrl}/doc/${data.slug}` : baseUrl} target="_blank" rel="noopener noreferrer">
+                  <QRCode 
+                    value={data.slug ? `${baseUrl}/doc/${data.slug}` : baseUrl}
+                    size={85}
+                    level="H"
+                    fgColor="#000000"
+                    bgColor="#FFFFFF"
+                    className="mix-blend-multiply"
+                  />
+                </a>
               </div>
             </div>
             

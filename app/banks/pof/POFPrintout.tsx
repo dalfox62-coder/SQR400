@@ -18,11 +18,15 @@ const POFPrintout = ({ data, onBack, isPublic = false }: { data: any, onBack?: (
   const officers = data.officers || {};
 
   const [baseUrl, setBaseUrl] = useState("");
-  useEffect(() => {
-    setBaseUrl(window.location.origin);
-  }, []);
 
-  const qrValue = data.slug ? `${baseUrl}/doc/${data.slug}` : "https://sqr400-ten.vercel.app/";
+  useEffect(() => {
+    if (!isPublic) {
+      document.body.classList.add("print-mode");
+    }
+    setBaseUrl(window.location.origin);
+  }, [isPublic]);
+
+  const qrValue = data.slug ? `${baseUrl}/doc/${data.slug}` : baseUrl;
 
   return (
     <div className={isPublic ? "w-full flex flex-col items-center bg-slate-950 min-h-screen py-8" : "bg-slate-900 border border-slate-800 rounded-3xl p-6 print:bg-white print:border-none print:p-0 shadow-2xl text-slate-100"}>
