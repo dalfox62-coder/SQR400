@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const CISForm = ({ onSubmit, initialData = {} as any }: any) => {
+const CISFormV2 = ({ onSubmit, initialData = {} as any }: any) => {
   const [formData, setFormData] = useState({
     companyInfo: {
       companyName: initialData.companyInfo?.companyName || "PAT PROCESS AUTOMATION TECHNOLOGIES GMBH",
