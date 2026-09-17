@@ -286,20 +286,21 @@ TIME                          : ${postTime}`;
             .print-landscape-wrapper {
                width: 750px !important;
                min-width: 750px !important;
-               height: 1050px !important;
+               height: 520px !important;
                margin: 0 auto !important;
                overflow: hidden !important;
                position: relative !important;
                break-after: page;
+               page-break-after: always !important;
             }
           .print-landscape-inner {
+             transform: scale(0.7142);
+             transform-origin: top left;
              width: 1050px !important;
              height: 693px !important;
              position: absolute !important;
-             top: 178.5px !important;
-             left: -150px !important;
-             transform: rotate(-90deg);
-             transform-origin: center center;
+             top: 10px !important;
+             left: 0 !important;
           }
         }
         .print-landscape-wrapper {
