@@ -249,6 +249,10 @@ TIME                          : ${postTime}`;
             size: A4 portrait;
             margin: 0;
           }
+          @page landscape_page {
+            size: A4 landscape;
+            margin: 0;
+          }
           body {
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
@@ -276,14 +280,15 @@ TIME                          : ${postTime}`;
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
           }
-          .print-landscape-wrapper {
-             width: 750px !important;
-             min-width: 750px !important;
-             height: 1050px !important;
-          }
+            .print-landscape-wrapper {
+               page: landscape_page;
+               width: 1122px !important;
+               min-width: 1122px !important;
+               height: 793px !important;
+               margin: 0 !important;
+               break-after: page;
+            }
           .print-landscape-inner {
-             transform: scale(0.7142);
-             transform-origin: top left;
              width: 1050px !important;
              height: 693px !important;
              position: absolute;
@@ -326,16 +331,16 @@ TIME                          : ${postTime}`;
                      <h1 className="text-3xl font-sans tracking-tight">Deutsche Bank</h1>
                      <h2 className="text-xl font-sans text-blue-500">OnlineBanking & Brokerage</h2>
                   </div>
-                  <div className="text-right text-[#0018a8] flex items-center gap-4">
-                     <div className="flex flex-col items-end pt-1">
-                        <h2 className="text-[14px] font-sans font-bold">Deutsche Bank Aktiengesellschaft</h2>
-                        <div className="font-bold text-[11px] underline"><a href="https://www.deutsche-bank.de">https://www.deutsche-bank.de</a></div>
-                     </div>
-                     <div className="w-10 h-10 border-[2px] border-[#0018a8] relative p-1 shrink-0">
-                        <div className="w-full h-full bg-white border border-[#0018a8]">
-                           <div className="w-[120%] h-[2.5px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-1.5 left-1"></div>
+                  <div className="text-right text-[#0018a8] flex flex-col items-end">
+                     <div className="flex items-center gap-2">
+                        <div className="w-10 h-10 border-[2px] border-[#0018a8] relative p-1 shrink-0">
+                           <div className="w-full h-full bg-white border border-[#0018a8]">
+                              <div className="w-[120%] h-[2.5px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-1.5 left-1"></div>
+                           </div>
                         </div>
                      </div>
+                     <h2 className="text-[14px] font-sans font-bold mt-1">Deutsche Bank Aktiengesellschaft</h2>
+                     <div className="mt-0.5 font-bold text-[11px] underline"><a href="https://www.deutsche-bank.de">https://www.deutsche-bank.de</a></div>
                   </div>
                </div>
 
@@ -351,16 +356,16 @@ TIME                          : ${postTime}`;
                      <h1 className="text-3xl font-sans tracking-tight">Deutsche Bank</h1>
                      <h2 className="text-xl font-sans text-blue-500">OnlineBanking & Brokerage</h2>
                   </div>
-                  <div className="text-right text-[#0018a8] flex items-center gap-4">
-                     <div className="flex flex-col items-end pt-1">
-                        <h2 className="text-[14px] font-sans font-bold">Deutsche Bank Aktiengesellschaft</h2>
-                        <div className="font-bold text-[11px] underline"><a href="https://www.deutsche-bank.de">https://www.deutsche-bank.de</a></div>
-                     </div>
-                     <div className="w-10 h-10 border-[2px] border-[#0018a8] relative p-1 shrink-0">
-                        <div className="w-full h-full bg-white border border-[#0018a8]">
-                           <div className="w-[120%] h-[2.5px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-1.5 left-1"></div>
+                  <div className="text-right text-[#0018a8] flex flex-col items-end">
+                     <div className="flex items-center gap-2">
+                        <div className="w-10 h-10 border-[2px] border-[#0018a8] relative p-1 shrink-0">
+                           <div className="w-full h-full bg-white border border-[#0018a8]">
+                              <div className="w-[120%] h-[2.5px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-1.5 left-1"></div>
+                           </div>
                         </div>
                      </div>
+                     <h2 className="text-[14px] font-sans font-bold mt-1">Deutsche Bank Aktiengesellschaft</h2>
+                     <div className="mt-0.5 font-bold text-[11px] underline"><a href="https://www.deutsche-bank.de">https://www.deutsche-bank.de</a></div>
                   </div>
                </div>
                <div className="font-mono text-[9px] leading-[1.15] whitespace-pre-wrap text-black">
@@ -375,16 +380,16 @@ TIME                          : ${postTime}`;
                      <h1 className="text-3xl font-sans tracking-tight">Deutsche Bank</h1>
                      <h2 className="text-xl font-sans text-blue-500">OnlineBanking & Brokerage</h2>
                   </div>
-                  <div className="text-right text-[#0018a8] flex items-center gap-4">
-                     <div className="flex flex-col items-end pt-1">
-                        <h2 className="text-[14px] font-sans font-bold">Deutsche Bank Aktiengesellschaft</h2>
-                        <div className="font-bold text-[11px] underline"><a href="https://www.deutsche-bank.de">https://www.deutsche-bank.de</a></div>
-                     </div>
-                     <div className="w-10 h-10 border-[2px] border-[#0018a8] relative p-1 shrink-0">
-                        <div className="w-full h-full bg-white border border-[#0018a8]">
-                           <div className="w-[120%] h-[2.5px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-1.5 left-1"></div>
+                  <div className="text-right text-[#0018a8] flex flex-col items-end">
+                     <div className="flex items-center gap-2">
+                        <div className="w-10 h-10 border-[2px] border-[#0018a8] relative p-1 shrink-0">
+                           <div className="w-full h-full bg-white border border-[#0018a8]">
+                              <div className="w-[120%] h-[2.5px] bg-[#0018a8] origin-bottom-left -rotate-45 absolute bottom-1.5 left-1"></div>
+                           </div>
                         </div>
                      </div>
+                     <h2 className="text-[14px] font-sans font-bold mt-1">Deutsche Bank Aktiengesellschaft</h2>
+                     <div className="mt-0.5 font-bold text-[11px] underline"><a href="https://www.deutsche-bank.de">https://www.deutsche-bank.de</a></div>
                   </div>
                </div>
                <div className="font-mono text-[9px] leading-[1.15] whitespace-pre-wrap text-black">
