@@ -7,6 +7,9 @@ import DeutschePrintoutV2 from "@/app/banks/deutsche/DeutschePrintoutV2";
 import HSBCPrintout from "@/app/banks/hsbc/HSBCPrintout";
 import POFPrintout from "@/app/banks/pof/POFPrintout";
 
+import CISPrintout from "@/app/banks/cis/CISPrintout";
+import CISPrintoutV2 from "@/app/banks/cis/CISPrintoutV2";
+
 export default function PublicDocumentPage() {
   const { slug } = useParams();
   const [data, setData] = useState(null);
@@ -87,6 +90,18 @@ export default function PublicDocumentPage() {
     return (
       <div translate="no" className="notranslate min-h-screen bg-gray-100 print:bg-white flex flex-col items-center py-8 print:py-0 px-2 print:px-0 overflow-x-auto print:overflow-visible">
         <POFPrintout data={data} isPublic={true} />
+      </div>
+    );
+  } else if (data.bankId === "cis") {
+    return (
+      <div translate="no" className="notranslate min-h-screen bg-gray-100 print:bg-white flex flex-col items-center py-8 print:py-0 px-2 print:px-0 overflow-x-auto print:overflow-visible">
+        <CISPrintout data={data} isPublic={true} />
+      </div>
+    );
+  } else if (data.bankId === "cis_v2" || data.bankId === "cis-v2") {
+    return (
+      <div translate="no" className="notranslate min-h-screen bg-gray-100 print:bg-white flex flex-col items-center py-8 print:py-0 px-2 print:px-0 overflow-x-auto print:overflow-visible">
+        <CISPrintoutV2 data={data} isPublic={true} />
       </div>
     );
   }

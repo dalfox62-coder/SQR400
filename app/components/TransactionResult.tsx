@@ -4,6 +4,7 @@ import HSBCPrintout from "../banks/hsbc/HSBCPrintout";
 import DeutschePrintout from "../banks/deutsche/DeutschePrintout";
 import DeutschePrintoutV2 from "../banks/deutsche/DeutschePrintoutV2";
 import CISPrintout from "../banks/cis/CISPrintout";
+import CISPrintoutV2 from "../banks/cis/CISPrintoutV2";
 import POFPrintout from "../banks/pof/POFPrintout";
 
 const TransactionResult = ({ data, onBack }) => {
@@ -22,6 +23,10 @@ const TransactionResult = ({ data, onBack }) => {
 
   if (data?.bankId === "cis") {
     return <CISPrintout data={data} onBack={onBack} />;
+  }
+
+  if (data?.bankId === "cis_v2" || data?.bankId === "cis-v2") {
+    return <CISPrintoutV2 data={data} onBack={onBack} />;
   }
 
   if (data?.bankId === "pof") {

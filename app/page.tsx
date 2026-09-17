@@ -12,6 +12,7 @@ import MandiriForm from "./banks/mandiri/MandiriForm";
 import BCAForm from "./banks/bca/BCAForm";
 import CitiForm from "./banks/citi/CitiForm";
 import CISForm from "./banks/cis/CISForm";
+import CISFormV2 from "./banks/cis/CISFormV2";
 import POFForm from "./banks/pof/POFForm";
 import TransactionResult from "./components/TransactionResult";
 
@@ -192,6 +193,8 @@ export default function Home() {
         return <CitiForm onSubmit={handleSubmit} />;
       case "cis":
         return <CISForm onSubmit={handleSubmit} />;
+      case "cis_v2":
+        return <CISFormV2 onSubmit={handleSubmit} />;
       case "pof":
         return <POFForm onSubmit={handleSubmit} />;
       default:
