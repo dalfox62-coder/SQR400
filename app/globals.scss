@@ -41,6 +41,8 @@ html, body {
 @media print {
   /* Set html/body print defaults and force exact background rendering for barcode/logos */
   html, body {
+    width: 210mm !important;
+    max-width: 210mm !important;
     background: white !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -63,6 +65,7 @@ html, body {
     height: auto !important;
     max-width: none !important;
     max-height: none !important;
+    overflow: visible !important;
   }
 
   .no-print {
@@ -91,10 +94,6 @@ html, body {
     background: transparent !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
-  }
-
-  .print-page rect {
-    fill: black !important;
   }
 
   .print-page:last-child {
