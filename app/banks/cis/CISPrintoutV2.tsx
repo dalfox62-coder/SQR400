@@ -147,12 +147,10 @@ const CISPrintoutV2 = ({ data, onBack, isPublic = false }: { data: any, onBack?:
         </div>
 
         <div className="mb-4 mt-2 relative w-[350px] h-[130px]">
-          <Image 
+          <img 
             src="/images/cis-v2-stamp.png" 
             alt="Signature and Stamp" 
-            layout="fill"
-            objectFit="contain"
-            className="opacity-90 mix-blend-multiply"
+            className="w-full h-full object-contain opacity-90 mix-blend-multiply"
           />
         </div>
 
