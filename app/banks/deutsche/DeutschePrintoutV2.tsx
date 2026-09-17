@@ -284,19 +284,22 @@ TIME                          : ${postTime}`;
             print-color-adjust: exact !important;
           }
             .print-landscape-wrapper {
-               page: landscape_page;
-               width: 1122px !important;
-               min-width: 1122px !important;
-               height: 793px !important;
-               margin: 0 !important;
+               width: 750px !important;
+               min-width: 750px !important;
+               height: 1050px !important;
+               margin: 0 auto !important;
+               overflow: hidden !important;
+               position: relative !important;
                break-after: page;
             }
           .print-landscape-inner {
              width: 1050px !important;
              height: 693px !important;
-             position: absolute;
-             top: 0;
-             left: 0;
+             position: absolute !important;
+             top: 178.5px !important;
+             left: -150px !important;
+             transform: rotate(-90deg);
+             transform-origin: center center;
           }
         }
         .print-landscape-wrapper {
