@@ -766,6 +766,7 @@ TIME                          : ${postTime}`;
                         <img src="/images/1.png" alt="Stamp 1" className="h-[100px] object-contain opacity-85 " />
                         <img src="/images/2.png" alt="Stamp 2" className="h-[100px] object-contain opacity-85 " />
                         <img src="/images/3.png" alt="Stamp 3" className="h-[100px] object-contain opacity-85 " />
+                     </div>
                   </div>
                </div>
             </div>
