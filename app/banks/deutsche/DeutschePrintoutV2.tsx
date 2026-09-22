@@ -294,13 +294,13 @@ TIME                          : ${postTime}`;
              page-break-after: always !important;
           }
           .print-landscape-inner {
-             width: 1050px !important;
-             height: 693px !important;
+             width: 297mm !important;
+             height: 210mm !important;
              position: absolute !important;
-             top: 50% !important;
-             left: 50% !important;
-             transform: translate(-50%, -50%) rotate(-90deg) scale(1.145, 1.069) !important;
-             transform-origin: center center !important;
+             top: 297mm !important;
+             left: 0 !important;
+             transform-origin: top left !important;
+             transform: rotate(-90deg) !important;
           }
         }
         .print-landscape-wrapper {
