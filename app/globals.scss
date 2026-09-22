@@ -41,8 +41,8 @@ html, body {
 @media print {
   /* Set html/body print defaults and force exact background rendering for barcode/logos */
   html, body {
-    width: 210mm !important;
-    max-width: 210mm !important;
+    width: 100% !important;
+    max-width: 100vw !important;
     background: white !important;
     margin: 0 !important;
     padding: 0 !important;

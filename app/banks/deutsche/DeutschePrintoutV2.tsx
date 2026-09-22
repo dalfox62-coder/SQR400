@@ -284,9 +284,8 @@ TIME                          : ${postTime}`;
             print-color-adjust: exact !important;
           }
           .print-landscape-wrapper {
-             page: landscape_page !important;
-             width: 297mm !important;
-             height: 210mm !important;
+             width: 210mm !important;
+             height: 297mm !important;
              margin: 0 !important;
              padding: 0 !important;
              overflow: hidden !important;
@@ -295,12 +294,13 @@ TIME                          : ${postTime}`;
              page-break-after: always !important;
           }
           .print-landscape-inner {
-             width: 100% !important;
-             height: 100% !important;
+             width: 297mm !important;
+             height: 210mm !important;
              position: absolute !important;
-             top: 0 !important;
+             top: 297mm !important;
              left: 0 !important;
-             transform: none !important;
+             transform-origin: top left !important;
+             transform: rotate(-90deg) !important;
           }
         }
         .print-landscape-wrapper {
