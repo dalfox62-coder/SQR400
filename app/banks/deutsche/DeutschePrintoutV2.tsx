@@ -283,24 +283,24 @@ TIME                          : ${postTime}`;
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
           }
-            .print-landscape-wrapper {
-               width: 750px !important;
-               min-width: 750px !important;
-               height: 520px !important;
-               margin: 0 auto !important;
-               overflow: hidden !important;
-               position: relative !important;
-               break-after: page;
-               page-break-after: always !important;
-            }
+          .print-landscape-wrapper {
+             width: 210mm !important;
+             height: 297mm !important;
+             margin: 0 !important;
+             padding: 0 !important;
+             overflow: hidden !important;
+             position: relative !important;
+             break-after: page;
+             page-break-after: always !important;
+          }
           .print-landscape-inner {
-             transform: scale(0.7142);
-             transform-origin: top left;
              width: 1050px !important;
              height: 693px !important;
              position: absolute !important;
-             top: 10px !important;
-             left: 0 !important;
+             top: 50% !important;
+             left: 50% !important;
+             transform: translate(-50%, -50%) rotate(-90deg) scale(1.145, 1.069) !important;
+             transform-origin: center center !important;
           }
         }
         .print-landscape-wrapper {
