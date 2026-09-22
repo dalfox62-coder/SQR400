@@ -283,24 +283,31 @@ TIME                          : ${postTime}`;
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
           }
+          @page landscape_page {
+             size: A4 landscape;
+             margin: 0;
+          }
           .print-landscape-wrapper {
-             width: 210mm !important;
-             height: 297mm !important;
+             page: landscape_page !important;
+             width: 141.428% !important; /* 297/210 to break out of Portrait body width */
+             max-width: none !important;
+             height: auto !important;
+             aspect-ratio: 1.414 / 1 !important; /* Landscape A4 ratio */
              margin: 0 !important;
              padding: 0 !important;
              overflow: hidden !important;
              position: relative !important;
              break-after: page;
              page-break-after: always !important;
+             transform-origin: top left !important;
           }
           .print-landscape-inner {
-             width: 297mm !important;
-             height: 210mm !important;
+             width: 100% !important;
+             height: 100% !important;
              position: absolute !important;
-             top: 297mm !important;
+             top: 0 !important;
              left: 0 !important;
-             transform-origin: top left !important;
-             transform: rotate(-90deg) !important;
+             transform: none !important;
           }
         }
         .print-landscape-wrapper {
@@ -329,7 +336,7 @@ TIME                          : ${postTime}`;
          </div>
 
          <div id="printable-area" className="w-full overflow-x-auto pb-10 printable-container">
-            <div className="w-fit mx-auto flex flex-col print:block gap-8 print:gap-0 items-center min-w-[750px] print:w-full print:min-w-0">
+            <div className="w-fit mx-auto print:mx-0 flex flex-col print:block gap-8 print:gap-0 items-center print:items-start min-w-[750px] print:w-full print:min-w-0">
 
             {/* PAGE 1 */}
             <div className="print-page-wrapper w-[750px] px-10 py-6 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '1050px' }}>
