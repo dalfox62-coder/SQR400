@@ -332,7 +332,7 @@ TIME                          : ${postTime}`;
             <div className="w-fit mx-auto print:mx-0 flex flex-col print:block gap-8 print:gap-0 items-center print:items-start min-w-[750px] print:w-full print:min-w-0">
 
             {/* PAGE 1 */}
-            <div className="print-page-wrapper w-[750px] px-10 py-6 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '1050px' }}>
+            <div className="print-page-wrapper w-[750px] p-0 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '1050px' }}>
                <div className="flex justify-between items-start mb-4">
                   <div className="text-[#0018a8]">
                      <h1 className="text-3xl font-sans tracking-tight">Deutsche Bank</h1>
@@ -357,7 +357,7 @@ TIME                          : ${postTime}`;
             </div>
 
             {/* PAGE 1-B (MT202) */}
-            <div className="print-page-wrapper w-[750px] px-10 py-6 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '1050px' }}>
+            <div className="print-page-wrapper w-[750px] p-0 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '1050px' }}>
                <div className="flex justify-between items-start mb-4">
                   <div className="text-[#0018a8]">
                      <h1 className="text-3xl font-sans tracking-tight">Deutsche Bank</h1>
@@ -381,7 +381,7 @@ TIME                          : ${postTime}`;
             </div>
 
             {/* PAGE 1-C (Network Delivery) */}
-            <div className="print-page-wrapper w-[750px] px-10 py-6 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '1050px' }}>
+            <div className="print-page-wrapper w-[750px] p-0 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '1050px' }}>
                <div className="flex justify-between items-start mb-4">
                   <div className="text-[#0018a8]">
                      <h1 className="text-3xl font-sans tracking-tight">Deutsche Bank</h1>
@@ -418,7 +418,7 @@ TIME                          : ${postTime}`;
             </div>
 
              {/* PAGE 2 */}
-            <div className="print-page-wrapper w-[750px] px-10 py-6 bg-black text-gray-200 print-bg shadow-2xl print:shadow-none relative" style={{ minHeight: '1050px', backgroundColor: 'black' }}>
+            <div className="print-page-wrapper w-[750px] p-0 bg-black text-gray-200 print-bg shadow-2xl print:shadow-none relative" style={{ minHeight: '1050px', backgroundColor: 'black' }}>
                {/* Full Page Background Image */}
                <div className="absolute inset-0 z-0">
                   <img src="/deutsche-v2-bg.jpeg" alt="Deutsche Background" className="w-full h-full object-fill" />
@@ -432,7 +432,7 @@ TIME                          : ${postTime}`;
             </div>
 
             {/* PAGE 3 */}
-            <div className="print-page-wrapper w-[750px] px-10 py-6 bg-black text-gray-200 print-bg shadow-2xl print:shadow-none relative" style={{ minHeight: '1050px', backgroundColor: 'black' }}>
+            <div className="print-page-wrapper w-[750px] p-0 bg-black text-gray-200 print-bg shadow-2xl print:shadow-none relative" style={{ minHeight: '1050px', backgroundColor: 'black' }}>
                {/* Full Page Background Image */}
                <div className="absolute inset-0 z-0">
                   <img src="/deutsche-v2-bg.jpeg" alt="Deutsche Background" className="w-full h-full object-fill" />
@@ -446,7 +446,7 @@ TIME                          : ${postTime}`;
             </div>
 
             {/* PAGE 4 (Network Delivery Status) */}
-            <div className="print-page-wrapper w-[750px] px-10 py-6 bg-black text-gray-200 print-bg shadow-2xl print:shadow-none relative" style={{ minHeight: '1050px', backgroundColor: 'black' }}>
+            <div className="print-page-wrapper w-[750px] p-0 bg-black text-gray-200 print-bg shadow-2xl print:shadow-none relative" style={{ minHeight: '1050px', backgroundColor: 'black' }}>
                {/* Full Page Background Image */}
                <div className="absolute inset-0 z-0">
                   <img src="/deutsche-v2-bg.jpeg" alt="Deutsche Background" className="w-full h-full object-fill" />
