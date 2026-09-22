@@ -94,11 +94,11 @@ const DeutscheFormV3 = ({ onSubmit, initialData = {} as any }: any) => {
       <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
 
       <div className="flex items-center gap-4 mb-6 pb-5 border-b border-slate-855">
-        <div className="w-12 h-12 bg-blue-500/10 text-blue-400 border border-blue-900/30 rounded-xl flex items-center justify-center font-black text-sm tracking-wider shadow-lg">
-          DB V2
-        </div>
-        <div>
-          <h2 className="text-base font-bold text-white tracking-widest uppercase">DEUTSCHE NODE V2 (EXTENDED)</h2>
+          <div className="w-12 h-12 bg-emerald-500/10 border border-emerald-500/30 rounded-xl flex items-center justify-center text-emerald-400 font-bold text-sm tracking-wider shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+            DB V3
+          </div>
+          <div>
+            <h2 className="text-base font-bold text-white tracking-widest uppercase">DEUTSCHE NODE V3 (EXTENDED)</h2>
           <p className="text-sm text-slate-500 font-mono tracking-wider uppercase">MT103 Transaction Parameters Configurator (5 Pages)</p>
         </div>
       </div>

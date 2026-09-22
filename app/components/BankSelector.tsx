@@ -64,7 +64,7 @@ const BankSelector = ({ selectedBank, onSelectBank }) => {
                   bank.id
                 )} ${isSelected ? "ring-2 ring-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.1)]" : ""}`}
               >
-                {bank.id.substring(0, 3)}
+                {bank.id.includes("_") ? bank.id.split("_")[1].toUpperCase() : bank.id.substring(0, 3)}
               </div>
 
               {/* Bank Name */}
