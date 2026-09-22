@@ -284,11 +284,9 @@ TIME                          : ${postTime}`;
             print-color-adjust: exact !important;
           }
           .print-landscape-wrapper {
-             width: 750px !important;
-             min-width: 750px !important;
-             height: 1050px !important;
-             min-height: 1050px !important;
-             margin: 0 auto !important;
+             width: 100vw !important;
+             height: 100vh !important;
+             margin: 0 !important;
              padding: 0 !important;
              overflow: hidden !important;
              position: relative !important;
@@ -296,10 +294,10 @@ TIME                          : ${postTime}`;
              page-break-after: always !important;
           }
           .print-landscape-inner {
-             width: 1050px !important;
-             height: 750px !important;
+             width: 141.42% !important;
+             height: 70.71% !important;
              position: absolute !important;
-             top: 1050px !important;
+             top: 100% !important;
              left: 0 !important;
              transform-origin: top left !important;
              transform: rotate(-90deg) !important;
