@@ -283,31 +283,26 @@ TIME                          : ${postTime}`;
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
           }
-          @page landscape_page {
-             size: A4 landscape;
-             margin: 0;
-          }
           .print-landscape-wrapper {
-             page: landscape_page !important;
-             width: 141.428% !important; /* 297/210 to break out of Portrait body width */
-             max-width: none !important;
+             width: 100% !important;
+             max-width: 100% !important;
              height: auto !important;
-             aspect-ratio: 1.414 / 1 !important; /* Landscape A4 ratio */
-             margin: 0 !important;
+             aspect-ratio: 1 / 1.4142 !important; /* A4 Portrait ratio */
+             margin: 0 auto !important;
              padding: 0 !important;
              overflow: hidden !important;
              position: relative !important;
              break-after: page;
              page-break-after: always !important;
-             transform-origin: top left !important;
           }
           .print-landscape-inner {
-             width: 100% !important;
-             height: 100% !important;
+             width: 141.42% !important; /* Expand width to match rotated height */
+             height: 70.71% !important; /* Shrink height to match rotated width */
              position: absolute !important;
-             top: 0 !important;
+             top: 100% !important; /* Push origin to bottom left */
              left: 0 !important;
-             transform: none !important;
+             transform-origin: top left !important;
+             transform: rotate(-90deg) !important;
           }
         }
         .print-landscape-wrapper {
