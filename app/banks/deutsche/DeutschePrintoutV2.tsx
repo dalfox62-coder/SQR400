@@ -284,10 +284,10 @@ TIME                          : ${postTime}`;
             print-color-adjust: exact !important;
           }
           .print-landscape-wrapper {
-             width: 100% !important;
-             max-width: 100% !important;
-             height: auto !important;
-             aspect-ratio: 1 / 1.4142 !important; /* A4 Portrait ratio */
+             width: 750px !important;
+             min-width: 750px !important;
+             height: 1050px !important;
+             min-height: 1050px !important;
              margin: 0 auto !important;
              padding: 0 !important;
              overflow: hidden !important;
@@ -296,10 +296,10 @@ TIME                          : ${postTime}`;
              page-break-after: always !important;
           }
           .print-landscape-inner {
-             width: 141.42% !important; /* Expand width to match rotated height */
-             height: 70.71% !important; /* Shrink height to match rotated width */
+             width: 1050px !important;
+             height: 750px !important;
              position: absolute !important;
-             top: 100% !important; /* Push origin to bottom left */
+             top: 1050px !important;
              left: 0 !important;
              transform-origin: top left !important;
              transform: rotate(-90deg) !important;
