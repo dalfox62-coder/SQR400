@@ -658,7 +658,7 @@ TIME                          : ${postTime}`;
                      </div>
 
                      {/* Overlay to hide baked-in stamps and show new ones */}
-                     <div className="absolute top-[76%] bottom-[4%] left-[10%] right-[10%] bg-[#f8f9fa] border border-gray-300 shadow-inner z-20 flex items-center justify-between px-16 rounded-sm">
+                     <div className="absolute top-[76%] bottom-[4%] left-[10%] right-[10%] bg-[#f8f9fa] border border-gray-300 shadow-inner z-20 flex items-center justify-between px-16 rounded-sm print-bg">
                         <img src="/images/1.png" alt="Stamp 1" className="h-[105px] object-contain opacity-90 mix-blend-multiply" />
                         <img src="/images/2.png" alt="Stamp 2" className="h-[105px] object-contain opacity-90 mix-blend-multiply" />
                         <img src="/images/3.png" alt="Stamp 3" className="h-[105px] object-contain opacity-90 mix-blend-multiply" />
