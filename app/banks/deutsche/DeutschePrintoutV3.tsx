@@ -304,13 +304,13 @@ TIME                          : ${postTime}`;
           }
         }
         .print-landscape-wrapper {
-          width: 1050px !important;
-          min-width: 1050px !important;
-          height: 693px !important;
-          overflow: hidden !important;
-          position: relative !important;
-          box-shadow: none !important;
-          margin: 0 auto !important;
+          width: 1050px;
+          min-width: 1050px;
+          height: 750px;
+          overflow: hidden;
+          position: relative;
+          box-shadow: none;
+          margin: 0 auto;
           page-break-after: always;
           break-after: page;
         }
@@ -329,10 +329,10 @@ TIME                          : ${postTime}`;
          </div>
 
          <div id="printable-area" className="w-full overflow-x-auto pb-10 printable-container">
-            <div className="w-fit mx-auto print:mx-0 flex flex-col print:block gap-8 print:gap-0 items-center print:items-start min-w-[750px] print:w-full print:min-w-0">
+            <div className="w-fit mx-auto print:mx-0 flex flex-col print:block gap-8 print:gap-0 items-center print:items-start min-w-[210mm] print:w-full print:min-w-0">
 
             {/* PAGE 1 */}
-            <div className="print-page-wrapper w-[750px] px-10 py-6 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '1050px' }}>
+            <div className="print-page-wrapper w-[210mm] px-10 py-6 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '297mm' }}>
                <div className="flex justify-between items-start mb-4">
                   <div className="text-[#0018a8]">
                      <h1 className="text-3xl font-sans tracking-tight">Deutsche Bank</h1>
@@ -357,7 +357,7 @@ TIME                          : ${postTime}`;
             </div>
 
             {/* PAGE 1-B (MT202) */}
-            <div className="print-page-wrapper w-[750px] px-10 py-6 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '1050px' }}>
+            <div className="print-page-wrapper w-[210mm] px-10 py-6 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '297mm' }}>
                <div className="flex justify-between items-start mb-4">
                   <div className="text-[#0018a8]">
                      <h1 className="text-3xl font-sans tracking-tight">Deutsche Bank</h1>
@@ -381,7 +381,7 @@ TIME                          : ${postTime}`;
             </div>
 
             {/* PAGE 1-C (Network Delivery) */}
-            <div className="print-page-wrapper w-[750px] px-10 py-6 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '1050px' }}>
+            <div className="print-page-wrapper w-[210mm] px-10 py-6 bg-white text-black relative shadow-2xl print:shadow-none" style={{ minHeight: '297mm' }}>
                <div className="flex justify-between items-start mb-4">
                   <div className="text-[#0018a8]">
                      <h1 className="text-3xl font-sans tracking-tight">Deutsche Bank</h1>
@@ -418,7 +418,7 @@ TIME                          : ${postTime}`;
             </div>
 
              {/* PAGE 2 */}
-            <div className="print-page-wrapper w-[750px] px-10 py-6 bg-black text-gray-200 print-bg shadow-2xl print:shadow-none relative" style={{ minHeight: '1050px', backgroundColor: 'black' }}>
+            <div className="print-page-wrapper w-[210mm] px-10 py-6 bg-black text-gray-200 print-bg shadow-2xl print:shadow-none relative" style={{ minHeight: '297mm', backgroundColor: 'black' }}>
                {/* Full Page Background Image */}
                <div className="absolute inset-0 z-0">
                   <img src="/deutsche-v2-bg.jpeg" alt="Deutsche Background" className="w-full h-full object-fill" />
@@ -432,7 +432,7 @@ TIME                          : ${postTime}`;
             </div>
 
             {/* PAGE 3 */}
-            <div className="print-page-wrapper w-[750px] px-10 py-6 bg-black text-gray-200 print-bg shadow-2xl print:shadow-none relative" style={{ minHeight: '1050px', backgroundColor: 'black' }}>
+            <div className="print-page-wrapper w-[210mm] px-10 py-6 bg-black text-gray-200 print-bg shadow-2xl print:shadow-none relative" style={{ minHeight: '297mm', backgroundColor: 'black' }}>
                {/* Full Page Background Image */}
                <div className="absolute inset-0 z-0">
                   <img src="/deutsche-v2-bg.jpeg" alt="Deutsche Background" className="w-full h-full object-fill" />
@@ -446,7 +446,7 @@ TIME                          : ${postTime}`;
             </div>
 
             {/* PAGE 4 (Network Delivery Status) */}
-            <div className="print-page-wrapper w-[750px] px-10 py-6 bg-black text-gray-200 print-bg shadow-2xl print:shadow-none relative" style={{ minHeight: '1050px', backgroundColor: 'black' }}>
+            <div className="print-page-wrapper w-[210mm] px-10 py-6 bg-black text-gray-200 print-bg shadow-2xl print:shadow-none relative" style={{ minHeight: '297mm', backgroundColor: 'black' }}>
                {/* Full Page Background Image */}
                <div className="absolute inset-0 z-0">
                   <img src="/deutsche-v2-bg.jpeg" alt="Deutsche Background" className="w-full h-full object-fill" />
@@ -666,8 +666,8 @@ TIME                          : ${postTime}`;
             </div>
             
             {/* PAGE 7 (Remittance Advice) */}
-            <div className="print-landscape-wrapper bg-white shadow-2xl print:shadow-none overflow-hidden relative" style={{ pageBreakAfter: 'auto' }}>
-               <div className="print-landscape-inner absolute inset-0 w-full h-full bg-white font-sans text-black pt-6 px-12 pb-4">
+            <div className="print-page-wrapper w-[210mm] bg-white shadow-2xl print:shadow-none overflow-hidden relative" style={{ minHeight: '297mm', pageBreakAfter: 'auto' }}>
+               <div className="w-full h-full bg-white font-sans text-black pt-6 px-12 pb-4">
                   {/* Outer Border */}
                   <div className="absolute inset-4 border border-gray-300 pointer-events-none"></div>
 
