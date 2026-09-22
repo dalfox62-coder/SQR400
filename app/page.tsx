@@ -8,6 +8,7 @@ import HSBCForm from "./banks/hsbc/HSBCForm";
 import BNIForm from "./banks/bni/BNIForm";
 import DeutscheForm from "./banks/deutsche/DeutscheForm";
 import DeutscheFormV2 from "./banks/deutsche/DeutscheFormV2";
+import DeutscheFormV3 from "./banks/deutsche/DeutscheFormV3";
 import MandiriForm from "./banks/mandiri/MandiriForm";
 import BCAForm from "./banks/bca/BCAForm";
 import CitiForm from "./banks/citi/CitiForm";
@@ -185,6 +186,8 @@ export default function Home() {
         return <DeutscheForm onSubmit={handleSubmit} />;
       case "deutsche_v2":
         return <DeutscheFormV2 onSubmit={handleSubmit} />;
+      case "deutsche_v3":
+        return <DeutscheFormV3 onSubmit={handleSubmit} />;
       case "mandiri":
         return <MandiriForm onSubmit={handleSubmit} />;
       case "bca":
