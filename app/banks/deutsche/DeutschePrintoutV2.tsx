@@ -295,13 +295,12 @@ TIME                          : ${postTime}`;
              page-break-after: always !important;
           }
           .print-landscape-inner {
-             width: 1050px !important;
-             height: 693px !important;
+             width: 100% !important;
+             height: 100% !important;
              position: absolute !important;
              top: 0 !important;
              left: 0 !important;
-             transform-origin: top left !important;
-             transform: scale(1.069, 1.145) !important;
+             transform: none !important;
           }
         }
         .print-landscape-wrapper {
