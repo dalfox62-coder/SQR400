@@ -757,6 +757,7 @@ TIME                          : ${postTime}`;
                      </div>
                      <div className="absolute left-[45%] top-[-50px] z-0">
                         <img src="/images/page5_stamps.png" alt="Stamp" className="h-[120px] object-contain opacity-85 mix-blend-multiply" />
+                     </div>
                   </div>
                </div>
             </div>
