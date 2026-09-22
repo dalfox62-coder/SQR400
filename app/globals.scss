@@ -54,8 +54,8 @@ html, body {
   main,
   main > div,
   main > div > div,
-  main > div > div > div:not(.print-page),
-  main > div > div > div > div:not(.print-page) {
+  main > div > div > div:not(.print-page):not(.print-page-wrapper),
+  main > div > div > div > div:not(.print-page):not(.print-page-wrapper) {
     margin: 0 !important;
     padding: 0 !important;
     border: none !important;
