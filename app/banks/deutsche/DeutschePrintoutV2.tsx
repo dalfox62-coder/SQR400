@@ -294,13 +294,13 @@ TIME                          : ${postTime}`;
              page-break-after: always !important;
           }
           .print-landscape-inner {
-             width: 141.42% !important;
-             height: 70.71% !important;
+             width: 1050px !important;
+             height: 750px !important;
              position: absolute !important;
-             top: 100% !important;
+             top: 0 !important;
              left: 0 !important;
              transform-origin: top left !important;
-             transform: rotate(-90deg) !important;
+             transform: rotate(-90deg) translateX(-100%) !important;
           }
         }
         .print-landscape-wrapper {
