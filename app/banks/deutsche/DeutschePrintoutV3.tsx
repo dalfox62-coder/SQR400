@@ -129,11 +129,11 @@ ${transaction.remittanceInfo ? transaction.remittanceInfo.split('\n').map((line:
 :71F: Sender's Charges
 / ${transaction.currency}
 / ${formatNumber(transaction.senderCharges || 798.00)}
-------------------------------------------------------------------------------------------------------`;
+-------------------------------------------------------------------------------------`;
    };
 
    const generateMT202Text = () => {
-      return `------------------------------------------------------------------------------------------------------------------
+      return `-------------------------------------------------------------------------------------
 ANSWER BACK PAGE CONFIRMATION SYSTEM
 / User: ${meta?.user}
 / Document History: ${meta?.documentHistory}
@@ -152,7 +152,7 @@ ANSWER BACK PAGE CONFIRMATION SYSTEM
 / ACCOUNT/SORT NUMBER: ${beneficiary.bankCode ? beneficiary.bankCode + beneficiary.accountNumber : beneficiary.accountNumber}
 / Session Number: ${transaction.sessionNumber || "3476"}
 / Message Number: ${transaction.messageNumber || "987654"}
-------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 :20: Sender Reference Number
 / ${transaction.senderReference}
 :21: Related Ref
@@ -175,7 +175,7 @@ ANSWER BACK PAGE CONFIRMATION SYSTEM
 1/ ${beneficiary.accountName}
 2/ 300 DELAWARE AVE, SUITE 210, WILMINGTON, DE19801, USA
 3/ ${beneficiary.swiftCode}
-------------------------------------------------------------------------------------------------------------------`;
+-------------------------------------------------------------------------------------`;
    };
 
    const generateNetworkDeliveryText = () => {
@@ -351,7 +351,7 @@ TIME                          : ${postTime}`;
                   </div>
                </div>
 
-               <div className="font-mono text-[9px] leading-[1.15] whitespace-pre-wrap text-black">
+               <div className="font-mono text-[12px] leading-[1.7] px-8 pt-6 whitespace-pre-wrap text-black">
                   {generateMT103Text(false)}
                </div>
             </div>
@@ -375,7 +375,7 @@ TIME                          : ${postTime}`;
                      <div className="mt-0.5 font-bold text-[11px] underline"><a href="https://www.deutsche-bank.de">https://www.deutsche-bank.de</a></div>
                   </div>
                </div>
-               <div className="font-mono text-[9px] leading-[1.15] whitespace-pre-wrap text-black">
+               <div className="font-mono text-[12px] leading-[1.7] px-8 pt-6 whitespace-pre-wrap text-black">
                   {generateMT202Text()}
                </div>
             </div>
@@ -399,7 +399,7 @@ TIME                          : ${postTime}`;
                      <div className="mt-0.5 font-bold text-[11px] underline"><a href="https://www.deutsche-bank.de">https://www.deutsche-bank.de</a></div>
                   </div>
                </div>
-               <div className="font-mono text-[9px] leading-[1.15] whitespace-pre-wrap text-black">
+               <div className="font-mono text-[12px] leading-[1.7] px-8 pt-6 whitespace-pre-wrap text-black">
                   {generateNetworkDeliveryText()}
                </div>
                <div className="mt-4 flex justify-end">
@@ -425,7 +425,7 @@ TIME                          : ${postTime}`;
                </div>
                
                <div className="relative z-10 pt-[160px] pl-[15px]">
-                  <div className="font-mono text-[11px] leading-[1.15] whitespace-pre-wrap text-white font-semibold tracking-wide">
+                  <div className="font-mono text-[13px] leading-[1.7] whitespace-pre-wrap text-white font-semibold tracking-wide">
                      {generateMT103Text(true)}
                   </div>
                </div>
@@ -439,7 +439,7 @@ TIME                          : ${postTime}`;
                </div>
                
                <div className="relative z-10 pt-[160px] pl-[15px]">
-                  <div className="font-mono text-[11px] leading-[1.15] whitespace-pre-wrap text-white font-semibold tracking-wide">
+                  <div className="font-mono text-[13px] leading-[1.7] whitespace-pre-wrap text-white font-semibold tracking-wide">
                      {generateMT202Text()}
                   </div>
                </div>
@@ -453,7 +453,7 @@ TIME                          : ${postTime}`;
                </div>
                
                <div className="relative z-10 pt-[160px] pl-[15px]">
-                  <div className="font-mono text-[11px] leading-[1.15] whitespace-pre-wrap text-white font-semibold tracking-wide">
+                  <div className="font-mono text-[13px] leading-[1.7] whitespace-pre-wrap text-white font-semibold tracking-wide">
                      {generateNetworkDeliveryText()}
                   </div>
                </div>
