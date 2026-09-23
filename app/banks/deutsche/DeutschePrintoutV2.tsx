@@ -357,6 +357,11 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
                      <div className="uppercase">JAMES VON MOLTKE (78414M)</div>
                      <div className="uppercase">MANAGING DIRECTOR</div>
                   </div>
+                  <div className="flex flex-col text-left">
+                     <div className="uppercase">AUTHORIZED OFFICER</div>
+                     <div className="uppercase">CHRISTIAN SEWING (9089)</div>
+                     <div className="uppercase">CHIEF EXECUTIVE OFFICER</div>
+                  </div>
                </div>
                <div className="relative w-full -mt-4 flex items-center justify-center px-8">
                   <img src="/images/page4_stamps.png" alt="Stamps and Signatures" className="w-full max-w-[85%] h-auto max-h-[150px] object-contain mix-blend-multiply" />
@@ -435,5 +440,6 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
 };
 
 export default DeutschePrintoutV2;
+
 
 
