@@ -655,12 +655,7 @@ TIME                          : ${postTime}`;
                         </div>
                      </div>
 
-                     {/* Overlay to hide baked-in stamps and show new ones */}
-                     <div className="absolute top-[78%] bottom-[4%] left-[10%] right-[10%] bg-[#f8f9fa] border border-gray-300 shadow-inner z-20 flex items-center justify-between px-16 rounded-sm print-bg">
-                        <img src="/images/1.png" alt="Stamp 1" className="h-[105px] object-contain opacity-90 " />
-                        <img src="/images/2.png" alt="Stamp 2" className="h-[105px] object-contain opacity-90 " />
-                        <img src="/images/3.png" alt="Stamp 3" className="h-[105px] object-contain opacity-90 " />
-                     </div>
+
                   </div>
                </div>
             </div>
@@ -762,11 +757,7 @@ TIME                          : ${postTime}`;
                         <span>Senior Corporate Officer</span>
                         <span className="font-bold uppercase ml-8">{transaction.participant || 'OLE MATTHIESSEN'}</span>
                      </div>
-                     <div className="absolute left-[30%] top-[-50px] z-0 flex items-center gap-4">
-                        <img src="/images/1.png" alt="Stamp 1" className="h-[100px] object-contain opacity-85 " />
-                        <img src="/images/2.png" alt="Stamp 2" className="h-[100px] object-contain opacity-85 " />
-                        <img src="/images/3.png" alt="Stamp 3" className="h-[100px] object-contain opacity-85 " />
-                     </div>
+
                   </div>
                </div>
             </div>
