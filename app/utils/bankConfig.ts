@@ -85,7 +85,7 @@ export const bankConfigs = {
   },
   deutsche_v2: {
     id: "deutsche_v2",
-    name: "Deutsche Bank V2",
+    name: "DEUTSCHE NODE V2 (9 SLIDES)",
     code: "DEUTDEFF9925",
     logo: "/logos/deutsche.png",
     bankFullName: "DEUTSCHE BANK AG",
