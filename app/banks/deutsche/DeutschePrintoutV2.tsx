@@ -214,8 +214,8 @@ VALUE AND NO MAIL OR SWIFT CONFIRMATION SHALL FOLLOW.
 FOR AND ON BEHALF OF ${(institution.bankName || "DEUTSCHE BANK AG").toUpperCase()}, ${(institution.address || "DEUTSCHE BANK A.G. TAUNUSANLAFE 12, FERANKURT AM MAIN 60254 FERNKFURT GERMANY").toUpperCase()}.
 AUTOMATED MESSAGE DOESN'T NEED ANY SIGNATURE
 
-AUTHORIZED OFFICER 1: MARCUS SCHENCK, CHIEF OPERATING OFFICER (PIN: 75456CFO)
-AUTHORIZED OFFICER 2: JAMES VON MOLTKE, MANAGING DIRECTOR (ID: 78414M)
+AUTHORIZED OFFICER 1: JAMES VON MOLTKE, MANAGING DIRECTOR (ID: 78414M)
+AUTHORIZED OFFICER 2: CHRISTIAN SEWING, CHIEF EXECUTIVE OFFICER (ID: CS9089)
 FOR AND ON BEHALF OF DEUTSCHE BANK AG
 ${(institution.address || "DEUTSCHE BANK A.G. TAUNUSANLAFE 12, FERANKURT AM MAIN 60254 FERNKFURT GERMANY").toUpperCase()}.`;
 
@@ -354,8 +354,8 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
                <div className="w-full flex justify-between px-8 text-[11px] mb-0 font-bold">
                   <div className="flex flex-col">
                      <div className="uppercase">AUTHORIZED OFFICER</div>
-                     <div className="uppercase">MARCUS SCHENCK (PIN75456CFO)</div>
-                     <div className="uppercase">CHIEF OPERATING OFFICER</div>
+                     <div className="uppercase">JAMES VON MOLTKE (78414M)</div>
+                     <div className="uppercase">MANAGING DIRECTOR</div>
                   </div>
                </div>
                <div className="relative w-full -mt-4 flex items-center justify-center px-8">
@@ -418,8 +418,8 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
                <div className="w-full flex justify-between px-8 text-[11px] mb-0 font-bold">
                   <div className="flex flex-col">
                      <div className="uppercase">AUTHORIZED OFFICER</div>
-                     <div className="uppercase">MARCUS SCHENCK (PIN75456CFO)</div>
-                     <div className="uppercase">CHIEF OPERATING OFFICER</div>
+                     <div className="uppercase">JAMES VON MOLTKE (78414M)</div>
+                     <div className="uppercase">MANAGING DIRECTOR</div>
                   </div>
                </div>
                <div className="relative w-full -mt-4 flex items-center justify-center px-8">
