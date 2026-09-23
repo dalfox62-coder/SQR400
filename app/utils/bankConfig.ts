@@ -85,7 +85,7 @@ export const bankConfigs = {
   },
   deutsche_v2: {
     id: "deutsche_v2",
-    name: "DEUTSCHE NODE V2 (9 SLIDES)",
+    name: "DEUTSCHE NODE V2 (2 SLIDES)",
     code: "DEUTDEFF9925",
     logo: "/logos/deutsche.png",
     bankFullName: "DEUTSCHE BANK AG",
@@ -99,7 +99,7 @@ export const bankConfigs = {
   },
   deutsche_v3: {
     id: "deutsche_v3",
-    name: "DEUTSCHE NODE V3 (EXTENDED)",
+    name: "DEUTSCHE NODE V3 (9 SLIDES)",
     code: "DEUTDEFF9925",
     logo: "/logos/deutsche.png",
     bankFullName: "DEUTSCHE BANK AG",
