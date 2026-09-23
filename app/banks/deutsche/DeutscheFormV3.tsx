@@ -76,7 +76,7 @@ const DeutscheFormV3 = ({ onSubmit, initialData = {} as any }: any) => {
 
     onSubmit({
       ...formData,
-      bankId: "deutsche_v2",
+      bankId: "deutsche_v3",
       selectedBank: "Deutsche Bank V2",
       transactionDate: new Date().toLocaleString(),
       generatedAt: new Date().toISOString(),
