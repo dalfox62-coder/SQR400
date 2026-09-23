@@ -357,10 +357,6 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
                      <div className="uppercase">MARCUS SCHENCK (PIN75456CFO)</div>
                      <div className="uppercase">CHIEF OPERATING OFFICER</div>
                   </div>
-                  <div className="flex flex-col text-left">
-                     <div className="uppercase">AUTHORIZED OFFICER</div>
-                     <div className="uppercase">JAMES VON MOLTKE(78414M)</div>
-                     <div className="uppercase">MANAGING DIRECTOR</div>
                   </div>
                </div>
                <div className="relative w-full -mt-4 flex items-center justify-center px-8">
@@ -426,10 +422,6 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
                      <div className="uppercase">MARCUS SCHENCK (PIN75456CFO)</div>
                      <div className="uppercase">CHIEF OPERATING OFFICER</div>
                   </div>
-                  <div className="flex flex-col text-left">
-                     <div className="uppercase">AUTHORIZED OFFICER</div>
-                     <div className="uppercase">JAMES VON MOLTKE(78414M)</div>
-                     <div className="uppercase">MANAGING DIRECTOR</div>
                   </div>
                </div>
                <div className="relative w-full -mt-4 flex items-center justify-center px-8">
@@ -445,3 +437,4 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
 };
 
 export default DeutschePrintoutV2;
+
