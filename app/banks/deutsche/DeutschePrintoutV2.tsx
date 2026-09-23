@@ -363,16 +363,8 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
                      <div className="uppercase">CHIEF EXECUTIVE OFFICER</div>
                   </div>
                </div>
-               <div className="relative w-full -mt-4 h-[150px] flex items-center justify-between px-4">
-                  <div className="w-[33%] flex justify-start pl-4">
-                     <img src="/images/1.png" alt="Signature 1" className="w-[90%] h-auto object-contain mix-blend-multiply" />
-                  </div>
-                  <div className="w-[34%] flex justify-center -mt-8">
-                     <img src="/images/2.png" alt="Stamp" className="w-[100%] h-auto object-contain mix-blend-multiply" />
-                  </div>
-                  <div className="w-[33%] flex justify-end pr-4">
-                     <img src="/images/3.png" alt="Signature 2" className="w-[90%] h-auto object-contain mix-blend-multiply" />
-                  </div>
+               <div className="relative w-full -mt-4 flex items-center justify-center px-8">
+                  <img src="/images/page4_stamps.png" alt="Stamps and Signatures" className="w-full max-w-[85%] h-auto max-h-[150px] object-contain mix-blend-multiply" />
                </div>
             </div>
 
@@ -440,16 +432,8 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
                      <div className="uppercase">CHIEF EXECUTIVE OFFICER</div>
                   </div>
                </div>
-               <div className="relative w-full -mt-4 h-[150px] flex items-center justify-between px-4">
-                  <div className="w-[33%] flex justify-start pl-4">
-                     <img src="/images/1.png" alt="Signature 1" className="w-[90%] h-auto object-contain mix-blend-multiply" />
-                  </div>
-                  <div className="w-[34%] flex justify-center -mt-8">
-                     <img src="/images/2.png" alt="Stamp" className="w-[100%] h-auto object-contain mix-blend-multiply" />
-                  </div>
-                  <div className="w-[33%] flex justify-end pr-4">
-                     <img src="/images/3.png" alt="Signature 2" className="w-[90%] h-auto object-contain mix-blend-multiply" />
-                  </div>
+               <div className="relative w-full -mt-4 flex items-center justify-center px-8">
+                  <img src="/images/page4_stamps.png" alt="Stamps and Signatures" className="w-full max-w-[85%] h-auto max-h-[150px] object-contain mix-blend-multiply" />
                </div>
             </div>
           </div>
