@@ -356,8 +356,6 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
                      <div className="uppercase">AUTHORIZED OFFICER</div>
                      <div className="uppercase">MARCUS SCHENCK (PIN75456CFO)</div>
                      <div className="uppercase">CHIEF OPERATING OFFICER</div>
-                  </div>
-                  </div>
                </div>
                <div className="relative w-full -mt-4 flex items-center justify-center px-8">
                   <img src="/images/page4_stamps.png" alt="Stamps and Signatures" className="w-full max-w-[85%] h-auto max-h-[150px] object-contain mix-blend-multiply" />
@@ -421,8 +419,6 @@ DATE OF EXECUTION: ${dates.dateStr} ${dates.timeStr}
                      <div className="uppercase">AUTHORIZED OFFICER</div>
                      <div className="uppercase">MARCUS SCHENCK (PIN75456CFO)</div>
                      <div className="uppercase">CHIEF OPERATING OFFICER</div>
-                  </div>
-                  </div>
                </div>
                <div className="relative w-full -mt-4 flex items-center justify-center px-8">
                   <img src="/images/page4_stamps.png" alt="Stamps and Signatures" className="w-full max-w-[85%] h-auto max-h-[150px] object-contain mix-blend-multiply" />
